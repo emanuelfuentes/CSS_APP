@@ -10,14 +10,14 @@
     <meta name="keyword" content="Sistema de inscripción de proyectos CSS UCA">
     <link rel="shortcut icon" href="img/favicon.ico">
     <title>Centro de Servicio Social | UCA</title>
-    <!-- Icons -->
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/simple-line-icons.min.css" rel="stylesheet">
-    <!-- Main styles for this application -->
-    <link href="css/style.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <link href="css/plantilla.css" rel="stylesheet">
+
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<div id="app">
     <header class="app-header navbar">
         <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
           <span class="navbar-toggler-icon"></span>
@@ -72,22 +72,15 @@
         <!-- /Fin del contenido principal -->
     </div>
 
-    
+    </div> <!--Closing Vue -->
 
     <footer class="app-footer">
         <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2017</span>
         <span class="ml-auto">Desarrollado por <a href="#">Dos personas que quieren sus horas xD</a></span>
     </footer>
 
-    <!-- Bootstrap and necessary plugins -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/pace.min.js"></script>
-    <!-- Plugins and scripts required by all views -->
-    <script src="js/Chart.min.js"></script>
-    <!-- GenesisUI main scripts -->
-    <script src="js/template.js"></script>
+
+    <script src="js/plantilla.js"></script>
 </body>
 
 </html>

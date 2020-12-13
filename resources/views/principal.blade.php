@@ -10,6 +10,7 @@
     <meta name="keyword" content="Sistema de inscripción de proyectos CSS UCA">
     <link rel="shortcut icon" href="img/favicon.ico">
     <title>Centro de Servicio Social | UCA</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Icons -->
     <link href="css/plantilla.css" rel="stylesheet">
@@ -17,6 +18,7 @@
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<div id="app">
     <header class="app-header navbar">
         <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
           <span class="navbar-toggler-icon"></span>
@@ -71,13 +73,15 @@
         <!-- /Fin del contenido principal -->
     </div>
 
-    
+    </div> <!--CLOSING VUE -->
 
     <footer class="app-footer">
         <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2017</span>
         <span class="ml-auto">Desarrollado por <a href="#">Dos personas que quieren sus horas xD</a></span>
     </footer>
 
+    
+    <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
 </body>
 
