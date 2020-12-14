@@ -1099,7 +1099,10 @@ Vue.component('example', __webpack_require__(39));
 Vue.component('student-dashboard', __webpack_require__(42));
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: {
+    menu: 0
+  }
 });
 
 /***/ }),

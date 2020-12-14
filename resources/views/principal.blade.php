@@ -45,29 +45,8 @@
     </header>
 
     <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="main.html"><i class="icon-home"></i> Inicio </a>
-                    </li>
-                    <li class="nav-title">
-                        Menú
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-folder"></i> Proyectos Disponibles </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-check"></i> Proyectos Aplicados </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-calendar"></i> Historial de proyectos </a>
-                    </li>
-                </ul>
-            </nav>
-            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
-        </div>
-
+        
+        @include('plantilla.sidebar')
         <!-- Contenido Principal -->
         @yield('edashboard')
         <!-- /Fin del contenido principal -->
