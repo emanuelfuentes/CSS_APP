@@ -17,10 +17,12 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('student-dashboard',require('./components/Estudiante.vue'));
+Vue.component('admin-dashboard', require('./components/Admin.vue'))
 
 const app = new Vue({
     el: '#app',
     data :{
-        menu: 0
+        menu: 0,
+        amenu: 0
     }
 });
