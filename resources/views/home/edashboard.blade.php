@@ -6,7 +6,7 @@
     </template>
     
     <template v-if="menu==1">
-        <h1>Componente de Proyectos Disponibles</h1>
+        <mis-proyectos></mis-proyectos>
     </template>
 
     <template v-if="menu==2">

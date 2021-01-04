@@ -15,8 +15,9 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
-Vue.component('student-dashboard',require('./components/Estudiante.vue'));
+Vue.component('example', require('./components/Example.vue'))
+Vue.component('student-dashboard',require('./components/Estudiante.vue'))
+Vue.component('mis-proyectos', require('./components/MisProyectos.vue'))
 Vue.component('admin-dashboard', require('./components/Admin.vue'))
 
 const app = new Vue({

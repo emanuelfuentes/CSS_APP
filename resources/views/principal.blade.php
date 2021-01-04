@@ -44,7 +44,7 @@
         </ul>
     </header>
 
-    <div class="app-body">
+<div class="app-body">
         
         @include('plantilla.sidebar')
         <!-- Contenido Principal -->
