@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Estudiante;
 
 class EstudianteController extends Controller
 {
@@ -13,7 +14,9 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        //
+        //muestra todos los estudiantes
+        $estudiante = Estudiante::all;
+        return $estudiante;
     }
 
     /**
@@ -45,7 +48,7 @@ class EstudianteController extends Controller
      */
     public function show($id)
     {
-        //
+        //mostrar todos los proyectos a los que aplico
     }
 
     /**
@@ -68,7 +71,7 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //eliminar o apartar el cupo de un proyecto
     }
 
     /**
