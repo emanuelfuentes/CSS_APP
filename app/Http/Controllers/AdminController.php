@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        //crear un proyecto nuevo
     }
 
     /**
@@ -45,7 +45,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        //mostrar estudiantes en un proyecto y estudiantes inscritos en la pagina?
     }
 
     /**
@@ -68,7 +68,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //modificar proyectos
     }
 
     /**
@@ -79,6 +79,6 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //eliminar proyectos
     }
 }

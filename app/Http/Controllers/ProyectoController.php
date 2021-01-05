@@ -14,8 +14,8 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-        $proyecto = Proyecto::all();
-        return $proyecto;
+        $proyectos = Proyecto::all();
+        return $proyectos;
     }
 
     /**
@@ -36,7 +36,21 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proyecto = new Proyecto();
+        $proyecto->estado = $request->estado;
+        $proyecto->contraparte = $request->contraparte;
+        $proyecto->cupos = $request->cupos;
+        $proyecto->descripcion = $request->descripcion;
+        $proyecto->encargado = $request->encargado;
+        $proyecto->fecha_inicio = $request->fecha_inicio;
+        $proyecto->fecha_fin = $request->fecha_fin;
+        $proyecto->horario = $request->horario;
+        $proyecto->nombre = $request->nombre;
+        $proyecto->tipo_horas = $request->tipo_horas;
+        $proyecto->modifiedBy = $request->modifiedBy;
+        $proyecto->createdAt = $request->createdAt;
+        $proyecto->save();
+
     }
 
     /**
@@ -47,6 +61,7 @@ class ProyectoController extends Controller
      */
     public function show($id)
     {
+        // mostrar proyectos dependiendo de la carrera
         
     }
 
@@ -68,9 +83,22 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $proyecto = Proyecto::findOrFail($request->id);
+        $proyecto->estado = $request->estado;
+        $proyecto->contraparte = $request->contraparte;
+        $proyecto->cupos = $request->cupos;
+        $proyecto->descripcion = $request->descripcion;
+        $proyecto->encargado = $request->encargado;
+        $proyecto->fecha_inicio = $request->fecha_inicio;
+        $proyecto->fecha_fin = $request->fecha_fin;
+        $proyecto->horario = $request->horario;
+        $proyecto->nombre = $request->nombre;
+        $proyecto->tipo_horas = $request->tipo_horas;
+        $proyecto->modifiedBy = $request->modifiedBy;
+        $proyecto->createdAt = $request->createdAt;
+        $proyecto->save();
     }
 
     /**
@@ -81,6 +109,6 @@ class ProyectoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Eliminar proyectos que ya fueron terminados
     }
 }
