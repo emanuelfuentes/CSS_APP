@@ -8,7 +8,7 @@
                         Menú
                     </li>
                     <li @click='menu=1' class="nav-item">
-                        <a class="nav-link active" href="#"><i class="icon-folder"></i> Proyectos Disponibles </a>
+                        <a class="nav-link" href="#"><i class="icon-folder"></i> Proyectos Disponibles </a>
                     </li>
                     <li @click='menu=2' class="nav-item">
                         <a class="nav-link" href="#"><i class="icon-check"></i> Proyectos Aplicados </a>
