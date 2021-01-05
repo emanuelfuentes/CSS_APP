@@ -23,6 +23,10 @@ Route::get('/admin', function () {
     return view('admin/adashboard');
 });
 
+//proyecto
 Route::get('/proyecto', 'ProyectoController@index');
-Route::post('proyecto/ingresar', 'ProyectoController@store');
+
+//proyecto x estudiante
+Route::post('/proyecto/ingresar', 'ProyectoxEstudianteController@store');
+
 Route::put('/proyecto/actualizar',  'ProyectoController@update');

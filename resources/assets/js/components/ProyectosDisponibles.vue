@@ -38,18 +38,18 @@
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
                                         <div v-if="proyecto.estado">
-                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
+                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm" data-target="#modalNuevo">
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
                                         <div v-else>
-                                            <button disabled type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
+                                            <button disabled type="button" class="btn btn-success btn-sm" data-target="#modalNuevo">
                                             <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
                                         
                                     </td>
-                                    <td v-text="proyecto.nombre"></td>
+                                    <td v-text="proyecto.nombre" id="name_p"></td>
                                     <td v-text="proyecto.descripcion"></td>
                                     <td>
                                         <div v-if="proyecto.estado">
@@ -94,12 +94,12 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal agregar/actualizar-->
-            <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Agregar categoría</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <h4 class="modal-title">Aplicar a proyecto</h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -107,8 +107,8 @@
                             <h2>¿Desea aplicar a este proyecto?</h2>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Aceptar</button>
+                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -125,7 +125,9 @@
             return{
                 nombre : '',
                 descripcion : '',
-                arrayProyectos : [''] 
+                arrayProyectos : [''],
+                modal : 0,
+                id_proyecto : 0
             }
         },
         methods:{
@@ -136,9 +138,40 @@
                     console.log(response.data)
                 })
                 .catch(function (error) {
-                    // handle error
                     console.log(error);
                 });
+            },
+            aplicarProyecto(){
+                let me = this
+                axios.post('/public/proyecto/ingresar', {
+                    'idProyecto' : this.id_proyecto,
+                    'idEstudiante' : 1,
+                    'appliedAt' : 'no se que es esto',
+                    'estado' : 1,
+                    'modifiedBy' : 'admin'
+                })
+                .then(function (response) {
+                    me.cerrarModal();
+                    console.log('si se metio yay')
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            cerrarModal(){
+                this.modal = 0;
+            },
+            abrirModal(modelo, data = []){
+                switch (modelo) {
+                    case "proyecto":
+                        {
+                            this.modal = 1;
+                            this.id_proyecto = data.idProyecto
+                            break;
+                        }
+                    default:
+                        break;
+                }
             }
         },
         mounted() {
@@ -146,3 +179,15 @@
         }
     }
 </script>
+<style>
+    .modal-content{
+        width : 100% !important;
+        position : absolute !important;
+    }
+    .mostrar{
+        display : list-item !important;
+        opacity : 1 !important;
+        position: absolute !important;
+        background-color: #3c29297a !important;
+    }
+</style>
