@@ -2,11 +2,11 @@
 @section('edashboard')
 
     <template v-if="menu==0">
-        <student-dashboard></student-dashboard>
+        <todos-proyectos></todos-proyectos>
     </template>
     
     <template v-if="menu==1">
-        <mis-proyectos></mis-proyectos>
+        <h1>Componente de Proyectos Aplicados</h1>
     </template>
 
     <template v-if="menu==2">

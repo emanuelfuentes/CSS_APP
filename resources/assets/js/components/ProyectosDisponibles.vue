@@ -35,84 +35,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                          <i class="icon-check"></i>
-                                        </button> &nbsp;
+                                        <div v-if="proyecto.estado">
+                                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
+                                                <i class="icon-check"></i>
+                                            </button> &nbsp;
+                                        </div>
+                                        <div v-else>
+                                            <button disabled type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
+                                            <i class="icon-check"></i>
+                                            </button> &nbsp;
+                                        </div>
+                                        
                                     </td>
-                                    <td>Proyecto</td>
-                                    <td>Descripción del proyecto</td>
+                                    <td v-text="proyecto.nombre"></td>
+                                    <td v-text="proyecto.descripcion"></td>
                                     <td>
-                                        <span class="badge badge-success">Activo</span>
-                                    </td>
-                                    <td>
-                                    <button type="button" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                          <i class="icon-check"></i>
-                                        </button> &nbsp;
-                                    </td>
-                                    <td>Proyecto</td>
-                                    <td>Descripción del proyecto</td>
-                                    <td>
-                                        <span class="badge badge-success">Activo</span>
-                                    </td>
-                                    <td>
-                                    <button type="button" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                          <i class="icon-check"></i>
-                                        </button> &nbsp;
-                                    </td>
-                                    <td>Proyecto</td>
-                                    <td>Descripción del proyecto</td>
-                                    <td>
-                                        <span class="badge badge-success">Activo</span>
-                                    </td>
-                                    <td>
-                                    <button type="button" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                          <i class="icon-check"></i>
-                                        </button> &nbsp;
-                                    </td>
-                                    <td>Proyecto</td>
-                                    <td>Descripción del proyecto</td>
-                                    <td>
-                                        <span class="badge badge-secondary">Inactivo</span>
-                                    </td>
-                                    <td>
-                                    <button type="button" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <td>
-                                        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalNuevo">
-                                          <i class="icon-check"></i>
-                                        </button> &nbsp;
-                                    </td>
-                                    <td>Proyecto</td>
-                                    <td>Descripción del proyecto</td>
-                                    <td>
-                                        <span class="badge badge-secondary">Inactivo</span>
+                                        <div v-if="proyecto.estado">
+                                            <span class="badge badge-success">Disponible</span>
+                                        </div>
+                                        <div v-else>
+                                            <span class="badge badge-danger">No disponible</span>
+                                        </div>
                                     </td>
                                     <td>
                                     <button type="button" class="btn btn-info btn-sm">
@@ -176,9 +121,28 @@
 
 <script>
     export default {
-        name: "mis-proyectos",
+        data(){
+            return{
+                nombre : '',
+                descripcion : '',
+                arrayProyectos : [''] 
+            }
+        },
+        methods:{
+            listarProyectos(){
+                let me = this
+                axios.get('/public/proyecto').then(function (response) {
+                    me.arrayProyectos = response.data;
+                    console.log(response.data)
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+            }
+        },
         mounted() {
-            console.log('Component mounted.')
+            this.listarProyectos();
         }
     }
 </script>

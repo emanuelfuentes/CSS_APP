@@ -25,4 +25,4 @@ Route::get('/admin', function () {
 
 Route::get('/proyecto', 'ProyectoController@index');
 Route::post('proyecto/ingresar', 'ProyectoController@store');
-Route::put('proyecto/actualizar',  'ProyectoController@update');
+Route::put('/proyecto/actualizar',  'ProyectoController@update');
