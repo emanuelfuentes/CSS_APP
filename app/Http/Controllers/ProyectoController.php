@@ -17,7 +17,7 @@ class ProyectoController extends Controller
         $proyectos = Proyecto::all();
         return $proyectos;
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -59,11 +59,7 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // mostrar proyectos dependiendo de la carrera
-        
-    }
+    
 
     /**
      * Show the form for editing the specified resource.

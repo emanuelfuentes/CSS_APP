@@ -17,7 +17,16 @@ class ProyectoxEstudianteController extends Controller
         $proyectoXestudiantes = ProyectoxEstudiante::all();
         return $proyectoXestudiantes;
     }
+    public function proyectosPorId(Request $request)
+    {
+        
+        $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
+        ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
+        ->select('proyecto.idProyecto','proyecto.nombre','proyecto.descripcion','proyecto.estado')
+        ->orderBy('proyecto.idProyecto', 'desc')->get();
 
+        return $proyectos;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -77,7 +86,7 @@ class ProyectoxEstudianteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    {/*
         $proyecto = Proyecto::findOrFail($request->id);
         $proyecto->estado = $request->estado;
         $proyecto->contraparte = $request->contraparte;
@@ -91,7 +100,7 @@ class ProyectoxEstudianteController extends Controller
         $proyecto->tipo_horas = $request->tipo_horas;
         $proyecto->modifiedBy = $request->modifiedBy;
         $proyecto->createdAt = $request->createdAt;
-        $proyecto->save();
+        $proyecto->save();*/
     }
 
     /**
