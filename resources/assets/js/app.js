@@ -17,8 +17,10 @@ window.Vue = require('vue');
 
 //Vue.component('student-dashboard',require('./components/Estudiante.vue'));
 //Vue.component('admin-dashboard', require('./components/Admin.vue'));
+Vue.component('recordatorio', require('./components/Recordatorio.vue'));
 Vue.component('todos-proyectos', require('./components/ProyectosDisponibles.vue'));
 Vue.component('mis-proyectos', require('./components/Estudiante.vue'));
+
 const app = new Vue({
     el: '#app',
     data :{

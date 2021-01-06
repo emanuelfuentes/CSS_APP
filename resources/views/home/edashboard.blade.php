@@ -10,11 +10,11 @@
     </template>
 
     <template v-if="menu==2">
-        <h1>Componente de Proyectos Aplicados</h1>
+        <h1>Componente de Historial Aplicados2</h1>
     </template>
 
     <template v-if="menu==3">
-        <h1>Componente de Historial de Proyectos</h1>
+        <recordatorio></recordatorio>
     </template>
 
 @endsection
