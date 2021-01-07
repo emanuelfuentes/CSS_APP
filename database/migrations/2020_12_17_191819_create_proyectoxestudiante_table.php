@@ -15,9 +15,9 @@ class CreateProyectoxestudianteTable extends Migration
     {
         Schema::create('proyectoxestudiante', function (Blueprint $table) {
             $table->bigIncrements('idProyectoEstudiante');
-            $table->unsignedbigInteger('idProyecto')->unique();
+            $table->unsignedbigInteger('idProyecto');
             $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
-            $table->unsignedbigInteger('idEstudiante')->unique();
+            $table->unsignedbigInteger('idEstudiante');
             $table->foreign('idEstudiante')->references('idEstudiante')->on('estudiante')->onDelete('cascade');
             $table->string('appliedAt', 150);
             $table->tinyInteger('estado');
