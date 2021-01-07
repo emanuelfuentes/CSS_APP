@@ -24,6 +24,6 @@ Route::get('/admin', function () {
 });
 
 Route::get('/proyecto', 'ProyectoController@index');
-Route::post('proyecto/ingresar', 'ProyectoController@store');
+Route::post('proyecto/ingresar', 'ProyectoxEstudianteController@store');
 Route::put('proyecto/actualizar',  'ProyectoController@update'); 
 Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
