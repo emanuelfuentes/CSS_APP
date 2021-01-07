@@ -13,7 +13,8 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        //
+        $perfil = Perfil::all;
+        return $perfil;
     }
 
     /**

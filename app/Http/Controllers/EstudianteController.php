@@ -15,8 +15,8 @@ class EstudianteController extends Controller
     public function index()
     {
         //muestra todos los estudiantes
-        $estudiante = Estudiante::all;
-        return $estudiante;
+        $estudiantes = Estudiante::all;
+        return $estudiantes;
     }
 
     /**
@@ -37,7 +37,17 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $estudiante = new Estudiante();
+        $estudiante->nombres = $request->nombres;
+        $estudiante->apellidos = $request->apellidos;
+        $estudiante->carnet = $request->carnet;
+        $estudiante->correo = $request->correo;
+        $estudiante->estado = $request->estado;
+        $estudiante->genero = $request->genero;
+        $estudiante->default_password = $request->default_password;
+        $estudiante->password = $request->password;
+        $estudiante->nombres = $request->nombres;
+        $estudiante->save();
     }
 
     /**
@@ -69,9 +79,19 @@ class EstudianteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //eliminar o apartar el cupo de un proyecto
+        $estudiante = Estudiante::findOrFail($request->id);
+        $estudiante->nombres = $request->nombres;
+        $estudiante->apellidos = $request->apellidos;
+        $estudiante->carnet = $request->carnet;
+        $estudiante->correo = $request->correo;
+        $estudiante->estado = $request->estado;
+        $estudiante->genero = $request->genero;
+        $estudiante->default_password = $request->default_password;
+        $estudiante->password = $request->password;
+        $estudiante->nombres = $request->nombres;
+        $estudiante->save();
     }
 
     /**

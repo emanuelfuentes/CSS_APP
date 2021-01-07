@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class CarreraController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = Admins::all;
-        return $admins;
+        $carreras = Carrera::all;
+        return $carreras;
     }
 
     /**
@@ -35,15 +35,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $admin = new Admin();
-        $admin->nombres = $request->nombres;
-        $admin->apellidos = $request->apellidos;
-        $admin->correo = $request->correo;
-        $admin->password = $request->password;
-        $admin->area = $request->area;
-        $admin->estado = $request->estado;
-        $admin->save();
+        //
     }
 
     /**
