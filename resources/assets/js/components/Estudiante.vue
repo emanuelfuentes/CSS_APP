@@ -100,7 +100,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Aplicar a proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" @click="cerrarModal() " aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>

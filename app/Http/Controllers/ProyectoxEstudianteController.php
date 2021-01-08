@@ -19,13 +19,18 @@ class ProyectoxEstudianteController extends Controller
     }
     public function proyectosPorId(Request $request)
     {
-        
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
         ->select('proyecto.idProyecto','proyecto.nombre','proyecto.descripcion','proyecto.estado')
         ->orderBy('proyecto.idProyecto', 'desc')->get();
 
         return $proyectos;
+    }
+
+    public function pxePorId (Request $request) {
+        $req = $request->idEstudiante;
+        $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idEstudiante = :req')->get();
+        return $pXe;
     }
     /**
      * Show the form for creating a new resource.

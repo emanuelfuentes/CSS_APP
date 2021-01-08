@@ -34712,37 +34712,59 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             descripcion: '',
             arrayProyectos: [''],
             modal: 0,
-            id_proyecto: 0
+            id_proyecto: 0,
+            arrayPXE: ['']
         };
     },
 
     methods: {
-        listarProyectos: function listarProyectos() {
+        bindData: function bindData() {
             var me = this;
+            axios.get('/public/pxe_estudiante').then(function (response) {
+                me.arrayPXE = response.data;
+                console.log(response.data);
+            }).catch(function (error) {
+                console.log(error);
+            });
             axios.get('/public/proyecto').then(function (response) {
                 me.arrayProyectos = response.data;
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
         },
         aplicarProyecto: function aplicarProyecto() {
             var me = this;
-            axios.post('/public/proyecto/ingresar', {
-                'idProyecto': this.id_proyecto,
-                'idEstudiante': 1,
-                'appliedAt': 'no se que es esto',
-                'estado': 1,
-                'modifiedBy': 'admin'
-            }).then(function (response) {
-                me.cerrarModal();
-                console.log('si se metio yay');
-            }).catch(function (error) {
-                console.log(error);
-            });
+            var flag = true;
+            if (me.arrayPXE.length > 0) {
+                for (var j = 0; j < me.arrayPXE.length; j++) {
+                    if (me.id_proyecto == me.arrayPXE[j].idProyecto) {
+                        document.getElementById('hidden_applied').style.visibility = 'visible';
+                        console.log('hola chopper');
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            if (flag) {
+                axios.post('/public/proyecto/ingresar', {
+                    'idProyecto': this.id_proyecto,
+                    'idEstudiante': 1,
+                    'appliedAt': 'true',
+                    'estado': 1,
+                    'modifiedBy': 'admin'
+                }).then(function (response) {
+                    me.cerrarModal();
+                    console.log('si se metio yay');
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         },
         cerrarModal: function cerrarModal() {
+            document.getElementById('hidden_applied').style.visibility = 'hidden';
             this.modal = 0;
+            this.id_proyecto = 0;
+            this.bindData();
         },
         abrirModal: function abrirModal(modelo) {
             var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -34760,7 +34782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.listarProyectos();
+        this.bindData();
     }
 });
 
@@ -34799,10 +34821,7 @@ var render = function() {
                               "button",
                               {
                                 staticClass: "btn btn-success btn-sm",
-                                attrs: {
-                                  type: "button",
-                                  "data-target": "#modalNuevo"
-                                },
+                                attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
                                     return _vm.abrirModal("proyecto", proyecto)
@@ -34904,6 +34923,8 @@ var render = function() {
               _vm._m(7),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
+                _vm._m(8),
+                _vm._v(" "),
                 _c(
                   "button",
                   {
@@ -35026,10 +35047,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      {
-        staticClass: "btn btn-success btn-sm",
-        attrs: { disabled: "", type: "button", "data-target": "#modalNuevo" }
-      },
+      { staticClass: "btn btn-success btn-sm", attrs: { type: "button" } },
       [_c("i", { staticClass: "icon-check" })]
     )
   },
@@ -35096,6 +35114,19 @@ var staticRenderFns = [
     return _c("div", { staticClass: "modal-body" }, [
       _c("h2", [_vm._v("¿Desea aplicar a este proyecto?")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticStyle: { visibility: "hidden", "text-align": "left" },
+        attrs: { id: "hidden_applied" }
+      },
+      [_c("p", [_vm._v("Ya ha aplicado a este proyecto")])]
+    )
   }
 ]
 render._withStripped = true

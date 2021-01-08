@@ -38,16 +38,15 @@
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
                                         <div v-if="proyecto.estado">
-                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm" data-target="#modalNuevo">
+                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm">
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
                                         <div v-else>
-                                            <button disabled type="button" class="btn btn-success btn-sm" data-target="#modalNuevo">
-                                            <i class="icon-check"></i>
+                                            <button type="button" class="btn btn-success btn-sm">
+                                                <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
-                                        
                                     </td>
                                     <td v-text="proyecto.nombre" id="name_p"></td>
                                     <td v-text="proyecto.descripcion"></td>
@@ -107,6 +106,7 @@
                             <h2>¿Desea aplicar a este proyecto?</h2>
                         </div>
                         <div class="modal-footer">
+                            <div style="visibility:hidden;text-align:left" id="hidden_applied"><p>Ya ha aplicado a este proyecto</p></div>
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
@@ -127,15 +127,21 @@
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
-                id_proyecto : 0
+                id_proyecto : 0,
+                arrayPXE : ['']
             }
         },
         methods:{
-            listarProyectos(){
+            bindData(){
                 let me = this
+                axios.get('/public/pxe_estudiante').then(function (response) {
+                    me.arrayPXE = response.data
+                    console.log(response.data)
+                }).catch(function (error) {
+                    console.log(error);
+                });
                 axios.get('/public/proyecto').then(function (response) {
                     me.arrayProyectos = response.data;
-                    console.log(response.data)
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -143,23 +149,39 @@
             },
             aplicarProyecto(){
                 let me = this
-                axios.post('/public/proyecto/ingresar', {
-                    'idProyecto' : this.id_proyecto,
-                    'idEstudiante' : 1,
-                    'appliedAt' : 'no se que es esto',
-                    'estado' : 1,
-                    'modifiedBy' : 'admin'
-                })
-                .then(function (response) {
-                    me.cerrarModal();
-                    console.log('si se metio yay')
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                let flag = true;
+                if(me.arrayPXE.length > 0){
+                    for(let j = 0; j < me.arrayPXE.length; j++){
+                        if(me.id_proyecto == me.arrayPXE[j].idProyecto){
+                            document.getElementById('hidden_applied').style.visibility = 'visible';
+                            console.log('hola chopper')
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                if (flag) {
+                        axios.post('/public/proyecto/ingresar', {
+                            'idProyecto' : this.id_proyecto,
+                            'idEstudiante' : 1,
+                            'appliedAt' : 'true',
+                            'estado' : 1,
+                            'modifiedBy' : 'admin'
+                        })
+                        .then(function (response) {
+                            me.cerrarModal();
+                            console.log('si se metio yay')
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
             },
             cerrarModal(){
+                document.getElementById('hidden_applied').style.visibility = 'hidden';
                 this.modal = 0;
+                this.id_proyecto = 0;
+                this.bindData();
             },
             abrirModal(modelo, data = []){
                 switch (modelo) {
@@ -175,7 +197,7 @@
             }
         },
         mounted() {
-            this.listarProyectos();
+            this.bindData();
         }
     }
 </script>
