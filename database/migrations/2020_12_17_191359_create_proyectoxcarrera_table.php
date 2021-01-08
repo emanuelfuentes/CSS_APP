@@ -15,11 +15,11 @@ class CreateProyectoxcarreraTable extends Migration
     {
         Schema::create('proyectoxcarrera', function (Blueprint $table) {
             $table->bigIncrements('idProyectoCarrera');
-            $table->unsignedbigInteger('idProyecto')->unique();
+            $table->unsignedbigInteger('idProyecto');
             $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
-            $table->unsignedbigInteger('idCarrera')->unique();
+            $table->unsignedbigInteger('idCarrera');
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
-            $table->unsignedbigInteger('idPerfil')->unique();
+            $table->unsignedbigInteger('idPerfil');
             $table->foreign('idPerfil')->references('idPerfil')->on('perfil')->onDelete('cascade');            
             $table->timestamps();
         });

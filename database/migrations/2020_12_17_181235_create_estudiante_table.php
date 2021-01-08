@@ -23,9 +23,9 @@ class CreateEstudianteTable extends Migration
             $table->string('genero', 100);
             $table->string('default_password', 100);
             $table->string('password', 100);
-            $table->unsignedbigInteger('idPerfil')->unique();
+            $table->unsignedbigInteger('idPerfil');
             $table->foreign('idPerfil')->references('idPerfil')->on('perfil')->onDelete('cascade');
-            $table->unsignedbigInteger('idCarrera')->unique();
+            $table->unsignedbigInteger('idCarrera');
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
             $table->timestamps();
         });
