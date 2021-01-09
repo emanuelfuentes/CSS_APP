@@ -34439,7 +34439,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
       _c("div", { staticClass: "card" }, [
-        _c("img", { attrs: { src: "/public/img/recordatorio.png" } })
+        _c("img", { attrs: { src: "/public/img/recordatorio.ae2960e4.png" } })
       ])
     ])
   }
@@ -34746,7 +34746,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var me = this;
             axios.get('/public/pxe_estudiante').then(function (response) {
                 me.arrayPXE = response.data;
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -34772,7 +34771,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 for (var j = 0; j < me.arrayPXE.length; j++) {
                     if (me.id_proyecto == me.arrayPXE[j].idProyecto) {
                         document.getElementById('hidden_applied').style.visibility = 'visible';
-                        console.log('hola chopper');
                         flag = false;
                         break;
                     }
@@ -34787,7 +34785,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'modifiedBy': 'admin'
                 }).then(function (response) {
                     me.cerrarModal();
-                    console.log('si se metio yay');
                 }).catch(function (error) {
                     console.log(error);
                 });
