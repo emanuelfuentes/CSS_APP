@@ -45,10 +45,17 @@
     </header>
 
 <div class="app-body">
+        @if(Auth::check())
+            @if(Auth::user()->idrol == 1)
+                @include('plantilla.adminSidebar')
+            @elseif(Auth::user()->idrol == 2)
+                @include('plantilla.sidebar')
+            @else
+            @endif
+        @endif
         
-        @include('plantilla.sidebar')
         <!-- Contenido Principal -->
-        @yield('edashboard')
+        @yield('dashboard')
         <!-- /Fin del contenido principal -->
     </div>
 
