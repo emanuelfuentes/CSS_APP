@@ -14,17 +14,29 @@ class ProyectoxEstudianteController extends Controller
      */
     public function index()
     {
+        if(!$request->ajax()) return redirect('/home');
         $proyectoXestudiantes = ProyectoxEstudiante::all();
         return $proyectoXestudiantes;
     }
     public function proyectosPorId(Request $request)
     {
+        if(!$request->ajax()) return redirect('/home');
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
         ->select('proyecto.idProyecto','proyecto.nombre','proyecto.descripcion','proyecto.estado')
-        ->orderBy('proyecto.idProyecto', 'desc')->get();
+        ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
 
-        return $proyectos;
+        return [
+            'pagination' => [
+                'total'         => $proyectos->total(),
+                'current_page'  => $proyectos->currentPage(),
+                'per_page'      => $proyectos->perPage(),
+                'last_page'     => $proyectos->lastPage(),
+                'from'          => $proyectos->firstItem(),
+                'to'            => $proyectos->lastItem(),
+            ],
+            'proyectos' => $proyectos
+        ];
     }
 
     public function pxePorId (Request $request) {

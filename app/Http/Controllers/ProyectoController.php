@@ -12,10 +12,21 @@ class ProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proyectos = Proyecto::all();
-        return $proyectos;
+        if(!$request->ajax()) return redirect('/home');
+        $proyectos = Proyecto::paginate(10);
+        return [
+            'pagination' => [
+                'total'         => $proyectos->total(),
+                'current_page'  => $proyectos->currentPage(),
+                'per_page'      => $proyectos->perPage(),
+                'last_page'     => $proyectos->lastPage(),
+                'from'          => $proyectos->firstItem(),
+                'to'            => $proyectos->lastItem(),
+            ],
+            'proyectos' => $proyectos
+        ];
     }
     
     /**
