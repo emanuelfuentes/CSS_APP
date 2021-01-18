@@ -34695,6 +34695,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -34703,7 +34751,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             descripcion: '',
             arrayProyectos: [''],
             modal: 0,
+            modal2: 0,
             id_proyecto: 0,
+            modal_encargado: '',
+            modal_nombre: '',
+            modal_desc: '',
+            modal_tipo_horas: '',
+            modal_cupos: 0,
+            modal_horario: '',
+            modal_fecha_in: '',
+            modal_fecha_fin: '',
             arrayPXE: [''],
             pagination: {
                 'total': 0,
@@ -34795,14 +34852,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modal = 0;
             this.id_proyecto = 0;
         },
+        cerrarModalDos: function cerrarModalDos() {
+            document.getElementById('hidden_applied').style.visibility = 'hidden';
+            this.modal2 = 0;
+        },
         abrirModal: function abrirModal(modelo) {
             var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
+
             switch (modelo) {
-                case "proyecto":
+                case "aplicar":
                     {
                         this.modal = 1;
                         this.id_proyecto = data.idProyecto;
+                        break;
+                    }
+                case "info":
+                    {
+                        this.modal2 = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.modal_encargado = data.encargado;
+                        this.modal_nombre = data.nombre;
+                        this.modal_desc = data.descripcion;
+                        this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos = data.cupos;
+                        this.modal_horario = data.horario;
+                        this.modal_fecha_in = data.fecha_inicio;
+                        this.modal_fecha_fin = data.fecha_fin;
                         break;
                     }
                 default:
@@ -34853,7 +34929,7 @@ var render = function() {
                                 attrs: { type: "button" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.abrirModal("proyecto", proyecto)
+                                    return _vm.abrirModal("aplicar", proyecto)
                                   }
                                 }
                               },
@@ -34890,7 +34966,22 @@ var render = function() {
                           ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(5, true)
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-info btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.abrirModal("info", proyecto)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "icon-info" })]
+                      ),
+                      _vm._v("   \n                                ")
+                    ])
                   ])
                 }),
                 0
@@ -35022,10 +35113,10 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(7),
+                _vm._m(6),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -35053,6 +35144,130 @@ var render = function() {
                     }
                   },
                   [_vm._v("Confirmar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modal2 },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h4",
+                  {
+                    staticClass: "modal-title",
+                    domProps: { textContent: _vm._s(_vm.modal_nombre) }
+                  },
+                  [_vm._v("Aplicar a proyecto")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModalDos()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("td", {
+                          domProps: {
+                            textContent: _vm._s(_vm.modal_tipo_horas)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_cupos) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_horario) }
+                        })
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModalDos()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
                 )
               ])
             ])
@@ -35157,18 +35372,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-info btn-sm", attrs: { type: "button" } },
-        [_c("i", { staticClass: "icon-info" })]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-body" }, [
       _c("h2", [_vm._v("¿Desea aplicar a este proyecto?")])
     ])
@@ -35185,6 +35388,28 @@ var staticRenderFns = [
       },
       [_c("p", [_vm._v("Ya ha aplicado a este proyecto")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Tipo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cupos")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Horario")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", [_vm._v("Encargado")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Descripción")])
+    ])
   }
 ]
 render._withStripped = true
@@ -35406,6 +35631,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -35415,6 +35666,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arrayProyectos: [''],
             modal: 0,
             id_proyecto: 0,
+            modal_encargado: '',
+            modal_nombre: '',
+            modal_desc: '',
+            modal_tipo_horas: '',
+            modal_cupos: 0,
+            modal_horario: '',
+            modal_fecha_in: '',
+            modal_fecha_fin: '',
             pagination: {
                 'total': 0,
                 'current_page': 0,
@@ -35470,10 +35729,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
             switch (modelo) {
-                case "proyecto":
+                case "info":
                     {
                         this.modal = 1;
                         this.id_proyecto = data.idProyecto;
+                        this.modal_encargado = data.encargado;
+                        this.modal_nombre = data.nombre;
+                        this.modal_desc = data.descripcion;
+                        this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos = data.cupos;
+                        this.modal_horario = data.horario;
+                        this.modal_fecha_in = data.fecha_inicio;
+                        this.modal_fecha_fin = data.fecha_fin;
                         break;
                     }
                 default:
@@ -35540,7 +35807,21 @@ var render = function() {
                           ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(4, true)
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-info btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.abrirModal("info", proyecto)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "icon-info" })]
+                      )
+                    ])
                   ])
                 }),
                 0
@@ -35649,9 +35930,14 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Aplicar a proyecto")
-                ]),
+                _c(
+                  "h4",
+                  {
+                    staticClass: "modal-title",
+                    domProps: { textContent: _vm._s(_vm.modal_nombre) }
+                  },
+                  [_vm._v("Aplicar a proyecto")]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -35672,7 +35958,57 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("td", {
+                          domProps: {
+                            textContent: _vm._s(_vm.modal_tipo_horas)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_cupos) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_horario) }
+                        })
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "table",
+                  {
+                    staticClass: "table table-bordered table-striped table-sm"
+                  },
+                  [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ])
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -35687,20 +36023,6 @@ var render = function() {
                     }
                   },
                   [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.aplicarProyecto()
-                      }
-                    }
-                  },
-                  [_vm._v("Confirmar")]
                 )
               ])
             ])
@@ -35716,8 +36038,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Escritorio")
+        _vm._v("Proyectos Aplicados")
       ])
     ])
   },
@@ -35793,20 +36117,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        { staticClass: "btn btn-info btn-sm", attrs: { type: "button" } },
-        [_c("i", { staticClass: "icon-info" })]
-      )
+    return _c("thead", [
+      _c("th", [_vm._v("Tipo")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Cupos")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Horario")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c("h2", [_vm._v("¿Desea aplicar a este proyecto?")])
+    return _c("thead", [
+      _c("th", [_vm._v("Encargado")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Descripción")])
     ])
   }
 ]

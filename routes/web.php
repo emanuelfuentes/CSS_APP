@@ -10,12 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::middleware(['guest'])->group(function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
-    Route::post('/login', 'Auth\LoginController@login')->name('login');
+    Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 });
-
+*/
+/*
 Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['Administrador'])->group(function () {
@@ -28,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['NormalUser'])->group(function () {
         Route::get('/home', function () {
-            return view('home/edashboard');
+            return view('home/dashboard');
         })->name('main');
 
         Route::get('/proyecto', 'ProyectoController@index');
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
     });
 });
+*/
 
 /*
     Route::put('proyecto/actualizar',  'ProyectoController@update'); 
@@ -46,11 +48,11 @@ Route::middleware(['auth'])->group(function () {
     return view('principal');
 });*/
 
+Route::get('/home', function () {
+    return view('home/dashboard');
+})->name('main');
 
-
-
-
-
-
-
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/proyecto', 'ProyectoController@index');
+Route::post('proyecto/ingresar', 'ProyectoxEstudianteController@store');
+Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
+Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');

@@ -38,7 +38,7 @@
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
                                         <div v-if="proyecto.estado">
-                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm">
+                                            <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm">
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
@@ -59,9 +59,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                    <button type="button" class="btn btn-info btn-sm">
+                                        <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
                                           <i class="icon-info"></i>
-                                        </button>
+                                        </button>  &nbsp;
                                     </td>
                                 </tr>
                             </tbody>
@@ -83,7 +83,7 @@
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
-            <!--Inicio del modal agregar/actualizar-->
+            <!--Inicio del modal aplicar a proyecto-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
@@ -107,6 +107,54 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+
+            <!--Inicio del modal informacion de proyecto-->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
+                            <button type="button" class="close" @click="cerrarModalDos()" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <th>Tipo</th>
+                                    <th>Cupos</th>
+                                    <th>Horario</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-text="modal_tipo_horas"></td>
+                                        <td v-text="modal_cupos"></td>
+                                        <td v-text="modal_horario"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <th>Encargado</th>
+                                    <th>Descripción</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-text="modal_encargado"></td>
+                                        <td v-text="modal_desc"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModalDos()">Cerrar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!--Fin del modal-->
         </main>
 </template>
 
@@ -118,7 +166,16 @@
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
-                id_proyecto : 0,
+                modal2 : 0,
+                id_proyecto : 0,                
+                modal_encargado : '',
+                modal_nombre : '',
+                modal_desc : '',
+                modal_tipo_horas : '',
+                modal_cupos : 0,
+                modal_horario : '',
+                modal_fecha_in : '',
+                modal_fecha_fin : '',
                 arrayPXE : [''],
                 pagination : {
                     'total' : 0,
@@ -159,7 +216,7 @@
             bindData(page){
                 let me = this
                 axios.get('/public/pxe_estudiante').then(function (response) {
-                    me.arrayPXE = response.data
+                    me.arrayPXE = response.data;
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -212,14 +269,33 @@
                 this.modal = 0;
                 this.id_proyecto = 0;
             },
+            cerrarModalDos(){
+                document.getElementById('hidden_applied').style.visibility = 'hidden';
+                this.modal2 = 0;
+            },
             abrirModal(modelo, data = []){
+                
                 switch (modelo) {
-                    case "proyecto":
+                    case "aplicar":
                         {
                             this.modal = 1;
                             this.id_proyecto = data.idProyecto
                             break;
                         }
+                    case "info":
+                    {
+                        this.modal2 = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.modal_encargado = data.encargado;
+                        this.modal_nombre = data.nombre;
+                        this.modal_desc = data.descripcion;
+                        this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos = data.cupos;
+                        this.modal_horario = data.horario;
+                        this.modal_fecha_in = data.fecha_inicio;
+                        this.modal_fecha_fin = data.fecha_fin;
+                        break;
+                    }
                     default:
                         break;
                 }

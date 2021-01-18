@@ -44,26 +44,18 @@
         </ul>
     </header>
 
-<div class="app-body">
-        @if(Auth::check())
-            @if(Auth::user()->idrol == 1)
-                @include('plantilla.adminSidebar')
-            @elseif(Auth::user()->idrol == 2)
-                @include('plantilla.sidebar')
-            @else
-            @endif
-        @endif
-        
+    <div class="app-body">
+        @include('plantilla.sidebar')
         <!-- Contenido Principal -->
         @yield('dashboard')
         <!-- /Fin del contenido principal -->
     </div>
 
-    </div> <!--CLOSING VUE -->
+</div> <!--CLOSING VUE -->
 
     <footer class="app-footer">
         <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2017</span>
-        <span class="ml-auto">Desarrollado por <a href="#">Dos personas que quieren sus horas xD</a></span>
+        <span class="ml-auto">Desarrollado por <a href="#"></a></span>
     </footer>
 
     

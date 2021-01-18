@@ -2,7 +2,8 @@
     <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active">Escritorio</li>
+                <li class="breadcrumb-item">Inicio</li>
+                <li class="breadcrumb-item active">Proyectos Aplicados</li>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -61,7 +62,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                    <button type="button" class="btn btn-info btn-sm">
+                                    <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
                                           <i class="icon-info"></i>
                                         </button>
                                     </td>
@@ -85,22 +86,47 @@
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
-            <!--Inicio del modal agregar/actualizar-->
+
+            <!--Inicio del modal informacion de proyecto-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Aplicar a proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal() " aria-label="Close">
+                            <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h2>¿Desea aplicar a este proyecto?</h2>
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <th>Tipo</th>
+                                    <th>Cupos</th>
+                                    <th>Horario</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-text="modal_tipo_horas"></td>
+                                        <td v-text="modal_cupos"></td>
+                                        <td v-text="modal_horario"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <th>Encargado</th>
+                                    <th>Descripción</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td v-text="modal_encargado"></td>
+                                        <td v-text="modal_desc"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -119,7 +145,15 @@
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
-                id_proyecto : 0,
+                id_proyecto : 0,                
+                modal_encargado : '',
+                modal_nombre : '',
+                modal_desc : '',
+                modal_tipo_horas : '',
+                modal_cupos : 0,
+                modal_horario : '',
+                modal_fecha_in : '',
+                modal_fecha_fin : '',
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -173,12 +207,20 @@
             },
             abrirModal(modelo, data = []){
                 switch (modelo) {
-                    case "proyecto":
-                        {
-                            this.modal = 1;
-                            this.id_proyecto = data.idProyecto
-                            break;
-                        }
+                    case "info":
+                    {
+                        this.modal = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.modal_encargado = data.encargado;
+                        this.modal_nombre = data.nombre;
+                        this.modal_desc = data.descripcion;
+                        this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos = data.cupos;
+                        this.modal_horario = data.horario;
+                        this.modal_fecha_in = data.fecha_inicio;
+                        this.modal_fecha_fin = data.fecha_fin;
+                        break;
+                    }
                     default:
                         break;
                 }
