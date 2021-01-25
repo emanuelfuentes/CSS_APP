@@ -20,6 +20,7 @@ window.Vue = require('vue');
 Vue.component('recordatorio', require('./components/Recordatorio.vue'));
 Vue.component('todos-proyectos', require('./components/ProyectosDisponibles.vue'));
 Vue.component('mis-proyectos', require('./components/ProyectosAplicados.vue'));
+Vue.component('admin-proyectos', require('./components/ProyectosAdmin.vue'));
 
 const app = new Vue({
     el: '#app',

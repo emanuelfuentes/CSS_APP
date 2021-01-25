@@ -5,7 +5,7 @@
                         Menú
                     </li>
                     <li @click='menu=0' class="nav-item">
-                        <a class="nav-link active" href="#"><i class="icon-home"></i> Proyectos Disponibles </a>
+                        <a class="nav-link active" href="#"><i class="icon-home"></i> Proyectos </a>
                     </li>
                     <li @click='menu=1' class="nav-item">
                         <a class="nav-link" href="#"><i class="icon-check"></i> Historial de Proyectos </a>

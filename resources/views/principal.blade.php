@@ -45,7 +45,7 @@
     </header>
 
     <div class="app-body">
-        @include('plantilla.sidebar')
+        @include('plantilla.adminSidebar')
         <!-- Contenido Principal -->
         @yield('dashboard')
         <!-- /Fin del contenido principal -->
