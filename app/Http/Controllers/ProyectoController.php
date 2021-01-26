@@ -107,7 +107,19 @@ class ProyectoController extends Controller
         $proyecto->createdAt = $request->createdAt;
         $proyecto->save();
     }
-
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function state(Request $request)
+    {
+        $proyecto = Proyecto::findOrFail($request->idProyecto);
+        $proyecto->estado = $request->estado;
+        $proyecto->save();
+    }
     /**
      * Remove the specified resource from storage.
      *
