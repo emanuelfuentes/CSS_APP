@@ -31,21 +31,36 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="img/UCA.6b065e25.png" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    <span class="d-md-down-none"> 00117716 </span>
+                    <span class="d-md-down-none"> 000000 </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">
                         <strong>Cuenta</strong>
                     </div>
                     <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                    <a class="dropdown-item" href="{{route('logout')}}" 
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> Cerrar sesión</a>
+
+                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none;">
+                        {{ csrf_field() }}
+                    </form>
                 </div>
             </li>
         </ul>
     </header>
 
     <div class="app-body">
-        @include('plantilla.adminSidebar')
+
+    @if(Auth::check())
+        @if(Auth::user()->idRol == 1)
+            @include('plantilla.adminSidebar')
+        @else
+            @include('plantilla.sidebar')
+        @endif
+    @else
+        @include('plantilla.sidebar')
+
+    @endif
         <!-- Contenido Principal -->
         @yield('dashboard')
         <!-- /Fin del contenido principal -->
