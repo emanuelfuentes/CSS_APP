@@ -59,3 +59,4 @@ Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
 //admin
 Route::post('/proyecto/insertar', 'ProyectoController@store');
 Route::put('/proyecto/actualizar', 'ProyectoController@update'); 
+Route::put('/proyecto/estado', 'ProyectoController@state'); 

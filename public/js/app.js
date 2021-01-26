@@ -36539,7 +36539,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_createdAt: '',
             modal_estado: 0,
             errorProyecto: [''],
-            arrayPXE: [''],
             pagination: {
                 'total': 0,
                 'current_page': 0,
@@ -36579,12 +36578,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
-            axios.get('/public/pxe_estudiante').then(function (response) {
-                me.arrayPXE = response.data;
-            }).catch(function (error) {
-                console.log(error);
-            });
-
             var url = '/public/proyecto?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
@@ -36641,6 +36634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'createdAt': "this.modal_createdAt"
                 }).then(function (response) {
                     me.cerrarModal();
+                    me.bindData();
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -36657,7 +36651,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.errorProyecto.length >= 1) return true;else return false;
         },
-        estadoProyecto: function estadoProyecto() {},
+        estadoProyecto: function estadoProyecto() {
+            var me = this;
+            var state;
+            if (this.modal_estado == 1) state = 0;else state = 1;
+            console.log(this.id_proyecto);
+            axios.put("/public/proyecto/estado", {
+                'idProyecto': this.id_proyecto,
+                'estado': state
+            }).then(function (response) {
+                me.cerrarModal();
+                me.bindData();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
         cerrarModal: function cerrarModal() {
             this.modal = 0;
             this.modal2 = 0;

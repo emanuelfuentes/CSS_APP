@@ -294,7 +294,6 @@
                 modal_createdAt : '',
                 modal_estado: 0,
                 errorProyecto : [''],
-                arrayPXE : [''],
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -333,12 +332,6 @@
         methods:{
             bindData(page){
                 let me = this
-                axios.get('/public/pxe_estudiante').then(function (response) {
-                    me.arrayPXE = response.data;
-                }).catch(function (error) {
-                    console.log(error);
-                });
-
                 var url = '/public/proyecto?page=' + page;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
@@ -397,6 +390,7 @@
                         'createdAt' : "this.modal_createdAt"
                     }).then(function (response) {
                         me.cerrarModal();
+                        me.bindData();
                     }).catch(function (error) {
                         console.log(error);
                     }); 
@@ -415,7 +409,20 @@
                 else return false;
             },
             estadoProyecto(){
-                
+                let me = this;
+                var state;
+                if(this.modal_estado == 1) state = 0;
+                else state = 1;
+                console.log(this.id_proyecto)
+                axios.put("/public/proyecto/estado", {
+                    'idProyecto' : this.id_proyecto,
+                    'estado' : state
+                }).then(function (response) {
+                    me.cerrarModal();
+                    me.bindData();
+                }).catch(function (error) {
+                    console.log(error);
+                }); 
             },
             cerrarModal(){
                 this.modal = 0;
