@@ -59,11 +59,8 @@ Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
 //admin
 Route::post('/proyecto/insertar', 'ProyectoController@store');
 Route::put('/proyecto/actualizar', 'ProyectoController@update'); 
-<<<<<<< HEAD
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-=======
 Route::put('/proyecto/estado', 'ProyectoController@state'); 
->>>>>>> aa72a37158e37cd8403e32fb76d626773d4c4f22
