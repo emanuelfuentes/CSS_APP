@@ -44,9 +44,6 @@
                                         <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
                                             <i class="icon-check"></i>
                                         </button> &nbsp;
-                                        <button type="button" @click="abrirModal('borrar', proyecto)" class="btn btn-danger btn-sm">
-                                            <i class="icon-trash"></i>
-                                        </button> &nbsp;
                                     </td>
                                     <td v-text="proyecto.nombre" id="name_p"></td>
                                     <td v-text="proyecto.descripcion"></td>
@@ -190,29 +187,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!--Fin del modal-->
-            <!--Inicio del modal borrar proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal3}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Borrar proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h2>¿Desea borrar este proyecto?</h2>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -369,6 +343,7 @@
                         'createdAt' : "this.modal_createdAt"
                     }).then(function (response) {
                         me.cerrarModal();
+                        me.bindData();
                     }).catch(function (error) {
                         console.log(error);
                     }); 
@@ -414,7 +389,7 @@
                 if(this.modal_estado == 1) state = 0;
                 else state = 1;
                 console.log(this.id_proyecto)
-                axios.put("/public/proyecto/estado", {
+                axios.put('/public/proyecto/estado', {
                     'idProyecto' : this.id_proyecto,
                     'estado' : state
                 }).then(function (response) {

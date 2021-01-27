@@ -83,13 +83,6 @@ class ProyectoController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $proyecto = Proyecto::findOrFail($request->idProyecto);
@@ -108,26 +101,11 @@ class ProyectoController extends Controller
         $proyecto->save();
     }
     
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function state(Request $request)
     {
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //Eliminar proyectos que ya fueron terminados
     }
 }

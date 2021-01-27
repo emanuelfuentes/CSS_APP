@@ -16,6 +16,7 @@ class LoginController extends Controller
         $this->validateLogin($request);
 
         Auth::loginUsingId(1);
+        return redirect()->intended('home');
 
         /*
         if(Auth::attempt(['email' => '00170517@uca.edu.sv', 'password' => '1234'])){
