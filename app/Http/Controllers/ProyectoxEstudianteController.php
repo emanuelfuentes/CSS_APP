@@ -24,6 +24,7 @@ class ProyectoxEstudianteController extends Controller
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
         ->select('proyecto.idProyecto','proyecto.nombre','proyecto.descripcion','proyecto.estado')
+        ->where('proyecto.estado', '=', 0)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
 
         return [

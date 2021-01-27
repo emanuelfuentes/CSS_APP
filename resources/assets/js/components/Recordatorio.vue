@@ -1,7 +1,9 @@
 <template>
-    <div class="container">
-        <div class="card">
-            <img src="/public/img/recordatorio.ae2960e4.png" />
-        </div>
+  <main class="main">
+    <div class="container-fluid">
+      <div class="card">
+        <img src="/public/img/recordatorio.ae2960e4.png" />
+      </div>
     </div>
+  </main>
 </template>

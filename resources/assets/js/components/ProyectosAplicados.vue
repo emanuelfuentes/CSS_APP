@@ -196,6 +196,7 @@
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     me.arrayProyectos = respuesta.proyectos.data;
+                    console.log(respuesta);
                     me.pagination = respuesta.pagination;
                 })
                 .catch(function (error) {

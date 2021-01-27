@@ -1,6 +1,6 @@
 @extends('principal')
 @section('dashboard')
-    <template v-if="menu==0">
+    <!--<template v-if="menu==0">
         <admin-proyectos></admin-proyectos>
     </template>
     
@@ -14,8 +14,8 @@
 
     <template v-if="menu==3">
         <recordatorio></recordatorio>
-    </template>
-    <!--<template v-if="menu==0">
+    </template>-->
+    <template v-if="menu==0">
         <todos-proyectos></todos-proyectos>
     </template>
     
@@ -24,12 +24,12 @@
     </template>
 
     <template v-if="menu==2">
-        <h1>Componente nuevo</h1>
+        <historial-proyectos></historial-proyectos>
     </template>
 
     <template v-if="menu==3">
         <recordatorio></recordatorio>
-    </template>-->
+    </template>
 
     <!--@if(Auth::check())
         @if(Auth::user()->idrol == 1)
