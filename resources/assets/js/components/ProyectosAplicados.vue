@@ -152,7 +152,7 @@
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div>
+                        <div class="modal-body">
                             <h2>¿Eliminar proyecto de su lista de aplicados?</h2>
                         </div>
                         <div class="modal-footer">

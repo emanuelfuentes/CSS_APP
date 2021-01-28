@@ -41,9 +41,17 @@
                                         <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
                                             <i class="icon-pencil"></i>
                                         </button> &nbsp;
-                                        <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
-                                            <i class="icon-check"></i>
-                                        </button> &nbsp;
+                                        <div v-if="proyecto.estado">
+                                            <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-danger btn-sm">
+                                                <i class="icon-close"></i>
+                                            </button> &nbsp;
+                                        </div>
+                                        <div v-else>
+                                            <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
+                                                <i class="icon-check"></i>
+                                            </button> &nbsp;
+                                        </div>
+                                        
                                     </td>
                                     <td v-text="proyecto.nombre" id="name_p"></td>
                                     <td v-text="proyecto.descripcion"></td>

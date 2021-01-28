@@ -36316,7 +36316,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "modal-body" }, [
       _c("h2", [_vm._v("¿Eliminar proyecto de su lista de aplicados?")])
     ])
   }
@@ -36427,6 +36427,14 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -36983,20 +36991,39 @@ var render = function() {
                         [_c("i", { staticClass: "icon-pencil" })]
                       ),
                       _vm._v("  \n                                    "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("estado", proyecto)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-check" })]
-                      ),
-                      _vm._v("  \n                                ")
+                      proyecto.estado
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("estado", proyecto)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-close" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ])
+                        : _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("estado", proyecto)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-check" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ])
                     ]),
                     _vm._v(" "),
                     _c("td", {
