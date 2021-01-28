@@ -53,7 +53,10 @@ Route::get('/home', function () {
 })->name('main');
 
 Route::get('/proyecto', 'ProyectoController@index');
-Route::post('proyecto/ingresar', 'ProyectoxEstudianteController@store');
+
+Route::post('/proyecto/ingresar', 'ProyectoxEstudianteController@store');
+Route::post('/proyecto/eliminar', 'ProyectoxEstudianteController@deleteRow');
+
 Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
 Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
 
@@ -66,4 +69,5 @@ Route::put('/proyecto/actualizar', 'ProyectoController@update');
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-Route::put('/proyecto/estado', 'ProyectoController@state'); 
+Route::put('/proyecto/estado', 'ProyectoController@state');
+Route::put('/proyecto/eliminar', 'ProyectoController@delete');  

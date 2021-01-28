@@ -131,8 +131,14 @@ class ProyectoxEstudianteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    
+    public function deleteRow(Request $request)
     {
-        //Eliminar proyectos que ya fueron terminados
+        if(!$request->ajax()) return redirect('/home');
+        $idUser = $request->idEstudiante;
+        $idProyecto = $request->idProyecto;
+        ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
+        ->where('idEstudiante','=', $idUser)
+        ->delete();
     }
 }

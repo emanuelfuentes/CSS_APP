@@ -35700,6 +35700,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             nombre: '',
+            user_id: '',
             descripcion: '',
             arrayProyectos: [''],
             arrayPXE: [''],
@@ -35751,7 +35752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        listarProyectos: function listarProyectos(page) {
+        bindData: function bindData(page) {
             var me = this;
             var url = '/public/mis_proyectos' /*?page=' + page*/;
             axios.get(url).then(function (response) {
@@ -35761,11 +35762,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+
+            axios.get('/public/get_id').then(function (response) {
+                me.user_id = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        desAplicarProyecto: function desAplicarProyecto() {
+            var me = this;
+            axios.post('/public/proyecto/eliminar', {
+                'idProyecto': this.id_proyecto,
+                'idEstudiante': this.user_id
+            }).then(function (response) {
+                me.cerrarModal();
+                me.bindData();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
             me.pagination.current_page = page;
-            me.listarProyectos(page);
+            me.bindData(page);
         },
         cerrarModal: function cerrarModal() {
             this.modal = 0;
@@ -35792,6 +35811,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 case "desaplicar":
                     {
                         this.modal2 = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.nombre = data.nombre;
                         break;
                     }
                 default:
@@ -35800,7 +35821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.listarProyectos();
+        this.bindData();
     }
 });
 
@@ -36122,9 +36143,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Estado del proyecto")
-                ]),
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.nombre) }
+                }),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -36169,7 +36191,7 @@ var render = function() {
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
-                        return _vm.desAplicar()
+                        return _vm.desAplicarProyecto()
                       }
                     }
                   },
