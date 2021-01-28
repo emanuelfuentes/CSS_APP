@@ -144,8 +144,9 @@
                 nombre : '',
                 descripcion : '',
                 arrayProyectos : [''],
+                arrayPXE : [''],
                 modal : 0,
-                id_proyecto : 0,                
+                id_proyecto : 0,
                 modal_encargado : '',
                 modal_nombre : '',
                 modal_desc : '',
@@ -192,9 +193,9 @@
         methods:{
             listarProyectos(page){
                 let me = this
-                var url = '/public/proyecto?page=' + page;
+                var url = '/public/mis_proyecto?page=' + page;
                 axios.get(url).then(function (response) {
-                    var respuesta = response.data;
+                    var respuesta = response;
                     me.arrayProyectos = respuesta.proyectos.data;
                     me.pagination = respuesta.pagination;
                 })

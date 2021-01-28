@@ -1,7 +1,7 @@
 @extends('principal')
 @section('dashboard')
     <template v-if="menu==0">
-        <admin-proyectos></admin-proyectos>
+        <todos-proyectos></todos-proyectos>
     </template>
     
     <template v-if="menu==1">

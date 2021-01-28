@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProyectoxEstudiante;
+use Illuminate\Support\Facades\Auth;
 
 class ProyectoxEstudianteController extends Controller
 {
@@ -20,10 +21,12 @@ class ProyectoxEstudianteController extends Controller
     }
     public function proyectosPorId(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+        //if(!$request->ajax()) return redirect('/home');
+        $id = Auth()->user()->id;
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
-        ->select('proyecto.idProyecto','proyecto.nombre','proyecto.descripcion','proyecto.estado')
+        ->select('proyecto.idProyecto', 'estudiante.idEstudiante','proyecto.nombre','proyecto.descripcion','proyecto.estado')
+        ->where('proyectoxestudiante.idEstudiante','=', $id)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
 
         return [

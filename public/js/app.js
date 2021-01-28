@@ -35665,6 +35665,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombre: '',
             descripcion: '',
             arrayProyectos: [''],
+            arrayPXE: [''],
             modal: 0,
             id_proyecto: 0,
             modal_encargado: '',
@@ -35714,9 +35715,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         listarProyectos: function listarProyectos(page) {
             var me = this;
-            var url = '/public/proyecto?page=' + page;
+            var url = '/public/mis_proyecto?page=' + page;
             axios.get(url).then(function (response) {
-                var respuesta = response.data;
+                var respuesta = response;
                 me.arrayProyectos = respuesta.proyectos.data;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
