@@ -31,7 +31,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="img/UCA.6b065e25.png" class="img-avatar" alt="admin@bootstrapmaster.com">
-                    <span class="d-md-down-none"> 000000 </span>
+                    <span class="d-md-down-none"> {{Auth::user()->email}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <div class="dropdown-header text-center">

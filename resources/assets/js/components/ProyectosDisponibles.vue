@@ -162,7 +162,7 @@
     export default {
         data(){
             return{
-                nombre : '',
+                user_id : 0,
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
@@ -230,6 +230,13 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+
+                axios.get('/public/get_id').then(function (response) {
+                    me.user_id = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             cambiarPagina(page){
                 let me = this;
@@ -251,7 +258,7 @@
                 if (flag) {
                         axios.post('/public/proyecto/ingresar', {
                             'idProyecto' : this.id_proyecto,
-                            'idEstudiante' : 1,
+                            'idEstudiante' : this.user_id,
                             'appliedAt' : 'true',
                             'estado' : 1,
                             'modifiedBy' : 'admin'

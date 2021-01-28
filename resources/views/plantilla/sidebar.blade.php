@@ -2,7 +2,7 @@
             <nav class="sidebar-nav">
                 <ul class="nav">
                     <li class="nav-title">
-                        Menú
+                        MENÚ
                     </li>
                     <li @click='menu=0' class="nav-item">
                         <a class="nav-link active" href="#"><i class="icon-home"></i> Proyectos Disponibles </a>

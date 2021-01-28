@@ -85,7 +85,13 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Editar proyecto</h4>
+                            <div v-if="add_edit_flag = 1">
+                                <h4 class="modal-title">Insertar nuevo proyecto</h4>
+                            </div>
+                            <div v-else-if="add_edit_flag = 2">
+                                <h4 class="modal-title">Editar proyecto existente</h4>
+                            </div>
+                            
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
@@ -122,7 +128,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Descripción</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="modal_desc" class="form-control" placeholder="Descripción">
+                                        <textarea type="text" v-model="modal_desc" class="form-control" placeholder="Descripción"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -134,13 +140,13 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de inicio</label>
                                     <div class="col-md-9">
-                                        <datepicker v-model="modal_fecha_in"></datepicker>
+                                        <input type="date" value="2017-06-01" v-model="modal_fecha_in">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de finalización</label>
                                     <div class="col-md-9">
-                                        <datepicker v-model="modal_fecha_fin"></datepicker>
+                                        <input type="date" value="2021-01-01" v-model="modal_fecha_fin">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -251,6 +257,7 @@
                 nombre : '',
                 descripcion : '',
                 arrayProyectos : [''],
+                add_edit_flag : 0,
                 modal : 0,
                 modal2 : 0,
                 modal3 : 0,
@@ -400,6 +407,7 @@
                 }); 
             },
             cerrarModal(){
+                this.add_edit_flag = 0;
                 this.modal = 0;
                 this.modal2 = 0;
                 this.modal3 = 0;
@@ -410,12 +418,18 @@
                 switch (modelo) {
                     case "insertar":
                         {
+                            
                             this.modal = 1;
+                            this.add_edit_flag = 1;
+                            console.log(this.add_edit_flag);
                             break;
                         }
                     case "editar":
                         {
+                            
                             this.modal = 1;
+                            this.add_edit_flag = 2;
+                            console.log(this.add_edit_flag);
                             this.id_proyecto = data.idProyecto;
                             this.modal_encargado = data.encargado;
                             this.modal_nombre = data.nombre;

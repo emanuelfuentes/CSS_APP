@@ -28,7 +28,7 @@
                             <thead>
                                 <tr>
                                     <!--<th>Opciones</th> -->
-                                    <th>Numero</th>
+                                    <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
@@ -50,7 +50,11 @@
                                         </div>
                                         
                                     </td>-->
-                                    <td v-text="proyecto.idProyecto"></td>
+                                    <td>
+                                        <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
+                                            <i class="icon-trash"></i>
+                                        </button> &nbsp;
+                                    </td>
                                     <td v-text="proyecto.nombre"></td>
                                     <td v-text="proyecto.descripcion"></td>
                                     <td>
@@ -92,7 +96,7 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
+                            <h4 class="modal-title" v-text="modal_nombre"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
@@ -103,12 +107,16 @@
                                     <th>Tipo</th>
                                     <th>Cupos</th>
                                     <th>Horario</th>
+                                    <th>Inicio</th>
+                                    <th>Fin</th>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td v-text="modal_tipo_horas"></td>
                                         <td v-text="modal_cupos"></td>
                                         <td v-text="modal_horario"></td>
+                                        <td v-text="modal_fecha_in"></td>
+                                        <td v-text="modal_fecha_fin"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,6 +142,29 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <!--Inicio del modal eliminar-->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Estado del proyecto</h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div>
+                            <h2>¿Eliminar proyecto de su lista de aplicados?</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" @click ="desAplicar()">Confirmar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!--Fin del modal-->
         </main>
 </template>
 
@@ -146,6 +177,7 @@
                 arrayProyectos : [''],
                 arrayPXE : [''],
                 modal : 0,
+                modal2 : 0,
                 id_proyecto : 0,
                 modal_encargado : '',
                 modal_nombre : '',
@@ -193,9 +225,9 @@
         methods:{
             listarProyectos(page){
                 let me = this
-                var url = '/public/mis_proyecto?page=' + page;
+                var url = '/public/mis_proyectos' /*?page=' + page*/;
                 axios.get(url).then(function (response) {
-                    var respuesta = response;
+                    var respuesta = response.data;
                     me.arrayProyectos = respuesta.proyectos.data;
                     me.pagination = respuesta.pagination;
                 })
@@ -203,8 +235,14 @@
                     console.log(error);
                 });
             },
+            cambiarPagina(page){
+                let me = this;
+                me.pagination.current_page = page;
+                me.listarProyectos(page);
+            },
             cerrarModal(){
                 this.modal = 0;
+                this.modal2 = 0;
             },
             abrirModal(modelo, data = []){
                 switch (modelo) {
@@ -220,6 +258,11 @@
                         this.modal_horario = data.horario;
                         this.modal_fecha_in = data.fecha_inicio;
                         this.modal_fecha_fin = data.fecha_fin;
+                        break;
+                    }
+                    case "desaplicar":
+                    {
+                        this.modal2 = 1;
                         break;
                     }
                     default:

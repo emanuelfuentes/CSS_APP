@@ -21,11 +21,12 @@ class ProyectoxEstudianteController extends Controller
     }
     public function proyectosPorId(Request $request)
     {
-        //if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->id;
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
-        ->select('proyecto.idProyecto', 'estudiante.idEstudiante','proyecto.nombre','proyecto.descripcion','proyecto.estado')
+        ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
+        'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
         ->where('proyectoxestudiante.idEstudiante','=', $id)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
 
@@ -46,6 +47,12 @@ class ProyectoxEstudianteController extends Controller
         $req = $request->idEstudiante;
         $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idEstudiante = :req')->get();
         return $pXe;
+    }
+
+    public function getId(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $id = Auth()->user()->id;
+        return $id;
     }
     /**
      * Show the form for creating a new resource.

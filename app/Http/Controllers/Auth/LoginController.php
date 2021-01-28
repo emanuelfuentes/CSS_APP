@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function authenticate(Request $request){
         $this->validateLogin($request);
 
-        Auth::loginUsingId(2);
+        Auth::loginUsingId(3);
         return redirect()->intended('home');
 
         /*

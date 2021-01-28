@@ -34748,7 +34748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            nombre: '',
+            user_id: 0,
             descripcion: '',
             arrayProyectos: [''],
             modal: 0,
@@ -34816,6 +34816,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+
+            axios.get('/public/get_id').then(function (response) {
+                me.user_id = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
@@ -34837,7 +34843,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (flag) {
                 axios.post('/public/proyecto/ingresar', {
                     'idProyecto': this.id_proyecto,
-                    'idEstudiante': 1,
+                    'idEstudiante': this.user_id,
                     'appliedAt': 'true',
                     'estado': 1,
                     'modifiedBy': 'admin'
@@ -35658,6 +35664,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -35667,6 +35704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arrayProyectos: [''],
             arrayPXE: [''],
             modal: 0,
+            modal2: 0,
             id_proyecto: 0,
             modal_encargado: '',
             modal_nombre: '',
@@ -35715,17 +35753,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         listarProyectos: function listarProyectos(page) {
             var me = this;
-            var url = '/public/mis_proyecto?page=' + page;
+            var url = '/public/mis_proyectos' /*?page=' + page*/;
             axios.get(url).then(function (response) {
-                var respuesta = response;
+                var respuesta = response.data;
                 me.arrayProyectos = respuesta.proyectos.data;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
                 console.log(error);
             });
         },
+        cambiarPagina: function cambiarPagina(page) {
+            var me = this;
+            me.pagination.current_page = page;
+            me.listarProyectos(page);
+        },
         cerrarModal: function cerrarModal() {
             this.modal = 0;
+            this.modal2 = 0;
         },
         abrirModal: function abrirModal(modelo) {
             var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -35743,6 +35787,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal_horario = data.horario;
                         this.modal_fecha_in = data.fecha_inicio;
                         this.modal_fecha_fin = data.fecha_fin;
+                        break;
+                    }
+                case "desaplicar":
+                    {
+                        this.modal2 = 1;
                         break;
                     }
                 default:
@@ -35783,9 +35832,22 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.idProyecto) }
-                    }),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-warning btn-sm",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.abrirModal("desaplicar", proyecto)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "icon-trash" })]
+                      ),
+                      _vm._v("  \n                                ")
+                    ]),
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(proyecto.nombre) }
@@ -35932,14 +35994,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h4",
-                  {
-                    staticClass: "modal-title",
-                    domProps: { textContent: _vm._s(_vm.modal_nombre) }
-                  },
-                  [_vm._v("Aplicar a proyecto")]
-                ),
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.modal_nombre) }
+                }),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -35983,6 +36041,14 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_fecha_in) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: { textContent: _vm._s(_vm.modal_fecha_fin) }
                         })
                       ])
                     ])
@@ -36025,6 +36091,89 @@ var render = function() {
                     }
                   },
                   [_vm._v("Cerrar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        class: { mostrar: _vm.modal2 },
+        staticStyle: { display: "none" },
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", { staticClass: "modal-title" }, [
+                  _vm._v("Estado del proyecto")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: { type: "button", "aria-label": "Close" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.desAplicar()
+                      }
+                    }
+                  },
+                  [_vm._v("Confirmar")]
                 )
               ])
             ])
@@ -36103,7 +36252,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Numero")]),
+        _c("th", [_vm._v("Opciones")]),
         _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
@@ -36124,7 +36273,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Cupos")]),
       _vm._v(" "),
-      _c("th", [_vm._v("Horario")])
+      _c("th", [_vm._v("Horario")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Fin")])
     ])
   },
   function() {
@@ -36135,6 +36288,14 @@ var staticRenderFns = [
       _c("th", [_vm._v("Encargado")]),
       _vm._v(" "),
       _c("th", [_vm._v("Descripción")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h2", [_vm._v("¿Eliminar proyecto de su lista de aplicados?")])
     ])
   }
 ]
@@ -36490,6 +36651,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -36497,6 +36664,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombre: '',
             descripcion: '',
             arrayProyectos: [''],
+            add_edit_flag: 0,
             modal: 0,
             modal2: 0,
             modal3: 0,
@@ -36643,6 +36811,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         cerrarModal: function cerrarModal() {
+            this.add_edit_flag = 0;
             this.modal = 0;
             this.modal2 = 0;
             this.modal3 = 0;
@@ -36655,12 +36824,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             switch (modelo) {
                 case "insertar":
                     {
+
                         this.modal = 1;
+                        this.add_edit_flag = 1;
+                        console.log(this.add_edit_flag);
                         break;
                     }
                 case "editar":
                     {
+
                         this.modal = 1;
+                        this.add_edit_flag = 2;
+                        console.log(this.add_edit_flag);
                         this.id_proyecto = data.idProyecto;
                         this.modal_encargado = data.encargado;
                         this.modal_nombre = data.nombre;
@@ -36949,9 +37124,19 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Editar proyecto")
-                ]),
+                (_vm.add_edit_flag = 1)
+                  ? _c("div", [
+                      _c("h4", { staticClass: "modal-title" }, [
+                        _vm._v("Insertar nuevo proyecto")
+                      ])
+                    ])
+                  : (_vm.add_edit_flag = 2)
+                  ? _c("div", [
+                      _c("h4", { staticClass: "modal-title" }, [
+                        _vm._v("Editar proyecto existente")
+                      ])
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -37148,7 +37333,7 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-9" }, [
-                      _c("input", {
+                      _c("textarea", {
                         directives: [
                           {
                             name: "model",
@@ -37217,22 +37402,28 @@ var render = function() {
                       [_vm._v("Fecha de inicio")]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-9" },
-                      [
-                        _c("datepicker", {
-                          model: {
+                    _c("div", { staticClass: "col-md-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
                             value: _vm.modal_fecha_in,
-                            callback: function($$v) {
-                              _vm.modal_fecha_in = $$v
-                            },
                             expression: "modal_fecha_in"
                           }
-                        })
-                      ],
-                      1
-                    )
+                        ],
+                        attrs: { type: "date", value: "2017-06-01" },
+                        domProps: { value: _vm.modal_fecha_in },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.modal_fecha_in = $event.target.value
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
@@ -37245,22 +37436,28 @@ var render = function() {
                       [_vm._v("Fecha de finalización")]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-md-9" },
-                      [
-                        _c("datepicker", {
-                          model: {
+                    _c("div", { staticClass: "col-md-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
                             value: _vm.modal_fecha_fin,
-                            callback: function($$v) {
-                              _vm.modal_fecha_fin = $$v
-                            },
                             expression: "modal_fecha_fin"
                           }
-                        })
-                      ],
-                      1
-                    )
+                        ],
+                        attrs: { type: "date", value: "2021-01-01" },
+                        domProps: { value: _vm.modal_fecha_fin },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.modal_fecha_fin = $event.target.value
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group row" }, [
