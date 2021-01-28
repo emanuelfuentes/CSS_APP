@@ -49,11 +49,6 @@ class ProyectoxEstudianteController extends Controller
         return $pXe;
     }
 
-    public function getId(Request $request){
-        if(!$request->ajax()) return redirect('/home');
-        $id = Auth()->user()->id;
-        return $id;
-    }
     /**
      * Show the form for creating a new resource.
      *

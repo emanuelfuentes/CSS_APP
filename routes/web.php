@@ -56,7 +56,8 @@ Route::get('/proyecto', 'ProyectoController@index');
 Route::post('proyecto/ingresar', 'ProyectoxEstudianteController@store');
 Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
 Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
-Route::get('/get_id', 'ProyectoxEstudianteController@getId'); 
+
+Route::get('/get_id', 'UserController@getId'); 
 
 //admin
 Route::post('/proyecto/insertar', 'ProyectoController@store');

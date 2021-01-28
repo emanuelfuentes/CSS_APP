@@ -248,7 +248,7 @@
                 let flag = true;
                 if(me.arrayPXE.length > 0){
                     for(let j = 0; j < me.arrayPXE.length; j++){
-                        if(me.id_proyecto == me.arrayPXE[j].idProyecto){
+                        if(me.id_proyecto == me.arrayPXE[j].idProyecto && me.arrayPXE[j].idEstudiante == me.user_id){
                             document.getElementById('hidden_applied').style.visibility = 'visible';
                             flag = false;
                             break;
