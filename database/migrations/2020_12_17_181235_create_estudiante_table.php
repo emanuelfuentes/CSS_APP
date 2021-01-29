@@ -19,13 +19,13 @@ class CreateEstudianteTable extends Migration
             $table->string('apellidos', 150);
             $table->string('carnet', 100)->unique();
             $table->string('correo', 150)->unique();
-            $table->tinyInteger('estado');
+            $table->tinyInteger('estado')->nullable();
             $table->string('genero', 100);
             $table->string('default_password', 100);
             $table->string('password', 100);
-            $table->unsignedbigInteger('idPerfil');
+            $table->unsignedbigInteger('idPerfil')->nullable();
             $table->foreign('idPerfil')->references('idPerfil')->on('perfil')->onDelete('cascade');
-            $table->unsignedbigInteger('idCarrera');
+            $table->unsignedbigInteger('idCarrera')->nullable();
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
             $table->timestamps();
         });

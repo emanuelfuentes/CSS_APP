@@ -14,8 +14,11 @@ class LoginController extends Controller
 
     public function authenticate(Request $request){
         $this->validateLogin($request);
+        $email = $request->email;
 
-        Auth::loginUsingId(2);
+        if($email == "admin@uca.edu.sv") Auth::loginUsingId(1);
+        else if($email == "00170517@uca.edu.sv") Auth::loginUsingId(2);
+
         return redirect()->intended('home');
 
         /*
