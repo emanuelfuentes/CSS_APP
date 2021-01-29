@@ -35700,6 +35700,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             nombre: '',
+            user_id: '',
             descripcion: '',
             arrayProyectos: [''],
             arrayPXE: [''],
@@ -35751,7 +35752,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        listarProyectos: function listarProyectos(page) {
+        bindData: function bindData(page) {
             var me = this;
             var url = '/public/mis_proyectos' /*?page=' + page*/;
             axios.get(url).then(function (response) {
@@ -35761,11 +35762,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+
+            axios.get('/public/get_id').then(function (response) {
+                me.user_id = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        desAplicarProyecto: function desAplicarProyecto() {
+            var me = this;
+            axios.post('/public/proyecto/eliminar', {
+                'idProyecto': this.id_proyecto,
+                'idEstudiante': this.user_id
+            }).then(function (response) {
+                me.cerrarModal();
+                me.bindData();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
             me.pagination.current_page = page;
-            me.listarProyectos(page);
+            me.bindData(page);
         },
         cerrarModal: function cerrarModal() {
             this.modal = 0;
@@ -35792,6 +35811,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 case "desaplicar":
                     {
                         this.modal2 = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.nombre = data.nombre;
                         break;
                     }
                 default:
@@ -35800,7 +35821,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
-        this.listarProyectos();
+        this.bindData();
     }
 });
 
@@ -36122,9 +36143,10 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h4", { staticClass: "modal-title" }, [
-                  _vm._v("Estado del proyecto")
-                ]),
+                _c("h4", {
+                  staticClass: "modal-title",
+                  domProps: { textContent: _vm._s(_vm.nombre) }
+                }),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -36169,7 +36191,7 @@ var render = function() {
                     attrs: { type: "button" },
                     on: {
                       click: function($event) {
-                        return _vm.desAplicar()
+                        return _vm.desAplicarProyecto()
                       }
                     }
                   },
@@ -36294,7 +36316,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "modal-body" }, [
       _c("h2", [_vm._v("¿Eliminar proyecto de su lista de aplicados?")])
     ])
   }
@@ -36405,6 +36427,14 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -36961,20 +36991,39 @@ var render = function() {
                         [_c("i", { staticClass: "icon-pencil" })]
                       ),
                       _vm._v("  \n                                    "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("estado", proyecto)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-check" })]
-                      ),
-                      _vm._v("  \n                                ")
+                      proyecto.estado
+                        ? _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("estado", proyecto)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-close" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ])
+                        : _c("div", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("estado", proyecto)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-check" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ])
                     ]),
                     _vm._v(" "),
                     _c("td", {

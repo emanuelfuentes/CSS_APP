@@ -147,17 +147,17 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Estado del proyecto</h4>
+                            <h4 class="modal-title" v-text="nombre"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div>
+                        <div class="modal-body">
                             <h2>¿Eliminar proyecto de su lista de aplicados?</h2>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="desAplicar()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" @click ="desAplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -173,6 +173,7 @@
         data(){
             return{
                 nombre : '',
+                user_id : '',
                 descripcion : '',
                 arrayProyectos : [''],
                 arrayPXE : [''],
@@ -223,7 +224,7 @@
             }
         },
         methods:{
-            listarProyectos(page){
+            bindData(page){
                 let me = this
                 var url = '/public/mis_proyectos' /*?page=' + page*/;
                 axios.get(url).then(function (response) {
@@ -234,11 +235,30 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+
+                axios.get('/public/get_id').then(function (response) {
+                    me.user_id = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            desAplicarProyecto(){
+                let me = this;
+                axios.post('/public/proyecto/eliminar', {
+                    'idProyecto' : this.id_proyecto,
+                    'idEstudiante' : this.user_id
+                }).then(function (response) {
+                    me.cerrarModal();
+                    me.bindData();
+                }).catch(function (error) {
+                    console.log(error);
+                });
             },
             cambiarPagina(page){
                 let me = this;
                 me.pagination.current_page = page;
-                me.listarProyectos(page);
+                me.bindData(page);
             },
             cerrarModal(){
                 this.modal = 0;
@@ -263,6 +283,8 @@
                     case "desaplicar":
                     {
                         this.modal2 = 1;
+                        this.id_proyecto = data.idProyecto;
+                        this.nombre = data.nombre;
                         break;
                     }
                     default:
@@ -271,7 +293,7 @@
             }
         },
         mounted() {
-            this.listarProyectos();
+            this.bindData();
         }
     }
 </script>

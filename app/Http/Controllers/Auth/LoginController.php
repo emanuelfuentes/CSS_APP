@@ -19,6 +19,7 @@ class LoginController extends Controller
         if($email == "admin@uca.edu.sv") Auth::loginUsingId(1);
         else if($email == "00170517@uca.edu.sv") Auth::loginUsingId(2);
 
+        //Auth::loginUsingId(3);
         return redirect()->intended('home');
 
         /*
