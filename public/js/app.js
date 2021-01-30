@@ -34841,10 +34841,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     listarProyectos: function listarProyectos(page) {
       var me = this;
-      var url = "/public/proyecto?page=" + page;
+      var url = '/public/proyecto?page=' + page;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
-        me.arrayProyectos = respuesta.proyectos.data;
+        var proyectos = respuesta.proyectos.data;
+        var auxiliar = [];
+        proyectos.map(function (dato, key) {
+          if (!dato.estado) {
+            auxiliar.push(dato);
+          }
+        });
+        me.arrayProyectos = auxiliar;
         me.pagination = respuesta.pagination;
       }).catch(function (error) {
         console.log(error);
@@ -34907,11 +34914,9 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.arrayProyectos, function(proyecto) {
+                _vm._l(_vm.arrayProyectos, function(proyecto, index) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.idProyecto) }
-                    }),
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(proyecto.nombre) }
@@ -36504,8 +36509,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var url = '/public/proyecto?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
-                me.arrayProyectos = respuesta.proyectos.data;
-                console.log(respuesta);
+                var proyectos = respuesta.proyectos.data;
+                var auxiliar = [];
+                proyectos.map(function (dato, key) {
+                    if (dato.estado) {
+                        auxiliar.push(dato);
+                    }
+                });
+                me.arrayProyectos = auxiliar;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
                 console.log(error);
@@ -36568,11 +36579,9 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.arrayProyectos, function(proyecto) {
+                _vm._l(_vm.arrayProyectos, function(proyecto, index) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.idProyecto) }
-                    }),
+                    _c("td", [_vm._v(_vm._s(index + 1))]),
                     _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(proyecto.nombre) }

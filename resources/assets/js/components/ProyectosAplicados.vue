@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
+                                <tr v-for="(proyecto, index) in arrayProyectos" :key="proyecto.idProyecto">
                                    <!-- <td>
                                         <div v-if="proyecto.estado">
                                             <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm" data-target="#modalNuevo">
@@ -50,7 +50,7 @@
                                         </div>
                                         
                                     </td>-->
-                                    <td v-text="proyecto.idProyecto"></td>
+                                    <td >{{index + 1}}</td>
                                     <td v-text="proyecto.nombre"></td>
                                     <td v-text="proyecto.descripcion"></td>
                                     <td>
@@ -195,8 +195,14 @@
                 var url = '/public/proyecto?page=' + page;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
-                    me.arrayProyectos = respuesta.proyectos.data;
-                    console.log(respuesta);
+                    var proyectos = respuesta.proyectos.data;
+                    var auxiliar = [];
+                    proyectos.map((dato, key)=> {
+                        if(dato.estado){
+                            auxiliar.push(dato)
+                        }
+                    })
+                    me.arrayProyectos = auxiliar;
                     me.pagination = respuesta.pagination;
                 })
                 .catch(function (error) {

@@ -45,7 +45,7 @@
             </thead>
             <tbody>
                 <tr
-                  v-for="proyecto in arrayProyectos"
+                  v-for="(proyecto,index) in arrayProyectos"
                   :key="proyecto.idProyecto"
                 >
                   <!-- <td>
@@ -61,7 +61,7 @@
                                         </div>
                                         
                                     </td>-->
-                  <td v-text="proyecto.idProyecto"></td>
+                  <td >{{index + 1}}</td>
                   <td v-text="proyecto.nombre"></td>
                   <td v-text="proyecto.descripcion"></td>
                   <td>
@@ -250,18 +250,23 @@ export default {
   },
   methods: {
     listarProyectos(page) {
-      let me = this;
-      var url = "/public/proyecto?page=" + page;
-      axios
-        .get(url)
-        .then(function(response) {
-          var respuesta = response.data;
-          me.arrayProyectos = respuesta.proyectos.data;
-          me.pagination = respuesta.pagination;
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      let me = this
+                var url = '/public/proyecto?page=' + page;
+                axios.get(url).then(function (response) {
+                    var respuesta = response.data;
+                    var proyectos = respuesta.proyectos.data;
+                    var auxiliar = [];
+                    proyectos.map((dato, key)=> {
+                        if(!dato.estado){
+                            auxiliar.push(dato)
+                        }
+                    })
+                    me.arrayProyectos = auxiliar;
+                    me.pagination = respuesta.pagination;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
     },
     cerrarModal() {
       this.modal = 0;
