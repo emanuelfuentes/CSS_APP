@@ -29,7 +29,7 @@ class ProyectoxEstudianteController extends Controller
         'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
         ->where('proyectoxestudiante.idEstudiante','=', $id)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
-
+        
         return [
             'pagination' => [
                 'total'         => $proyectos->total(),

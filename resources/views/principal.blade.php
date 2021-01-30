@@ -70,7 +70,7 @@
 
     <footer class="app-footer">
         <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2017</span>
-        <span class="ml-auto">Desarrollado por <a href="#"></a></span>
+        <span class="ml-auto">Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
     </footer>
 
     
