@@ -70,7 +70,7 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::put('/proyecto/estado', 'ProyectoController@state');
-Route::put('/proyecto/eliminar', 'ProyectoController@delete');  
+Route::put('/proyecto/eliminar', 'ProyectoController@delete');
 
-Route::get('/register_form', 'Auth\RegisterController@create');
+Route::get('/register_form', 'Auth\RegisterController@showForm')->name('register_form');
 Route::post('/register', 'Auth\RegisterController@registrar')->name('register');        

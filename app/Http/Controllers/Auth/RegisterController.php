@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Estudiante;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -21,28 +22,27 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function create(){
+    public function showForm(){
         return view('auth.register');
     }
 
     public function registrar(Request $request){
-        $this->validator($request);
+        //$this->validator($request);
+        
         $email = $request->email;
         $psw = $request->password;
         $username = $request->username;
         
-        $user = User::create([
-            'id' => 4,
+        $this->createEstudiante($request);
+
+        User::create([
             'idRol' => 2,
             'name' => $username,
             'email' => $email,
             'password' => $psw
         ]);
 
-
-        auth()->login('$user');
-
-        return redirect()->intended('home');
+        return redirect('/');
     }
 
     protected function validator(Request $request)
@@ -52,5 +52,20 @@ class RegisterController extends Controller
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
+    }
+
+    public function createEstudiante(Request $request)
+    {
+        $estudiante = new Estudiante();
+        $estudiante->nombres = $request->nombres;
+        $estudiante->apellidos = $request->apellidos;
+        $estudiante->carnet = $request->carnet;
+        $estudiante->correo = $request->email;
+        $estudiante->estado = $request->estado;
+        $estudiante->genero = $request->genero;
+        $estudiante->default_password = bcrypt('1234');
+        $estudiante->password = bcrypt($request->password);
+        $estudiante->nombres = $request->nombres;
+        $estudiante->save();
     }
 }

@@ -41,7 +41,7 @@ class EstudianteController extends Controller
         $estudiante->nombres = $request->nombres;
         $estudiante->apellidos = $request->apellidos;
         $estudiante->carnet = $request->carnet;
-        $estudiante->correo = $request->correo;
+        $estudiante->correo = $request->email;
         $estudiante->estado = $request->estado;
         $estudiante->genero = $request->genero;
         $estudiante->default_password = $request->default_password;

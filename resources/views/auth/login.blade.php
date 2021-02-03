@@ -36,7 +36,7 @@
           <div>
             <h2>Sign up</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <button class="btn btn-lg btn-outline-light mt-3" type="button">Register Now!</button>
+            <a class="btn btn-lg btn-outline-light mt-3" type="button" href="{{ url('/register_form') }}">Register Now!</a>
           </div>
         </div>
       </div>
