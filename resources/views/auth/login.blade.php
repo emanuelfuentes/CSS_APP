@@ -10,14 +10,16 @@
           <div class="card-body">
             <h1>Login</h1>
             <p class="text-muted">Sign In to your account</p>
-            <div class="form-group mb-3 {{$errors->has('email' ? 'is-invalid' : '')}}">
+
+            <div class="form-group mb-3 ">
               <input class="form-control" value="{{old('email')}}" name="email"  type="text" placeholder="e-mail"><br>
-              {!!$errors->first('email','<span class="invalid-feedback">:message</span>')!!}
             </div>
-            <div class="form-group mb-4 {{$errors->has('password' ? 'is-invalid' : '')}}">
+
+            <div class="form-group mb-4 ">
               <input class="form-control" name="password"  type="password" placeholder="Password">
               {!!$errors->first('password','<span class="invalid-feedback">:message</span>')!!}
             </div>
+            
             <div class="row">
               <div class="col-6">
                 <button class="btn btn-primary px-4" type="submit">Login</button>

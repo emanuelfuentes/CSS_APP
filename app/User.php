@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id', 'idRol', 'name', 'email',
+        'id','idRol', 'name', 'email', 'password',
     ];
 
     public $timestamps = false;
@@ -29,11 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function rol(){
-        return $this->belongsTo('App\Rol');
-    }
-
-    public function estudiante(){
-        return $this->belongsTo('App\Estudiante');
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }
