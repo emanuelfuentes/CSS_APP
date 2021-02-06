@@ -22,9 +22,9 @@ class ProyectoxEstudianteController extends Controller
     public function proyectosPorId(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
-        $id = Auth()->user()->id;
+        $id = Auth()->user()->idUser;
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
-        ->join('estudiante', 'proyectoxestudiante.idUser','=','estudiante.idUser')
+        ->join('users', 'proyectoxestudiante.idUser','=','users.idUser')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
         'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
         ->where('proyectoxestudiante.idUser','=', $id)
@@ -44,7 +44,7 @@ class ProyectoxEstudianteController extends Controller
     }
 
     public function pxePorId (Request $request) {
-        $req = $request->idEstudiante;
+        $req = $request->idUser;
         $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idUser = :req')->get();
         return $pXe;
     }
@@ -69,12 +69,10 @@ class ProyectoxEstudianteController extends Controller
     {
         $pXe = new ProyectoxEstudiante();
         $pXe->idProyecto = $request->idProyecto;
-        $pXe->idEstudiante = $request->idEstudiante;
-        $pXe->appliedAt = $request->appliedAt;
+        $pXe->idUser = $request->idUser;
         $pXe->estado = $request->estado;
         $pXe->modifiedBy = $request->modifiedBy;
         $pXe->save();
-
     }
 
     /**
@@ -135,10 +133,10 @@ class ProyectoxEstudianteController extends Controller
     public function deleteRow(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
-        $idUser = $request->idEstudiante;
+        $idUser = $request->idUser;
         $idProyecto = $request->idProyecto;
         ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
-        ->where('idEstudiante','=', $idUser)
+        ->where('idUser','=', $idUser)
         ->delete();
     }
 }

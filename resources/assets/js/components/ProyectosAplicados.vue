@@ -247,7 +247,7 @@
                 let me = this;
                 axios.post('/public/proyecto/eliminar', {
                     'idProyecto' : this.id_proyecto,
-                    'idEstudiante' : this.user_id
+                    'idUser' : this.user_id
                 }).then(function (response) {
                     me.cerrarModal();
                     me.bindData();

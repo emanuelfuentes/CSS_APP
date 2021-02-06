@@ -17,7 +17,7 @@ class LoginController extends Controller
         $email = $request->email;
         $psw = $request->password;
 
-        if(Auth::attempt(['email' => $email, 'password' => $psw])){
+        if(Auth::attempt(['correo' => $email, 'password' => $psw])){
             return redirect()->intended('home');
         }
         else{

@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function getId(Request $request){
         if(!$request->ajax()) return redirect('/home');
-        $id = Auth()->user()->id;
+        $id = Auth()->user()->idUser;
         return $id;
     }
 }
