@@ -24,10 +24,10 @@ class ProyectoxEstudianteController extends Controller
         if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->id;
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
-        ->join('estudiante', 'proyectoxestudiante.idEstudiante','=','estudiante.idEstudiante')
+        ->join('estudiante', 'proyectoxestudiante.idUser','=','estudiante.idUser')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
         'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
-        ->where('proyectoxestudiante.idEstudiante','=', $id)
+        ->where('proyectoxestudiante.idUser','=', $id)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
 
         return [
@@ -45,7 +45,7 @@ class ProyectoxEstudianteController extends Controller
 
     public function pxePorId (Request $request) {
         $req = $request->idEstudiante;
-        $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idEstudiante = :req')->get();
+        $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idUser = :req')->get();
         return $pXe;
     }
 

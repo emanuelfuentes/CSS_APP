@@ -8,5 +8,5 @@ class ProyectoxEstudiante extends Model
 {
     protected $table = 'proyectoxestudiante';
     protected $primaryKey = 'idProyectoEstudiante';
-    protected $fillable = ['idProyecto', 'idEstudiante', 'appliedAt', 'estado', 'modifiedBy'];
+    protected $fillable = ['idProyecto', 'idUser', 'estado', 'modifiedBy'];
 }

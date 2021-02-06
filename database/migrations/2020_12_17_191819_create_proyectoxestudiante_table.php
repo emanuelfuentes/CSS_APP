@@ -17,9 +17,8 @@ class CreateProyectoxestudianteTable extends Migration
             $table->bigIncrements('idProyectoEstudiante');
             $table->unsignedbigInteger('idProyecto');
             $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
-            $table->unsignedbigInteger('idEstudiante');
-            $table->foreign('idEstudiante')->references('idEstudiante')->on('estudiante')->onDelete('cascade');
-            $table->string('appliedAt', 150);
+            $table->unsignedbigInteger('idUser');
+            $table->foreign('idUser')->references('idUser')->on('users')->onDelete('cascade');
             $table->tinyInteger('estado');
             $table->string('modifiedBy', 150);
             $table->timestamps();
