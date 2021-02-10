@@ -254,8 +254,8 @@ export default {
   methods: {
     listarProyectos(page) {
       let me = this
-                var url2 = '/public/proyecto?page=' + page;
-                var url = `${API_HOST}/proyecto?page=${page}`
+                //var url2 = '/public/proyecto?page=' + page;
+                var url = `${API_HOST}/proyecto?page=${page}`; 
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     var proyectos = respuesta.proyectos.data;

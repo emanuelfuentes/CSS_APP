@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import {API_HOST} from '../constants/endpoint.js';
     export default {
         mounted() {
             console.log('Component mounted.')

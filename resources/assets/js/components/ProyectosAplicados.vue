@@ -169,6 +169,7 @@
 </template>
 
 <script>
+import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
@@ -226,7 +227,7 @@
         methods:{
             bindData(page){
                 let me = this
-                var url = '/public/mis_proyectos' /*?page=' + page*/;
+                var url = `${API_HOST}/mis_proyectos` /*?page=' + page*/;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     var proyectos = respuesta.proyectos.data;
@@ -243,7 +244,7 @@
                     console.log(error);
                 });
 
-                axios.get('/public/get_id').then(function (response) {
+                axios.get(`${API_HOST}/get_id`).then(function (response) {
                     me.user_id = response.data;
                 })
                 .catch(function (error) {
@@ -252,7 +253,7 @@
             },
             desAplicarProyecto(){
                 let me = this;
-                axios.post('/public/proyecto/eliminar', {
+                axios.post(`${API_HOST}/proyecto/eliminar`, {
                     'idProyecto' : this.id_proyecto,
                     'idUser' : this.user_id
                 }).then(function (response) {

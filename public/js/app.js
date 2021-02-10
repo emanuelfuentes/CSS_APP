@@ -34588,6 +34588,7 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(53);
 //
 //
 //
@@ -34685,6 +34686,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -35147,7 +35149,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     listarProyectos: function listarProyectos(page) {
       var me = this;
-      var url2 = '/public/proyecto?page=' + page;
+      //var url2 = '/public/proyecto?page=' + page;
       var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/proyecto?page=" + page;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
@@ -35701,6 +35703,7 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(53);
 //
 //
 //
@@ -35861,6 +35864,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -35919,22 +35923,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
-            axios.get('/public/pxe_estudiante').then(function (response) {
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/pxe_estudiante').then(function (response) {
                 me.arrayPXE = response.data;
             }).catch(function (error) {
                 console.log(error);
             });
 
-            var url = '/public/proyecto?page=' + page;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
-                me.arrayProyectos = respuesta.proyectos.data;
+                var proyectos = respuesta.proyectos.data;
+                var auxiliar = [];
+                proyectos.map(function (dato, key) {
+                    if (dato.estado) {
+                        auxiliar.push(dato);
+                    }
+                });
+
+                me.arrayProyectos = auxiliar;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
                 console.log(error);
             });
 
-            axios.get('/public/get_id').then(function (response) {
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_id').then(function (response) {
                 me.user_id = response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -35958,7 +35970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
             if (flag) {
-                axios.post('/public/proyecto/ingresar', {
+                axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/ingresar', {
                     'idProyecto': this.id_proyecto,
                     'idUser': this.user_id,
                     'estado': 1,
@@ -36641,6 +36653,7 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(53);
 //
 //
 //
@@ -36811,6 +36824,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -36870,7 +36884,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
-            var url = '/public/mis_proyectos' /*?page=' + page*/;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/mis_proyectos' /*?page=' + page*/;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 var proyectos = respuesta.proyectos.data;
@@ -36886,7 +36900,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
 
-            axios.get('/public/get_id').then(function (response) {
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_id').then(function (response) {
                 me.user_id = response.data;
             }).catch(function (error) {
                 console.log(error);
@@ -36894,7 +36908,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         desAplicarProyecto: function desAplicarProyecto() {
             var me = this;
-            axios.post('/public/proyecto/eliminar', {
+            axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/eliminar', {
                 'idProyecto': this.id_proyecto,
                 'idUser': this.user_id
             }).then(function (response) {
@@ -37550,6 +37564,7 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(53);
 //
 //
 //
@@ -37810,6 +37825,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -37874,7 +37890,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
-            var url = '/public/proyecto?page=' + page;
+            //var url = '/public/proyecto?page=' + page;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayProyectos = respuesta.proyectos.data;
@@ -37894,7 +37911,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             var me = this;
             if (!this.id_proyecto) {
-                axios.post('/public/proyecto/insertar', {
+                axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/insertar', {
                     'idProyecto': this.id_proyecto,
                     'estado': 1,
                     'contraparte': this.modal_contraparte,
@@ -37915,7 +37932,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(error);
                 });
             } else {
-                axios.put('/public/proyecto/actualizar', {
+                axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/actualizar', {
                     'idProyecto': this.id_proyecto,
                     'estado': this.modal_estado,
                     'contraparte': this.modal_contraparte,
@@ -37953,7 +37970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var state;
             if (this.modal_estado == 1) state = 0;else state = 1;
             console.log(this.id_proyecto);
-            axios.put('/public/proyecto/estado', {
+            axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/estado', {
                 'idProyecto': this.id_proyecto,
                 'estado': state
             }).then(function (response) {

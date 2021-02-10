@@ -259,6 +259,7 @@
 </template>
 
 <script>
+import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
@@ -321,7 +322,8 @@
         methods:{
             bindData(page){
                 let me = this
-                var url = '/public/proyecto?page=' + page;
+                //var url = '/public/proyecto?page=' + page;
+                var url = `${API_HOST}/proyecto?page=${page}`
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     me.arrayProyectos = respuesta.proyectos.data;
@@ -342,7 +344,7 @@
                 }
                 let me = this;
                 if(!this.id_proyecto){
-                    axios.post('/public/proyecto/insertar', {
+                    axios.post(`${API_HOST}/proyecto/insertar`, {
                         'idProyecto' : this.id_proyecto,
                         'estado' : 1,
                         'contraparte' : this.modal_contraparte,
@@ -364,7 +366,7 @@
                     }); 
                 }
                 else{
-                    axios.put('/public/proyecto/actualizar', {
+                    axios.put(`${API_HOST}/proyecto/actualizar`, {
                         'idProyecto' : this.id_proyecto,
                         'estado' : this.modal_estado,
                         'contraparte' : this.modal_contraparte,
@@ -404,7 +406,7 @@
                 if(this.modal_estado == 1) state = 0;
                 else state = 1;
                 console.log(this.id_proyecto)
-                axios.put('/public/proyecto/estado', {
+                axios.put(`${API_HOST}/proyecto/estado`, {
                     'idProyecto' : this.id_proyecto,
                     'estado' : state
                 }).then(function (response) {

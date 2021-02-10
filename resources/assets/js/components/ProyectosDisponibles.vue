@@ -159,6 +159,7 @@
 </template>
 
 <script>
+import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
@@ -215,23 +216,31 @@
         methods:{
             bindData(page){
                 let me = this
-                axios.get('/public/pxe_estudiante').then(function (response) {
+                axios.get(`${API_HOST}/pxe_estudiante`).then(function (response) {
                     me.arrayPXE = response.data;
                 }).catch(function (error) {
                     console.log(error);
                 });
 
-                var url = '/public/proyecto?page=' + page;
+                var url = `${API_HOST}/proyecto?page=${page}`;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
-                    me.arrayProyectos = respuesta.proyectos.data;
+                    var proyectos = respuesta.proyectos.data;
+                    var auxiliar = [];
+                    proyectos.map((dato, key)=> {
+                        if(dato.estado){
+                            auxiliar.push(dato);
+                        }
+                    })
+
+                    me.arrayProyectos = auxiliar;
                     me.pagination = respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
 
-                axios.get('/public/get_id').then(function (response) {
+                axios.get(`${API_HOST}/get_id`).then(function (response) {
                     me.user_id = response.data;
                 })
                 .catch(function (error) {
@@ -256,7 +265,7 @@
                     }
                 }
                 if (flag) {
-                        axios.post('/public/proyecto/ingresar', {
+                        axios.post(`${API_HOST}/proyecto/ingresar`, {
                             'idProyecto' : this.id_proyecto,
                             'idUser' : this.user_id,
                             'estado' : 1,
