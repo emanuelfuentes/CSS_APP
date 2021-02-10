@@ -16,6 +16,9 @@
                     <li @click='menu=3' class="nav-item">
                         <a class="nav-link" href="#"><i class="icon-calendar"></i> Recordatorio </a>
                     </li>
+                    <li @click='menu=4' class="nav-item">
+                        <a class="nav-link" href="#"><i class="icon-folder"></i> Perfil </a>
+                    </li>
                 </ul>
             </nav>
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>

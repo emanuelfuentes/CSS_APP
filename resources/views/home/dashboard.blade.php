@@ -22,11 +22,15 @@
             </template>
 
             <template v-if="menu==2">
-                <h1>Componente NUEWVOOO</h1>
+                <historial-proyectos></historial-proyectos>
             </template>
 
             <template v-if="menu==3">
                 <recordatorio></recordatorio>
+            </template>
+
+            <template v-if="menu==4">
+                <perfil></perfil>
             </template>
         @else
         @endif
