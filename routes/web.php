@@ -44,9 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('proyecto/ingresar', 'ProyectoxEstudianteController@store');*/
 
-/*Route::get('/main', function () {
+Route::get('/main', function () {
     return view('principal');
-});*/
+});
 
 Route::get('/home', function () {
     return view('home/dashboard');

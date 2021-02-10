@@ -16,22 +16,22 @@ class LoginController extends Controller
         $this->validateLogin($request);
         $email = $request->email;
 
-        if($email == "admin@uca.edu.sv") Auth::loginUsingId(1);
-        else if($email == "00170517@uca.edu.sv") Auth::loginUsingId(2);
+        //if($email == "admin@uca.edu.sv") Auth::loginUsingId(1);
+        //else if($email == "00170517@uca.edu.sv") Auth::loginUsingId(2);
 
         //Auth::loginUsingId(3);
-        return redirect()->intended('home');
+        //return redirect()->intended('home');
 
-        /*
+        
         if(Auth::attempt(['email' => '00170517@uca.edu.sv', 'password' => '1234'])){
-            return redirect()->intended('main');
+            return redirect()->route('main');
         }
         else{
             return back()
             ->withErrors(['password' => trans('auth.failedPass')])
             ->withInput(request(['email']));
         }
-        */
+        
     }
     protected function validateLogin(Request $request){
         $this->validate($request, [
