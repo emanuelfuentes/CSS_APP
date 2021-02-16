@@ -178,12 +178,17 @@
                                                 <tr v-for="acp in arrayCarreraPerfil" :key="acp">
                                                     <td>
                                                         <select class="form-control custom-select" v-model="acp[0]">
-                                                            <option v-for="carrera in arrayCarreras" :key="carrera.idCarrera">{{carrera.nombre}}</option>
+                                                            <option v-for="carrera in arrayCarreras" v-bind:key="carrera.idCarrera">{{carrera.nombre}}</option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <select class="form-control custom-select" v-model="acp[1]">
-                                                            <option v-for="perfil in arrayPerfiles" :key="perfil.idPerfil">{{perfil.perfil}}</option>
+                                                            <option v-for="perfil in arrayPerfiles" v-bind:key="perfil.idPerfil">{{perfil.perfil}}</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control custom-select" v-model="acp[2]">
+                                                            <option v-for="perfil in arrayPerfiles" v-bind:key="perfil.idPerfil">{{perfil.perfil}}</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -376,6 +381,10 @@ import {API_HOST} from '../constants/endpoint.js';
                     return;
                 }
                 let me = this;
+                this.arrayCarreraPerfil.forEach(element => {
+                    console.log(element[0])
+                    console.log(element[1       ])
+                });
                 if(!this.id_proyecto){
                     axios.post(`${API_HOST}/proyecto/insertar`, {
                         'idProyecto' : this.id_proyecto,

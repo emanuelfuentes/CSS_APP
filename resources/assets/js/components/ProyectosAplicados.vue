@@ -244,8 +244,8 @@ import {API_HOST} from '../constants/endpoint.js';
                     console.log(error);
                 });
 
-                axios.get(`${API_HOST}/get_id`).then(function (response) {
-                    me.user_id = response.data;
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_id = response.data.idUser;
                 })
                 .catch(function (error) {
                     console.log(error);

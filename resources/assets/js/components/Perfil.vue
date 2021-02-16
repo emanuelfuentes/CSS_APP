@@ -98,6 +98,29 @@
 <script>
 import {API_HOST} from '../constants/endpoint.js';
     export default {
+        data(){
+            return{
+                user_id : 0,
+                correo : '',
+                carnet : 0,
+                nombres : '',
+                apellidos : '',
+                carrera : '',                
+                facultad : '',
+                perfil: ''
+            }
+        },
+        methods:{
+            bindData(){
+                let me = this
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_id = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        },
         mounted() {
             console.log('Component mounted.')
         }

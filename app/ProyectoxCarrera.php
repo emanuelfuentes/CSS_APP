@@ -8,5 +8,5 @@ class ProyectoxCarrera extends Model
 {
     protected $table = 'proyectoxcarrera';
     protected $primaryKey = 'idProyectoCarrera';
-    protected $fillable = ['idProyecto', 'idCarrera', 'idPerfil'];
+    protected $fillable = ['idProyecto', 'idCarrera', 'limite_inf', 'limite_sup'];
 }

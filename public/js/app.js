@@ -34707,6 +34707,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            user_id: 0,
+            correo: '',
+            carnet: 0,
+            nombres: '',
+            apellidos: '',
+            carrera: '',
+            facultad: '',
+            perfil: ''
+        };
+    },
+
+    methods: {
+        bindData: function bindData() {
+            var me = this;
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_id = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    },
     mounted: function mounted() {
         console.log('Component mounted.');
     }
@@ -35946,8 +35969,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
 
-            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_id').then(function (response) {
-                me.user_id = response.data;
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_id = response.data.idUser;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -36900,8 +36923,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
 
-            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_id').then(function (response) {
-                me.user_id = response.data;
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_id = response.data.idUser;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -37853,6 +37876,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37943,6 +37971,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return;
             }
             var me = this;
+            this.arrayCarreraPerfil.forEach(function (element) {
+                console.log(element[0]);
+                console.log(element[1]);
+            });
             if (!this.id_proyecto) {
                 axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/insertar', {
                     'idProyecto': this.id_proyecto,
@@ -38857,6 +38889,56 @@ var render = function() {
                                           _vm.$set(
                                             acp,
                                             1,
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.arrayPerfiles, function(perfil) {
+                                      return _c(
+                                        "option",
+                                        { key: perfil.idPerfil },
+                                        [_vm._v(_vm._s(perfil.perfil))]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: acp[2],
+                                          expression: "acp[2]"
+                                        }
+                                      ],
+                                      staticClass: "form-control custom-select",
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            acp,
+                                            2,
                                             $event.target.multiple
                                               ? $$selectedVal
                                               : $$selectedVal[0]
