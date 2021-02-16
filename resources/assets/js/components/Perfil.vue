@@ -44,31 +44,31 @@
                         <table class="table table-bordered table-striped table-sm">
                             <tr>
                                 <th>Correo Institucional</th>
-                                <td>aqui se escribe el Correo</td>
+                                <td v-text="correo" ></td>
                             </tr>
                             <tr>
                                 <th>Carnet</th>
-                                <td>aqui se escribe el Carnet</td>
+                                <td v-text="carnet"></td>
                             </tr>
                             <tr>
                                 <th>Nombres</th>
-                                <td>aqui se escribe el Nombres</td>
+                                <td v-text="nombres"></td>
                             </tr>
                             <tr>
                                 <th>Apellidos</th>
-                                <td>aqui se escribe el Apellidos</td>
+                                <td v-text="apellidos"></td>
                             </tr>
                             <tr>
                                 <th>Facultad</th>
-                                <td>aqui se escribe el Facultad</td>
+                                <td v-text="facultad"></td>
                             </tr>
                             <tr>
                                 <th>Carrera</th>
-                                <td>aqui se escribe el Carrera</td>
+                                <td v-text="carrera"></td>
                             </tr>
                             <tr>
                                 <th>Perfil</th>
-                                <td>aqui se escribe el Año</td>
+                                <td v-text="perfil"></td>
                             </tr>
                         </table>
                         <!--<nav>
@@ -114,7 +114,23 @@ import {API_HOST} from '../constants/endpoint.js';
             bindData(){
                 let me = this
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
-                    me.user_id = response.data;
+                    me.user_id = response.data.idUser;
+                    me.correo = response.data.correo;
+                    var splitString = me.correo.split(/@/);
+                    me.carnet = splitString[0];
+                    me.nombres = response.data.nombres;
+                    me.apellidos = response.data.apellidos;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.get(`${API_HOST}/mi_carrera`).then(function (response) {
+                    console.log(response.data[0]);
+                    var res = response.data[0];
+                    me.carrera = res.nombre_c;
+                    me.facultad = res.nombre_f;
+                    me.perfil = res.anio_carrera;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -122,7 +138,8 @@ import {API_HOST} from '../constants/endpoint.js';
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            this.bindData();
         }
     }
 </script>

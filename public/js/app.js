@@ -34724,7 +34724,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bindData: function bindData() {
             var me = this;
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
-                me.user_id = response.data;
+                me.user_id = response.data.idUser;
+                me.correo = response.data.correo;
+                var splitString = me.correo.split(/@/);
+                me.carnet = splitString[0];
+                me.nombres = response.data.nombres;
+                me.apellidos = response.data.apellidos;
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/mi_carrera').then(function (response) {
+                console.log(response.data[0]);
+                var res = response.data[0];
+                me.carrera = res.nombre_c;
+                me.facultad = res.nombre_f;
+                me.perfil = res.anio_carrera;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -34732,6 +34747,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('Component mounted.');
+        this.bindData();
     }
 });
 
@@ -34743,86 +34759,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("main", { staticClass: "main" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c(
+            "table",
+            { staticClass: "table table-bordered table-striped table-sm" },
+            [
+              _c("tr", [
+                _c("th", [_vm._v("Correo Institucional")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.correo) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Carnet")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.carnet) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Nombres")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.nombres) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Apellidos")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.apellidos) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Facultad")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.facultad) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Carrera")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.carrera) } })
+              ]),
+              _vm._v(" "),
+              _c("tr", [
+                _c("th", [_vm._v("Perfil")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.perfil) } })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("button", { staticClass: "button button1" }, [
+            _vm._v("Modificar Perfil")
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "button button2" }, [
+            _vm._v("Cambiar Contraseña")
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("main", { staticClass: "main" }, [
-      _c("ol", { staticClass: "breadcrumb" }, [
-        _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-        _vm._v(" "),
-        _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Perfil")])
-      ]),
+    return _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
       _vm._v(" "),
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("i", { staticClass: "fa fa-align-justify" }),
-            _vm._v(" Perfil\n                ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "table",
-              { staticClass: "table table-bordered table-striped table-sm" },
-              [
-                _c("tr", [
-                  _c("th", [_vm._v("Correo Institucional")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Correo")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Carnet")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Carnet")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Nombres")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Nombres")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Apellidos")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Apellidos")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Facultad")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Facultad")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Carrera")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Carrera")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", [_vm._v("Perfil")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("aqui se escribe el Año")])
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("button", { staticClass: "button button1" }, [
-              _vm._v("Modificar Perfil")
-            ]),
-            _vm._v(" "),
-            _c("button", { staticClass: "button button2" }, [
-              _vm._v("Cambiar Contraseña")
-            ])
-          ])
-        ])
-      ])
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Perfil")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fa fa-align-justify" }),
+      _vm._v(" Perfil\n                ")
     ])
   }
 ]
