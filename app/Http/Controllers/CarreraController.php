@@ -17,6 +17,15 @@ class CarreraController extends Controller
         return $carreras;
     }
 
+    public function carreraPorId(){
+        if(!$request->ajax()) return redirect('/home');
+        $id = Auth()->user()->idUser;
+
+        /*$carrera = ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
+        ->where('idUser','=', $idUser)
+        ->delete();*/
+    }
+
     /**
      * Show the form for creating a new resource.
      *
