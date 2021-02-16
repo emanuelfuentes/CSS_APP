@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get_user', 'UserController@getUser'); 
         Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
         Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
+        Route::get('/mi_carrera', 'CarreraController@carreraPorId');
 
         Route::post('/proyecto/ingresar', 'ProyectoxEstudianteController@store');
         Route::post('/proyecto/eliminar', 'ProyectoxEstudianteController@deleteRow');

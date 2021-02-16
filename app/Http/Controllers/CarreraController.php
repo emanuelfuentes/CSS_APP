@@ -14,17 +14,19 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $carreras = Carrera::all();
+        $carreras = Carrera::all;
         return $carreras;
     }
 
-    public function carreraPorId(){
+    public function carreraPorId(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->idUser;
-
-        /*$carrera = ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
-        ->where('idUser','=', $idUser)
-        ->delete();*/
+        $carrera = Carrera::join('users', 'users.idCarrera', '=','carrera.idCarrera')
+        ->join('facultad', 'carrera.idFacultad', '=', 'facultad.idFacultad')
+        ->join('perfil' , 'perfil.idPerfil', '=', 'users.idPerfil')
+        ->select('carrera.nombre as nombre_c', 'facultad.nombre as nombre_f', 'perfil.descripcion as anio_carrera')
+        ->where('users.idUser','=', $id)->get();
+        return $carrera;
     }
 
     /**

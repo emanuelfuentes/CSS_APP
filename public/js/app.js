@@ -34730,9 +34730,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 me.carnet = splitString[0];
                 me.nombres = response.data.nombres;
                 me.apellidos = response.data.apellidos;
-                me.carrera = response.data.idCarrera;
-                me.facultad = 'test';
-                me.perfil = response.data.idPerfil;
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/mi_carrera').then(function (response) {
+                console.log(response.data[0]);
+                var res = response.data[0];
+                me.carrera = res.nombre_c;
+                me.facultad = res.nombre_f;
+                me.perfil = res.anio_carrera;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -34791,12 +34798,20 @@ var render = function() {
               _c("tr", [
                 _c("th", [_vm._v("Facultad")]),
                 _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(_vm.carnet) } })
+                _c("td", { domProps: { textContent: _vm._s(_vm.facultad) } })
               ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("tr", [
+                _c("th", [_vm._v("Carrera")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.carrera) } })
+              ]),
               _vm._v(" "),
-              _vm._m(3)
+              _c("tr", [
+                _c("th", [_vm._v("Perfil")]),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(_vm.perfil) } })
+              ])
             ]
           ),
           _vm._v(" "),
@@ -34830,26 +34845,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Perfil\n                ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Carrera")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("aqui se escribe el Carrera")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("Perfil")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("aqui se escribe el Año")])
     ])
   }
 ]

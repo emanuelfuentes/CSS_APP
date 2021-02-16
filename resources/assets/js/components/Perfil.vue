@@ -60,15 +60,15 @@
                             </tr>
                             <tr>
                                 <th>Facultad</th>
-                                <td v-text="carnet"></td>
+                                <td v-text="facultad"></td>
                             </tr>
                             <tr>
                                 <th>Carrera</th>
-                                <td>aqui se escribe el Carrera</td>
+                                <td v-text="carrera"></td>
                             </tr>
                             <tr>
                                 <th>Perfil</th>
-                                <td>aqui se escribe el Año</td>
+                                <td v-text="perfil"></td>
                             </tr>
                         </table>
                         <!--<nav>
@@ -120,9 +120,17 @@ import {API_HOST} from '../constants/endpoint.js';
                     me.carnet = splitString[0];
                     me.nombres = response.data.nombres;
                     me.apellidos = response.data.apellidos;
-                    me.carrera = response.data.idCarrera;
-                    me.facultad = 'test';
-                    me.perfil = response.data.idPerfil;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.get(`${API_HOST}/mi_carrera`).then(function (response) {
+                    console.log(response.data[0]);
+                    var res = response.data[0];
+                    me.carrera = res.nombre_c;
+                    me.facultad = res.nombre_f;
+                    me.perfil = res.anio_carrera;
                 })
                 .catch(function (error) {
                     console.log(error);
