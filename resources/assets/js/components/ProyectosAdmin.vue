@@ -146,6 +146,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Contraparte</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="modal_contraparte" class="form-control" placeholder="Contraparte">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de inicio</label>
                                     <div class="col-md-9">
                                         <input type="date" value="2017-06-01" v-model="modal_fecha_in">
@@ -158,9 +164,31 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Contraparte</label>
+                                    <label class="col-md-3 form-control-label" for="text-input">Carreras</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="modal_contraparte" class="form-control" placeholder="Contraparte">
+                                        <button type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
+                                        <table class="table-sm table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Carrera</th>
+                                                    <th>Perfil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="acp in arrayCarreraPerfil" :key="acp">
+                                                    <td>
+                                                        <select class="form-control custom-select" v-model="acp[0]">
+                                                            <option v-for="carrera in arrayCarreras" :key="carrera.idCarrera">{{carrera.nombre}}</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control custom-select" v-model="acp[1]">
+                                                            <option v-for="perfil in arrayPerfiles" :key="perfil.idPerfil">{{perfil.perfil}}</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div v-show="errorProyecto" class="form-group row div-error">
@@ -266,6 +294,9 @@ import {API_HOST} from '../constants/endpoint.js';
                 nombre : '',
                 descripcion : '',
                 arrayProyectos : [''],
+                arrayCarreras : [''],
+                arrayPerfiles : [''],
+                arrayCarreraPerfil : [[]],
                 add_edit_flag : 0,
                 modal : 0,
                 modal2 : 0,
@@ -281,6 +312,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_fecha_in : '',
                 modal_fecha_fin : '',
                 modal_contraparte : '',
+                modal_carrera : 0,
+                modal_perfil : 0,
                 modal_createdAt : '',
                 modal_estado: 0,
                 errorProyecto : [''],
@@ -357,7 +390,8 @@ import {API_HOST} from '../constants/endpoint.js';
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
                         'modifiedBy' : 'Usuario',
-                        'createdAt' : "this.modal_createdAt"
+                        'createdAt' : "this.modal_createdAt",
+                        'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
                         me.cerrarModal();
                         me.bindData();
@@ -379,7 +413,8 @@ import {API_HOST} from '../constants/endpoint.js';
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
                         'modifiedBy' : 'Usuario',
-                        'createdAt' : "this.modal_createdAt"
+                        'createdAt' : "this.modal_createdAt",
+                        'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
                         me.cerrarModal();
                         me.bindData();
@@ -428,7 +463,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 switch (modelo) {
                     case "insertar":
                         {
-                            
+                            this.getCarrerasAndPerfils()
                             this.modal = 1;
                             this.add_edit_flag = 1;
                             console.log(this.add_edit_flag);
@@ -436,7 +471,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         }
                     case "editar":
                         {
-                            
+                            this.getCarrerasAndPerfils()
                             this.modal = 1;
                             this.add_edit_flag = 2;
                             console.log(this.add_edit_flag);
@@ -483,6 +518,24 @@ import {API_HOST} from '../constants/endpoint.js';
                     default:
                         break;
                 }
+            },
+            getCarrerasAndPerfils(){
+                let me = this
+                axios.get('/public/carrera').then(function (response) {
+                    me.arrayCarreras = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                axios.get('/public/perfil').then(function (response) {
+                    me.arrayPerfiles = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            agregarACP(){
+                this.arrayCarreraPerfil.push([])
             }
         },
         mounted() {
