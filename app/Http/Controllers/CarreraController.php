@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Carrera;
 
 class CarreraController extends Controller
 {
@@ -13,7 +14,7 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $carreras = Carrera::all;
+        $carreras = Carrera::all();
         return $carreras;
     }
 

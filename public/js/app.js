@@ -37875,6 +37875,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37883,6 +37916,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombre: '',
             descripcion: '',
             arrayProyectos: [''],
+            arrayCarreras: [''],
+            arrayPerfiles: [''],
+            arrayCarreraPerfil: [[]],
             add_edit_flag: 0,
             modal: 0,
             modal2: 0,
@@ -37898,6 +37934,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_fecha_in: '',
             modal_fecha_fin: '',
             modal_contraparte: '',
+            modal_carrera: 0,
+            modal_perfil: 0,
             modal_createdAt: '',
             modal_estado: 0,
             errorProyecto: [''],
@@ -37960,6 +37998,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return;
             }
             var me = this;
+            this.arrayCarreraPerfil.forEach(function (element) {
+                console.log(element[0]);
+                console.log(element[1]);
+            });
             if (!this.id_proyecto) {
                 axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/insertar', {
                     'idProyecto': this.id_proyecto,
@@ -37974,7 +38016,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
                     'modifiedBy': 'Usuario',
-                    'createdAt': "this.modal_createdAt"
+                    'createdAt': "this.modal_createdAt",
+                    'carreraPerfil': this.arrayCarreraPerfil
                 }).then(function (response) {
                     me.cerrarModal();
                     me.bindData();
@@ -37995,7 +38038,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
                     'modifiedBy': 'Usuario',
-                    'createdAt': "this.modal_createdAt"
+                    'createdAt': "this.modal_createdAt",
+                    'carreraPerfil': this.arrayCarreraPerfil
                 }).then(function (response) {
                     me.cerrarModal();
                     me.bindData();
@@ -38044,7 +38088,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             switch (modelo) {
                 case "insertar":
                     {
-
+                        this.getCarrerasAndPerfils();
                         this.modal = 1;
                         this.add_edit_flag = 1;
                         console.log(this.add_edit_flag);
@@ -38052,7 +38096,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 case "editar":
                     {
-
+                        this.getCarrerasAndPerfils();
                         this.modal = 1;
                         this.add_edit_flag = 2;
                         console.log(this.add_edit_flag);
@@ -38099,6 +38143,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 default:
                     break;
             }
+        },
+        getCarrerasAndPerfils: function getCarrerasAndPerfils() {
+            var me = this;
+            axios.get('/public/carrera').then(function (response) {
+                me.arrayCarreras = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            axios.get('/public/perfil').then(function (response) {
+                me.arrayPerfiles = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        agregarACP: function agregarACP() {
+            this.arrayCarreraPerfil.push([]);
         }
     },
     mounted: function mounted() {
@@ -38638,6 +38698,41 @@ var render = function() {
                         staticClass: "col-md-3 form-control-label",
                         attrs: { for: "text-input" }
                       },
+                      [_vm._v("Contraparte")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.modal_contraparte,
+                            expression: "modal_contraparte"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Contraparte" },
+                        domProps: { value: _vm.modal_contraparte },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.modal_contraparte = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-3 form-control-label",
+                        attrs: { for: "text-input" }
+                      },
                       [_vm._v("Fecha de inicio")]
                     ),
                     _vm._v(" "),
@@ -38706,31 +38801,194 @@ var render = function() {
                         staticClass: "col-md-3 form-control-label",
                         attrs: { for: "text-input" }
                       },
-                      [_vm._v("Contraparte")]
+                      [_vm._v("Carreras")]
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-9" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.modal_contraparte,
-                            expression: "modal_contraparte"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Contraparte" },
-                        domProps: { value: _vm.modal_contraparte },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary mb-2",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.agregarACP()
                             }
-                            _vm.modal_contraparte = $event.target.value
                           }
-                        }
-                      })
+                        },
+                        [
+                          _c("i", { staticClass: "icon-plus" }),
+                          _vm._v(" Agregar")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "table-sm table-borderless" },
+                        [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.arrayCarreraPerfil, function(acp) {
+                              return _c("tr", { key: acp }, [
+                                _c("td", [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: acp[0],
+                                          expression: "acp[0]"
+                                        }
+                                      ],
+                                      staticClass: "form-control custom-select",
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            acp,
+                                            0,
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.arrayCarreras, function(
+                                      carrera
+                                    ) {
+                                      return _c(
+                                        "option",
+                                        { key: carrera.idCarrera },
+                                        [_vm._v(_vm._s(carrera.nombre))]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: acp[1],
+                                          expression: "acp[1]"
+                                        }
+                                      ],
+                                      staticClass: "form-control custom-select",
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            acp,
+                                            1,
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.arrayPerfiles, function(perfil) {
+                                      return _c(
+                                        "option",
+                                        { key: perfil.idPerfil },
+                                        [_vm._v(_vm._s(perfil.perfil))]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: acp[2],
+                                          expression: "acp[2]"
+                                        }
+                                      ],
+                                      staticClass: "form-control custom-select",
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            acp,
+                                            2,
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    _vm._l(_vm.arrayPerfiles, function(perfil) {
+                                      return _c(
+                                        "option",
+                                        { key: perfil.idPerfil },
+                                        [_vm._v(_vm._s(perfil.perfil))]
+                                      )
+                                    }),
+                                    0
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -38946,7 +39204,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -38974,7 +39232,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -39079,6 +39337,18 @@ var staticRenderFns = [
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", [_vm._v("Información")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Carrera")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Perfil")])
       ])
     ])
   },

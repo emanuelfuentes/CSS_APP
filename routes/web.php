@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/proyecto/insertar', 'ProyectoController@store');
         Route::put('/proyecto/actualizar', 'ProyectoController@update'); 
         Route::put('/proyecto/estado', 'ProyectoController@state');
+        Route::get('/carrera', 'CarreraController@index');
+        Route::get('/perfil', 'PerfilController@index');
     });
 
     Route::middleware(['NormalUser'])->group(function () {
