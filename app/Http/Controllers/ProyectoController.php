@@ -63,7 +63,7 @@ class ProyectoController extends Controller
         $proyecto->createdAt = $request->createdAt;
         $proyecto->save();
 
-        /*$arraycp = $request->carreraPerfil;
+        $arraycp = $request->carreraPerfil;
 
         for($i = 0; $i < count($arraycp); $i++){
             $pxc = new ProyectoxCarrera();
@@ -72,7 +72,7 @@ class ProyectoController extends Controller
             $pxc->limite_inf = $arraycp[$i][1];
             $pxc->limite_sup = $arraycp[$i][2];
             $pxc->save();
-        }*/
+        }
     }
 
     /**

@@ -16,12 +16,6 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <button type="button" @click="abrirModal('insertar', null)" class="btn btn-primary"><i class="icon-plus"></i> Agregar</button>
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
-                                      <option value="nombre">Nombre</option>
-                                      <option value="descripcion">Descripción</option>
-                                    </select>
-                                    <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +83,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal editar proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none; overflow-y: scroll;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -171,24 +165,24 @@
                                             <thead>
                                                 <tr>
                                                     <th>Carrera</th>
-                                                    <th>Perfil</th>
+                                                    <th>Rango</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="acp in arrayCarreraPerfil" :key="acp">
                                                     <td>
                                                         <select class="form-control custom-select" v-model="acp[0]">
-                                                            <option v-for="carrera in arrayCarreras" v-bind:key="carrera.idCarrera">{{carrera.nombre}}</option>
+                                                            <option v-for="carrera in arrayCarreras" :value="carrera.idCarrera" :key="carrera.idCarrera">{{carrera.nombre}}</option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <select class="form-control custom-select" v-model="acp[1]">
-                                                            <option v-for="perfil in arrayPerfiles" v-bind:key="perfil.idPerfil">{{perfil.perfil}}</option>
+                                                            <option v-for="perfil in arrayPerfiles" :value="perfil.idPerfil" :key="perfil.idPerfil">{{perfil.perfil}}</option>
                                                         </select>
                                                     </td>
                                                     <td>
                                                         <select class="form-control custom-select" v-model="acp[2]">
-                                                            <option v-for="perfil in arrayPerfiles" v-bind:key="perfil.idPerfil">{{perfil.perfil}}</option>
+                                                            <option v-for="perfil in arrayPerfiles" :value="perfil.idPerfil" :key="perfil.idPerfil">{{perfil.perfil}}</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -312,7 +306,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_nombre : '',
                 modal_desc : '',
                 modal_tipo_horas : '',
-                modal_cupos : 0,
+                modal_cupos : '',
                 modal_horario : '',
                 modal_fecha_in : '',
                 modal_fecha_fin : '',
@@ -461,6 +455,19 @@ import {API_HOST} from '../constants/endpoint.js';
                 }); 
             },
             cerrarModal(){
+                if(this.modal == 1){
+                    this.arrayCarreraPerfil = [[]];
+                    this.modal_nombre = '';
+                    this.modal_encargado = '';
+                    this.modal_cupos = ''
+                    this.modal_desc = '';
+                    this.modal_horario = '';
+                    this.modal_contraparte = '';
+                    this.modal_tipo_horas = '';
+                    this.contraparte = '';
+                    this.modal_fecha_in = '';
+                    this.modal_fecha_fin = '';
+                }
                 this.add_edit_flag = 0;
                 this.modal = 0;
                 this.modal2 = 0;
@@ -475,15 +482,14 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.getCarrerasAndPerfils()
                             this.modal = 1;
                             this.add_edit_flag = 1;
-                            console.log(this.add_edit_flag);
                             break;
                         }
                     case "editar":
                         {
-                            this.getCarrerasAndPerfils()
+                            this.getCarrerasAndPerfils();
+                            this.updateCarrerasAndPerfil();
                             this.modal = 1;
                             this.add_edit_flag = 2;
-                            console.log(this.add_edit_flag);
                             this.id_proyecto = data.idProyecto;
                             this.modal_encargado = data.encargado;
                             this.modal_nombre = data.nombre;
@@ -542,6 +548,10 @@ import {API_HOST} from '../constants/endpoint.js';
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+            updateCarrerasAndPerfil(){
+                let me = this
+                
             },
             agregarACP(){
                 this.arrayCarreraPerfil.push([])

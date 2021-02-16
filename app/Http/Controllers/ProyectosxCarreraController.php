@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ProyectoxCarrera;
 
 class ProyectosxCarreraController extends Controller
 {
@@ -13,7 +14,7 @@ class ProyectosxCarreraController extends Controller
      */
     public function index()
     {
-        $proyxcarr = ProyxCarr::all;
+        $proyxcarr = ProyectoxCarrera::all();
         return $proyxcarr;
     }
 

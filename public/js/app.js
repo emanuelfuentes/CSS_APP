@@ -37875,12 +37875,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37902,7 +37896,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_nombre: '',
             modal_desc: '',
             modal_tipo_horas: '',
-            modal_cupos: 0,
+            modal_cupos: '',
             modal_horario: '',
             modal_fecha_in: '',
             modal_fecha_fin: '',
@@ -38048,6 +38042,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         cerrarModal: function cerrarModal() {
+            if (this.modal == 1) {
+                this.arrayCarreraPerfil = [[]];
+                this.modal_nombre = '';
+                this.modal_encargado = '';
+                this.modal_cupos = '';
+                this.modal_desc = '';
+                this.modal_horario = '';
+                this.modal_contraparte = '';
+                this.modal_tipo_horas = '';
+                this.contraparte = '';
+                this.modal_fecha_in = '';
+                this.modal_fecha_fin = '';
+            }
             this.add_edit_flag = 0;
             this.modal = 0;
             this.modal2 = 0;
@@ -38064,15 +38071,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.getCarrerasAndPerfils();
                         this.modal = 1;
                         this.add_edit_flag = 1;
-                        console.log(this.add_edit_flag);
                         break;
                     }
                 case "editar":
                     {
                         this.getCarrerasAndPerfils();
+                        this.updateCarrerasAndPerfil();
                         this.modal = 1;
                         this.add_edit_flag = 2;
-                        console.log(this.add_edit_flag);
                         this.id_proyecto = data.idProyecto;
                         this.modal_encargado = data.encargado;
                         this.modal_nombre = data.nombre;
@@ -38130,6 +38136,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
+        updateCarrerasAndPerfil: function updateCarrerasAndPerfil() {
+            var me = this;
+        },
         agregarACP: function agregarACP() {
             this.arrayCarreraPerfil.push([]);
         }
@@ -38170,21 +38179,7 @@ var render = function() {
                     }
                   },
                   [_c("i", { staticClass: "icon-plus" }), _vm._v(" Agregar")]
-                ),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    id: "texto",
-                    name: "texto",
-                    placeholder: "Texto a buscar"
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(3)
+                )
               ])
             ])
           ]),
@@ -38193,7 +38188,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -38378,7 +38373,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         class: { mostrar: _vm.modal },
-        staticStyle: { display: "none" },
+        staticStyle: { display: "none", "overflow-y": "scroll" },
         attrs: {
           tabindex: "-1",
           role: "dialog",
@@ -38799,7 +38794,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(5),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -38849,7 +38844,10 @@ var render = function() {
                                     ) {
                                       return _c(
                                         "option",
-                                        { key: carrera.idCarrera },
+                                        {
+                                          key: carrera.idCarrera,
+                                          domProps: { value: carrera.idCarrera }
+                                        },
                                         [_vm._v(_vm._s(carrera.nombre))]
                                       )
                                     }),
@@ -38899,7 +38897,10 @@ var render = function() {
                                     _vm._l(_vm.arrayPerfiles, function(perfil) {
                                       return _c(
                                         "option",
-                                        { key: perfil.idPerfil },
+                                        {
+                                          key: perfil.idPerfil,
+                                          domProps: { value: perfil.idPerfil }
+                                        },
                                         [_vm._v(_vm._s(perfil.perfil))]
                                       )
                                     }),
@@ -38949,7 +38950,10 @@ var render = function() {
                                     _vm._l(_vm.arrayPerfiles, function(perfil) {
                                       return _c(
                                         "option",
-                                        { key: perfil.idPerfil },
+                                        {
+                                          key: perfil.idPerfil,
+                                          domProps: { value: perfil.idPerfil }
+                                        },
                                         [_vm._v(_vm._s(perfil.perfil))]
                                       )
                                     }),
@@ -39177,7 +39181,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -39205,7 +39209,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(7),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -39270,35 +39274,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control col-md-3",
-        attrs: { id: "opcion", name: "opcion" }
-      },
-      [
-        _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "descripcion" } }, [
-          _vm._v("Descripción")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", [_vm._v("Opciones")]),
@@ -39321,7 +39296,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Carrera")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Perfil")])
+        _c("th", [_vm._v("Rango")])
       ])
     ])
   },
