@@ -34,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/proyecto/estado', 'ProyectoController@state');
         Route::get('/carrera', 'CarreraController@index');
         Route::get('/perfil', 'PerfilController@index');
+        Route::get('/proyectosxcarrera', 'ProyectosxCarreraController@index');
     });
 
     Route::middleware(['NormalUser'])->group(function () {

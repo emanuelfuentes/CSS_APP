@@ -14,7 +14,7 @@ class CarreraController extends Controller
      */
     public function index()
     {
-        $carreras = Carrera::all;
+        $carreras = Carrera::all();
         return $carreras;
     }
 

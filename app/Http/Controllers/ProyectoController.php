@@ -110,6 +110,19 @@ class ProyectoController extends Controller
         $proyecto->modifiedBy = $request->modifiedBy;
         $proyecto->createdAt = $request->createdAt;
         $proyecto->save();
+
+        ProyectoxCarrera::where('idProyecto', '=', $request->idProyecto)->delete();
+
+        $arraycp = $request->carreraPerfil;
+
+        for($i = 0; $i < count($arraycp); $i++){
+            $pxc = new ProyectoxCarrera();
+            $pxc->idProyecto = $proyecto->idProyecto;
+            $pxc->idCarrera = $arraycp[$i][0];
+            $pxc->limite_inf = $arraycp[$i][1];
+            $pxc->limite_sup = $arraycp[$i][2];
+            $pxc->save();
+        }
     }
     
     

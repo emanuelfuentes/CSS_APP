@@ -185,6 +185,11 @@
                                                             <option v-for="perfil in arrayPerfiles" :value="perfil.idPerfil" :key="perfil.idPerfil">{{perfil.perfil}}</option>
                                                         </select>
                                                     </td>
+                                                    <td>
+                                                        <button type="button" class="close" @click="eliminarACP(acp)" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -375,10 +380,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     return;
                 }
                 let me = this;
-                this.arrayCarreraPerfil.forEach(element => {
-                    console.log(element[0])
-                    console.log(element[1       ])
-                });
                 if(!this.id_proyecto){
                     axios.post(`${API_HOST}/proyecto/insertar`, {
                         'idProyecto' : this.id_proyecto,
@@ -551,10 +552,29 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             updateCarrerasAndPerfil(){
                 let me = this
-                
+                axios.get('/public/proyectosxcarrera').then(function(response){
+                    var i = 0;
+                    response.data.forEach(document =>{
+                        if(document.idProyecto == me.id_proyecto){
+                            me.arrayCarreraPerfil[i][0] = document.idCarrera;
+                            me.arrayCarreraPerfil[i][1] = document.limite_inf;
+                            me.arrayCarreraPerfil[i][2] = document.limite_sup;
+                            me.arrayCarreraPerfil.push([]);
+                            i++;
+                        }
+                    })
+                    if(i != 0) me.arrayCarreraPerfil.pop() 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             agregarACP(){
                 this.arrayCarreraPerfil.push([])
+            },
+            eliminarACP(acp){
+                let index = this.arrayCarreraPerfil.indexOf(acp);
+                this.arrayCarreraPerfil.splice(index, 1)
             }
         },
         mounted() {
