@@ -7,7 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>{{$details['title']}}</h1>
-    <p>{{$details['body']}}</p>
+    <h1> Hola {{ $user->nombres }}</h1>
+    <p>
+        Click para verificar
+        <a href="{{ url('cambiar_contra/'.$user->correo) }}"> Cambiar contra</a>
+    </p>
 </body>
 </html>
