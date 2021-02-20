@@ -47,6 +47,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/proyecto/eliminar', 'ProyectoxEstudianteController@deleteRow');
     });
 });
+/*
+Route::get('/mail', function () {
+    $details = [
+        'title' => 'Mail from CSS rout msg',
+        'body' => 'Probando correo automatico'
+    ];
+    \Mail::to('00017917@uca.edu.sv')->send(new \App\Mail\VerifyMail($details));
+    echo 'Email has been sent';
+});*/
 
+Route::get('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@formulario');  
+Route::post('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@cambiar');  
 
    

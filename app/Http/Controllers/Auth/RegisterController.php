@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -29,19 +29,26 @@ class RegisterController extends Controller
     public function registrar(Request $request){
         //$this->validator($request);
         
+        $nombre = $request->nombres;
+        $apellido = $request->apellidos;
         $email = $request->email;
-        $psw = $request->password;
-        $username = $request->username;
-        
-        $this->createEstudiante($request);
+        $genero = $request->genero;
 
         User::create([
+            'nombres' => $nombre,
+            'apellidos' => $apellido,
+            'correo' => $email,
+            'estado' => 1,
+            'genero' => $genero,
             'idRol' => 2,
-            'name' => $username,
-            'email' => $email,
-            'password' => $psw
+            'idPerfil' => 4,
+            'idCarrera' => 1,
+            'password' => bcrypt('temporal')
         ]);
 
+        $user = User::whereCorreo($email)->first();
+        $this->sendEmail($user);
+        
         return redirect('/');
     }
 
@@ -54,18 +61,14 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function createEstudiante(Request $request)
-    {
-        $estudiante = new Estudiante();
-        $estudiante->nombres = $request->nombres;
-        $estudiante->apellidos = $request->apellidos;
-        $estudiante->carnet = $request->carnet;
-        $estudiante->correo = $request->email;
-        $estudiante->estado = $request->estado;
-        $estudiante->genero = $request->genero;
-        $estudiante->default_password = bcrypt('1234');
-        $estudiante->password = bcrypt($request->password);
-        $estudiante->nombres = $request->nombres;
-        $estudiante->save();
+    public function sendEmail($user){
+        Mail::send(
+            'emails.changePSWmail',
+            ['user' => $user],
+            function($message) use ($user){
+                $message->to($user->correo);
+                $message->subject("Hola $user->nombres, Verifica tu cuenta.");
+            }
+        );
     }
 }
