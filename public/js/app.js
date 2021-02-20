@@ -37598,7 +37598,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.error{\n    color: red;\n    margin: 0.25em;\n    margin-bottom: 0.5em;\n}\n.show{\n    visibility: visible;\n}\n.hide{\n    visibility: hidden;\n}\n.div-form{\n    margin-bottom: 0em;\n}\n", ""]);
 
 // exports
 
@@ -37902,6 +37902,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37909,7 +37927,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             nombre: '',
             descripcion: '',
-            arrayProyectos: [''],
+            arrayProyectos: [],
             arrayCarreras: [''],
             arrayPerfiles: [''],
             arrayCarreraPerfil: [[]],
@@ -37933,6 +37951,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_createdAt: '',
             modal_estado: 0,
             errorProyecto: [''],
+            errorDateMsg: '',
+            errorPerfilMsg: '',
+            flagError: false,
             pagination: {
                 'total': 0,
                 'current_page': 0,
@@ -37981,6 +38002,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+            this.getCarrerasAndPerfils();
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
@@ -38039,15 +38061,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         validarProyecto: function validarProyecto() {
-            this.errorProyecto = [];
-            if (!this.modal_nombre) this.errorProyecto.push("El nombre del proyecto no puede ir vacio.");
-            if (!this.modal_contraparte) this.errorProyecto.push("El campo contraparte no puede ir vacio.");
-            if (!this.modal_cupos) this.errorProyecto.push("El campo cupos no puede ir vacio.");
-            if (!this.modal_desc) this.errorProyecto.push("El campo descripcion no puede ir vacio.");
-            if (!this.modal_encargado) this.errorProyecto.push("El campo encargados no puede ir vacio.");
-            if (!this.modal_tipo_horas) this.errorProyecto.push("El campo tipo de horas no puede ir vacio.");
+            var _this = this;
 
-            if (this.errorProyecto.length >= 1) return true;else return false;
+            this.errorProyecto = [];
+            this.flagError = false;
+            this.errorPerfilMsg = "";
+
+            if (!this.modal_nombre) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_encargado) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_cupos) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_tipo_horas) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_desc) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_horario) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_contraparte) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_fecha_in) {
+                this.errorProyecto.push(1);
+                this.errorDateMsg = "Debe seleccionar una fecha";
+            } else if (this.modal_fecha_in >= this.modal_fecha_fin) {
+                this.errorProyecto.push(2);
+                this.errorDateMsg = "La fecha seleccionada no concuerda con la otra fecha";
+            } else this.errorProyecto.push(0);
+            if (!this.modal_fecha_fin) this.errorProyecto.push(1);else if (this.modal_fecha_in >= this.modal_fecha_fin) this.errorProyecto.push(2);else this.errorProyecto.push(0);
+
+            var flagCP1 = true,
+                flagCP2 = true,
+                flagCP3 = true;
+            var msg1 = "",
+                msg2 = "",
+                msg3 = "";
+            var i = 0,
+                j = 0;
+
+            this.arrayCarreraPerfil.forEach(function (document) {
+                if ((!document[0] || !document[1] || !document[2]) && flagCP1) {
+                    msg1 = "Debe seleccionar todos los campos. ";
+                    flagCP1 = false;
+                    _this.flagError = true;
+                }
+                if (document[1] > document[2] && flagCP2) {
+                    msg2 = "Rango invalido, seleccione rangos válidos. ";
+                    flagCP2 = false;
+                    _this.flagError = true;
+                }
+                j = 0;
+                _this.arrayCarreraPerfil.forEach(function (subDocument) {
+                    if (subDocument[0] && i != j && document[0] == subDocument[0] && flagCP3) {
+                        msg3 = "No puede seleccionar la misma carrera más de una vez.";
+                        flagCP3 = false;
+                        _this.flagError = true;
+                        console.log(i);
+                        console.log(j);
+                    }
+                    j++;
+                });
+                i++;
+            });
+            this.errorPerfilMsg += msg1 + msg2 + msg3;
+
+            if (!this.errorProyecto.find(function (element) {
+                return element > 0;
+            })) return false;
+            return true;
         },
         estadoProyecto: function estadoProyecto() {
             var me = this;
@@ -38077,6 +38151,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.contraparte = '';
                 this.modal_fecha_in = '';
                 this.modal_fecha_fin = '';
+                this.errorProyecto = [];
+                this.errorDateMsg = '';
             }
             this.add_edit_flag = 0;
             this.modal = 0;
@@ -38091,14 +38167,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             switch (modelo) {
                 case "insertar":
                     {
-                        this.getCarrerasAndPerfils();
                         this.modal = 1;
                         this.add_edit_flag = 1;
+                        this.flagError = false;
+                        this.errorPerfilMsg = "";
                         break;
                     }
                 case "editar":
                     {
-                        this.getCarrerasAndPerfils();
                         this.updateCarrerasAndPerfil();
                         this.modal = 1;
                         this.add_edit_flag = 2;
@@ -38113,6 +38189,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal_fecha_fin = data.fecha_fin;
                         this.modal_contraparte = data.contraparte;
                         this.modal_createdAt = data.createdAt;
+                        this.flagError = false;
+                        this.errorPerfilMsg = "";
                         break;
                     }
                 case "estado":
@@ -38468,7 +38546,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("form", [
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38488,7 +38566,7 @@ var render = function() {
                             expression: "modal_nombre"
                           }
                         ],
-                        staticClass: "form-control",
+                        staticClass: "form-control inputs",
                         attrs: {
                           type: "text",
                           placeholder: "Nombre del proyecto"
@@ -38502,11 +38580,23 @@ var render = function() {
                             _vm.modal_nombre = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[0] == 1,
+                            hide: _vm.errorProyecto[0] != 1
+                          }
+                        },
+                        [_vm._v("El nombre no puede ir vacío")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38540,11 +38630,23 @@ var render = function() {
                             _vm.modal_encargado = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[1] == 1,
+                            hide: _vm.errorProyecto[1] != 1
+                          }
+                        },
+                        [_vm._v("El nombre del encargado no puede ir vacío")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38575,11 +38677,23 @@ var render = function() {
                             _vm.modal_cupos = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[2] == 1,
+                            hide: _vm.errorProyecto[2] != 1
+                          }
+                        },
+                        [_vm._v("Los cupos no pueden ir vacios")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38627,11 +38741,23 @@ var render = function() {
                             _vm._v("Externas")
                           ])
                         ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[3] == 1,
+                            hide: _vm.errorProyecto[3] != 1
+                          }
+                        },
+                        [_vm._v("Debe seleccionar un tipo de horas")]
                       )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38662,11 +38788,23 @@ var render = function() {
                             _vm.modal_desc = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[4] == 1,
+                            hide: _vm.errorProyecto[4] != 1
+                          }
+                        },
+                        [_vm._v("La Descripción no puede ir vacía")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38697,11 +38835,23 @@ var render = function() {
                             _vm.modal_horario = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[5] == 1,
+                            hide: _vm.errorProyecto[5] != 1
+                          }
+                        },
+                        [_vm._v("El horario no puede ir vacío")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38732,11 +38882,23 @@ var render = function() {
                             _vm.modal_contraparte = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[6] == 1,
+                            hide: _vm.errorProyecto[6] != 1
+                          }
+                        },
+                        [_vm._v("La contraparte no puede ir vacía")]
+                      )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38766,11 +38928,23 @@ var render = function() {
                             _vm.modal_fecha_in = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errorProyecto[7] == 1 || _vm.errorProyecto[7] == 2
+                        ? _c("div", [
+                            _c("p", { staticClass: "show error" }, [
+                              _vm._v(_vm._s(_vm.errorDateMsg))
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("p", { staticClass: "hide error" }, [
+                              _vm._v(".")
+                            ])
+                          ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -38800,11 +38974,23 @@ var render = function() {
                             _vm.modal_fecha_fin = $event.target.value
                           }
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errorProyecto[8] == 1 || _vm.errorProyecto[8] == 2
+                        ? _c("div", [
+                            _c("p", { staticClass: "show error" }, [
+                              _vm._v(_vm._s(_vm.errorDateMsg))
+                            ])
+                          ])
+                        : _c("div", [
+                            _c("p", { staticClass: "hide error" }, [
+                              _vm._v(".")
+                            ])
+                          ])
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "form-group row div-form" }, [
                     _c(
                       "label",
                       {
@@ -39032,37 +39218,25 @@ var render = function() {
                             0
                           )
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.flagError
+                        ? _c(
+                            "div",
+                            [
+                              _c("P", { staticClass: "show error" }, [
+                                _vm._v(_vm._s(_vm.errorPerfilMsg))
+                              ])
+                            ],
+                            1
+                          )
+                        : _c("div", [
+                            _c("p", { staticClass: "hide error" }, [
+                              _vm._v(".")
+                            ])
+                          ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.errorProyecto,
-                          expression: "errorProyecto"
-                        }
-                      ],
-                      staticClass: "form-group row div-error"
-                    },
-                    [
-                      _c(
-                        "div",
-                        { staticClass: "text-center text-error" },
-                        _vm._l(_vm.errorProyecto, function(error) {
-                          return _c("div", {
-                            key: error,
-                            domProps: { textContent: _vm._s(error) }
-                          })
-                        }),
-                        0
-                      )
-                    ]
-                  )
+                  ])
                 ])
               ]),
               _vm._v(" "),

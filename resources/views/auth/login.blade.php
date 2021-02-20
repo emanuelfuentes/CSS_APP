@@ -13,19 +13,19 @@
 
             <div class="form-group mb-3 ">
               <input class="form-control" value="{{old('email')}}" name="email"  type="text" placeholder="e-mail">
-              @if($errors->any())
+              @if($errors->first('email'))
                 {!!$errors->first('email','<span class="invalid-feedback">:message</span>')!!}
               @else
-                <span class="invalid-feedback" style="color: white;">.</span>
+                <span class="invalid-feedback" style="visibility: hidden;">.</span>
               @endif
             </div>
 
             <div class="form-group mb-4 ">
               <input class="form-control" name="password"  type="password" placeholder="Password">
-              @if($errors->any())
+              @if($errors->first('password'))
                 {!!$errors->first('password','<span class="invalid-feedback">:message</span>')!!}
               @else
-                <span class="invalid-feedback" style="color: white;">.</span>
+                <span class="invalid-feedback" style="visibility: hidden;">.</span>
               @endif
             </div>
             

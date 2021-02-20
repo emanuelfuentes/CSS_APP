@@ -100,64 +100,83 @@
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="modal_nombre" class="form-control" placeholder="Nombre del proyecto">
+                                        <input type="text" v-model="modal_nombre" class="form-control inputs" placeholder="Nombre del proyecto">
+                                        <p :class="{show: errorProyecto[0] == 1, hide: errorProyecto[0] != 1}" class="error">El nombre no puede ir vacío</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Encargado</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_encargado" class="form-control" placeholder="Nombre del encargado">
+                                        <p :class="{show: errorProyecto[1] == 1, hide: errorProyecto[1] != 1}" class="error">El nombre del encargado no puede ir vacío</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Cupos</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_cupos" class="form-control" placeholder="Cupos">
+                                        <p :class="{show: errorProyecto[2] == 1, hide: errorProyecto[2] != 1}" class="error">Los cupos no pueden ir vacios</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Tipo de horas</label>
                                     <div class="col-md-9">
                                         <select class="form-control" v-model="modal_tipo_horas">
                                             <option value="Internas">Internas</option>
                                             <option value="Externas">Externas</option>
                                         </select>
+                                        <p :class="{show: errorProyecto[3] == 1, hide: errorProyecto[3] != 1}" class="error">Debe seleccionar un tipo de horas</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Descripción</label>
                                     <div class="col-md-9">
                                         <textarea type="text" v-model="modal_desc" class="form-control" placeholder="Descripción"></textarea>
+                                        <p :class="{show: errorProyecto[4] == 1, hide: errorProyecto[4] != 1}" class="error">La Descripción no puede ir vacía</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Horario</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_horario" class="form-control" placeholder="Horario">
+                                        <p :class="{show: errorProyecto[5] == 1, hide: errorProyecto[5] != 1}" class="error">El horario no puede ir vacío</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Contraparte</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_contraparte" class="form-control" placeholder="Contraparte">
+                                        <p :class="{show: errorProyecto[6] == 1, hide: errorProyecto[6] != 1}" class="error">La contraparte no puede ir vacía</p>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de inicio</label>
                                     <div class="col-md-9">
                                         <input type="date" value="2017-06-01" v-model="modal_fecha_in">
+                                        <div v-if="errorProyecto[7] == 1 || errorProyecto[7] == 2">
+                                            <p class="show error">{{errorDateMsg}}</p>
+                                        </div>
+                                        <div v-else>
+                                            <p class="hide error">.</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de finalización</label>
                                     <div class="col-md-9">
                                         <input type="date" value="2021-01-01" v-model="modal_fecha_fin">
+                                        <div v-if="errorProyecto[8] == 1 || errorProyecto[8] == 2">
+                                            <p class="show error">{{errorDateMsg}}</p>
+                                        </div>
+                                        <div v-else>
+                                            <p class="hide error">.</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Carreras</label>
                                     <div class="col-md-9">
                                         <button type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
@@ -189,16 +208,15 @@
                                                         <button type="button" class="close" @click="eliminarACP(acp)" aria-label="Close">
                                                             <span aria-hidden="true">×</span>
                                                         </button>
-                                                    </td>
+                                                    </td>   
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-                                </div>
-                                <div v-show="errorProyecto" class="form-group row div-error">
-                                    <div class="text-center text-error">
-                                        <div v-for="error in errorProyecto" :key="error" v-text="error">
-
+                                        <div v-if="flagError">
+                                            <P class="show error">{{errorPerfilMsg}}</P>
+                                        </div>
+                                        <div v-else>
+                                            <p class="hide error">.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +315,7 @@ import {API_HOST} from '../constants/endpoint.js';
             return{
                 nombre : '',
                 descripcion : '',
-                arrayProyectos : [''],
+                arrayProyectos : [],
                 arrayCarreras : [''],
                 arrayPerfiles : [''],
                 arrayCarreraPerfil : [[]],
@@ -321,6 +339,9 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_createdAt : '',
                 modal_estado: 0,
                 errorProyecto : [''],
+                errorDateMsg : '',
+                errorPerfilMsg : '',
+                flagError : false,
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -369,6 +390,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 .catch(function (error) {
                     console.log(error);
                 });
+                this.getCarrerasAndPerfils();
             },
             cambiarPagina(page){
                 let me = this;
@@ -429,15 +451,68 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             validarProyecto(){
                 this.errorProyecto = [];
-                if(!this.modal_nombre) this.errorProyecto.push("El nombre del proyecto no puede ir vacio.");
-                if(!this.modal_contraparte) this.errorProyecto.push("El campo contraparte no puede ir vacio.");
-                if(!this.modal_cupos) this.errorProyecto.push("El campo cupos no puede ir vacio.");
-                if(!this.modal_desc) this.errorProyecto.push("El campo descripcion no puede ir vacio.");
-                if(!this.modal_encargado) this.errorProyecto.push("El campo encargados no puede ir vacio.");
-                if(!this.modal_tipo_horas) this.errorProyecto.push("El campo tipo de horas no puede ir vacio.");
+                this.flagError = false;
+                this.errorPerfilMsg = "";
 
-                if(this.errorProyecto.length >= 1) return true;
-                else return false;
+                if(!this.modal_nombre) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0);
+                if(!this.modal_encargado) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0);
+                if(!this.modal_cupos) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0);
+                if(!this.modal_tipo_horas) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0)
+                if(!this.modal_desc) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0)
+                if(!this.modal_horario) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0);
+                if(!this.modal_contraparte) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0);
+                if(!this.modal_fecha_in) {
+                    this.errorProyecto.push(1);
+                    this.errorDateMsg = "Debe seleccionar una fecha";
+                }
+                else if(this.modal_fecha_in >= this.modal_fecha_fin) {
+                    this.errorProyecto.push(2);
+                    this.errorDateMsg = "La fecha seleccionada no concuerda con la otra fecha"
+                }
+                else this.errorProyecto.push(0);
+                if(!this.modal_fecha_fin) this.errorProyecto.push(1);
+                else if(this.modal_fecha_in >= this.modal_fecha_fin) this.errorProyecto.push(2);
+                else this.errorProyecto.push(0);
+                
+                var flagCP1 = true, flagCP2 = true, flagCP3 = true;
+                var msg1 = "", msg2 = "", msg3 = "";
+                var i = 0, j = 0;
+
+                this.arrayCarreraPerfil.forEach(document => {
+                    if((!document[0] || !document[1] || !document[2]) && flagCP1){
+                        msg1 = "Debe seleccionar todos los campos. ";
+                        flagCP1 = false;
+                        this.flagError = true;
+                    }
+                    if(document[1] > document[2] && flagCP2){
+                        msg2 = "Rango invalido, seleccione rangos válidos. ";
+                        flagCP2 = false;
+                        this.flagError = true;
+                    }
+                    j = 0;
+                    this.arrayCarreraPerfil.forEach(subDocument => {
+                        if(subDocument[0] && (i != j && document[0] == subDocument[0]) && flagCP3){
+                            msg3 = "No puede seleccionar la misma carrera más de una vez."
+                            flagCP3 = false;
+                            this.flagError = true;
+                            console.log(i)
+                            console.log(j)
+                        }
+                        j++
+                    })
+                    i++;
+                })
+                this.errorPerfilMsg += msg1 + msg2 + msg3;
+
+                if(!this.errorProyecto.find(element => element > 0)) return false;
+                return true;
             },
             estadoProyecto(){
                 let me = this;
@@ -468,6 +543,8 @@ import {API_HOST} from '../constants/endpoint.js';
                     this.contraparte = '';
                     this.modal_fecha_in = '';
                     this.modal_fecha_fin = '';
+                    this.errorProyecto = [];
+                    this.errorDateMsg = '';
                 }
                 this.add_edit_flag = 0;
                 this.modal = 0;
@@ -480,14 +557,14 @@ import {API_HOST} from '../constants/endpoint.js';
                 switch (modelo) {
                     case "insertar":
                         {
-                            this.getCarrerasAndPerfils()
                             this.modal = 1;
                             this.add_edit_flag = 1;
+                            this.flagError = false;
+                            this.errorPerfilMsg = "";
                             break;
                         }
                     case "editar":
                         {
-                            this.getCarrerasAndPerfils();
                             this.updateCarrerasAndPerfil();
                             this.modal = 1;
                             this.add_edit_flag = 2;
@@ -502,6 +579,8 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_fecha_fin = data.fecha_fin;
                             this.modal_contraparte = data.contraparte;
                             this.modal_createdAt = data.createdAt;
+                            this.flagError = false;
+                            this.errorPerfilMsg = "";
                             break;
                         }
                     case "estado":
@@ -592,5 +671,19 @@ import {API_HOST} from '../constants/endpoint.js';
         opacity : 1 !important;
         position: absolute !important;
         background-color: #3c29297a !important;
+    }
+    .error{
+        color: red;
+        margin: 0.25em;
+        margin-bottom: 0.5em;
+    }
+    .show{
+        visibility: visible;
+    }
+    .hide{
+        visibility: hidden;
+    }
+    .div-form{
+        margin-bottom: 0em;
     }
 </style>
