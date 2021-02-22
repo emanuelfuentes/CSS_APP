@@ -14,10 +14,10 @@ class CreateCarreraTable extends Migration
     public function up()
     {
         Schema::create('carrera', function (Blueprint $table) {
-            $table->bigIncrements('idCarrera');
+            $table->increments('idCarrera');
             $table->unsignedbigInteger('idFacultad');
             $table->foreign('idFacultad')->references('idFacultad')->on('facultad')->onDelete('cascade');
-            $table->string('nombre', 300);
+            $table->string('nombre', 200);
             $table->timestamps();
         });
     }

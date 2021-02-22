@@ -14,18 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('idUser');
+            $table->increments('idUser');
             $table->string('nombres', 150);
             $table->string('apellidos', 150);
-            $table->string('correo', 150)->unique();
+            $table->string('correo', 100)->unique();
             $table->boolean('estado');
             $table->string('genero', 10);
 
-            $table->unsignedBigInteger('idRol');
+            $table->unsignedInteger('idRol');
             $table->foreign('idRol')->references('idRol')->on('rol')->onDelete('cascade');
-            $table->unsignedBigInteger('idPerfil')->nullable();
+            $table->unsignedInteger('idPerfil')->nullable();
             $table->foreign('idPerfil')->references('idPerfil')->on('perfil')->onDelete('cascade');
-            $table->unsignedBigInteger('idCarrera')->nullable();
+            $table->unsignedInteger('idCarrera')->nullable();
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
 
             $table->string('password');

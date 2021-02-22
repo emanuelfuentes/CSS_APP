@@ -14,14 +14,15 @@ class CreateProyectoxestudianteTable extends Migration
     public function up()
     {
         Schema::create('proyectoxestudiante', function (Blueprint $table) {
-            $table->bigIncrements('idProyectoEstudiante');
-            $table->unsignedbigInteger('idProyecto');
-            $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
-            $table->unsignedbigInteger('idUser');
-            $table->foreign('idUser')->references('idUser')->on('users')->onDelete('cascade');
+            $table->increments('idProyectoEstudiante');
             $table->tinyInteger('estado');
-            $table->string('modifiedBy', 150);
+            $table->string('modificado_por', 100);
             $table->timestamps();
+
+            $table->unsignedInteger('idProyecto');
+            $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
+            $table->unsignedInteger('idUser');
+            $table->foreign('idUser')->references('idUser')->on('users')->onDelete('cascade');
         });
     }
 

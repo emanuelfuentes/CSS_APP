@@ -14,10 +14,10 @@ class CreateProyectoxcarreraTable extends Migration
     public function up()
     {
         Schema::create('proyectoxcarrera', function (Blueprint $table) {
-            $table->bigIncrements('idProyectoCarrera');
-            $table->unsignedbigInteger('idProyecto');
+            $table->increments('idProyectoCarrera');
+            $table->unsignedInteger('idProyecto');
             $table->foreign('idProyecto')->references('idProyecto')->on('proyecto')->onDelete('cascade');
-            $table->unsignedbigInteger('idCarrera');
+            $table->unsignedInteger('idCarrera');
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
             $table->smallInteger('limite_inf');
             $table->smallInteger('limite_sup');     

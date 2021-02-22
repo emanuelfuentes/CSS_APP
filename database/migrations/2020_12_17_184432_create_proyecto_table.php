@@ -14,19 +14,20 @@ class CreateProyectoTable extends Migration
     public function up()
     {
         Schema::create('proyecto', function (Blueprint $table) {
-            $table->bigIncrements('idProyecto');
+            $table->increments('idProyecto');
             $table->tinyInteger('estado');
             $table->string('contraparte', 150);
             $table->smallInteger('cupos');
             $table->string('descripcion', 600);
             $table->string('encargado', 150);
-            $table->date('fecha_inicio')->nullable();
-            $table->date('fecha_fin')->nullable();
-            $table->string('horario', 100)->nullable()->default('text');
+            $table->date('fecha_inicio');
+            $table->date('fecha_fin');
+            $table->string('horario', 100);
             $table->string('nombre', 150);
-            $table->string('tipo_horas', 100)->nullable()->default('text');
-            $table->string('modifiedBy', 150);
-            $table->string('createdAt', 150);
+            $table->string('tipo_horas', 10);
+            $table->string('correo_encargado', 100)->nullable();
+            $table->string('modificado_por', 150)->nullable();
+            $table->string('creado_en', 150);
             $table->timestamps();
         });
     }

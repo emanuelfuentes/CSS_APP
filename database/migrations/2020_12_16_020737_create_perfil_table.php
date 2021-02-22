@@ -14,11 +14,21 @@ class CreatePerfilTable extends Migration
     public function up()
     {
         Schema::create('perfil', function (Blueprint $table) {
-            $table->bigIncrements('idPerfil');
-            $table->string('perfil', 150);
-            $table->string('descripcion', 600)->nullable();
-            $table->timestamps();
+            $table->increments('idPerfil');
+            $table->string('perfil', 15);
+            $table->string('descripcion', 50);
         });
+
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'1', 'perfil'=>'Primero', 'descripcion'=>'Primer año'));
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'2', 'perfil'=>'Segundo', 'descripcion'=>'Segundo año'));
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'3', 'perfil'=>'Tercero', 'descripcion'=>'Tercer año'));
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'4', 'perfil'=>'Cuarto', 'descripcion'=>'Cuarto año'));
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'5', 'perfil'=>'Quinto', 'descripcion'=>'Quinto año'));
     }
 
     /**
