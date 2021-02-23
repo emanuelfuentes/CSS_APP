@@ -12,18 +12,6 @@
                         <i class="fa fa-align-justify"></i> Listado de Proyectos
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
-                                      <option value="nombre">Nombre</option>
-                                      <option value="descripcion">Descripción</option>
-                                    </select>
-                                    <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </div>
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
@@ -222,7 +210,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     console.log(error);
                 });
 
-                var url = `${API_HOST}/proyecto?page=${page}`;
+                var url = `${API_HOST}/proyectos_carrera?page=${page}`;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     var proyectos = respuesta.proyectos.data;
@@ -232,7 +220,6 @@ import {API_HOST} from '../constants/endpoint.js';
                             auxiliar.push(dato);
                         }
                     })
-
                     me.arrayProyectos = auxiliar;
                     me.pagination = respuesta.pagination;
                 })
@@ -265,11 +252,11 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }
                 if (flag) {
-                        axios.post(`${API_HOST}/proyecto/ingresar`, {
+                        axios.post(`${API_HOST}/proyecto/aplicar`, {
                             'idProyecto' : this.id_proyecto,
                             'idUser' : this.user_id,
                             'estado' : 1,
-                            'modifiedBy' : 'admin'
+                            'modificado_por' : 'admin'
                         })
                         .then(function (response) {
                             me.cerrarModal();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProyectoxCarrera;
+use App\Proyecto;
 
 class ProyectosxCarreraController extends Controller
 {
@@ -26,6 +27,32 @@ class ProyectosxCarreraController extends Controller
     public function create()
     {
         //
+    }
+
+    public function proyectosPorCarrera(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $user = Auth()->user();
+
+        $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
+        ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
+        'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+        ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
+        ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
+        ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)
+        ->orWhere('proyectoxcarrera.idCarrera', '=', 8)
+        ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
+        
+        return [
+            'pagination' => [
+                'total'         => $proyectos->total(),
+                'current_page'  => $proyectos->currentPage(),
+                'per_page'      => $proyectos->perPage(),
+                'last_page'     => $proyectos->lastPage(),
+                'from'          => $proyectos->firstItem(),
+                'to'            => $proyectos->lastItem(),
+            ],
+            'proyectos' => $proyectos
+        ];
     }
 
     /**

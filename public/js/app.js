@@ -34679,31 +34679,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -35135,25 +35110,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35276,13 +35232,11 @@ var render = function() {
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _vm._m(2),
-          _vm._v(" "),
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -35470,7 +35424,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35498,7 +35452,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35555,50 +35509,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Historial\n      ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c(
-            "select",
-            {
-              staticClass: "form-control col-md-3",
-              attrs: { id: "opcion", name: "opcion" }
-            },
-            [
-              _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "descripcion" } }, [
-                _vm._v("Descripción")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "texto",
-              name: "texto",
-              placeholder: "Texto a buscar"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [
-              _c("i", { staticClass: "fa fa-search" }),
-              _vm._v(" Buscar\n              ")
-            ]
-          )
-        ])
-      ])
     ])
   },
   function() {
@@ -35897,18 +35807,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -35974,7 +35872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
 
-            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto?page=' + page;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyectos_carrera?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 var proyectos = respuesta.proyectos.data;
@@ -35984,7 +35882,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         auxiliar.push(dato);
                     }
                 });
-
                 me.arrayProyectos = auxiliar;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
@@ -36015,11 +35912,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
             if (flag) {
-                axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/ingresar', {
+                axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/aplicar', {
                     'idProyecto': this.id_proyecto,
                     'idUser': this.user_id,
                     'estado': 1,
-                    'modifiedBy': 'admin'
+                    'modificado_por': 'admin'
                 }).then(function (response) {
                     me.cerrarModal();
                 }).catch(function (error) {
@@ -36087,13 +35984,11 @@ var render = function() {
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _vm._m(2),
-          _vm._v(" "),
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -36118,7 +36013,7 @@ var render = function() {
                             _vm._v("  \n                                    ")
                           ])
                         : _c("div", [
-                            _vm._m(4, true),
+                            _vm._m(3, true),
                             _vm._v("  \n                                    ")
                           ])
                     ]),
@@ -36293,10 +36188,10 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -36390,7 +36285,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(7),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36418,7 +36313,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(8),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36477,47 +36372,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Listado de Proyectos\n                ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c(
-            "select",
-            {
-              staticClass: "form-control col-md-3",
-              attrs: { id: "opcion", name: "opcion" }
-            },
-            [
-              _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "descripcion" } }, [
-                _vm._v("Descripción")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "texto",
-              name: "texto",
-              placeholder: "Texto a buscar"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
-          )
-        ])
-      ])
     ])
   },
   function() {
@@ -36844,31 +36698,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36929,7 +36758,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
-            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/mis_proyectos' /*?page=' + page*/;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyectos_aplicados' /*?page=' + page*/;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 var proyectos = respuesta.proyectos.data;
@@ -36953,7 +36782,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         desAplicarProyecto: function desAplicarProyecto() {
             var me = this;
-            axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/eliminar', {
+            axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/desaplicar', {
                 'idProyecto': this.id_proyecto,
                 'idUser': this.user_id
             }).then(function (response) {
@@ -37023,17 +36852,15 @@ var render = function() {
         _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _vm._m(2),
-          _vm._v(" "),
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.arrayProyectos, function(proyecto, index) {
+                _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
                     _c("td", [
                       _c(
@@ -37228,7 +37055,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37264,7 +37091,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37349,7 +37176,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -37407,47 +37234,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Proyectos aplicados\n                ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c(
-            "select",
-            {
-              staticClass: "form-control col-md-3",
-              attrs: { id: "opcion", name: "opcion" }
-            },
-            [
-              _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "descripcion" } }, [
-                _vm._v("Descripción")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "texto",
-              name: "texto",
-              placeholder: "Texto a buscar"
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_c("i", { staticClass: "fa fa-search" }), _vm._v(" Buscar")]
-          )
-        ])
-      ])
     ])
   },
   function() {
@@ -37994,7 +37780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bindData: function bindData(page) {
             var me = this;
             //var url = '/public/proyecto?page=' + page;
-            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto?page=' + page;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/todos_proyectos?page=' + page;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayProyectos = respuesta.proyectos.data;
@@ -38027,7 +37813,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'horario': this.modal_horario,
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
-                    'modifiedBy': 'Usuario',
+                    'modificado_por': 'Usuario',
                     'createdAt': "this.modal_createdAt",
                     'carreraPerfil': this.arrayCarreraPerfil
                 }).then(function (response) {
@@ -38049,7 +37835,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'horario': this.modal_horario,
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
-                    'modifiedBy': 'Usuario',
+                    'modificado_por': 'Usuario',
                     'createdAt': "this.modal_createdAt",
                     'carreraPerfil': this.arrayCarreraPerfil
                 }).then(function (response) {
@@ -38667,7 +38453,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text", placeholder: "Cupos" },
+                        attrs: { type: "number", placeholder: "Cupos" },
                         domProps: { value: _vm.modal_cupos },
                         on: {
                           input: function($event) {

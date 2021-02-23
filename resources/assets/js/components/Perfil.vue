@@ -9,7 +9,7 @@
             <td>aqui se escribe el Correo</td>
           </tr>
         </table>
-         <!--<img src="/public/img/recordatorio.ae2960e4.png" />-->
+         <!--<img src="/public/img/recordatorio.ae2960e4.png" />
       </div>
     </div>
   </main>
@@ -29,18 +29,6 @@
                         <i class="fa fa-align-justify"></i> Perfil
                     </div>
                     <div class="card-body">
-                        <!--<div class="form-group row">
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
-                                      <option value="nombre">Nombre</option>
-                                      <option value="descripcion">Descripción</option>
-                                    </select>
-                                    <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </div>-->
                         <table class="table table-bordered table-striped table-sm">
                             <tr>
                                 <th>Correo Institucional</th>
@@ -71,19 +59,6 @@
                                 <td v-text="perfil"></td>
                             </tr>
                         </table>
-                        <!--<nav>
-                            <ul class="pagination">
-                                <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
-                                </li>
-                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
-                                </li>
-                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
-                                </li>
-                            </ul>
-                        </nav>-->
                         <button class="button button1">Modificar Perfil</button>
                         <button class="button button2">Cambiar Contraseña</button>
                     </div>

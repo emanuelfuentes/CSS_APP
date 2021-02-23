@@ -6,9 +6,6 @@
                 <admin-proyectos></admin-proyectos>
             </template>
             <template v-if="menu==1">
-                <h1>Componente de Historial Aplicados2</h1>
-            </template>
-            <template v-if="menu==2">
                 <recordatorio></recordatorio>
             </template>
 

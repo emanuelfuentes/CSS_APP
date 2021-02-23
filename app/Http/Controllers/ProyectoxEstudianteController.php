@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProyectoxEstudiante;
+use App\Proyecto;
 use Illuminate\Support\Facades\Auth;
 
 class ProyectoxEstudianteController extends Controller
@@ -19,7 +20,7 @@ class ProyectoxEstudianteController extends Controller
         $proyectoXestudiantes = ProyectoxEstudiante::all();
         return $proyectoXestudiantes;
     }
-    public function proyectosPorId(Request $request)
+    public function proyectosAplicados(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->idUser;
@@ -44,6 +45,7 @@ class ProyectoxEstudianteController extends Controller
     }
 
     public function pxePorId (Request $request) {
+        if(!$request->ajax()) return redirect('/home');
         $req = $request->idUser;
         $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idUser = :req')->get();
         return $pXe;
@@ -65,13 +67,13 @@ class ProyectoxEstudianteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function aplicar(Request $request)
     {
         $pXe = new ProyectoxEstudiante();
         $pXe->idProyecto = $request->idProyecto;
         $pXe->idUser = $request->idUser;
         $pXe->estado = $request->estado;
-        $pXe->modifiedBy = $request->modifiedBy;
+        $pXe->modificado_por = $request->modificado_por;
         $pXe->save();
     }
 

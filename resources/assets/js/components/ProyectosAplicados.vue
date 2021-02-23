@@ -12,18 +12,6 @@
                         <i class="fa fa-align-justify"></i> Proyectos aplicados
                     </div>
                     <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <div class="input-group">
-                                    <select class="form-control col-md-3" id="opcion" name="opcion">
-                                      <option value="nombre">Nombre</option>
-                                      <option value="descripcion">Descripción</option>
-                                    </select>
-                                    <input type="text" id="texto" name="texto" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </div>
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
@@ -36,20 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(proyecto, index) in arrayProyectos" :key="proyecto.idProyecto">
-                                   <!-- <td>
-                                        <div v-if="proyecto.estado">
-                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm" data-target="#modalNuevo">
-                                                <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div v-else>
-                                            <button disabled type="button" class="btn btn-success btn-sm" data-target="#modalNuevo">
-                                            <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        
-                                    </td>-->
+                                <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
                                         <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                             <i class="icon-trash"></i>
@@ -227,7 +202,7 @@ import {API_HOST} from '../constants/endpoint.js';
         methods:{
             bindData(page){
                 let me = this
-                var url = `${API_HOST}/mis_proyectos` /*?page=' + page*/;
+                var url = `${API_HOST}/proyectos_aplicados` /*?page=' + page*/;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     var proyectos = respuesta.proyectos.data;
@@ -253,7 +228,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             desAplicarProyecto(){
                 let me = this;
-                axios.post(`${API_HOST}/proyecto/eliminar`, {
+                axios.post(`${API_HOST}/proyecto/desaplicar`, {
                     'idProyecto' : this.id_proyecto,
                     'idUser' : this.user_id
                 }).then(function (response) {

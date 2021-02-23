@@ -13,26 +13,7 @@
           <i class="fa fa-align-justify"></i> Historial
         </div>
         <div class="card-body">
-          <div class="form-group row">
-            <div class="col-md-6">
-              <div class="input-group">
-                <select class="form-control col-md-3" id="opcion" name="opcion">
-                  <option value="nombre">Nombre</option>
-                  <option value="descripcion">Descripción</option>
-                </select>
-                <input
-                  type="text"
-                  id="texto"
-                  name="texto"
-                  class="form-control"
-                  placeholder="Texto a buscar"
-                />
-                <button type="submit" class="btn btn-primary">
-                  <i class="fa fa-search"></i> Buscar
-                </button>
-              </div>
-            </div>
-          </div>
+          
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>

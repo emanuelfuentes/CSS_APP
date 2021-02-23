@@ -25,10 +25,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', function () {
         return view('home/dashboard');
     })->name('main');
-    Route::get('/proyecto', 'ProyectoController@index');
+    
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
     Route::middleware(['Administrador'])->group(function () {
+        Route::get('/todos_proyectos', 'ProyectoController@index');
         Route::post('/proyecto/insertar', 'ProyectoController@store');
         Route::put('/proyecto/actualizar', 'ProyectoController@update'); 
         Route::put('/proyecto/estado', 'ProyectoController@state');
@@ -40,11 +41,12 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['NormalUser'])->group(function () {
         Route::get('/get_user', 'UserController@getUser'); 
         Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
-        Route::get('/mis_proyectos', 'ProyectoxEstudianteController@proyectosPorId');
+        Route::get('/proyectos_aplicados', 'ProyectoxEstudianteController@proyectosAplicados');
         Route::get('/mi_carrera', 'CarreraController@carreraPorId');
+        Route::get('/proyectos_carrera', 'ProyectosxCarreraController@proyectosPorCarrera');
 
-        Route::post('/proyecto/ingresar', 'ProyectoxEstudianteController@store');
-        Route::post('/proyecto/eliminar', 'ProyectoxEstudianteController@deleteRow');
+        Route::post('/proyecto/aplicar', 'ProyectoxEstudianteController@aplicar');
+        Route::post('/proyecto/desaplicar', 'ProyectoxEstudianteController@deleteRow');
     });
 });
 /*

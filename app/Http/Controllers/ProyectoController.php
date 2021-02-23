@@ -59,8 +59,8 @@ class ProyectoController extends Controller
         $proyecto->horario = $request->horario;
         $proyecto->nombre = $request->nombre;
         $proyecto->tipo_horas = $request->tipo_horas;
-        $proyecto->modifiedBy = $request->modifiedBy;
-        $proyecto->createdAt = $request->createdAt;
+        $proyecto->modificado_por = $request->modificado_por;
+        $proyecto->creado_en = $request->createdAt;
         $proyecto->save();
 
         $arraycp = $request->carreraPerfil;
@@ -107,8 +107,8 @@ class ProyectoController extends Controller
         $proyecto->horario = $request->horario;
         $proyecto->nombre = $request->nombre;
         $proyecto->tipo_horas = $request->tipo_horas;
-        $proyecto->modifiedBy = $request->modifiedBy;
-        $proyecto->createdAt = $request->createdAt;
+        $proyecto->modificado_por = $request->modificado_por;
+        $proyecto->creado_en = $request->createdAt;
         $proyecto->save();
 
         ProyectoxCarrera::where('idProyecto', '=', $request->idProyecto)->delete();

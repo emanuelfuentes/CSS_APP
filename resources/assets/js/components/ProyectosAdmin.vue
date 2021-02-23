@@ -117,7 +117,7 @@
                                 <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Cupos</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="modal_cupos" class="form-control" placeholder="Cupos">
+                                        <input type="number" v-model="modal_cupos" class="form-control" placeholder="Cupos">
                                         <p :class="{show: errorProyecto[2] == 1, hide: errorProyecto[2] != 1}" class="error">Los cupos no pueden ir vacios</p>
                                     </div>
                                 </div>
@@ -381,7 +381,7 @@ import {API_HOST} from '../constants/endpoint.js';
             bindData(page){
                 let me = this
                 //var url = '/public/proyecto?page=' + page;
-                var url = `${API_HOST}/proyecto?page=${page}`
+                var url = `${API_HOST}/todos_proyectos?page=${page}`
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     me.arrayProyectos = respuesta.proyectos.data;
@@ -415,7 +415,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
-                        'modifiedBy' : 'Usuario',
+                        'modificado_por' : 'Usuario',
                         'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
@@ -438,7 +438,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
-                        'modifiedBy' : 'Usuario',
+                        'modificado_por' : 'Usuario',
                         'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
