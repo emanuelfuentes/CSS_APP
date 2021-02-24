@@ -35169,7 +35169,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     listarProyectos: function listarProyectos(page) {
       var me = this;
       //var url2 = '/public/proyecto?page=' + page;
-      var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/proyecto?page=" + page;
+      var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/todos_proyectos?page=" + page;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         var proyectos = respuesta.proyectos.data;

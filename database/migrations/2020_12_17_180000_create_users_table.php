@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('correo', 100)->unique();
             $table->boolean('estado');
             $table->string('genero', 10);
+            $table->tinyInteger('verificado');
 
             $table->unsignedInteger('idRol');
             $table->foreign('idRol')->references('idRol')->on('rol')->onDelete('cascade');

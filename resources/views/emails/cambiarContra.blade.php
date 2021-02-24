@@ -7,10 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Hola {{ $user->nombres }}</h1>
+    <h3> Hola {{ $user->nombres }}.</h1>
     <p>
-        Click para verificar
-        <a href="{{ url('cambiar_contra/'.$user->correo) }}"> Cambiar contra</a>
+        Se solicitó un cambio de contraseña, por favor haga
+        <a href="{{ url('cambiar_contra_olvidada/'.$user->correo) }}"> click aquí</a>
+        para cambiarla. Este proceso se puede hacer una vez por día.
     </p>
 </body>
 </html>

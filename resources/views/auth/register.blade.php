@@ -1,17 +1,17 @@
-@extends('auth.contenido2')
+@extends('auth.contenido.contenidoRegister')
 
 @section('register')
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card-group">
             <div class="card p-4">
-                <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
                     {{ csrf_field() }}
                     <div class="card-body">
                         <h1>Register</h1>
 
                         <div class="form-group mb-3">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Correo elelctrónico">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Correo electrónico">
                         </div>
 
                         <div class="form-group mb-3">

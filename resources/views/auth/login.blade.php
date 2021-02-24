@@ -1,4 +1,4 @@
-@extends('auth.contenido')
+@extends('auth.contenido.contenidoLogin')
 
 @section('login')
 <div class="row justify-content-center">
@@ -34,7 +34,7 @@
                 <button class="btn btn-primary px-4" type="submit">Login</button>
               </div>
               <div class="col-6 text-right">
-                <button class="btn btn-link px-0" type="button">Forgot password?</button>
+                <a class="btn btn-link px-0" type="button" href="{{ url('/contra_olvidada_form') }} ">¿Olvidó la contraseña?</a>
               </div>
             </div>
           </div>
@@ -43,8 +43,8 @@
       <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
         <div class="card-body text-center">
           <div>
-            <h2>Sign up</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h2>Registrarse</h2>
+            <p>¿No tiene cuenta? Cree una.</p>
             <a class="btn btn-lg btn-outline-light mt-3" type="button" href="{{ url('/register_form') }}">Register Now!</a>
           </div>
         </div>

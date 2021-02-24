@@ -15,8 +15,17 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/', 'Auth\LoginController@showLoginForm');
     Route::post('/login', 'Auth\LoginController@authenticate')->name('login');
 
-    Route::get('/register_form', 'Auth\RegisterController@showForm')->name('register_form');
-    Route::post('/register', 'Auth\RegisterController@registrar')->name('register');   
+    Route::get('/register_form', 'Auth\RegisterController@showForm');
+    Route::post('/register', 'Auth\RegisterController@registrar')->name('registrar');   
+
+    Route::get('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@formularioVerificar');  
+    Route::post('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@verificarUsuario');
+
+    Route::get('/contra_olvidada_form', 'Auth\ForgotPasswordController@formularioEnviarCorreoContraOlvidada');
+    Route::post('/contra_olvidada_correo', 'Auth\ForgotPasswordController@enviarCorreoContraOlvidada')->name('olvido_contrasenia'); 
+
+    Route::get('/cambiar_contra_olvidada/{correo}', 'Auth\ForgotPasswordController@formularioOlvidoContrsenia');  
+    Route::post('/cambiar_contra_olvidada/{correo}', 'Auth\ForgotPasswordController@cambiarContraseniaOlvidada');
 });
 
 
@@ -59,7 +68,6 @@ Route::get('/mail', function () {
     echo 'Email has been sent';
 });*/
 
-Route::get('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@formulario');  
-Route::post('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@cambiar');  
+  
 
    

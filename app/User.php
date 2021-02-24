@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
+
 
 class User extends Authenticatable
 {
@@ -18,7 +20,7 @@ class User extends Authenticatable
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'nombres', 'apellidos', 'correo', 'estado', 'genero',
+        'nombres', 'apellidos', 'correo', 'estado', 'genero', 'verificado',
         'idRol', 'idPerfil', 'idCarrera', 'password'
     ];
 
@@ -35,6 +37,6 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = bcrypt($password);
+        $this->attributes['password'] = Hash::make($password);
     }
 }

@@ -7,7 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>{{$details['title']}}</h1>
-    <p>{{$details['body']}}</p>
+    <h3> Hola {{ $user->nombres }}</h1>
+    <p>
+        Usted ha creado una cuenta nueva en el sistema de horas sociales CSS, por favor haga 
+        <a href="{{ url('cambiar_contra/'.$user->correo) }}"> click aquí</a>
+        para verificar su cuenta y cambiar su contraseña.
+    </p>
 </body>
 </html>

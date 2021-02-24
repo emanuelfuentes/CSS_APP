@@ -40,6 +40,7 @@ class RegisterController extends Controller
             'correo' => $email,
             'estado' => 1,
             'genero' => $genero,
+            'verificado' => 0,
             'idRol' => 2,
             'idPerfil' => 4,
             'idCarrera' => 1,
@@ -63,11 +64,11 @@ class RegisterController extends Controller
 
     public function sendEmail($user){
         Mail::send(
-            'emails.changePSWmail',
+            'emails.verificar',
             ['user' => $user],
             function($message) use ($user){
                 $message->to($user->correo);
-                $message->subject("Hola $user->nombres, Verifica tu cuenta.");
+                $message->subject("Solicitud de creación de cuenta.");
             }
         );
     }
