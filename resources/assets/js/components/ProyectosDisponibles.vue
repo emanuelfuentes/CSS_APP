@@ -255,7 +255,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         axios.post(`${API_HOST}/proyecto/aplicar`, {
                             'idProyecto' : this.id_proyecto,
                             'idUser' : this.user_id,
-                            'estado' : 1,
+                            'estado' : 0,
                             'modificado_por' : 'admin'
                         })
                         .then(function (response) {

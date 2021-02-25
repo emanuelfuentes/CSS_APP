@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProyectoxEstudiante;
 use App\Proyecto;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProyectoxEstudianteController extends Controller
@@ -49,6 +50,25 @@ class ProyectoxEstudianteController extends Controller
         $req = $request->idUser;
         $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idUser = :req')->get();
         return $pXe;
+    }
+
+    public function estudiantesPorProyecto(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $idProyecto = $request->idProyecto;
+        //$estudiantes = User::query('SELECT * FROM users u INNER JOIN proyectoxestudiante pe ON u.idUser = pe.idUser WHERE pe.idProyecto = :idProyecto')->get();
+        $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->select('users.*')
+        ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)->get();
+        return $estudiantes;
+    }
+
+    public function aplicarRecazarEstudiante(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $idProyecto = $request->idProyecto;
+        $idUser = $request->idUser;
+        $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
+        $proXEst->estado = $request->estado;
+        $proXEst->save();
     }
 
     /**

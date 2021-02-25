@@ -31,23 +31,29 @@
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td>
-                                        <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
-                                            <i class="icon-pencil"></i>
-                                        </button> &nbsp;
-                                        <div v-if="proyecto.estado">
+                                    <td style="display:flex; height:100%;">
+                                        <div class="button-container">
+                                            <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
+                                                <i class="icon-pencil"></i>
+                                            </button> &nbsp;
+                                        </div>
+                                        <div class="button-container" v-if="proyecto.estado">
                                             <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-danger btn-sm">
                                                 <i class="icon-close"></i>
                                             </button> &nbsp;
                                         </div>
-                                        <div v-else>
+                                        <div class="button-container" v-else>
                                             <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
-                                        
+                                        <div class="button-container">
+                                            <button type="button" @click="abrirModal('estudiantes', proyecto)" class="btn btn-info btn-sm">
+                                                <i class="icon-people"></i>
+                                            </button> &nbsp;
+                                        </div>
                                     </td>
-                                    <td v-text="proyecto.nombre" id="name_p"></td>
+                                    <td v-text="proyecto.nombre"></td>
                                     <td v-text="proyecto.descripcion"></td>
                                     <td>
                                         <div v-if="proyecto.estado">
@@ -83,7 +89,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal editar proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none; overflow-y: scroll;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" style="display: none; overflow-y: scroll;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -95,7 +101,7 @@
                             </div>
                             
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -233,13 +239,13 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal estado del proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Estado del proyecto</h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div v-if="modal_estado" class="modal-body">
@@ -258,14 +264,88 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <!--Inicio de modal de estudiantes por proyecto-->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal3}" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg modal-student" role="document">
+                    <div class="modal-content modal-student">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Estudiantes</h4>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Carnet</th>
+                                        <th>Año de carrera</th>
+                                        <th>Carrera</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
+                                        <td v-text="estudiante.nombres"></td>
+                                        <td v-text="estudiante.apellidos"></td>
+                                        <td>Proximamente</td>
+                                        <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
+                                        <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
+                                        <td>
+                                            <button type="button" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
+                                                Aceptar
+                                            </button>  &nbsp;
+                                            <button type="button" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
+                                                Rechazar
+                                            </button>  &nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Fin del modal-->
+            <!--Inicio del modal de confirmacion para aceptar o rechazar estudiantes-->
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal4}" role="dialog" style="display: none; overflow-y: scroll;" aria-hidden="true">
+                <div class="modal-dialog modal-primary" role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <div v-if="flagEstudiante">
+                                <h4 class="modal-title">Aceptar estudiante</h4>
+                            </div>
+                            <div v-else>
+                                <h4 class="modal-title">Rechazar estudiante</h4>
+                            </div>
+                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5 v-text="nombre_estudiante_msg"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Fin del modal-->
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal4}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal5}" role="dialog" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -313,18 +393,20 @@ import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
-                nombre : '',
-                descripcion : '',
                 arrayProyectos : [],
                 arrayCarreras : [''],
                 arrayPerfiles : [''],
                 arrayCarreraPerfil : [[]],
+                arrayEstudiantes : [],
+                nombre_estudiante_msg : '',
                 add_edit_flag : 0,
                 modal : 0,
                 modal2 : 0,
                 modal3 : 0,
-                modal4: 0,
-                id_proyecto : 0,                
+                modal4 : 0,
+                modal5 : 0,
+                id_proyecto : 0,  
+                id_estudiante : 0,              
                 modal_encargado : '',
                 modal_nombre : '',
                 modal_desc : '',
@@ -342,6 +424,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 errorDateMsg : '',
                 errorPerfilMsg : '',
                 flagError : false,
+                flagEstudiante : false,
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -532,6 +615,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             cerrarModal(){
                 if(this.modal == 1){
+                    this.modal = 0;
                     this.arrayCarreraPerfil = [[]];
                     this.modal_nombre = '';
                     this.modal_encargado = '';
@@ -546,14 +630,18 @@ import {API_HOST} from '../constants/endpoint.js';
                     this.errorProyecto = [];
                     this.errorDateMsg = '';
                 }
-                this.add_edit_flag = 0;
-                this.modal = 0;
-                this.modal2 = 0;
-                this.modal3 = 0;
-                this.modal4 = 0;
-                this.id_proyecto = 0;
+                else if(this.modal4 == 1){
+                    this.modal4 = 0;
+                }
+                else{
+                    this.add_edit_flag = 0;
+                    this.modal2 = 0;
+                    this.modal3 = 0;
+                    this.modal5 = 0;
+                    this.id_proyecto = 0;
+                }
             },
-            abrirModal(modelo, data = []){
+            abrirModal(modelo, data = [], flag){
                 switch (modelo) {
                     case "insertar":
                         {
@@ -590,15 +678,27 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_estado = data.estado;
                             break;
                         }
-                    case "borrar":
+                    case "estudiantes":
                         {
                             this.modal3 = 1;
                             this.id_proyecto = data.idProyecto;
+                            this.modal_nombre = data.nombre;
+                            this.modal_cupos = data.cupos;
+                            this.getEstudiantes()
+                            break;
+                        }
+                    case "confirmacion":
+                        {
+                            this.modal4 = 1;
+                            if(flag) this.nombre_estudiante_msg = "¿Aceptar al estudiante " + data.nombres + " " + data.apellidos + "?";
+                            else this.nombre_estudiante_msg = "¿Rechazar al estudiante " + data.nombres + " " + data.apellidos + "?";
+                            this.flagEstudiante = flag;
+                            this.id_estudiante = data.idUser;
                             break;
                         }
                     case "info":
                         {
-                            this.modal4 = 1;
+                            this.modal5 = 1;
                             this.id_proyecto = data.idProyecto;
                             this.modal_encargado = data.encargado;
                             this.modal_nombre = data.nombre;
@@ -616,13 +716,13 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             getCarrerasAndPerfils(){
                 let me = this
-                axios.get('/public/carrera').then(function (response) {
+                axios.get(`${API_HOST}/carrera`).then(function (response) {
                     me.arrayCarreras = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-                axios.get('/public/perfil').then(function (response) {
+                axios.get(`${API_HOST}/perfil`).then(function (response) {
                     me.arrayPerfiles = response.data;
                 })
                 .catch(function (error) {
@@ -631,7 +731,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             updateCarrerasAndPerfil(){
                 let me = this
-                axios.get('/public/proyectosxcarrera').then(function(response){
+                axios.get(`${API_HOST}/proyectosxcarrera`).then(function(response){
                     var i = 0;
                     response.data.forEach(document =>{
                         if(document.idProyecto == me.id_proyecto){
@@ -654,6 +754,33 @@ import {API_HOST} from '../constants/endpoint.js';
             eliminarACP(acp){
                 let index = this.arrayCarreraPerfil.indexOf(acp);
                 this.arrayCarreraPerfil.splice(index, 1)
+            },
+            getEstudiantes(){
+                let me = this;
+                axios.get(`${API_HOST}/estudiantesxproyecto`, {
+                    params:{
+                        idProyecto: me.id_proyecto
+                    }
+                }).then(function (response){
+                    me.arrayEstudiantes = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            aceptarRechazarEstudiante(){
+                let me = this;
+                var estadoEst = 2;
+                if(this.flagEstudiante) estadoEst = 1;
+                axios.put(`${API_HOST}/aplicarestudiante`, {
+                    'idUser' : this.id_estudiante,
+                    'idProyecto' : this.id_proyecto,
+                    'estado' : estadoEst
+                }).then(function (response) {
+                    me.cerrarModal();
+                }).catch(function (error) {
+                    console.log(error);
+                }); 
             }
         },
         mounted() {
@@ -662,6 +789,9 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style>
+    .button-container{
+        margin: 0em 0.25em;
+    }
     .modal-content{
         width : 100% !important;
         position : absolute !important;
@@ -685,5 +815,9 @@ import {API_HOST} from '../constants/endpoint.js';
     }
     .div-form{
         margin-bottom: 0em;
+    }
+    .modal-student{
+        width: 65%;
+        max-width: none;
     }
 </style>
