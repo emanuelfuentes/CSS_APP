@@ -294,12 +294,20 @@
                                         <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
                                         <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                         <td>
-                                            <button type="button" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
-                                                Aceptar
-                                            </button>  &nbsp;
-                                            <button type="button" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
-                                                Rechazar
-                                            </button>  &nbsp;
+                                            <div v-if="estudiante.estado == 0">
+                                                <button type="button" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
+                                                    Aceptar
+                                                </button>  &nbsp;
+                                                <button type="button" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
+                                                    Rechazar
+                                                </button>  &nbsp;
+                                            </div>
+                                            <div v-else-if="estudiante.estado == 1">
+                                                ACEPTADO
+                                            </div>
+                                            <div v-else>
+                                                RECHAZADO
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -763,6 +771,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }).then(function (response){
                     me.arrayEstudiantes = response.data;
+                    console.log(response.data)
                 })
                 .catch(function (error) {
                     console.log(error);

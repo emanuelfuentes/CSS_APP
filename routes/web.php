@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/perfil', 'PerfilController@index');
         Route::get('/proyectosxcarrera', 'ProyectosxCarreraController@index');
         Route::get('/estudiantesxproyecto', 'ProyectoxEstudianteController@estudiantesPorProyecto');
-        Route::put('/aplicarestudiante', 'ProyectoxEstudianteController@aplicarRecazarEstudiante');
+        Route::put('/aplicarestudiante', 'ProyectoxEstudianteController@aceptarRechazarEstudiante');
     });
 
     Route::middleware(['NormalUser'])->group(function () {

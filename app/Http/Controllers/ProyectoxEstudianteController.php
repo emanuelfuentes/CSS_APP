@@ -62,7 +62,7 @@ class ProyectoxEstudianteController extends Controller
         return $estudiantes;
     }
 
-    public function aplicarRecazarEstudiante(Request $request){
+    public function aceptarRechazarEstudiante(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;

@@ -37786,6 +37786,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38154,6 +38162,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
+                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -39365,52 +39374,68 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("td", [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal(
-                                    "confirmacion",
-                                    estudiante,
-                                    true
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Aceptar\n                                        "
-                              )
-                            ]
-                          ),
-                          _vm._v(
-                            "   \n                                        "
-                          ),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger btn-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal(
-                                    "confirmacion",
-                                    estudiante,
-                                    false
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            Rechazar\n                                        "
-                              )
-                            ]
-                          ),
-                          _vm._v("   \n                                    ")
+                          estudiante.estado == 0
+                            ? _c("div", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "confirmacion",
+                                          estudiante,
+                                          true
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                Aceptar\n                                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(
+                                  "   \n                                            "
+                                ),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "confirmacion",
+                                          estudiante,
+                                          false
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                Rechazar\n                                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(
+                                  "   \n                                        "
+                                )
+                              ])
+                            : estudiante.estado == 1
+                            ? _c("div", [
+                                _vm._v(
+                                  "\n                                            ACEPTADO\n                                        "
+                                )
+                              ])
+                            : _c("div", [
+                                _vm._v(
+                                  "\n                                            RECHAZADO\n                                        "
+                                )
+                              ])
                         ])
                       ])
                     }),
