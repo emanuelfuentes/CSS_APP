@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mail;
 
 class RegisterController extends Controller
@@ -32,7 +33,16 @@ class RegisterController extends Controller
         $nombre = $request->nombres;
         $apellido = $request->apellidos;
         $email = $request->email;
+        $carnet = explode('@', $email);
         $genero = $request->genero;
+
+         
+        $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
+        $query = DB::unprepared('
+        CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
+                AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+            DO
+                DELETE FROM users WHERE verificado = 0;');
 
         User::create([
             'nombres' => $nombre,
@@ -46,7 +56,6 @@ class RegisterController extends Controller
             'idCarrera' => 1,
             'password' => bcrypt('temporal')
         ]);
-
         $user = User::whereCorreo($email)->first();
         $this->sendEmail($user);
         
