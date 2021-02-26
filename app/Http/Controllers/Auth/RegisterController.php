@@ -42,7 +42,7 @@ class RegisterController extends Controller
         CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
                 AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
             DO
-                DELETE FROM users WHERE verificado = 0 AND users.correo = ' . $email .';');
+                DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');
 
         User::create([
             'nombres' => $nombre,
