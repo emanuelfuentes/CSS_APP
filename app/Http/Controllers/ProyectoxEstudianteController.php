@@ -7,6 +7,9 @@ use App\ProyectoxEstudiante;
 use App\Proyecto;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use Illuminate\Support\Facades\DB;
+
 
 class ProyectoxEstudianteController extends Controller
 {
@@ -57,7 +60,7 @@ class ProyectoxEstudianteController extends Controller
         $idProyecto = $request->idProyecto;
         //$estudiantes = User::query('SELECT * FROM users u INNER JOIN proyectoxestudiante pe ON u.idUser = pe.idUser WHERE pe.idProyecto = :idProyecto')->get();
         $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
-        ->select('users.*')
+        ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.genero', 'users.idPerfil', 'users.idCarrera', 'proyectoxestudiante.estado')
         ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)->get();
         return $estudiantes;
     }
@@ -95,6 +98,24 @@ class ProyectoxEstudianteController extends Controller
         $pXe->estado = $request->estado;
         $pXe->modificado_por = $request->modificado_por;
         $pXe->save();
+        
+        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
+        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+        ->where('users.idUser', '=', $request->idUser)
+        ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+        $this->sendEmail($proyecto);
+    }
+
+    public function sendEmail($user){
+        Mail::send(
+            'emails.estudianteAplico',
+            ['user' => $user],
+            function($message) use ($user){
+                $message->to($user->correo_encargado);
+                $message->subject("Aplicación de un estudiante en su proyecto.");
+            }
+        );
     }
 
     /**

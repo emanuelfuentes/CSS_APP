@@ -787,6 +787,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     'estado' : estadoEst
                 }).then(function (response) {
                     me.cerrarModal();
+                    me.getEstudiantes();
                 }).catch(function (error) {
                     console.log(error);
                 }); 

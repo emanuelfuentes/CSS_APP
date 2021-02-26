@@ -38177,6 +38177,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'estado': estadoEst
             }).then(function (response) {
                 me.cerrarModal();
+                me.getEstudiantes();
             }).catch(function (error) {
                 console.log(error);
             });
