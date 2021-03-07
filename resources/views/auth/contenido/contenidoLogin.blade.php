@@ -27,6 +27,7 @@
   </head>
   <body class="cuerpo">
     <div class="container">
+    <img class="logo" src="img/UCA.6b065e25.png" width="125" height="150">
     <h1 id="inicios">Inicio de sesión</h1>
       <div class="card-group">
         <div class="card p-4">
