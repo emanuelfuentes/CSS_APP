@@ -16,12 +16,49 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <link href="css/plantilla.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet">
+    <script src="js/plantilla.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- <link href="css/plantilla.css" rel="stylesheet"> -->
 
   </head>
-  <body class="c-app flex-row align-items-center">
+  <body class="cuerpo">
     <div class="container">
-      @yield('register')
+      <h1 id="titulo">Register</h1>
+        <div class="card-group">
+            <div class="card p-4">
+                <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
+                    {{ csrf_field() }}
+                    <div class="card-body">
+                        
+
+                        <div class="form-group mb-3">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Correo electrónico">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input id="nombres" type="text" class="form-control" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" placeholder="Apellidos">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <select class="form-control" id="genero" name="genero">
+                                <option value="F">Femenino</option>
+                                <option value="M">Masculino</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      <!-- @yield('register') -->
     </div>
     <script src="js/plantilla.js"></script>
   </body>
