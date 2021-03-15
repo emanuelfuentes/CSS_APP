@@ -26,42 +26,55 @@ class RegisterController extends Controller
 
     public function showForm(){
         $facultades = Facultad::all();
-        return view('auth.register')->with('fact', $facultades);
+        return view('auth.verificarCuenta')->with('fact', $facultades);
     }
 
     public function registrar(Request $request){
         //$this->validator($request);
         
-        $nombre = $request->nombres;
-        $apellido = $request->apellidos;
         $email = $request->email;
-        $carnet = explode('@', $email);
-        $genero = $request->genero;
-
-         
-        $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
-        $query = DB::unprepared('
-        CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
-                AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
-            DO
-                DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');
-
-        User::create([
-            'nombres' => $nombre,
-            'apellidos' => $apellido,
-            'correo' => $email,
-            'estado' => 1,
-            'genero' => $genero,
-            'verificado' => 0,
-            'idRol' => 2,
-            'idPerfil' => 4,
-            'idCarrera' => 1,
-            'password' => bcrypt('temporal')
-        ]);
         $user = User::whereCorreo($email)->first();
-        $this->sendEmail($user);
-        
-        return redirect('/');
+
+        if($user == null){
+            $nombre = $request->nombres;
+            $apellido = $request->apellidos;
+            $carnet = explode('@', $email);
+            $genero = $request->genero;
+            $carrera = $request->carrera;
+
+            $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
+            $query = DB::unprepared('
+            CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
+                    AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
+                DO
+                    DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');
+            User::create([
+                'nombres' => $nombre,
+                'apellidos' => $apellido,
+                'correo' => $email,
+                'estado' => 1,
+                'genero' => $genero,
+                'verificado' => 0,/*
+                'ultima_fecha' => '1-1-2021',*/
+                'idRol' => 2,
+                'idPerfil' => 4,
+                'idCarrera' => $carrera,
+                'password' => bcrypt('temporal')
+            ]);
+            $user = User::whereCorreo($email)->first();
+            $this->sendEmail($user);
+            return redirect('/');
+        }
+        elseif($user != null && $user->verificado == 0){
+            return back()
+            ->withErrors(['email_existente' => trans('auth.aun_no_verificado')])
+            ->withInput(request(['email']));  
+        }
+        else{
+            return back()
+            ->withErrors(['email_existente' => trans('auth.ya_verificado')])
+            ->withInput(request(['email']));
+        }
     }
 
     protected function validator(Request $request)
