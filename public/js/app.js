@@ -37377,9 +37377,17 @@ if(false) {
 
 /***/ }),
 /* 67 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: Unexpected format https://fonts.googleapis.com/css?family=Abel (3:1)\n\n  1 | \n  2 | @import url(/public/css/ProyectosAdmin.css);\n> 3 | @import https://fonts.googleapis.com/css?family=Abel;\n    | ^\n  4 | \n");
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+exports.push([module.i, "@import url(/public/css/ProyectosAdmin.css);", ""]);
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
 
 /***/ }),
 /* 68 */
@@ -38225,11 +38233,11 @@ var render = function() {
               _c(
                 "tbody",
                 _vm._l(_vm.arrayProyectos, function(proyecto) {
-                  return _c("tr", { key: proyecto.idProyecto }, [
-                    _c(
-                      "td",
-                      { staticStyle: { display: "flex", height: "100%" } },
-                      [
+                  return _c(
+                    "tr",
+                    { key: proyecto.idProyecto, attrs: { id: "fila" } },
+                    [
+                      _c("td", { attrs: { id: "icons-pos" } }, [
                         _c("div", { staticClass: "button-container" }, [
                           _c(
                             "button",
@@ -38260,7 +38268,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_c("i", { staticClass: "icon-close" })]
+                                [_c("i", { staticClass: "icon-lock" })]
                               ),
                               _vm._v("  \n                                    ")
                             ])
@@ -38276,7 +38284,7 @@ var render = function() {
                                     }
                                   }
                                 },
-                                [_c("i", { staticClass: "icon-check" })]
+                                [_c("i", { staticClass: "icon-lock-open" })]
                               ),
                               _vm._v("  \n                                    ")
                             ]),
@@ -38297,48 +38305,54 @@ var render = function() {
                           ),
                           _vm._v("  \n                                    ")
                         ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.nombre) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.descripcion) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", [
-                      proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        attrs: { id: "pos" },
+                        domProps: { textContent: _vm._s(proyecto.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        attrs: { id: "pos" },
+                        domProps: { textContent: _vm._s(proyecto.descripcion) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        proyecto.estado
+                          ? _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-success" },
+                                [_vm._v("Disponible")]
+                              )
                             ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("No disponible")
+                          : _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("No disponible")]
+                              )
                             ])
-                          ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("info", proyecto)
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-info btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal("info", proyecto)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-info" })]
-                      ),
-                      _vm._v("   \n                                ")
-                    ])
-                  ])
+                          },
+                          [_c("i", { staticClass: "icon-info" })]
+                        ),
+                        _vm._v("   \n                                ")
+                      ])
+                    ]
+                  )
                 }),
                 0
               )

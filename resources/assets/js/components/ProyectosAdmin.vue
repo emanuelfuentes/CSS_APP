@@ -30,8 +30,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td style="display:flex; height:100%;">
+                                <tr id="fila" v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
+                                    <td id="icons-pos" >
                                         <div class="button-container">
                                             <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-pencil"></i>
@@ -39,12 +39,12 @@
                                         </div>
                                         <div class="button-container" v-if="proyecto.estado">
                                             <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-danger btn-sm">
-                                                <i class="icon-close"></i>
+                                                <i class="icon-lock"></i>
                                             </button> &nbsp;
                                         </div>
                                         <div class="button-container" v-else>
                                             <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
-                                                <i class="icon-check"></i>
+                                                <i class="icon-lock-open"></i>
                                             </button> &nbsp;
                                         </div>
                                         <div class="button-container">
@@ -53,8 +53,8 @@
                                             </button> &nbsp;
                                         </div>
                                     </td>
-                                    <td v-text="proyecto.nombre"></td>
-                                    <td v-text="proyecto.descripcion"></td>
+                                    <td id="pos" v-text="proyecto.nombre"></td>
+                                    <td id="pos" v-text="proyecto.descripcion"></td>
                                     <td>
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success">Disponible</span>

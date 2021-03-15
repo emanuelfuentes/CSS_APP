@@ -4,6 +4,17 @@
     font-family: 'Abel';
 }
 
+.modal-primary{
+    background-color: #003C71;
+}
+
+.modal-header{
+    background-color: #003C71;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
 .button-container{
     margin: 0em 0.25em;
 }
@@ -34,4 +45,16 @@
 .modal-student{
     width: 65%;
     max-width: none;
+}
+
+
+#icons-pos{
+    display: flex;
+    height: 100%;
+    flex-flow: row;
+    justify-content: center;
+}
+
+#pos{
+
 }
