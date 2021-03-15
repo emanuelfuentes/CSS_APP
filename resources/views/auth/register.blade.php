@@ -35,8 +35,8 @@
           success: function(res){
             $('#carrera').empty();
             $.each(res, function(key){
-							$('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
-						})
+                $('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
+            })
           },
           error: function(){
             console.log("No se ha seleccionado facultad");
