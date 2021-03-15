@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Facultad;
 
 class FacultadController extends Controller
 {
@@ -13,7 +14,7 @@ class FacultadController extends Controller
      */
     public function index()
     {
-        $facultades = Facultad::all;
+        $facultades = Facultad::all();
         return $facultades;
     }
 

@@ -29,6 +29,12 @@ class CarreraController extends Controller
         return $carrera;
     }
 
+    public function carreraPorFact(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $carreras = Carrera::where('idFacultad', '=', $request->idFact)->get();
+        return $carreras;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

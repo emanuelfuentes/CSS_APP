@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Estudiante;
+use App\Facultad;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -24,7 +25,8 @@ class RegisterController extends Controller
     }
 
     public function showForm(){
-        return view('auth.register');
+        $facultades = Facultad::all();
+        return view('auth.register')->with('fact', $facultades);
     }
 
     public function registrar(Request $request){

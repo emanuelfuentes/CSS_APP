@@ -25,6 +25,34 @@
     <!-- <link href="css/plantilla.css" rel="stylesheet"> -->
 
   </head>
+  <script>
+    $(document).ready(function(){
+      function getCarreras(){
+        $.ajax({
+          type: "GET",
+          url: './carreraxfacultad',
+          data: {idFact:idFact},
+          success: function(res){
+            $('#carrera').empty();
+            $.each(res, function(key){
+							$('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
+						})
+          },
+          error: function(){
+            console.log("No se ha seleccionado facultad");
+          }
+        })
+      }
+
+      var idFact = $('#facultad').val()
+      getCarreras()
+
+      $('#facultad').change(function(){
+        idFact = $('#facultad').val()
+        getCarreras()
+      })
+    })
+  </script>
   <body class="cuerpo">
     <div class="container">
       <h1 id="titulo">Register</h1>
@@ -52,6 +80,16 @@
                                 <option value="F">Femenino</option>
                                 <option value="M">Masculino</option>
                             </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <select class="form-control" id="facultad" name="facultad">
+                              @foreach($fact as $value)
+                                <option value="{{$value['idFacultad']}}">{{$value['nombre']}}</option>
+                              @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <select class="form-control" id="carrera" name="carrera"></select>
                         </div>
                         <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
                     </div>
