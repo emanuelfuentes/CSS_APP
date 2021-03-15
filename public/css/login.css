@@ -21,6 +21,11 @@ img{
     justify-content: center;
 }
 
+.label-form{
+    font-size: large;
+    color: black;
+}
+
 #inicios{
     align-self: center;
     color: white;

@@ -23,7 +23,6 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- <link href="css/plantilla.css" rel="stylesheet"> -->
-
   </head>
   <script>
     $(document).ready(function(){
@@ -55,32 +54,32 @@
   </script>
   <body class="cuerpo">
     <div class="container">
-      <h1 id="titulo">Register</h1>
+      <h1 id="titulo">Crear cuenta</h1>
         <div class="card-group">
             <div class="card p-4">
                 <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
                     {{ csrf_field() }}
                     <div class="card-body">
-                        
-
                         <div class="form-group mb-3">
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Correo electrónico">
+                            <label for="email" class="label-form">Carnet</label>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
                         </div>
-
                         <div class="form-group mb-3">
-                            <input id="nombres" type="text" class="form-control" name="nombres" value="{{ old('nombres') }}" placeholder="Nombres">
+                            <label for="nombres" class="label-form">Nombres</label>
+                            <input id="nombres" type="text" class="form-control" name="nombres" value="{{ old('nombres') }}">
                         </div>
-
                         <div class="form-group mb-3">
-                            <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}" placeholder="Apellidos">
+                            <label for="apellidos" class="label-form">Apellidos</label>
+                            <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}">
                         </div>
-
                         <div class="form-group mb-3">
+                            <label for="genero" class="label-form">Genero</label>
                             <select class="form-control" id="genero" name="genero">
                                 <option value="F">Femenino</option>
                                 <option value="M">Masculino</option>
                             </select>
                         </div>
+                        <label for="facultad" class="label-form">Facultad</label>
                         <div class="form-group mb-3">
                             <select class="form-control" id="facultad" name="facultad">
                               @foreach($fact as $value)
@@ -89,8 +88,14 @@
                             </select>
                         </div>
                         <div class="form-group mb-3">
+                            <label for="carrera" class="label-form">Carrera</label>
                             <select class="form-control" id="carrera" name="carrera"></select>
                         </div>
+                            @if($errors->first('email'))
+                                {!!$errors->first('email','<span style="color: red">:message</span>')!!}
+                            @else
+                                <span style="visibility: hidden;">.</span>
+                            @endif
                         <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
                     </div>
                 </form>
