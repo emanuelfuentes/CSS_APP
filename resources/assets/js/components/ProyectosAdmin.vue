@@ -798,36 +798,6 @@ import {API_HOST} from '../constants/endpoint.js';
         }
     }
 </script>
-<style>
-    .button-container{
-        margin: 0em 0.25em;
-    }
-    .modal-content{
-        width : 100% !important;
-        position : absolute !important;
-    }
-    .mostrar{
-        display : list-item !important;
-        opacity : 1 !important;
-        position: absolute !important;
-        background-color: #3c29297a !important;
-    }
-    .error{
-        color: red;
-        margin: 0.25em;
-        margin-bottom: 0.5em;
-    }
-    .show{
-        visibility: visible;
-    }
-    .hide{
-        visibility: hidden;
-    }
-    .div-form{
-        margin-bottom: 0em;
-    }
-    .modal-student{
-        width: 65%;
-        max-width: none;
-    }
+<style lang="scss">
+@import '/public/css/ProyectosAdmin.css';
 </style>

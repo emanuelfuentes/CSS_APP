@@ -37360,13 +37360,13 @@ var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("c802c246", content, false, {});
+var update = __webpack_require__(3)("cee6ce98", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f953158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProyectosAdmin.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f953158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProyectosAdmin.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f953158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProyectosAdmin.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f953158\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ProyectosAdmin.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -37377,17 +37377,9 @@ if(false) {
 
 /***/ }),
 /* 67 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__(2)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.button-container{\n    margin: 0em 0.25em;\n}\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.error{\n    color: red;\n    margin: 0.25em;\n    margin-bottom: 0.5em;\n}\n.show{\n    visibility: visible;\n}\n.hide{\n    visibility: hidden;\n}\n.div-form{\n    margin-bottom: 0em;\n}\n.modal-student{\n    width: 65%;\n    max-width: none;\n}\n", ""]);
-
-// exports
-
+throw new Error("Module build failed: Unexpected format https://fonts.googleapis.com/css?family=Abel (3:1)\n\n  1 | \n  2 | @import url(/public/css/ProyectosAdmin.css);\n> 3 | @import https://fonts.googleapis.com/css?family=Abel;\n    | ^\n  4 | \n");
 
 /***/ }),
 /* 68 */
