@@ -17,6 +17,11 @@
     justify-content: center;
 }
 
+.label-form{
+    font-size: large;
+    color: black;
+}
+
 #titulo{
     color:white;
     align-self: center;
@@ -24,8 +29,8 @@
 
 .card-group{
     align-self: center;
-    width: 35%;
-    height: 20em;
+    width: 45%;
+    height: 15em;
 }
 
 #registrarbtn{

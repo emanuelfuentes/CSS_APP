@@ -22,8 +22,6 @@
     <script src="js/plantilla.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
-
   </head>
   <body class="cuerpo">
     <div class="container">
@@ -34,28 +32,26 @@
           <form class="form-horizontal was-validated" style="height: 100%" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <div class="card-body" id="cardb">
-              <div class="form-group mb-3 " id="">
-                <input class="form-control hijos" value="{{old('email')}}" name="email"  type="text" placeholder="Correo electronico">
+              <div class="form-group">
+                <label for="email" class="label-form">Carnet</label>
+                <input class="form-control hijos" value="{{old('email')}}" id="email" name="email"  type="text">
                 @if($errors->first('email'))
                   {!!$errors->first('email','<span style="color: red">:message</span>')!!}
                 @else
-                  <span class="invalid-feedback" style="visibility: hidden;">.</span>
+                  <span style="visibility: hidden;">.</span>
                 @endif
               </div>
-
-              <div class="form-group mb-4 ">
-                <input class="form-control hijos" name="password"  type="password" placeholder="Contraseña">
+              <div class="form-group mb-2">
+                <label for="password" class="label-form">Contraseña</label>
+                <input class="form-control hijos" id="password" name="password" type="password">
                 @if($errors->first('password'))
                   {!!$errors->first('password','<span style="color: red">:message</span>')!!}
                 @else
-                  <span class="invalid-feedback" style="visibility: hidden;">.</span>
+                  <span style="visibility: hidden;">.</span>
                 @endif
               </div>
-              
               <div>
-
                 <button class="btn btn-primary px-4 hijos" id="btni" style="background-color: #003C71" type="submit">Iniciar sesion</button>
-
               </div>
             </div>
           </form>
@@ -66,6 +62,5 @@
         <a class="btn btn-link px-0" id="registrar" type="button" href="{{ url('/register_form') }}">Registrese ahora!</a>
       </div>
     </div>
-    
   </body>
 </html>

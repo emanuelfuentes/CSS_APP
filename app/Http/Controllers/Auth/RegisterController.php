@@ -26,11 +26,11 @@ class RegisterController extends Controller
 
     public function showForm(){
         $facultades = Facultad::all();
-        return view('auth.verificarCuenta')->with('fact', $facultades);
+        return view('auth.register')->with('fact', $facultades);
     }
 
     public function registrar(Request $request){
-        //$this->validator($request);
+        $this->validator($request);
         
         $email = $request->email;
         $user = User::whereCorreo($email)->first();
@@ -43,7 +43,7 @@ class RegisterController extends Controller
             $carrera = $request->carrera;
 
             $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
-            $query = DB::unprepared('
+            DB::unprepared('
             CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
                     AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
                 DO
@@ -80,9 +80,9 @@ class RegisterController extends Controller
     protected function validator(Request $request)
     {
         $this->validate($request, [
-            'username' => 'required|string',
             'email' => 'required|string',
-            'password' => 'required|string'
+            'nombres' => 'required|string',
+            'apellidos' => 'required|string'
         ]);
     }
 
