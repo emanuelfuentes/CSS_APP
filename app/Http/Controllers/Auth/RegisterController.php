@@ -69,12 +69,12 @@ class RegisterController extends Controller
         elseif($user != null && $user->verificado == 0){
             return back()
             ->withErrors(['email_existente' => trans('auth.aun_no_verificado')])
-            ->withInput(request(['email']));  
+            ->withInput(request(['carnet', 'apellidos', 'nombres']));  
         }
         else{
             return back()
             ->withErrors(['email_existente' => trans('auth.ya_verificado')])
-            ->withInput(request(['email']));
+            ->withInput(request(['carnet', 'apellidos', 'nombres']));
         }
     }
 

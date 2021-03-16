@@ -106,7 +106,7 @@ class ForgotPasswordController extends Controller
     protected function validatePassword(Request $request){
         $this->validate($request, [
             'Contraseña' => 'required|min:8|max:20',
-            'confirmar contraseña' => 'required|min:8|max:20|same:password'
+            'confirmar' => 'required|min:8|max:20|same:password'
         ]);
     }
     /**

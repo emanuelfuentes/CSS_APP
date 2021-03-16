@@ -39,8 +39,8 @@
                         @endif
                         Confirmar contraseña: <br>
                         <input type="password" name="confirm_psw" id="confirm_psw">
-                        @if($errors->first('confirmar contraseña'))
-                            {!!$errors->first('confirmar contraseña','<span style="color: red">:message</span>')!!}
+                        @if($errors->first('confirmar'))
+                            {!!$errors->first('confirmar','<span style="color: red">:message</span>')!!}
                         @else
                             <span style="visibility: hidden;">.</span>
                         @endif

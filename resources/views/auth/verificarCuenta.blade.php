@@ -41,8 +41,8 @@
 
                         <label for="password_confirm" class="label-form">Confirmar contraseña</label>
                         <input type="password" name="password_confirm" id="password_confirm">
-                        @if($errors->first('confirmar contraseña'))
-                            {!!$errors->first('confirmar contraseña','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
+                        @if($errors->first('confirmar'))
+                            {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
                         @else
                             <span style="visibility: hidden; margin-bottom:0.5em">.</span>
                         @endif
