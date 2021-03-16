@@ -22,11 +22,20 @@
             {{ csrf_field() }}
                 Contraseña: <br>
                 <input type="password" name="password" id="password">
+                @if($errors->first('Contraseña'))
+                    {!!$errors->first('Contraseña','<span style="color: red">:message</span>')!!}
+                @else
+                    <span style="visibility: hidden;">.</span>
+                @endif
 
                 <br><br>
                 Confirmar contraseña: <br>
-                <input type="password" name="password_confirm" id="password_confirm">
-
+                <input type="password" name="confirm_psw" id="confirm_psw">
+                @if($errors->first('confirmar contraseña'))
+                    {!!$errors->first('confirmar contraseña','<span style="color: red">:message</span>')!!}
+                @else
+                    <span style="visibility: hidden;">.</span>
+                @endif
                 <button type="submit">Establecer contraseña</button>
 
             </form>

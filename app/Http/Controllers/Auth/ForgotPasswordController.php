@@ -57,17 +57,18 @@ class ForgotPasswordController extends Controller
     //Se envía al correo ingresado un link para cambiar la contraseña
     public function enviarCorreoContraOlvidada(Request $request){
         $this->validateMail($request);
-        $user = User::whereCorreo($request->email)->first();
+        $email = $request->carnet . "@uca.edu.sv";
+        $user = User::whereCorreo($email)->first();
         
         if($user == null) {
             return back()
-            ->withErrors(['correo_inexistente' => trans('auth.correo_inexistente')])
-            ->withInput(request(['email']));
+            ->withErrors(['correo_inexistente' => trans('auth.carnet_inexistente')])
+            ->withInput(request(['carnet']));
         }
-        elseif($user->verificado == 0){
+        elseif($user->verificado == 0 && $user != null){
             return back()
-            ->withErrors(['no_verificado' => trans('auth.correo_no_verificado')])
-            ->withInput(request(['email']));
+            ->withErrors(['no_verificado' => trans('auth.carnet_no_verificado')])
+            ->withInput(request(['carnet']));
         }
         else{
             $this->sendEmail($user);
@@ -79,11 +80,11 @@ class ForgotPasswordController extends Controller
     //Se muestra el formulario para cambiar la contraseña olvidada
     public function formularioOlvidoContrsenia($email){
         $user = User::whereCorreo($email)->first();
-        return view('auth.verificarCuenta')->with(['user'=>$user]);
-        return view('auth.contraOlvidada');
+        return view('auth.contraOlvidada')->with(['user'=>$user]);
     }
 
     public function cambiarContraseniaOlvidada(Request $request, $email){
+        $this->validatePassword($request);
         $user = User::whereCorreo($email)->first();
         $user->update(['password'=> $request->password]);
         return redirect('/');
@@ -102,7 +103,14 @@ class ForgotPasswordController extends Controller
 
     protected function validateMail(Request $request){
         $this->validate($request, [
-            'email' => 'required|string'
+            'carnet' => 'required|numeric|regex:/[0-9]{8}/'
+        ]);
+    }
+
+    protected function validatePassword(Request $request){
+        $this->validate($request, [
+            'Contraseña' => 'required|min:8|max:20',
+            'confirmar contraseña' => 'required|min:8|max:20|same:password'
         ]);
     }
     /**

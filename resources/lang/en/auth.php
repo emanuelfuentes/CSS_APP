@@ -15,9 +15,9 @@ return [
 
     'failedPass' => 'Correo o contraseña incorrectos',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'correo_no_verificado' => 'Su cuenta no está verificada. ¿Ya revisó su correo?',
-    'correo_inexistente' => 'No se pudo encontrar el correo ingresado en el registro.',
-    'aun_no_verificado' => 'Correo ya existente pero no se encuentra verificado. Por favor revise su correo.',
-    'ya_verificado' => 'Este correo ya existe en el registro.'
+    'carnet_no_verificado' => 'Su cuenta no se encuentra verificada. Por favor revise su correo.',
+    'carnet_inexistente' => 'El carnet ingresado no existe en el registro.',
+    'aun_no_verificado' => 'Carnet ya existente pero no se encuentra verificado. Por favor revise su correo.',
+    'ya_verificado' => 'Este carnet ya existe en el registro.'
 
 ];

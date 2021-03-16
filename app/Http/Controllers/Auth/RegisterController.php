@@ -32,7 +32,7 @@ class RegisterController extends Controller
     public function registrar(Request $request){
         $this->validator($request);
         
-        $email = $request->email;
+        $email = $request->carnet . "@uca.edu.sv";
         $user = User::whereCorreo($email)->first();
 
         if($user == null){
@@ -43,6 +43,7 @@ class RegisterController extends Controller
             $carrera = $request->carrera;
 
             $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
+            DB::unprepared('SET GLOBAL event_scheduler = ON;');
             DB::unprepared('
             CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
                     AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
@@ -80,7 +81,7 @@ class RegisterController extends Controller
     protected function validator(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|string',
+            'carnet' => 'required|numeric|regex:/[0-9]{8}/',
             'nombres' => 'required|string',
             'apellidos' => 'required|string'
         ]);

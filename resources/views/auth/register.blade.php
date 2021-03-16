@@ -60,17 +60,32 @@
                 <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
                     {{ csrf_field() }}
                     <div class="card-body">
-                        <div class="form-group mb-3">
-                            <label for="email" class="label-form">Carnet</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+                        <div class="form-group">
+                            <label for="carnet" class="label-form">Carnet</label>
+                            <input id="carnet" type="text" class="form-control" name="carnet" value="{{ old('carnet') }}">
+                            @if($errors->first('carnet'))
+                                {!!$errors->first('carnet','<span style="color: red">:message</span>')!!}
+                            @else
+                                <span style="visibility: hidden;">.</span>
+                            @endif
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group">
                             <label for="nombres" class="label-form">Nombres</label>
                             <input id="nombres" type="text" class="form-control" name="nombres" value="{{ old('nombres') }}">
+                            @if($errors->first('nombres'))
+                                {!!$errors->first('nombres','<span style="color: red">:message</span>')!!}
+                            @else
+                                <span style="visibility: hidden;">.</span>
+                            @endif
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group">
                             <label for="apellidos" class="label-form">Apellidos</label>
                             <input id="apellidos" type="text" class="form-control" name="apellidos" value="{{ old('apellidos') }}">
+                            @if($errors->first('apellidos'))
+                                {!!$errors->first('apellidos','<span style="color: red">:message</span>')!!}
+                            @else
+                                <span style="visibility: hidden;">.</span>
+                            @endif
                         </div>
                         <div class="form-group mb-3">
                             <label for="genero" class="label-form">Genero</label>
@@ -87,15 +102,15 @@
                               @endforeach
                             </select>
                         </div>
-                        <div class="form-group mb-3">
+                        <div class="form-group">
                             <label for="carrera" class="label-form">Carrera</label>
                             <select class="form-control" id="carrera" name="carrera"></select>
                         </div>
-                            @if($errors->first('email'))
-                                {!!$errors->first('email','<span style="color: red">:message</span>')!!}
-                            @else
-                                <span style="visibility: hidden;">.</span>
-                            @endif
+                        @if($errors->first('email_existente'))
+                            {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
+                        @else
+                            <span style="visibility: hidden;">.</span>
+                        @endif
                         <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
                     </div>
                 </form>
