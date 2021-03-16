@@ -20,30 +20,35 @@
 <body class="cuerpo">
     <div class="container">
         <div class="card-group">
-            <h2>Cambiar contra</h2>
-            <h2>{{$user->correo}}</h2>
+            <div class="card">
+                <div class="card-body" id="cuerpoc">
+                    <h2 id="titulo">Cambiar contraseña</h2>
+                    <!--<h2>{{$user->correo}}</h2>-->
 
-            <form action="{{ url('/cambiar_contra_olvidada/'.$user->correo) }}" method="post">
-            {{ csrf_field() }}
-                Contraseña: <br>
-                <input type="password" name="password" id="password">
-                @if($errors->first('Contraseña'))
-                    {!!$errors->first('Contraseña','<span style="color: red">:message</span>')!!}
-                @else
-                    <span style="visibility: hidden;">.</span>
-                @endif
+                    <form id="form" action="{{ url('/cambiar_contra_olvidada/'.$user->correo) }}" method="post">
+                    {{ csrf_field() }}
+                        <label for="user" class="label-form">Usuario</label>
+                        <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
-                <br><br>
-                Confirmar contraseña: <br>
-                <input type="password" name="confirm_psw" id="confirm_psw">
-                @if($errors->first('confirmar contraseña'))
-                    {!!$errors->first('confirmar contraseña','<span style="color: red">:message</span>')!!}
-                @else
-                    <span style="visibility: hidden;">.</span>
-                @endif
-                <button type="submit">Establecer contraseña</button>
+                        Contraseña: <br>
+                        <input type="password" name="password" id="password">
+                        @if($errors->first('Contraseña'))
+                            {!!$errors->first('Contraseña','<span style="color: red">:message</span>')!!}
+                        @else
+                            <span style="visibility: hidden;">.</span>
+                        @endif
+                        Confirmar contraseña: <br>
+                        <input type="password" name="confirm_psw" id="confirm_psw">
+                        @if($errors->first('confirmar contraseña'))
+                            {!!$errors->first('confirmar contraseña','<span style="color: red">:message</span>')!!}
+                        @else
+                            <span style="visibility: hidden;">.</span>
+                        @endif
+                        <button type="submit" id="submit">Establecer contraseña</button>
 
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>
