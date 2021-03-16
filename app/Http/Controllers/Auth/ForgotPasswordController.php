@@ -28,7 +28,7 @@ class ForgotPasswordController extends Controller
     //se muestra el formulario para verificar la cuenta, solo se puede usar 1 vez
     public function formularioVerificar($email){
         $user = User::whereCorreo($email)->first();
-        if($user->verificado == 0){
+        if($user->verificado == 1){
             return view('auth.verificarCuenta')->with(['user'=>$user]);
         }
         else{
@@ -38,11 +38,7 @@ class ForgotPasswordController extends Controller
 
     //se verifica la cuenta y redirige al login
     public function verificarUsuario(Request $request, $email){
-        
-        /*$this->validate($request, [
-            'password' => 'required|min:7|max:12|confirmed',
-            'password_confirm' => 'required|min:7|max:12|confirmed'
-        ]);*/
+        $this->validatePassword($request);
 
         $user = User::whereCorreo($email)->first();
         $user->update(['password'=> $request->password, 'verificado' => 1]);
