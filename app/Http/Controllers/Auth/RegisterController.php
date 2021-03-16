@@ -46,7 +46,7 @@ class RegisterController extends Controller
             DB::unprepared('SET GLOBAL event_scheduler = ON;');
             DB::unprepared('
             CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
-                    AT CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
+                    AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
                 DO
                     DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');
             User::create([

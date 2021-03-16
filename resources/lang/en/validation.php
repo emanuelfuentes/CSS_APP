@@ -61,7 +61,7 @@ return [
     'min'                  => [
         'numeric' => 'El campo :attribute debe de tener un mínimo de :min caracteres.',
         'file'    => 'The :attribute must be at least :min kilobytes.',
-        'string'  => 'The :attribute must be at least :min characters.',
+        'string'  => 'El campo :attribute debe de tener un mínimo de :min caracteres.',
         'array'   => 'The :attribute must have at least :min items.',
     ],
     'not_in'               => 'The selected :attribute is invalid.',
@@ -75,7 +75,7 @@ return [
     'required_with_all'    => 'The :attribute field is required when :values is present.',
     'required_without'     => 'The :attribute field is required when :values is not present.',
     'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same'                 => ':attribute y :other no coinciden.',
+    'same'                 => 'Las contraseñas no coinciden',
     'size'                 => [
         'numeric' => 'El campo :attribute debe de tener :size números.',
         'file'    => 'The :attribute must be :size kilobytes.',

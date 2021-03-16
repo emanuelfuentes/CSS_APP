@@ -32,15 +32,15 @@
                         <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
                         <label for="password" class="label-form">Contraseña</label>
-                        <input type="password" name="password" id="password">
-                        @if($errors->first('Contraseña'))
-                            {!!$errors->first('Contraseña','<span style="color: red;">:message</span>')!!}
+                        <input type="password" name="contraseña" id="contraseña">
+                        @if($errors->first('contraseña'))
+                            {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
                         @else
                             <span style="visibility: hidden;">.</span>
                         @endif
 
                         <label for="password_confirm" class="label-form">Confirmar contraseña</label>
-                        <input type="password" name="password_confirm" id="password_confirm">
+                        <input type="password" name="confirmar" id="confirmar">
                         @if($errors->first('confirmar'))
                             {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
                         @else
