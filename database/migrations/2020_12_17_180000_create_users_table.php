@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('idCarrera')->nullable();
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
 
+            $table->string('ultima_fecha', 10);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

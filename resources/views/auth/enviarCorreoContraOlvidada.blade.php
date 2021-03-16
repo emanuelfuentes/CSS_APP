@@ -30,17 +30,19 @@
         <div class="heading">
           <h1>Cambiar contraseña</h1>
           <p>Por favor ingrese su carnet y se le enviará un link al correo asociado para poder realizar el cambio de contraseña. 
-          Se puede realizar el cambio de contraseña una vez por día.</p>
+          <a style="color:red">Se puede realizar el cambio de contraseña una vez por día.</a></p>
         </div>
 
         <div class="form-group mb-2">
           <input type="text" class="form-control" name="carnet" value="{{ old('carnet') }}">
           @if($errors->first('no_verificado'))
-          {!!$errors->first('no_verificado','<span style="color:red">:message</span>')!!}
+            {!!$errors->first('no_verificado','<span style="color:red">:message</span>')!!}
           @elseif($errors->first('carnet'))
-          {!!$errors->first('carnet','<span style="color:red">:message</span>')!!}
+            {!!$errors->first('carnet','<span style="color:red">:message</span>')!!}
           @elseif($errors->first('correo_inexistente'))
-          {!!$errors->first('correo_inexistente','<span style="color:red">:message</span>')!!}
+            {!!$errors->first('correo_inexistente','<span style="color:red">:message</span>')!!}
+          @elseif($errors->first('cambio_fecha'))
+            {!!$errors->first('cambio_fecha','<span style="color:red">:message</span>')!!}
           @else
           <span class="" style="visibility: hidden; color:red">.</span>
           @endif

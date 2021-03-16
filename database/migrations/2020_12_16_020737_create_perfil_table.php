@@ -29,6 +29,8 @@ class CreatePerfilTable extends Migration
         ->insert(array('idPerfil'=>'4', 'perfil'=>'Cuarto', 'descripcion'=>'Cuarto año'));
         DB::table('perfil')
         ->insert(array('idPerfil'=>'5', 'perfil'=>'Quinto', 'descripcion'=>'Quinto año'));
+        DB::table('perfil')
+        ->insert(array('idPerfil'=>'6', 'perfil'=>'Egresado', 'descripcion'=>'Egresado'));
     }
 
     /**

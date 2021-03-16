@@ -102,15 +102,15 @@
                               @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label for="carrera" class="label-form">Carrera</label>
                             <select class="form-control" id="carrera" name="carrera"></select>
-                        </div>
-                        @if($errors->first('email_existente'))
+                            @if($errors->first('email_existente'))
                             {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
-                        @else
-                            <span style="visibility: hidden;">.</span>
-                        @endif
+                            @else
+                                <span style="visibility: hidden;">.</span>
+                            @endif
+                        </div>                        
                         <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
                     </div>
                 </form>

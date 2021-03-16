@@ -41,6 +41,11 @@ class RegisterController extends Controller
             $carnet = explode('@', $email);
             $genero = $request->genero;
             $carrera = $request->carrera;
+            $perfil = (date('y') - (substr($carnet[0], -2))) + 1;
+
+            if($perfil >= 6){
+                $perfil = 6;
+            }
 
             $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
             DB::unprepared('SET GLOBAL event_scheduler = ON;');
@@ -55,10 +60,10 @@ class RegisterController extends Controller
                 'correo' => $email,
                 'estado' => 1,
                 'genero' => $genero,
-                'verificado' => 0,/*
-                'ultima_fecha' => '1-1-2021',*/
+                'verificado' => 0,
+                'ultima_fecha' => '1-1-2000',
                 'idRol' => 2,
-                'idPerfil' => 4,
+                'idPerfil' => $perfil,
                 'idCarrera' => $carrera,
                 'password' => bcrypt('temporal')
             ]);
