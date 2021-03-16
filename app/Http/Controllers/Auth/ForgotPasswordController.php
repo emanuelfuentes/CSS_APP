@@ -69,7 +69,7 @@ class ForgotPasswordController extends Controller
         elseif($user->ultima_fecha == date('d-m-Y')){
             return back()
             ->withErrors(['cambio_fecha' => trans('auth.ya_cambio_contra')])
-            ->withInput(request(['carnet', 'apellidos', 'nombres'])); 
+            ->withInput(request(['carnet'])); 
         }
         else{
             $this->sendEmail($user);
