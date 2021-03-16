@@ -20,8 +20,8 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/register_form', 'Auth\RegisterController@showForm');
     Route::post('/register', 'Auth\RegisterController@registrar')->name('registrar');   
 
-    Route::get('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@formularioVerificar');  
-    Route::post('/cambiar_contra/{correo}', 'Auth\ForgotPasswordController@verificarUsuario');
+    Route::get('/verificar_usuario/{correo}', 'Auth\ForgotPasswordController@formularioVerificar');  
+    Route::post('/verificar_usuario/{correo}', 'Auth\ForgotPasswordController@verificarUsuario');
 
     Route::get('/contra_olvidada_form', 'Auth\ForgotPasswordController@formularioEnviarCorreoContraOlvidada');
     Route::post('/contra_olvidada_correo', 'Auth\ForgotPasswordController@enviarCorreoContraOlvidada')->name('olvido_contrasenia'); 

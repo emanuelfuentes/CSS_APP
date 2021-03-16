@@ -10,7 +10,7 @@
     <h3> Hola {{ $user->nombres }}</h1>
     <p>
         Usted ha creado una cuenta nueva en el sistema de horas sociales CSS, por favor haga 
-        <a href="{{ url('cambiar_contra/'.$user->correo) }}"> click aquí</a>
+        <a href="{{ url('verificar_usuario/'.$user->correo) }}"> click aquí</a>
         para verificar su cuenta y cambiar su contraseña.
     </p>
 </body>
