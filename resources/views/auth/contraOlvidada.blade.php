@@ -1,15 +1,20 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="./olvidec.css" rel="stylesheet">
-    <script src="js/plantilla.js"></script>
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/olvidec.css') }}">
+    <link href="{{ asset('js/plantilla.css') }}" >
+    <link href="{{ asset('js/jquery.min.css') }}" >
+    <link href="{{ asset('js/bootstrap.min.css') }}" >
+    <!--<script src="js/plantilla.js"></script>
     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>-->
+    
     <title>Document</title>
 </head>
 <body class="cuerpo">
