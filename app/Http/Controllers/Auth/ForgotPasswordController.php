@@ -82,7 +82,7 @@ class ForgotPasswordController extends Controller
     public function cambiarContraseniaOlvidada(Request $request, $email){
         $this->validatePassword($request);
         $user = User::whereCorreo($email)->first();
-        $user->update(['password'=> $request->password]);
+        $user->update(['password'=> $request->contraseña]);
         return redirect('/');
     }
     //Función que envía correos

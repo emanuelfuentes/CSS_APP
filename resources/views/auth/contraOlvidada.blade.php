@@ -30,19 +30,20 @@
                         <label for="user" class="label-form">Usuario</label>
                         <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
-                        Contraseña: <br>
-                        <input type="password" name="password" id="password">
-                        @if($errors->first('Contraseña'))
-                            {!!$errors->first('Contraseña','<span style="color: red">:message</span>')!!}
+                        <label for="password" class="label-form">Contraseña</label>
+                        <input type="password" name="contraseña" id="contraseña">
+                        @if($errors->first('contraseña'))
+                            {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
                         @else
                             <span style="visibility: hidden;">.</span>
                         @endif
-                        Confirmar contraseña: <br>
-                        <input type="password" name="confirm_psw" id="confirm_psw">
+
+                        <label for="password_confirm" class="label-form">Confirmar contraseña</label>
+                        <input type="password" name="confirmar" id="confirmar">
                         @if($errors->first('confirmar'))
-                            {!!$errors->first('confirmar','<span style="color: red">:message</span>')!!}
+                            {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
                         @else
-                            <span style="visibility: hidden;">.</span>
+                            <span style="visibility: hidden; margin-bottom:0.5em">.</span>
                         @endif
                         <button type="submit" id="submit">Establecer contraseña</button>
 

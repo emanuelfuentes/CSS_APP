@@ -34677,8 +34677,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -34788,15 +34786,7 @@ var render = function() {
                 _c("td", { domProps: { textContent: _vm._s(_vm.perfil) } })
               ])
             ]
-          ),
-          _vm._v(" "),
-          _c("button", { staticClass: "button button1" }, [
-            _vm._v("Modificar Perfil")
-          ]),
-          _vm._v(" "),
-          _c("button", { staticClass: "button button2" }, [
-            _vm._v("Cambiar Contraseña")
-          ])
+          )
         ])
       ])
     ])

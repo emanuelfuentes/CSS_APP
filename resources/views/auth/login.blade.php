@@ -33,10 +33,10 @@
             {{ csrf_field() }}
             <div class="card-body" id="cardb">
               <div class="form-group">
-                <label for="email" class="label-form">Carnet</label>
-                <input class="form-control hijos" value="{{old('email')}}" id="email" name="email"  type="text">
-                @if($errors->first('email'))
-                  {!!$errors->first('email','<span style="color: red">:message</span>')!!}
+                <label for="carnet" class="label-form">Carnet</label>
+                <input class="form-control hijos" value="{{old('carnet')}}" id="carnet" name="carnet"  type="text">
+                @if($errors->first('carnet'))
+                  {!!$errors->first('carnet','<span style="color: red">:message</span>')!!}
                 @else
                   <span style="visibility: hidden;">.</span>
                 @endif
@@ -46,6 +46,8 @@
                 <input class="form-control hijos" id="password" name="password" type="password">
                 @if($errors->first('password'))
                   {!!$errors->first('password','<span style="color: red">:message</span>')!!}
+                @elseif($errors->first('email_existente'))
+                  {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
                 @else
                   <span style="visibility: hidden;">.</span>
                 @endif

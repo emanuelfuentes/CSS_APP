@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failedPass' => 'Correo o contraseña incorrectos',
+    'failedPass' => 'Carnet o contraseña incorrectos',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'carnet_no_verificado' => 'Su cuenta no se encuentra verificada. Por favor revise su correo.',
     'carnet_inexistente' => 'El carnet ingresado no existe en el registro.',

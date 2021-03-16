@@ -59,8 +59,6 @@
                                 <td v-text="perfil"></td>
                             </tr>
                         </table>
-                        <button class="button button1">Modificar Perfil</button>
-                        <button class="button button2">Cambiar Contraseña</button>
                     </div>
                     
                 </div>
