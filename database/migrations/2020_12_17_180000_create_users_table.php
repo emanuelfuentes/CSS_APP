@@ -34,6 +34,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        DB::table('users')
+        ->insert(array('idUser'=>'1','nombres'=>'Oscar','apellidos'=>'Arias','correo'=>'admin@uca.edu.sv','estado'=>'1','genero'=>'M','verificado'=>'1',
+                'idRol'=>'1','ultima_fecha'=>'1-1-2021', 'password'=>bcrypt('temporal')));
     }
 
     /**
