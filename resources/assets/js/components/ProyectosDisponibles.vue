@@ -82,7 +82,9 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h2>¿Desea aplicar a este proyecto?</h2>
+                            <h2>¿Esta seguro que desea aplicar a este proyectodasdasd?</h2>
+                            <p><b style="color:red">IMPORTANTE: </b>Este proceso se puede realizar una vez por día. Se le notificará al encargado sobre su aplicación y él 
+                            le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
                         </div>
                         <div class="modal-footer">
                             <div style="visibility:hidden;text-align:left" id="hidden_applied"><p>Ya ha aplicado a este proyecto</p></div>
