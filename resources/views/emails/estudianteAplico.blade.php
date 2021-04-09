@@ -14,10 +14,11 @@
             Apellidos: {{ $user->apellidos }}.<br>
             Correo: {{ $user->correo }}.<br><br>
 
-        Se le sugiere revisar el sistema de horas sociales CSS para aceptar o rechazar dicha solicitud.<br><br>
-
-        
-        Este es un correo autogenerado, no responder.
+        Se le sugiere revisar el sistema del Centro de Servicio Social UCA para aceptar o rechazar dicha solicitud.
+    </p><br>
+    <p>
+        Este es un correo autogenerado por el sistema, porfavor no responder. <br>
+        <i>Centro de Servicio Social, UCA.</i>
     </p>
 </body>
 </html>
