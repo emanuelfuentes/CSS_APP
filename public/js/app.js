@@ -38307,19 +38307,26 @@ var render = function() {
                         domProps: { textContent: _vm._s(proyecto.descripcion) }
                       }),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("td", { attrs: { id: "estado" } }, [
                         proyecto.estado
                           ? _c("div", [
                               _c(
                                 "span",
-                                { staticClass: "badge badge-success" },
+                                {
+                                  staticClass: "badge badge-success",
+                                  staticStyle: { "text-align": "center" },
+                                  attrs: { id: "estadod" }
+                                },
                                 [_vm._v("Disponible")]
                               )
                             ])
                           : _c("div", [
                               _c(
                                 "span",
-                                { staticClass: "badge badge-danger" },
+                                {
+                                  staticClass: "badge badge-danger",
+                                  attrs: { id: "estadond" }
+                                },
                                 [_vm._v("No disponible")]
                               )
                             ])

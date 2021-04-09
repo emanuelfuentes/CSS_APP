@@ -48,12 +48,13 @@
 }
 
 
-#icons-pos{
+/*#icons-pos{
     display: flex;
     height: 100%;
     flex-flow: row;
     justify-content: center;
-}
+}*/
+
 
 #pos{
 
