@@ -55,12 +55,12 @@
                                     </td>
                                     <td id="pos" v-text="proyecto.nombre"></td>
                                     <td id="pos" v-text="proyecto.descripcion"></td>
-                                    <td>
+                                    <td id="estado">
                                         <div v-if="proyecto.estado">
-                                            <span class="badge badge-success">Disponible</span>
+                                            <span class="badge badge-success" id="estadod" style="text-align:center">Disponible</span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger">No disponible</span>
+                                            <span class="badge badge-danger" id="estadond">No disponible</span>
                                         </div>
                                     </td>
                                     <td>
