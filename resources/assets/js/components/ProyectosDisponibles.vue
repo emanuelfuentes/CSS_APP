@@ -9,7 +9,7 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Listado de Proyectos
+                        <i class="fa fa-align-justify"></i> Listado de Proyectos  <b style="color:red"><i> No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente. </i></b>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-sm">
@@ -154,6 +154,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 user_id : 0,
+                ya_aplico_hoy: '1-1-2000',
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
@@ -231,6 +232,7 @@ import {API_HOST} from '../constants/endpoint.js';
 
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
                     me.user_id = response.data.idUser;
+                    me.ya_aplico_hoy = response.data.ya_aplico_hoy;
                 })
                 .catch(function (error) {
                     console.log(error);

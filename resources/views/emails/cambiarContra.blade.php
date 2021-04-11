@@ -9,11 +9,13 @@
 <body>
     <h3> Hola {{ $user->nombres }}.</h1>
     <p>
-        Se solicitó un cambio de contraseña, por favor haga
+        Se solicitó un cambio de contraseña debido a que fue olvidada, por favor haga
         <a href="{{ url('cambiar_contra_olvidada/'.$user->correo) }}"> click aquí</a>
-        para cambiarla.
+        para crear una nueva.
     </p>
-    <p>Se le recuerda que este proceso puede hacerse una vez por día.</p><br>
+    <p>
+        Se le recuerda que este proceso puede realizarse <b style="color:red">una vez por día.</b>
+    </p><br>
     <p>
         Este es un correo autogenerado por el sistema, porfavor no responder. <br>
         <i>Centro de servicio social, UCA.</i>

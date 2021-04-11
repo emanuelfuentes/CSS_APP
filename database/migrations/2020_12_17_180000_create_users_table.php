@@ -29,7 +29,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('idCarrera')->nullable();
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
 
-            $table->string('ultima_fecha', 10);
+            $table->string('ultima_fecha_contra', 10);
+            $table->string('ya_aplico_hoy', 10);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -37,7 +38,7 @@ class CreateUsersTable extends Migration
 
         DB::table('users')
         ->insert(array('idUser'=>'1','nombres'=>'Oscar','apellidos'=>'Arias','correo'=>'admin@uca.edu.sv','estado'=>'1','genero'=>'M','verificado'=>'1',
-                'idRol'=>'1','ultima_fecha'=>'1-1-2021', 'password'=>bcrypt('temporal')));
+                'idRol'=>'1','ultima_fecha_contra'=>'1-1-2021', 'password'=>bcrypt('temporal')));
     }
 
     /**

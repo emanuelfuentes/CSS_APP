@@ -62,15 +62,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/proyecto/desaplicar', 'ProyectoxEstudianteController@deleteRow');
     });
 });
-/*
-Route::get('/mail', function () {
-    $details = [
-        'title' => 'Mail from CSS rout msg',
-        'body' => 'Probando correo automatico'
-    ];
-    \Mail::to('00017917@uca.edu.sv')->send(new \App\Mail\VerifyMail($details));
-    echo 'Email has been sent';
-});*/
 
   
 
