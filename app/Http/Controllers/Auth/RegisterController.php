@@ -98,6 +98,7 @@ class RegisterController extends Controller
             'emails.verificar',
             ['user' => $user],
             function($message) use ($user){
+                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
                 $message->to($user->correo);
                 $message->subject("Solicitud de creación de cuenta.");
             }

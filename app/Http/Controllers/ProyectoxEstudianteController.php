@@ -112,6 +112,7 @@ class ProyectoxEstudianteController extends Controller
             'emails.estudianteAplico',
             ['user' => $user],
             function($message) use ($user){
+                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
                 $message->to($user->correo_encargado);
                 $message->subject("Aplicación de un estudiante en su proyecto.");
             }

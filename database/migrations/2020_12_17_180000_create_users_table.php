@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->foreign('idCarrera')->references('idCarrera')->on('carrera')->onDelete('cascade');
 
             $table->string('ultima_fecha_contra', 10);
-            $table->string('ya_aplico_hoy', 10);
+            $table->string('ya_aplico_hoy', 10)->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

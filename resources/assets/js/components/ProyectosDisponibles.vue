@@ -25,13 +25,13 @@
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td>
-                                        <div v-if="proyecto.estado">
+                                        <div v-if="ya_aplico_hoy == 0">
                                             <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm">
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
                                         <div v-else>
-                                            <button type="button" class="btn btn-success btn-sm">
+                                            <button type="button" class="btn btn-success btn-sm" disabled>
                                                 <i class="icon-check"></i>
                                             </button> &nbsp;
                                         </div>
@@ -154,7 +154,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 user_id : 0,
-                ya_aplico_hoy: '1-1-2000',
+                ya_aplico_hoy: 2,
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
@@ -232,7 +232,13 @@ import {API_HOST} from '../constants/endpoint.js';
 
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
                     me.user_id = response.data.idUser;
-                    me.ya_aplico_hoy = response.data.ya_aplico_hoy;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.get(`${API_HOST}/ya_aplico`).then(function (response) {
+                    me.ya_aplico_hoy = response.data.ya;
                 })
                 .catch(function (error) {
                     console.log(error);

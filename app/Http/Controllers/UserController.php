@@ -11,4 +11,17 @@ class UserController extends Controller
         $user = Auth()->user();
         return $user;
     }
+
+    public function yaAplico(Request $request){
+        //if(!$request->ajax()) return redirect('/home');
+        $user = Auth()->user();
+        if($user->ya_aplico_hoy == date('d-m-Y') ) {
+            $ya = 1;
+            return $ya;
+        }
+        else{
+            $ya = 0;
+            return $ya;
+        }
+    }
 }

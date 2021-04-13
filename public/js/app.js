@@ -35805,7 +35805,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             user_id: 0,
-            ya_aplico_hoy: '1-1-2000',
+            ya_aplico_hoy: 2,
             descripcion: '',
             arrayProyectos: [''],
             modal: 0,
@@ -35883,7 +35883,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
                 me.user_id = response.data.idUser;
-                me.ya_aplico_hoy = response.data.ya_aplico_hoy;
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/ya_aplico').then(function (response) {
+                me.ya_aplico_hoy = response.data.ya;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -35989,7 +35994,7 @@ var render = function() {
                 _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
                     _c("td", [
-                      proyecto.estado
+                      _vm.ya_aplico_hoy == 0
                         ? _c("div", [
                             _c(
                               "button",
@@ -36399,7 +36404,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "btn btn-success btn-sm", attrs: { type: "button" } },
+      {
+        staticClass: "btn btn-success btn-sm",
+        attrs: { type: "button", disabled: "" }
+      },
       [_c("i", { staticClass: "icon-check" })]
     )
   },

@@ -52,7 +52,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['NormalUser'])->group(function () {
-        Route::get('/get_user', 'UserController@getUser'); 
+        Route::get('/get_user', 'UserController@getUser');
+        Route::get('/ya_aplico', 'UserController@yaAplico');
         Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
         Route::get('/proyectos_aplicados', 'ProyectoxEstudianteController@proyectosAplicados');
         Route::get('/mi_carrera', 'CarreraController@carreraPorId');
