@@ -35799,6 +35799,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -35980,14 +35985,26 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _c("div", { staticClass: "card-header" }, [
+          _c("i", { staticClass: "fa fa-align-justify" }),
+          _vm._v(" Listado de Proyectos  \n                        "),
+          _c("b", { staticStyle: { color: "red" } }, [
+            _vm.ya_aplico_hoy == 0
+              ? _c("i", { attrs: { hidden: "" } })
+              : _c("i", [
+                  _vm._v(
+                    "  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasd  "
+                  )
+                ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -36012,7 +36029,7 @@ var render = function() {
                             _vm._v("  \n                                    ")
                           ])
                         : _c("div", [
-                            _vm._m(3, true),
+                            _vm._m(2, true),
                             _vm._v("  \n                                    ")
                           ])
                     ]),
@@ -36187,10 +36204,10 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -36284,7 +36301,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36312,7 +36329,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(7),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36361,22 +36378,6 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("li", { staticClass: "breadcrumb-item active" }, [
         _vm._v("Proyectos Disponibles")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-align-justify" }),
-      _vm._v(" Listado de Proyectos  "),
-      _c("b", { staticStyle: { color: "red" } }, [
-        _c("i", [
-          _vm._v(
-            " No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente. "
-          )
-        ])
       ])
     ])
   },

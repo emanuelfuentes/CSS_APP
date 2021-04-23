@@ -9,7 +9,12 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Listado de Proyectos  <b style="color:red"><i> No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente. </i></b>
+                        <i class="fa fa-align-justify"></i> Listado de Proyectos  
+                            <b style="color:red">
+                                <i v-if="ya_aplico_hoy == 0" hidden>  </i>
+                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasd  </i>
+                                
+                            </b>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-sm">
