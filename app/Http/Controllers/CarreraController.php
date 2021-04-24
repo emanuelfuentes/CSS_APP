@@ -18,7 +18,7 @@ class CarreraController extends Controller
         return $carreras;
     }
 
-    public function carreraPorId(Request $request){
+    public function miCarrera(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->idUser;
         $carrera = Carrera::join('users', 'users.idCarrera', '=','carrera.idCarrera')
