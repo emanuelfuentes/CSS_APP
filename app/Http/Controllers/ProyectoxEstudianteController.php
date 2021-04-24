@@ -66,30 +66,22 @@ class ProyectoxEstudianteController extends Controller
     }
 
     public function aceptarRechazarEstudiante(Request $request){
-        if(!$request->ajax()) return redirect('/home');
+        //if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
+        $estado = $request->estado;
         $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
-        $proXEst->estado = $request->estado;
+        $proXEst->estado = $estado;
         $proXEst->save();
+
+        $user = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
+        ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.correo','proyecto.encargado','proyecto.nombre')
+        ->where('proyectoxestudiante.idUser', '=', $idUser)
+        ->get();
+        $this->sendEmailAceptadoRechazado($user, $estado);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function aplicar(Request $request)
     {
         $pXe = new ProyectoxEstudiante();
@@ -121,6 +113,32 @@ class ProyectoxEstudianteController extends Controller
                 $message->subject("Aplicación de un estudiante en su proyecto.");
             }
         );
+    }
+
+    public function sendEmailAceptadoRechazado($user, $estado){
+        if($estado == 1){
+            Mail::send(
+                'emails.aceptado',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo);
+                    $message->subject("Estado de su aplicación. Proyecto: ". $user->nombre);
+                }
+            );
+        }
+        elseif($estado == 2){
+            Mail::send(
+                'emails.rechazado',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo);
+                    $message->subject("Estado de su aplicación. Proyecto: ". $user->nombre);
+                }
+            );
+        }
+        
     }
 
     /**

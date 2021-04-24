@@ -17,8 +17,8 @@
         Se le sugiere revisar el sistema del Centro de Servicio Social UCA para aceptar o rechazar dicha solicitud.
     </p><br>
     <p>
-        Este es un correo autogenerado por el sistema, porfavor no responder. <br>
-        <i>Centro de Servicio Social, UCA.</i>
+        <i>Este es un correo autogenerado por el sistema, por favor no responder. <br>
+            Centro de servicio social, UCA.</i>
     </p>
 </body>
 </html>

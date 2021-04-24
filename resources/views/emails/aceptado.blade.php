@@ -7,12 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Hola {{ $user->nombres }}</h1>
+    <h3> Estimado {{ $user->nombres }} {{ $user->apellidos }},</h1>
     <p>
-        Usted ha creado una cuenta nueva en el sistema de horas sociales CSS, por favor haga 
-        <a href="{{ url('verificar_usuario/'.$user->correo) }}"> click aquí</a>
-        para verificar su cuenta y cambiar su contraseña.
+        se le notifica que <u><b>ha sido aceptado</b></u> para el siguiente proceso de aplicación al proyecto de horas sociales {{ $user->nombre }}. <br>
+        Favor estar pendiente de su correo institucional para futuras indicaciones.
     </p><br>
+    <p>
+        Atentamente, Centro de Servicio Social.</b>
+    </p><br><br>
     <p>
         <i>Este es un correo autogenerado por el sistema, por favor no responder. <br>
             Centro de servicio social, UCA.</i>
