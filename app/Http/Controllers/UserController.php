@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
+use App\Carrera;
 class UserController extends Controller
 {
     public function getUser(Request $request){
@@ -21,5 +22,23 @@ class UserController extends Controller
         else{
             return 0;
         }
+    }
+
+    public function estudiantePorCarnet(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $estudiante = User::where('correo', '=', $request->carnet . '@uca.edu.sv')->first();
+        $carrera = null;
+        if($estudiante){
+            $carrera = Carrera::where('idCarrera', '=', $estudiante->idCarrera)->first();
+        }
+        return [$estudiante, $carrera];
+    }
+
+    public function actualizarEstudiante(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $estudiante = User::where('correo', '=', $request->carnet . '@uca.edu.sv')->first();
+        $estudiante->idCarrera = $request->idCarrera;
+        $estudiante->idPerfil = $request->idPerfil;
+        $estudiante->save();
     }
 }
