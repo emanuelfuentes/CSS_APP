@@ -808,7 +808,7 @@ export const API_HOST = 'http://201.131.110.26/desarrollo/CSS-UCA/public'
  * Constante que contiene el endpoint de desarrollo
  * @type {string}
  */
-var API_HOST = 'http://localhost/public';
+var API_HOST = 'http://localhost/CSS_UCA/public';
 
 /***/ }),
 /* 5 */
@@ -35803,14 +35803,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             user_id: 0,
-            ya_aplico_hoy: 2,
+            ya_aplico_hoy: 0,
             descripcion: '',
             arrayProyectos: [''],
             modal: 0,
@@ -35864,6 +35863,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         bindData: function bindData(page) {
             var me = this;
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_id = response.data.idUser;
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/ya_aplico').then(function (response) {
+                me.ya_aplico_hoy = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/pxe_estudiante').then(function (response) {
                 me.arrayPXE = response.data;
             }).catch(function (error) {
@@ -35885,18 +35895,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
-
-            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
-                me.user_id = response.data.idUser;
-            }).catch(function (error) {
-                console.log(error);
-            });
-
-            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/ya_aplico').then(function (response) {
-                me.ya_aplico_hoy = response.data.ya;
-            }).catch(function (error) {
-                console.log(error);
-            });
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
@@ -35905,36 +35903,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         aplicarProyecto: function aplicarProyecto() {
             var me = this;
-            var flag = true;
-            if (me.arrayPXE.length > 0) {
-                for (var j = 0; j < me.arrayPXE.length; j++) {
-                    if (me.id_proyecto == me.arrayPXE[j].idProyecto && me.arrayPXE[j].idUser == me.user_id) {
-                        document.getElementById('hidden_applied').style.visibility = 'visible';
-                        flag = false;
-                        break;
-                    }
-                }
-            }
-            if (flag) {
-                axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/aplicar', {
-                    'idProyecto': this.id_proyecto,
-                    'idUser': this.user_id,
-                    'estado': 0,
-                    'modificado_por': 'admin'
-                }).then(function (response) {
-                    me.cerrarModal();
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
+            axios.post(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/aplicar', {
+                'idProyecto': this.id_proyecto,
+                'idUser': this.user_id,
+                'estado': 0,
+                'modificado_por': 'admin'
+            }).then(function (response) {
+                me.cerrarModal();
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         cerrarModal: function cerrarModal() {
-            document.getElementById('hidden_applied').style.visibility = 'hidden';
             this.modal = 0;
             this.id_proyecto = 0;
+            this.bindData();
         },
         cerrarModalDos: function cerrarModalDos() {
-            document.getElementById('hidden_applied').style.visibility = 'hidden';
             this.modal2 = 0;
         },
         abrirModal: function abrirModal(modelo) {
@@ -35990,10 +35975,10 @@ var render = function() {
           _vm._v(" Listado de Proyectos  \n                        "),
           _c("b", { staticStyle: { color: "red" } }, [
             _vm.ya_aplico_hoy == 0
-              ? _c("i", { attrs: { hidden: "" } })
+              ? _c("i")
               : _c("i", [
                   _vm._v(
-                    "  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasd  "
+                    "  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasdasdasfd  "
                   )
                 ])
           ])
@@ -36207,8 +36192,6 @@ var render = function() {
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
-                _vm._m(4),
-                _vm._v(" "),
                 _c(
                   "button",
                   {
@@ -36301,7 +36284,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36329,7 +36312,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -36417,9 +36400,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-body" }, [
-      _c("h2", [
-        _vm._v("¿Esta seguro que desea aplicar a este proyectodasdasd?")
-      ]),
+      _c("h2", [_vm._v("¿Esta seguro que desea aplicar a este proyecto?")]),
       _vm._v(" "),
       _c("p", [
         _c("b", { staticStyle: { color: "red" } }, [_vm._v("IMPORTANTE: ")]),
@@ -36428,19 +36409,6 @@ var staticRenderFns = [
         )
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticStyle: { visibility: "hidden", "text-align": "left" },
-        attrs: { id: "hidden_applied" }
-      },
-      [_c("p", [_vm._v("Ya ha aplicado a este proyecto")])]
-    )
   },
   function() {
     var _vm = this

@@ -98,6 +98,10 @@ class ProyectoxEstudianteController extends Controller
         $pXe->estado = $request->estado;
         $pXe->modificado_por = $request->modificado_por;
         $pXe->save();
+
+        $user = Auth()->user();
+        $user->ya_aplico_hoy = date('d-m-Y');
+        $user->save();
         
         $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')

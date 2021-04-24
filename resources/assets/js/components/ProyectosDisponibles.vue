@@ -11,8 +11,8 @@
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Listado de Proyectos  
                             <b style="color:red">
-                                <i v-if="ya_aplico_hoy == 0" hidden>  </i>
-                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasd  </i>
+                                <i v-if="ya_aplico_hoy == 0">  </i>
+                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasdasdasfd  </i>
                                 
                             </b>
                     </div>
@@ -87,12 +87,11 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h2>¿Esta seguro que desea aplicar a este proyectodasdasd?</h2>
+                            <h2>¿Esta seguro que desea aplicar a este proyecto?</h2>
                             <p><b style="color:red">IMPORTANTE: </b>Este proceso se puede realizar una vez por día. Se le notificará al encargado sobre su aplicación y él 
                             le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
                         </div>
                         <div class="modal-footer">
-                            <div style="visibility:hidden;text-align:left" id="hidden_applied"><p>Ya ha aplicado a este proyecto</p></div>
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
@@ -159,7 +158,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 user_id : 0,
-                ya_aplico_hoy: 2,
+                ya_aplico_hoy : 0,
                 descripcion : '',
                 arrayProyectos : [''],
                 modal : 0,
@@ -212,6 +211,19 @@ import {API_HOST} from '../constants/endpoint.js';
         methods:{
             bindData(page){
                 let me = this
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_id = response.data.idUser;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+                axios.get(`${API_HOST}/ya_aplico`).then(function (response) {
+                    me.ya_aplico_hoy = response.data;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 axios.get(`${API_HOST}/pxe_estudiante`).then(function (response) {
                     me.arrayPXE = response.data;
                 }).catch(function (error) {
@@ -234,20 +246,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 .catch(function (error) {
                     console.log(error);
                 });
-
-                axios.get(`${API_HOST}/get_user`).then(function (response) {
-                    me.user_id = response.data.idUser;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                axios.get(`${API_HOST}/ya_aplico`).then(function (response) {
-                    me.ya_aplico_hoy = response.data.ya;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
             },
             cambiarPagina(page){
                 let me = this;
@@ -256,38 +254,25 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             aplicarProyecto(){
                 let me = this
-                let flag = true;
-                if(me.arrayPXE.length > 0){
-                    for(let j = 0; j < me.arrayPXE.length; j++){
-                        if(me.id_proyecto == me.arrayPXE[j].idProyecto && me.arrayPXE[j].idUser == me.user_id){
-                            document.getElementById('hidden_applied').style.visibility = 'visible';
-                            flag = false;
-                            break;
-                        }
-                    }
-                }
-                if (flag) {
-                        axios.post(`${API_HOST}/proyecto/aplicar`, {
-                            'idProyecto' : this.id_proyecto,
-                            'idUser' : this.user_id,
-                            'estado' : 0,
-                            'modificado_por' : 'admin'
-                        })
-                        .then(function (response) {
-                            me.cerrarModal();
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    }
+                axios.post(`${API_HOST}/proyecto/aplicar`, {
+                    'idProyecto' : this.id_proyecto,
+                    'idUser' : this.user_id,
+                    'estado' : 0,
+                    'modificado_por' : 'admin'
+                })
+                .then(function (response) {
+                    me.cerrarModal();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             cerrarModal(){
-                document.getElementById('hidden_applied').style.visibility = 'hidden';
                 this.modal = 0;
-                this.id_proyecto = 0;
+                this.id_proyecto = 0
+                this.bindData();
             },
             cerrarModalDos(){
-                document.getElementById('hidden_applied').style.visibility = 'hidden';
                 this.modal2 = 0;
             },
             abrirModal(modelo, data = []){

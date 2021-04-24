@@ -16,12 +16,10 @@ class UserController extends Controller
         //if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
         if($user->ya_aplico_hoy == date('d-m-Y') ) {
-            $ya = 1;
-            return $ya;
+            return 1;
         }
         else{
-            $ya = 0;
-            return $ya;
+            return 0;
         }
     }
 }
