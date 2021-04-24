@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/proyectosxcarrera', 'ProyectosxCarreraController@index');
         Route::get('/estudiantesxproyecto', 'ProyectoxEstudianteController@estudiantesPorProyecto');
         Route::put('/aplicarestudiante', 'ProyectoxEstudianteController@aceptarRechazarEstudiante');
+        Route::get('/estudiante_por_carnet', 'UserController@estudiantePorCarnet');
+        Route::get('/facultad', 'FacultadController@index');
+        Route::get('/carreraxfacultad', 'CarreraController@carreraPorFact');
+        Route::put('/estudiante/actualizar', 'UserController@actualizarEstudiante');
     });
 
     Route::middleware(['NormalUser'])->group(function () {
@@ -56,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/ya_aplico', 'UserController@yaAplico');
         Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
         Route::get('/proyectos_aplicados', 'ProyectoxEstudianteController@proyectosAplicados');
-        Route::get('/mi_carrera', 'CarreraController@carreraPorId');
+        Route::get('/mi_carrera', 'CarreraController@miCarrera');
         Route::get('/proyectos_carrera', 'ProyectosxCarreraController@proyectosPorCarrera');
 
         Route::post('/proyecto/aplicar', 'ProyectoxEstudianteController@aplicar');
