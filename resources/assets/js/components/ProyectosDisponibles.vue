@@ -319,4 +319,5 @@ import {API_HOST} from '../constants/endpoint.js';
         position: absolute !important;
         background-color: #3c29297a !important;
     }
+    @import '/public/css/ProyectosDisponibles.css';
 </style>
