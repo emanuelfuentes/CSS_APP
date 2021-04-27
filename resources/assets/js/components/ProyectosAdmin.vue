@@ -771,7 +771,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }).then(function (response){
                     me.arrayEstudiantes = response.data;
-                    console.log(response.data)
                 })
                 .catch(function (error) {
                     console.log(error);

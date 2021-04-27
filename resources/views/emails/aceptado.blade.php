@@ -7,17 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Estimado {{ $data->nombres }} {{ $data->apellidos }},</h1>
-    <p>
-        se le notifica que <u><b>ha sido aceptado</b></u> para el siguiente proceso de aplicación al proyecto de horas sociales {{ $data->nombre }}. <br>
-        Favor estar pendiente de su correo institucional para futuras indicaciones.
-    </p><br>
-    <p>
-        Atentamente, Centro de Servicio Social.</b>
-    </p><br><br>
-    <p>
-        <i>Este es un correo autogenerado por el sistema, por favor no responder. <br>
-            Centro de servicio social, UCA.</i>
+    <div style="color:black">
+        <p> Estimado/a {{ $data->nombres }} {{ $data->apellidos }},</p>
+        <p>
+            se le notifica que <b style="color:red">ha sido aceptado</b> para el siguiente proceso de aplicación al proyecto de horas sociales {{ $data->nombre }}. <br>
+            Favor estar pendiente de su correo institucional para futuras indicaciones.
+        </p><br>
+        <p>
+            Atentamente, Centro de Servicio Social.
+        </p><br><br>
+    </div>
+    <p style="color:gray">
+        Este es un correo autogenerado por el sistema. <br>
+        Centro de servicio social, UCA | css@uca.edu.sv <br>
+        Tel. 2210-6600 | 2210-6680
     </p>
 </body>
 </html>

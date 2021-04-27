@@ -7,18 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Estimado {{ $user->encargado }}.</h1>
-    <p>
-        Un estudiante ha aplicado al proyecto de horas sociales a su cargo, {{ $user->nombre }}:<br>
-            Nombres: {{ $user->nombres }}.<br>
-            Apellidos: {{ $user->apellidos }}.<br>
-            Correo: {{ $user->correo }}.<br><br>
+    <div style="color:black">
+        <p> Estimado/a {{ $user->encargado }}.</p>
+        <p>
+            Un estudiante ha aplicado al proyecto de horas sociales a su cargo, {{ $user->nombre }}:<br>
+                Nombres: {{ $user->nombres }}.<br>
+                Apellidos: {{ $user->apellidos }}.<br>
+                Correo: {{ $user->correo }}.<br><br>
 
-        Se le sugiere revisar el sistema del Centro de Servicio Social UCA para aceptar o rechazar dicha solicitud.
-    </p><br>
-    <p>
-        <i>Este es un correo autogenerado por el sistema, por favor no responder. <br>
-            Centro de servicio social, UCA.</i>
+            Se le sugiere revisar el sistema del Centro de Servicio Social UCA para aceptar o rechazar dicha solicitud.
+        </p><br>
+        <p>
+            Atentamente, Centro de Servicio Social.
+        </p><br><br>
+    </div>
+    
+    <p style="color:gray">
+        Este es un correo autogenerado por el sistema. <br>
+        Centro de servicio social, UCA | css@uca.edu.sv <br>
+        Tel. 2210-6600 | 2210-6680
     </p>
 </body>
 </html>

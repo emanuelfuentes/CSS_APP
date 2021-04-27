@@ -808,7 +808,7 @@ export const API_HOST = 'http://201.131.110.26/desarrollo/CSS-UCA/public'
  * Constante que contiene el endpoint de desarrollo
  * @type {string}
  */
-var API_HOST = 'http://localhost/CSS_UCA/public';
+var API_HOST = 'http://localhost/public';
 
 /***/ }),
 /* 5 */
@@ -38150,7 +38150,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });

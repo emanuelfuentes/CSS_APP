@@ -11,13 +11,7 @@ use Mail;
 use Illuminate\Support\Facades\DB;
 
 
-class ProyectoxEstudianteController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+class ProyectoxEstudianteController extends Controller{
     public function index(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
@@ -60,33 +54,32 @@ class ProyectoxEstudianteController extends Controller
         $idProyecto = $request->idProyecto;
         //$estudiantes = User::query('SELECT * FROM users u INNER JOIN proyectoxestudiante pe ON u.idUser = pe.idUser WHERE pe.idProyecto = :idProyecto')->get();
         $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
-        ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.genero', 'users.idPerfil', 'users.idCarrera', 'proyectoxestudiante.estado')
+        ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.genero', 'users.idPerfil', 'users.idCarrera', 'proyectoxestudiante.estado', 'users.idUser')
         ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)->get();
         return $estudiantes;
     }
 
     public function aceptarRechazarEstudiante(Request $request){
-        //if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
-        dd($idProyecto .$idUser);
 
         $estado = $request->estado;
         $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
-        //$proXEst->estado = $estado;
-        //$proXEst->save();
+        $proXEst->estado = $estado;
+        $proXEst->save();
+        
         $mailData = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
         ->select('users.nombres', 'users.apellidos', 'users.correo','proyecto.encargado','proyecto.nombre')
         ->where('proyectoxestudiante.idUser', '=', 2)
         ->first();
 
-        
-        //$this->sendEmailAceptadoRechazado($mailData, $estado);
+        $this->sendEmailAceptadoRechazado($mailData, $estado);
     }
 
-    public function aplicar(Request $request)
-    {
+    public function aplicar(Request $request){
+        if(!$request->ajax()) return redirect('/home');
         $pXe = new ProyectoxEstudiante();
         $pXe->idProyecto = $request->idProyecto;
         $pXe->idUser = $request->idUser;
@@ -133,74 +126,17 @@ class ProyectoxEstudianteController extends Controller
         elseif($estado == 2){
             Mail::send(
                 'emails.rechazado',
-                ['user' => $user],
-                function($message) use ($user){
+                ['data' => $mailData],
+                function($message) use ($mailData){
                     $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                    $message->to($user->correo);
-                    $message->subject("Estado de su aplicación. Proyecto: ". $user->nombre);
+                    $message->to($mailData->correo);
+                    $message->subject("Estado de su aplicación. Proyecto: ". $mailData->nombre);
                 }
             );
         }
-        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // mostrar proyectos dependiendo de la carrera
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {/*
-        $proyecto = Proyecto::findOrFail($request->id);
-        $proyecto->estado = $request->estado;
-        $proyecto->contraparte = $request->contraparte;
-        $proyecto->cupos = $request->cupos;
-        $proyecto->descripcion = $request->descripcion;
-        $proyecto->encargado = $request->encargado;
-        $proyecto->fecha_inicio = $request->fecha_inicio;
-        $proyecto->fecha_fin = $request->fecha_fin;
-        $proyecto->horario = $request->horario;
-        $proyecto->nombre = $request->nombre;
-        $proyecto->tipo_horas = $request->tipo_horas;
-        $proyecto->modifiedBy = $request->modifiedBy;
-        $proyecto->createdAt = $request->createdAt;
-        $proyecto->save();*/
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-    public function deleteRow(Request $request)
-    {
+    public function deleteRow(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $idUser = $request->idUser;
         $idProyecto = $request->idProyecto;
