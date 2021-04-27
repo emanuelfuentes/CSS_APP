@@ -470,7 +470,7 @@ import {API_HOST} from '../constants/endpoint.js';
         },
         methods:{
             bindData(page){
-                let me = this
+                let me = this;
                 //var url = '/public/proyecto?page=' + page;
                 var url = `${API_HOST}/todos_proyectos?page=${page}`
                 axios.get(url).then(function (response) {
@@ -481,7 +481,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 .catch(function (error) {
                     console.log(error);
                 });
-                this.getCarrerasAndPerfils();
+                me.getCarrerasAndPerfils();
             },
             cambiarPagina(page){
                 let me = this;
@@ -780,10 +780,10 @@ import {API_HOST} from '../constants/endpoint.js';
             aceptarRechazarEstudiante(){
                 let me = this;
                 var estadoEst = 2;
-                if(this.flagEstudiante) estadoEst = 1;
+                if(me.flagEstudiante) estadoEst = 1;
                 axios.put(`${API_HOST}/aplicarestudiante`, {
-                    'idUser' : this.id_estudiante,
-                    'idProyecto' : this.id_proyecto,
+                    'idUser' : me.id_estudiante,
+                    'idProyecto' : me.id_proyecto,
                     'estado' : estadoEst
                 }).then(function (response) {
                     me.cerrarModal();

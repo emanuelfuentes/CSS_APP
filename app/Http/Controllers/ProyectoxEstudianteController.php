@@ -69,17 +69,20 @@ class ProyectoxEstudianteController extends Controller
         //if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
+        dd($idProyecto .$idUser);
+
         $estado = $request->estado;
         $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
-        $proXEst->estado = $estado;
-        $proXEst->save();
-
-        $user = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        //$proXEst->estado = $estado;
+        //$proXEst->save();
+        $mailData = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
-        ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.correo','proyecto.encargado','proyecto.nombre')
-        ->where('proyectoxestudiante.idUser', '=', $idUser)
-        ->get();
-        $this->sendEmailAceptadoRechazado($user, $estado);
+        ->select('users.nombres', 'users.apellidos', 'users.correo','proyecto.encargado','proyecto.nombre')
+        ->where('proyectoxestudiante.idUser', '=', 2)
+        ->first();
+
+        
+        //$this->sendEmailAceptadoRechazado($mailData, $estado);
     }
 
     public function aplicar(Request $request)
@@ -115,15 +118,15 @@ class ProyectoxEstudianteController extends Controller
         );
     }
 
-    public function sendEmailAceptadoRechazado($user, $estado){
+    public function sendEmailAceptadoRechazado($mailData, $estado){
         if($estado == 1){
             Mail::send(
                 'emails.aceptado',
-                ['user' => $user],
-                function($message) use ($user){
+                ['data' => $mailData],
+                function($message) use ($mailData){
                     $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                    $message->to($user->correo);
-                    $message->subject("Estado de su aplicación. Proyecto: ". $user->nombre);
+                    $message->to($mailData->correo);
+                    $message->subject("Estado de su aplicación. Proyecto: ". $mailData->nombre);
                 }
             );
         }

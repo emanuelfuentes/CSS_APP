@@ -1431,6 +1431,7 @@ Vue.component('historial-proyectos', __webpack_require__(50));
 Vue.component('todos-proyectos', __webpack_require__(55));
 Vue.component('mis-proyectos', __webpack_require__(60));
 Vue.component('admin-proyectos', __webpack_require__(65));
+Vue.component('admin-estudiantes', __webpack_require__(70));
 
 var app = new Vue({
   el: '#app',
@@ -37866,7 +37867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
-            this.getCarrerasAndPerfils();
+            me.getCarrerasAndPerfils();
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
@@ -38157,10 +38158,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         aceptarRechazarEstudiante: function aceptarRechazarEstudiante() {
             var me = this;
             var estadoEst = 2;
-            if (this.flagEstudiante) estadoEst = 1;
+            if (me.flagEstudiante) estadoEst = 1;
             axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/aplicarestudiante', {
-                'idUser': this.id_estudiante,
-                'idProyecto': this.id_proyecto,
+                'idUser': me.id_estudiante,
+                'idProyecto': me.id_proyecto,
                 'estado': estadoEst
             }).then(function (response) {
                 me.cerrarModal();
@@ -39777,6 +39778,621 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-5f953158", module.exports)
+  }
+}
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(71)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(73)
+/* template */
+var __vue_template__ = __webpack_require__(74)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/EstudiantesAdmin.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8e7323b6", Component.options)
+  } else {
+    hotAPI.reload("data-v-8e7323b6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(72);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("00bff144", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8e7323b6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EstudiantesAdmin.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8e7323b6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./EstudiantesAdmin.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+exports.push([module.i, "@import url(/public/css/ProyectosAdmin.css);", ""]);
+
+// module
+exports.push([module.i, "\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 73 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            carnet: '',
+            nombres: '',
+            apellidos: '',
+            idCarrera: 0,
+            idFacultad: 0,
+            idPerfil: 0,
+            nombre_completo: '',
+            arrayFacultad: [],
+            arrayCarrera: [],
+            arrayPerfil: [],
+            flag: false,
+            flagError: false
+        };
+    },
+
+    methods: {
+        bindData: function bindData() {
+            var me = this;
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/facultad').then(function (response) {
+                me.arrayFacultad = response.data;
+            });
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/perfil').then(function (response) {
+                me.arrayPerfil = response.data;
+            });
+            $('#facultad').change(function () {
+                me.getCarreras();
+            });
+        },
+        buscarEstudiante: function buscarEstudiante() {
+            var me = this;
+            this.flag = false;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante_por_carnet';
+            axios.get(url, {
+                params: {
+                    carnet: me.carnet
+                }
+            }).then(function (response) {
+                var estudiante = response.data[0];
+                if (estudiante != null) {
+                    me.flagError = false;
+                    var carrera = response.data[1];
+                    me.nombres = estudiante.nombres;
+                    me.apellidos = estudiante.apellidos;
+                    me.idCarrera = estudiante.idCarrera;
+                    me.idPerfil = estudiante.idPerfil;
+                    me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
+                    me.idFacultad = carrera.idFacultad;
+                    me.getCarreras();
+                } else me.flagError = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        getCarreras: function getCarreras() {
+            var me = this;
+            $.ajax({
+                type: "GET",
+                url: './carreraxfacultad',
+                data: { idFact: me.idFacultad },
+                success: function success(res) {
+                    $('#carrera').empty();
+                    $.each(res, function (key) {
+                        $('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
+                    });
+                },
+                error: function error() {
+                    console.log("No se ha seleccionado facultad");
+                }
+            });
+        },
+        actualizarEstudiante: function actualizarEstudiante() {
+            var me = this;
+            axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante/actualizar', {
+                'carnet': this.carnet,
+                'idCarrera': this.idCarrera,
+                'idPerfil': this.idPerfil
+            }).then(function (response) {
+                me.flag = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        cerrarModal: function cerrarModal() {},
+        abrirModal: function abrirModal(modelo) {
+            var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
+            switch (modelo) {
+                case "editar":
+                    {}
+                case "aplicar":
+                    {
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+    },
+    mounted: function mounted() {
+        this.bindData();
+    }
+});
+
+/***/ }),
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", { staticClass: "main" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "card" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "input-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.carnet,
+                      expression: "carnet"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Ingrese el carnet del estudiante"
+                  },
+                  domProps: { value: _vm.carnet },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.carnet = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "submit" },
+                    on: {
+                      click: function($event) {
+                        return _vm.buscarEstudiante()
+                      }
+                    }
+                  },
+                  [_vm._v("Buscar")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _vm.flagError
+                  ? _c("div", { staticClass: "mt-2 text-danger" }, [
+                      _vm._v(
+                        "\n                                    No se ha encontrado resultados\n                                "
+                      )
+                    ])
+                  : _c(
+                      "div",
+                      {
+                        staticClass: "mt-2",
+                        staticStyle: { visibility: "hidden" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Nada\n                                "
+                        )
+                      ]
+                    )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm.nombre_completo == ""
+            ? _c("div", [
+                _c(
+                  "h2",
+                  {
+                    staticStyle: { visibility: "hidden", "margin-bottom": "0" }
+                  },
+                  [_vm._v("Nada")]
+                )
+              ])
+            : _c("div", [
+                _c("h2", {
+                  staticStyle: { "margin-bottom": "0" },
+                  domProps: { textContent: _vm._s(_vm.nombre_completo) }
+                })
+              ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "form-control-label" }, [
+                _vm._v("Facultad")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.idFacultad,
+                      expression: "idFacultad"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: { id: "facultad" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.idFacultad = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.arrayFacultad, function(facultad) {
+                  return _c(
+                    "option",
+                    {
+                      key: facultad.idFacultad,
+                      domProps: { value: facultad.idFacultad }
+                    },
+                    [_vm._v(_vm._s(facultad.nombre))]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "form-control-label" }, [
+                _vm._v("Carrera")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.idCarrera,
+                      expression: "idCarrera"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: { id: "carrera" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.idCarrera = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.arrayCarrera, function(carrera) {
+                  return _c(
+                    "option",
+                    {
+                      key: carrera.idCarrera,
+                      domProps: { value: carrera.idCarrera }
+                    },
+                    [_vm._v(_vm._s(carrera.nombre))]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "form-control-label" }, [
+                _vm._v("Año de carrera")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.idPerfil,
+                      expression: "idPerfil"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: { id: "carrera" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.idPerfil = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.arrayPerfil, function(perfil) {
+                  return _c(
+                    "option",
+                    {
+                      key: perfil.idPerfil,
+                      domProps: { value: perfil.idPerfil }
+                    },
+                    [_vm._v(_vm._s(perfil.perfil))]
+                  )
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _vm.flag
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-success row",
+                    staticStyle: { "margin-bottom": "0" },
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Estudiante actualizado correctamente\n                        "
+                    )
+                  ]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-success row",
+                    staticStyle: { visibility: "hidden", "margin-bottom": "0" },
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Estudiante actualizado correctmente\n                        "
+                    )
+                  ]
+                )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.actualizarEstudiante()
+                }
+              }
+            },
+            [_vm._v("Confirmar")]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Administración de Estudiantes")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fa fa-align-justify" }),
+      _vm._v(" Estudiantes\n                ")
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8e7323b6", module.exports)
   }
 }
 

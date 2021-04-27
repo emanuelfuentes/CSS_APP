@@ -7,9 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h3> Estimado {{ $user->nombres }} {{ $user->apellidos }},</h1>
+    <h3> Estimado {{ $data->nombres }} {{ $data->apellidos }},</h1>
     <p>
-        se le notifica que <u><b>ha sido aceptado</b></u> para el siguiente proceso de aplicación al proyecto de horas sociales {{ $user->nombre }}. <br>
+        se le notifica que <u><b>ha sido aceptado</b></u> para el siguiente proceso de aplicación al proyecto de horas sociales {{ $data->nombre }}. <br>
         Favor estar pendiente de su correo institucional para futuras indicaciones.
     </p><br>
     <p>
