@@ -50,7 +50,7 @@
                             <div class="form-group row">
                                 <label class="form-control-label">Carrera</label>
                                 <select class="form-control custom-select" id="carrera" v-model="idCarrera">
-                                    <option v-for="carrera in arrayCarrera" :value="carrera.idCarrera" :key="carrera.idCarrera">{{carrera.nombre}}</option>
+                                    <option v-for="carrera in arrayCarreraFact" :value="carrera.idCarrera" :key="carrera.idCarrera">{{carrera.nombre}}</option>
                                 </select>
                             </div>
                             <div class="form-group row">
@@ -59,12 +59,16 @@
                                     <option v-for="perfil in arrayPerfil" :value="perfil.idPerfil" :key="perfil.idPerfil">{{perfil.perfil}}</option>
                                 </select>
                             </div>
-                            <div v-if="flag" style="margin-bottom:0" class="alert alert-success row" role="alert">
+                            <div v-if="errorActualizar == 1" id="message" style="margin-bottom:0" class="alert alert-success row" role="alert">
                                 Estudiante actualizado correctamente
                             </div>
-                            <div v-else style="visibility:hidden; margin-bottom:0"  class="alert alert-success row" role="alert">
-                                Estudiante actualizado correctmente
+                            <div v-else-if="errorActualizar == 2" id="message" style="margin-bottom:0" class="alert alert-danger row" role="alert">
+                                Busque un estudiante
                             </div>
+                            <div v-else-if="errorActualizar == 3" id="message" style="margin-bottom:0" class="alert alert-danger row" role="alert">
+                                Seleccione una carrera
+                            </div>
+                            <div v-else style="visibility:hidden; margin-bottom:0"  class="alert row" role="alert">.</div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -84,14 +88,15 @@ import {API_HOST} from '../constants/endpoint.js';
                 nombres : '',
                 apellidos : '',
                 idCarrera : 0,
-                idFacultad : 0,
-                idPerfil : 0,
+                idFacultad : 1,
+                idPerfil : 1,
                 nombre_completo : '',
                 arrayFacultad : [],
                 arrayCarrera : [],
+                arrayCarreraFact : [],
                 arrayPerfil : [],
-                flag : false,
-                flagError : false 
+                errorActualizar : false,
+                flagError : false,
             }
         },
         methods:{
@@ -100,16 +105,20 @@ import {API_HOST} from '../constants/endpoint.js';
                 axios.get(`${API_HOST}/facultad`).then(function (response){
                     me.arrayFacultad = response.data
                 })
+                axios.get(`${API_HOST}/carrera`).then(function (response) {
+                    me.arrayCarrera = response.data;
+                    me.getCarreras(false)
+                })
                 axios.get(`${API_HOST}/perfil`).then(function (response) {
                     me.arrayPerfil = response.data;
                 })
                 $('#facultad').change(function(){
-                    me.getCarreras()
+                    me.getCarreras(false)
                 })
             },
             buscarEstudiante(){
                 let me = this
-                this.flag = false
+                this.errorActualizar = false
                 var url = `${API_HOST}/estudiante_por_carnet`
                 axios.get(url, {
                     params:{
@@ -126,7 +135,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         me.idPerfil = estudiante.idPerfil;
                         me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                         me.idFacultad = carrera.idFacultad;
-                        me.getCarreras()
+                        me.getCarreras(true)
                     }
                     else me.flagError = true
                 })
@@ -134,35 +143,36 @@ import {API_HOST} from '../constants/endpoint.js';
                     console.log(error);
                 });
             },
-            getCarreras(){
+            getCarreras(flag){
                 let me = this
-                $.ajax({
-                    type: "GET",
-                    url: './carreraxfacultad',
-                    data: {idFact:me.idFacultad},
-                    success: function(res){
-                        $('#carrera').empty();
-                        $.each(res, function(key){
-                            $('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
-                        })
-                    },
-                    error: function(){
-                        console.log("No se ha seleccionado facultad");
-                    }
+                if(!flag) this.idCarrera = 0
+                this.arrayCarreraFact = []
+                this.arrayCarrera.forEach(function(element){
+                    if(element.idFacultad == me.idFacultad) me.arrayCarreraFact.push(element)
                 })
             },
             actualizarEstudiante(){
                 let me = this
-                axios.put(`${API_HOST}/estudiante/actualizar`, {
-                    'carnet' : this.carnet,
-                    'idCarrera' : this.idCarrera,
-                    'idPerfil' : this.idPerfil
-                }).then(function (response) {
-                    me.flag = true;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                if(this.carnet != ''){
+                    if(this.idCarrera != null && this.idCarrera != 0){
+                        axios.put(`${API_HOST}/estudiante/actualizar`, {
+                            'carnet' : this.carnet,
+                            'idCarrera' : this.idCarrera,
+                            'idPerfil' : this.idPerfil
+                        }).then(function (response) {
+                            me.errorActualizar = 1
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
+                    else{
+                        this.errorActualizar = 3
+                    }
+                }
+                else{
+                    this.errorActualizar = 2;
+                }
             },
             cerrarModal(){
                 
