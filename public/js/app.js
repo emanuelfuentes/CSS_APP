@@ -38190,7 +38190,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
-                console.log(response.data);
             }).catch(function (error) {
                 console.log(error);
             });
