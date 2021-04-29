@@ -16,7 +16,7 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
-        $proyectos = Proyecto::paginate(10);
+        $proyectos = Proyecto::paginate(5);
         return [
             'pagination' => [
                 'total'         => $proyectos->total(),

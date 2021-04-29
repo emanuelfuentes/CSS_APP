@@ -12,7 +12,7 @@
                         <i class="fa fa-align-justify"></i> Listado de Proyectos  
                             <b style="color:red">
                                 <i v-if="ya_aplico_hoy == 0">  </i>
-                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasdasdasfd  </i>
+                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.  </i>
                                 
                             </b>
                     </div>

@@ -35979,7 +35979,7 @@ var render = function() {
               ? _c("i")
               : _c("i", [
                   _vm._v(
-                    "  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.asdasdasdasfd  "
+                    "  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.  "
                   )
                 ])
           ])
@@ -39955,6 +39955,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39964,13 +39968,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombres: '',
             apellidos: '',
             idCarrera: 0,
-            idFacultad: 0,
-            idPerfil: 0,
+            idFacultad: 1,
+            idPerfil: 1,
             nombre_completo: '',
             arrayFacultad: [],
             arrayCarrera: [],
+            arrayCarreraFact: [],
             arrayPerfil: [],
-            flag: false,
+            errorActualizar: false,
             flagError: false
         };
     },
@@ -39981,16 +39986,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/facultad').then(function (response) {
                 me.arrayFacultad = response.data;
             });
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/carrera').then(function (response) {
+                me.arrayCarrera = response.data;
+                me.getCarreras(false);
+            });
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/perfil').then(function (response) {
                 me.arrayPerfil = response.data;
             });
             $('#facultad').change(function () {
-                me.getCarreras();
+                me.getCarreras(false);
             });
         },
         buscarEstudiante: function buscarEstudiante() {
             var me = this;
-            this.flag = false;
+            this.errorActualizar = false;
             var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante_por_carnet';
             axios.get(url, {
                 params: {
@@ -40007,40 +40016,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     me.idPerfil = estudiante.idPerfil;
                     me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                     me.idFacultad = carrera.idFacultad;
-                    me.getCarreras();
+                    me.getCarreras(true);
                 } else me.flagError = true;
             }).catch(function (error) {
                 console.log(error);
             });
         },
-        getCarreras: function getCarreras() {
+        getCarreras: function getCarreras(flag) {
             var me = this;
-            $.ajax({
-                type: "GET",
-                url: './carreraxfacultad',
-                data: { idFact: me.idFacultad },
-                success: function success(res) {
-                    $('#carrera').empty();
-                    $.each(res, function (key) {
-                        $('#carrera').append($("<option></option>").val(res[key]['idCarrera']).text(res[key]['nombre']));
-                    });
-                },
-                error: function error() {
-                    console.log("No se ha seleccionado facultad");
-                }
+            if (!flag) this.idCarrera = 0;
+            this.arrayCarreraFact = [];
+            this.arrayCarrera.forEach(function (element) {
+                if (element.idFacultad == me.idFacultad) me.arrayCarreraFact.push(element);
             });
         },
         actualizarEstudiante: function actualizarEstudiante() {
             var me = this;
-            axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante/actualizar', {
-                'carnet': this.carnet,
-                'idCarrera': this.idCarrera,
-                'idPerfil': this.idPerfil
-            }).then(function (response) {
-                me.flag = true;
-            }).catch(function (error) {
-                console.log(error);
-            });
+            if (this.carnet != '') {
+                if (this.idCarrera != null && this.idCarrera != 0) {
+                    axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante/actualizar', {
+                        'carnet': this.carnet,
+                        'idCarrera': this.idCarrera,
+                        'idPerfil': this.idPerfil
+                    }).then(function (response) {
+                        me.errorActualizar = 1;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else {
+                    this.errorActualizar = 3;
+                }
+            } else {
+                this.errorActualizar = 2;
+            }
         },
         cerrarModal: function cerrarModal() {},
         abrirModal: function abrirModal(modelo) {
@@ -40252,7 +40260,7 @@ var render = function() {
                     }
                   }
                 },
-                _vm._l(_vm.arrayCarrera, function(carrera) {
+                _vm._l(_vm.arrayCarreraFact, function(carrera) {
                   return _c(
                     "option",
                     {
@@ -40314,13 +40322,13 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm.flag
+            _vm.errorActualizar == 1
               ? _c(
                   "div",
                   {
                     staticClass: "alert alert-success row",
                     staticStyle: { "margin-bottom": "0" },
-                    attrs: { role: "alert" }
+                    attrs: { id: "message", role: "alert" }
                   },
                   [
                     _vm._v(
@@ -40328,18 +40336,42 @@ var render = function() {
                     )
                   ]
                 )
-              : _c(
+              : _vm.errorActualizar == 2
+              ? _c(
                   "div",
                   {
-                    staticClass: "alert alert-success row",
-                    staticStyle: { visibility: "hidden", "margin-bottom": "0" },
-                    attrs: { role: "alert" }
+                    staticClass: "alert alert-danger row",
+                    staticStyle: { "margin-bottom": "0" },
+                    attrs: { id: "message", role: "alert" }
                   },
                   [
                     _vm._v(
-                      "\n                            Estudiante actualizado correctmente\n                        "
+                      "\n                            Busque un estudiante\n                        "
                     )
                   ]
+                )
+              : _vm.errorActualizar == 3
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-danger row",
+                    staticStyle: { "margin-bottom": "0" },
+                    attrs: { id: "message", role: "alert" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            Seleccione una carrera\n                        "
+                    )
+                  ]
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "alert row",
+                    staticStyle: { visibility: "hidden", "margin-bottom": "0" },
+                    attrs: { role: "alert" }
+                  },
+                  [_vm._v(".")]
                 )
           ])
         ]),
