@@ -31,7 +31,7 @@
                             </thead>
                             <tbody>
                                 <tr id="fila" v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td id="icons-pos" >
+                                    <td id="icons-pos" style="text-align: center;">
                                         <div class="button-container">
                                             <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-pencil"></i>
@@ -55,7 +55,7 @@
                                     </td>
                                     <td id="pos" v-text="proyecto.nombre"></td>
                                     <td id="pos" v-text="proyecto.descripcion"></td>
-                                    <td id="estado">
+                                    <td id="estado" style="text-align: center;">
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success" id="estadod" style="text-align:center">Disponible</span>
                                         </div>
@@ -63,8 +63,8 @@
                                             <span class="badge badge-danger" id="estadond">No disponible</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
+                                    <td style="text-align: center;">
+                                        <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm" style="border-radius: 100%;">
                                           <i class="icon-info"></i>
                                         </button>  &nbsp;
                                     </td>
@@ -357,6 +357,46 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <table class="table table-sm" style="font-size: 1.35em;">
+                                <!--<thead>
+                                    <th>Tipo</th>
+                                    <th>Cupos</th>
+                                    <th>Horario</th>
+                                    <th>Encargado</th>
+                                    <th>Descripción</th>
+                                </thead>-->
+                                <tbody>
+                                    <tr>
+                                        <td>Tipo</td>
+                                        <td v-text="modal_tipo_horas"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cupos</td>
+                                        <td v-text="modal_cupos"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Horario</td>
+                                        <td v-text="modal_horario"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encargado</td>
+                                        <td v-text="modal_encargado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción</td>
+                                        <td v-text="modal_desc"></td>
+                                    </tr>
+                                    <!--<tr>
+                                        <td v-text="modal_tipo_horas"></td>
+                                        <td v-text="modal_cupos"></td>
+                                        <td v-text="modal_horario"></td>
+                                        <td v-text="modal_encargado"></td>
+                                        <td v-text="modal_desc"></td>
+                                    </tr>-->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--<div class="modal-body">
                             <table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <th>Tipo</th>
@@ -383,7 +423,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                         </div>

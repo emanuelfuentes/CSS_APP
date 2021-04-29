@@ -35635,7 +35635,7 @@ if(false) {
 
 exports = module.exports = __webpack_require__(2)(false);
 // imports
-
+exports.push([module.i, "@import url(/public/css/ProyectosDisponibles.css);", ""]);
 
 // module
 exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n", ""]);
@@ -37782,6 +37782,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38224,75 +38264,95 @@ var render = function() {
                     "tr",
                     { key: proyecto.idProyecto, attrs: { id: "fila" } },
                     [
-                      _c("td", { attrs: { id: "icons-pos" } }, [
-                        _c("div", { staticClass: "button-container" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning btn-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal("editar", proyecto)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "icon-pencil" })]
-                          ),
-                          _vm._v("  \n                                    ")
-                        ]),
-                        _vm._v(" "),
-                        proyecto.estado
-                          ? _c("div", { staticClass: "button-container" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.abrirModal("estado", proyecto)
-                                    }
+                      _c(
+                        "td",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { id: "icons-pos" }
+                        },
+                        [
+                          _c("div", { staticClass: "button-container" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("editar", proyecto)
                                   }
-                                },
-                                [_c("i", { staticClass: "icon-lock" })]
-                              ),
-                              _vm._v("  \n                                    ")
-                            ])
-                          : _c("div", { staticClass: "button-container" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.abrirModal("estado", proyecto)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-lock-open" })]
-                              ),
-                              _vm._v("  \n                                    ")
-                            ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "button-container" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-info btn-sm",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal("estudiantes", proyecto)
                                 }
-                              }
-                            },
-                            [_c("i", { staticClass: "icon-people" })]
-                          ),
-                          _vm._v("  \n                                    ")
-                        ])
-                      ]),
+                              },
+                              [_c("i", { staticClass: "icon-pencil" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ]),
+                          _vm._v(" "),
+                          proyecto.estado
+                            ? _c("div", { staticClass: "button-container" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "estado",
+                                          proyecto
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "icon-lock" })]
+                                ),
+                                _vm._v(
+                                  "  \n                                    "
+                                )
+                              ])
+                            : _c("div", { staticClass: "button-container" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "estado",
+                                          proyecto
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "icon-lock-open" })]
+                                ),
+                                _vm._v(
+                                  "  \n                                    "
+                                )
+                              ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "button-container" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-info btn-sm",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal(
+                                      "estudiantes",
+                                      proyecto
+                                    )
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "icon-people" })]
+                            ),
+                            _vm._v("  \n                                    ")
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("td", {
                         attrs: { id: "pos" },
@@ -38304,36 +38364,44 @@ var render = function() {
                         domProps: { textContent: _vm._s(proyecto.descripcion) }
                       }),
                       _vm._v(" "),
-                      _c("td", { attrs: { id: "estado" } }, [
-                        proyecto.estado
-                          ? _c("div", [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "badge badge-success",
-                                  staticStyle: { "text-align": "center" },
-                                  attrs: { id: "estadod" }
-                                },
-                                [_vm._v("Disponible")]
-                              )
-                            ])
-                          : _c("div", [
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "badge badge-danger",
-                                  attrs: { id: "estadond" }
-                                },
-                                [_vm._v("No disponible")]
-                              )
-                            ])
-                      ]),
+                      _c(
+                        "td",
+                        {
+                          staticStyle: { "text-align": "center" },
+                          attrs: { id: "estado" }
+                        },
+                        [
+                          proyecto.estado
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-success",
+                                    staticStyle: { "text-align": "center" },
+                                    attrs: { id: "estadod" }
+                                  },
+                                  [_vm._v("Disponible")]
+                                )
+                              ])
+                            : _c("div", [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "badge badge-danger",
+                                    attrs: { id: "estadond" }
+                                  },
+                                  [_vm._v("No disponible")]
+                                )
+                              ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("td", { staticStyle: { "text-align": "center" } }, [
                         _c(
                           "button",
                           {
                             staticClass: "btn btn-info btn-sm",
+                            staticStyle: { "border-radius": "100%" },
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
@@ -39606,44 +39674,47 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-bordered table-striped table-sm"
+                    staticClass: "table table-sm",
+                    staticStyle: { "font-size": "1.35em" }
                   },
                   [
-                    _vm._m(5),
-                    _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
+                        _c("td", [_vm._v("Tipo")]),
+                        _vm._v(" "),
                         _c("td", {
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Cupos")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Horario")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped table-sm"
-                  },
-                  [
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("tbody", [
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
+                        _c("td", [_vm._v("Encargado")]),
+                        _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Descripción")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_desc) }
@@ -39746,28 +39817,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Estado")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cupos")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Horario")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Encargado")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Descripción")])
     ])
   }
 ]
