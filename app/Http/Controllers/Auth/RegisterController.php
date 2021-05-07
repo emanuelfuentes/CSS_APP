@@ -38,22 +38,22 @@ class RegisterController extends Controller
         if($user == null){
             $nombre = $request->nombres;
             $apellido = $request->apellidos;
-            $carnet = explode('@', $email);
+            $carnet = $request->carnet;
             $genero = $request->genero;
             $carrera = $request->carrera;
-            $perfil = (date('y') - (substr($carnet[0], -2))) + 1;
+            $perfil = (date('y') - (substr($carnet, -2))) + 1;
 
             if($perfil >= 6){
                 $perfil = 6;
             }
 
-            $nombreEvento = "cuenta_no_verificada_" . $carnet[0];
+            /*$nombreEvento = "cuenta_no_verificada_" . $carnet[0];
             DB::unprepared('SET GLOBAL event_scheduler = ON;');
             DB::unprepared('
             CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
                     AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
                 DO
-                    DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');
+                    DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');*/
             User::create([
                 'nombres' => $nombre,
                 'apellidos' => $apellido,

@@ -46,8 +46,8 @@
                 <input class="form-control hijos" id="password" name="password" type="password">
                 @if($errors->first('password'))
                   {!!$errors->first('password','<span style="color: red">:message</span>')!!}
-                @elseif($errors->first('email_existente'))
-                  {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
+                @elseif($errors->first('email_inexistente'))
+                  {!!$errors->first('email_inexistente','<span style="color: red">:message</span>')!!}
                 @else
                   <span style="visibility: hidden;">.</span>
                 @endif

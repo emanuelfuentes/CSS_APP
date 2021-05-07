@@ -8,7 +8,7 @@
 </head>
 <body>
     <div style="color:black">
-        <p> Estimado/a {{ $user->nombres }}</p>
+        <p> Estimado/a {{ $user->nombres }} {{ $user->apellidos }}</p>
         <p>
             Usted ha creado una cuenta nueva en el sistema de horas sociales CSS, por favor haga 
             <b style="color:red"><a href="{{ url('verificar_usuario/'.$user->correo) }}"> click aquí</a></b>

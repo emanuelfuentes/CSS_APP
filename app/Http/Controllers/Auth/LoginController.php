@@ -14,30 +14,17 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request){
-        if($request->carnet == 'admin@uca.edu.sv'){
-            $this->validateAdmin($request);
-            $email = $request->carnet;
-            $psw = $request->password;
-            if(Auth::attempt(['correo' => $email, 'password' => $psw])){
-                return redirect()->intended('home');
-            }
-            else{
-                return back()
-                ->withErrors(['password' => trans('auth.failedPass')])
-                ->withInput(request(['carnet']));
-            }
-        }
-        else{
-            $this->validateLogin($request);
-            $email = $request->carnet . "@uca.edu.sv";
-            $psw = $request->password;
-            $user = User::whereCorreo($email)->first();
+        if(strpos($request->carnet, '@') == true){
+            $user = User::whereCorreo($request->carnet)->first();
             if($user == null){
                 return back()
-                ->withErrors(['email_existente' => trans('auth.carnet_inexistente')])
+                ->withErrors(['email_inexistente' => trans('auth.cuenta_inexistente')])
                 ->withInput(request(['carnet']));
             }
             else{
+                $this->validateAdmin($request);
+                $email = $request->carnet;
+                $psw = $request->password;
                 if(Auth::attempt(['correo' => $email, 'password' => $psw])){
                     return redirect()->intended('home');
                 }
@@ -46,6 +33,37 @@ class LoginController extends Controller
                     ->withErrors(['password' => trans('auth.failedPass')])
                     ->withInput(request(['carnet']));
                 }
+            }
+            
+        }
+        else{
+            $this->validateLogin($request);
+            $email = $request->carnet . "@uca.edu.sv";
+            $psw = $request->password;
+            $user = User::whereCorreo($email)->first();
+            if($user == null){
+                return back()
+                ->withErrors(['email_inexistente' => trans('auth.carnet_inexistente')])
+                ->withInput(request(['carnet']));
+            }
+            else{
+
+                if($user->verificado == 0){
+                    return back()
+                    ->withErrors(['email_inexistente' => trans('auth.aun_no_verificado')])
+                    ->withInput(request(['carnet']));
+                }
+                else{
+                    if(Auth::attempt(['correo' => $email, 'password' => $psw])){
+                        return redirect()->intended('home');
+                    }
+                    else{
+                        return back()
+                        ->withErrors(['password' => trans('auth.failedPass')])
+                        ->withInput(request(['carnet']));
+                    }
+                }
+                
             }
         }
         
