@@ -44,7 +44,7 @@ img{
 .card-group{
     align-self: center;
     width: 35%;
-    height: 20em;
+
 }
 
 .hijos{
@@ -64,7 +64,7 @@ img{
 }
 
 #espacio{
-    margin-top: 5em;
+    margin-top: 0.25em;
     width: 35%;
     align-self: center;
     display: flex;
@@ -76,21 +76,36 @@ img{
     .cuerpo{
         font-size: 0.75em;
     }
+    .card-group{
+        align-self: center;
+        width: 45%;
+    
+    }
 }
 
 @media only screen and (max-width: 988px) {
     .cuerpo{
         font-size: 0.5em;
     }
-    .espacio{
-        margin-top: 20em;
+    #espacio{
+        margin-top: -5em;
+        font-size: 1.25em;
+        align-self: center;
+        width: 75%;   
+
+
+    }
+    .card-group{
+        align-self: center;
+        width: 75%;
+    
     }
     #olvido{
-        margin-top: 6em;
+        margin-top: 5.25em;
         font-size: 1.50em;
     }
     #registrar{
-        margin-top: 6em;
+        margin-top: 5em;
         font-size: 1.50em;
     }
 
