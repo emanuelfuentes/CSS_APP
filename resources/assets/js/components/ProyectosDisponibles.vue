@@ -114,20 +114,35 @@
                         </div>
                         <div class="modal-body">
                             <table class="table table-bordered table-striped table-sm">
-                                <thead>
+                               <!-- <thead>
                                     <th>Tipo</th>
                                     <th>Cupos</th>
                                     <th>Horario</th>
-                                </thead>
+                                </thead>-->
                                 <tbody>
                                     <tr>
+                                        <td>Tipo</td>
                                         <td v-text="modal_tipo_horas"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cupos</td>
                                         <td v-text="modal_cupos"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Horario</td>
                                         <td v-text="modal_horario"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encargado</td>
+                                        <td v-text="modal_encargado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción</td>
+                                        <td v-text="modal_desc"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <table class="table table-bordered table-striped table-sm">
+                            <!--<table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <th>Encargado</th>
                                     <th>Descripción</th>
@@ -138,7 +153,7 @@
                                         <td v-text="modal_desc"></td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModalDos()">Cerrar</button>
