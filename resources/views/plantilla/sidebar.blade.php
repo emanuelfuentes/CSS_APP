@@ -11,12 +11,9 @@
                         <a class="nav-link" href="#"><i class="icon-folder"></i> Proyectos Aplicados </a>
                     </li>
                     <li @click='menu=2' class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-check"></i> Historial de Proyectos </a>
-                    </li>
-                    <li @click='menu=3' class="nav-item">
                         <a class="nav-link" href="#"><i class="icon-calendar"></i> Recordatorio </a>
                     </li>
-                    <li @click='menu=4' class="nav-item">
+                    <li @click='menu=3' class="nav-item">
                         <a class="nav-link" href="#"><i class="icon-folder"></i> Perfil </a>
                     </li>
                 </ul>

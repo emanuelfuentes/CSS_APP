@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Rules\Captcha;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,7 @@ class LoginController extends Controller
             else{
                 $this->validateAdmin($request);
                 $email = $request->carnet;
-                $psw = $request->password;
+                $psw = $request->contraseña;
                 if(Auth::attempt(['correo' => $email, 'password' => $psw])){
                     return redirect()->intended('home');
                 }
@@ -39,7 +40,7 @@ class LoginController extends Controller
         else{
             $this->validateLogin($request);
             $email = $request->carnet . "@uca.edu.sv";
-            $psw = $request->password;
+            $psw = $request->contraseña;
             $user = User::whereCorreo($email)->first();
             if($user == null){
                 return back()
@@ -59,7 +60,7 @@ class LoginController extends Controller
                     }
                     else{
                         return back()
-                        ->withErrors(['password' => trans('auth.failedPass')])
+                        ->withErrors(['contraseña' => trans('auth.failedPass')])
                         ->withInput(request(['carnet']));
                     }
                 }
@@ -71,13 +72,15 @@ class LoginController extends Controller
     protected function validateLogin(Request $request){
         $this->validate($request, [
             'carnet' => 'required|numeric|regex:/[0-9]{8}/',
-            'password' => 'required|string'
+            'contraseña' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 
     protected function validateAdmin(Request $request){
         $this->validate($request, [
-            'password' => 'required|string'
+            'contraseña' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 

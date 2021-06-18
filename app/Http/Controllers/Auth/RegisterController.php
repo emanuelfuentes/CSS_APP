@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use App\Rules\Captcha;
 
 class RegisterController extends Controller
 {
@@ -47,13 +48,6 @@ class RegisterController extends Controller
                 $perfil = 6;
             }
 
-            /*$nombreEvento = "cuenta_no_verificada_" . $carnet[0];
-            DB::unprepared('SET GLOBAL event_scheduler = ON;');
-            DB::unprepared('
-            CREATE EVENT ' . $nombreEvento . ' ON SCHEDULE
-                    AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
-                DO
-                    DELETE FROM users WHERE verificado = 0 AND users.correo = "' . $email .'";');*/
             User::create([
                 'nombres' => $nombre,
                 'apellidos' => $apellido,
@@ -89,7 +83,8 @@ class RegisterController extends Controller
         $this->validate($request, [
             'carnet' => 'required|numeric|regex:/[0-9]{8}/',
             'nombres' => 'required|string',
-            'apellidos' => 'required|string'
+            'apellidos' => 'required|string',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
     }
 

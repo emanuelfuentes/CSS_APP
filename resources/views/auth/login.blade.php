@@ -22,6 +22,7 @@
     <script src="js/plantilla.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body class="cuerpo">
     <div class="container">
@@ -42,16 +43,29 @@
                 @endif
               </div>
               <div class="form-group mb-2">
-                <label for="password" class="label-form">Contraseña</label>
-                <input class="form-control hijos" id="password" name="password" type="password">
-                @if($errors->first('password'))
-                  {!!$errors->first('password','<span style="color: red">:message</span>')!!}
+                <label for="con" class="label-form">Contraseña</label>
+                <input class="form-control hijos" id="contraseña" name="contraseña" type="password">
+                @if($errors->first('contraseña'))
+                  {!!$errors->first('contraseña','<span style="color: red">:message</span>')!!}
                 @elseif($errors->first('email_inexistente'))
                   {!!$errors->first('email_inexistente','<span style="color: red">:message</span>')!!}
                 @else
                   <span style="visibility: hidden;">.</span>
                 @endif
               </div>
+              <div class="form-group mb-2{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                <div class="col-md-12">
+                  {!! app('captcha')->display() !!}
+                  @if ($errors->has('g-recaptcha-response'))
+                      <span style="color: red">
+                          {{ $errors->first('g-recaptcha-response') }}
+                      </span>
+                  @else
+                      <span style="visibility: hidden;">.</span>
+                  @endif
+                </div>
+              </div>
+              
               <div>
                 <button class="btn btn-primary px-4 hijos" id="btni" style="background-color: #003C71" type="submit">Iniciar sesion</button>
               </div>

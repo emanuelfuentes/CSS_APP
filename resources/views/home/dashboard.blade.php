@@ -9,6 +9,9 @@
                 <admin-estudiantes></admin-estudiantes>
             </template>
             <template v-if="menu==2">
+                <historial-proyectos></historial-proyectos>
+            </template>
+            <template v-if="menu==3">
                 <recordatorio></recordatorio>
             </template>
 
@@ -20,16 +23,10 @@
             <template v-if="menu==1">
                 <mis-proyectos></mis-proyectos>
             </template>
-
             <template v-if="menu==2">
-                <historial-proyectos></historial-proyectos>
-            </template>
-
-            <template v-if="menu==3">
                 <recordatorio></recordatorio>
             </template>
-
-            <template v-if="menu==4">
+            <template v-if="menu==3">
                 <perfil></perfil>
             </template>
         @else

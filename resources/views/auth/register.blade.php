@@ -22,6 +22,7 @@
     <script src="js/plantilla.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- <link href="css/plantilla.css" rel="stylesheet"> -->
   </head>
   <script>
@@ -102,16 +103,30 @@
                               @endforeach
                             </select>
                         </div>
+                        
                         <div class="form-group mb-2">
-                            <label for="carrera" class="label-form">Carrera</label>
-                            <select class="form-control" id="carrera" name="carrera"></select>
-                            @if($errors->first('email_existente'))
-                            {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
+                          <label for="carrera" class="label-form">Carrera</label>
+                          <select class="form-control" id="carrera" name="carrera"></select>
+                          @if($errors->first('email_existente'))
+                          {!!$errors->first('email_existente','<span style="color: red">:message</span>')!!}
+                          @else
+                              <span style="visibility: hidden;">.</span>
+                          @endif
+                        </div>
+                        <div class="form-group mb-2{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                          <div class="col-md-12">
+                            {!! app('captcha')->display() !!}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <span style="color: red">
+                                    {{ $errors->first('g-recaptcha-response') }}
+                                </span>
                             @else
                                 <span style="visibility: hidden;">.</span>
                             @endif
-                        </div>                        
-                        <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
+                          </div>
+                        </div>
+                      </div>                  
+                      <button type="submit" class="btn btn-primary" style="background-color: #003C71" id="registrarbtn">Register</button>
                     </div>
                 </form>
             </div>
