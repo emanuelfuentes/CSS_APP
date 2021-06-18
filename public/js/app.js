@@ -37578,6 +37578,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38059,41 +38074,43 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
-                    _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
+                        _c("td", [_vm._v("Tipo")]),
+                        _vm._v(" "),
                         _c("td", {
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Cupos")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Horario")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped table-sm"
-                  },
-                  [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c("tbody", [
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
+                        _c("td", [_vm._v("Encargado")]),
+                        _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", [_vm._v("Descripción")]),
                         _vm._v(" "),
                         _c("td", {
                           domProps: { textContent: _vm._s(_vm.modal_desc) }
@@ -38183,28 +38200,6 @@ var staticRenderFns = [
           "Este proceso se puede realizar una vez por día. Se le notificará al encargado sobre su aplicación y él \n                        le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación."
         )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cupos")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Horario")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Encargado")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Descripción")])
     ])
   }
 ]
