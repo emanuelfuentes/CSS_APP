@@ -113,7 +113,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-bordered table-striped table-sm">
+                            <table class="table table-sm" style="font-size: 1.35em;">
                                <!-- <thead>
                                     <th>Tipo</th>
                                     <th>Cupos</th>
