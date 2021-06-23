@@ -249,13 +249,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
                     var proyectos = respuesta.proyectos.data;
-                    var auxiliar = [];
-                    proyectos.map((dato, key)=> {
-                        if(dato.estado){
-                            auxiliar.push(dato);
-                        }
-                    })
-                    me.arrayProyectos = auxiliar;
+                    me.arrayProyectos = proyectos;
                     me.pagination = respuesta.pagination;
                 })
                 .catch(function (error) {

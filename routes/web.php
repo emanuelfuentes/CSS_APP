@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['Administrador'])->group(function () {
         Route::get('/todos_proyectos', 'ProyectoController@index');
+        Route::get('/historial_proyectos', 'ProyectoController@proyectosNoDisponibles');
         Route::post('/proyecto/insertar', 'ProyectoController@store');
         Route::put('/proyecto/actualizar', 'ProyectoController@update'); 
         Route::put('/proyecto/estado', 'ProyectoController@state');
