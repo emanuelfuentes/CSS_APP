@@ -1,4 +1,3 @@
-
 <template>
   <main class="main">
     <!-- Breadcrumb -->
@@ -13,7 +12,6 @@
           <i class="fa fa-align-justify"></i> Historial
         </div>
         <div class="card-body">
-          
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
@@ -26,44 +24,31 @@
               </tr>
             </thead>
             <tbody>
-                <tr
-                  v-for="(proyecto,index) in arrayProyectos"
-                  :key="proyecto.idProyecto"
-                >
-                  <!-- <td>
-                                        <div v-if="proyecto.estado">
-                                            <button type="button" @click="abrirModal('proyecto', proyecto)" class="btn btn-success btn-sm" data-target="#modalNuevo">
-                                                <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div v-else>
-                                            <button disabled type="button" class="btn btn-success btn-sm" data-target="#modalNuevo">
-                                            <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        
-                                    </td>-->
-                  <td >{{index + 1}}</td>
-                  <td v-text="proyecto.nombre"></td>
-                  <td v-text="proyecto.descripcion"></td>
-                  <td>
-                    <div v-if="proyecto.estado">
-                      <span class="badge badge-success">Disponible</span>
-                    </div>
-                    <div v-else>
-                      <span class="badge badge-danger">No disponible</span>
-                    </div>
-                  </td>
-                  <td>
-                    <button
-                      type="button"
-                      @click="abrirModal('info', proyecto)"
-                      class="btn btn-info btn-sm"
-                    >
-                      <i class="icon-info"></i>
-                    </button>
-                  </td>
-                </tr>
+              <tr
+                v-for="(proyecto, index) in arrayProyectos"
+                :key="proyecto.idProyecto"
+              >
+                <td>{{ index + 1 }}</td>
+                <td v-text="proyecto.nombre"></td>
+                <td v-text="proyecto.descripcion"></td>
+                <td>
+                  <div v-if="proyecto.estado">
+                    <span class="badge badge-success">Disponible</span>
+                  </div>
+                  <div v-else>
+                    <span class="badge badge-danger">No disponible</span>
+                  </div>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    @click="abrirModal('info', proyecto)"
+                    class="btn btn-info btn-sm"
+                  >
+                    <i class="icon-info"></i>
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
           <nav>
@@ -179,7 +164,7 @@
 </template>
 
 <script>
-import {API_HOST} from '../constants/endpoint.js';
+import { API_HOST } from "../constants/endpoint.js";
 
 export default {
   data() {
@@ -209,10 +194,10 @@ export default {
     };
   },
   computed: {
-    isActived: function() {
+    isActived: function () {
       return this.pagination.current_page;
     },
-    pagesNumber: function() {
+    pagesNumber: function () {
       if (!this.pagination.to) {
         return [];
       }
@@ -233,26 +218,26 @@ export default {
     },
   },
   methods: {
-    listarProyectos(page) {
-      let me = this
-                //var url2 = '/public/proyecto?page=' + page;
-                var url = `${API_HOST}/todos_proyectos?page=${page}`; 
-                axios.get(url).then(function (response) {
-                    var respuesta = response.data;
-                    var proyectos = respuesta.proyectos.data;
-                    var auxiliar = [];
-                    proyectos.map((dato, key)=> {
-                        if(!dato.estado){
-                            auxiliar.push(dato)
-                        }
-                    })
-                    me.arrayProyectos = auxiliar;
-                    me.pagination = respuesta.pagination;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+    bindData(page){
+      let me = this;
+      //var url2 = '/public/proyecto?page=' + page;
+      var url = `${API_HOST}/historial_proyectos?page=${page}`;
+      axios.get(url).then(function (response) {
+          var respuesta = response.data;
+          var proyectos = respuesta.proyectos.data;
+          me.arrayProyectos = proyectos;
+          me.pagination = respuesta.pagination;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
+    cambiarPagina(page){
+      let me = this;
+      me.pagination.current_page = page;
+      me.bindData(page);
+    },
+
     cerrarModal() {
       this.modal = 0;
     },
@@ -277,7 +262,7 @@ export default {
     },
   },
   mounted() {
-    this.listarProyectos();
+    this.bindData();
   },
 };
 </script>

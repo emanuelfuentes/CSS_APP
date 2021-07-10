@@ -35086,21 +35086,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35157,24 +35142,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
-    listarProyectos: function listarProyectos(page) {
+    bindData: function bindData(page) {
       var me = this;
       //var url2 = '/public/proyecto?page=' + page;
-      var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/todos_proyectos?page=" + page;
+      var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/historial_proyectos?page=" + page;
       axios.get(url).then(function (response) {
         var respuesta = response.data;
         var proyectos = respuesta.proyectos.data;
-        var auxiliar = [];
-        proyectos.map(function (dato, key) {
-          if (!dato.estado) {
-            auxiliar.push(dato);
-          }
-        });
-        me.arrayProyectos = auxiliar;
+        me.arrayProyectos = proyectos;
         me.pagination = respuesta.pagination;
       }).catch(function (error) {
         console.log(error);
       });
+    },
+    cambiarPagina: function cambiarPagina(page) {
+      var me = this;
+      me.pagination.current_page = page;
+      me.bindData(page);
     },
     cerrarModal: function cerrarModal() {
       this.modal = 0;
@@ -35203,7 +35187,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    this.listarProyectos();
+    this.bindData();
   }
 });
 
@@ -35900,13 +35884,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 var proyectos = respuesta.proyectos.data;
-                var auxiliar = [];
-                proyectos.map(function (dato, key) {
-                    if (dato.estado) {
-                        auxiliar.push(dato);
-                    }
-                });
-                me.arrayProyectos = auxiliar;
+                me.arrayProyectos = proyectos;
                 me.pagination = respuesta.pagination;
             }).catch(function (error) {
                 console.log(error);

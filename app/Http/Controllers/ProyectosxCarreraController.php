@@ -36,6 +36,7 @@ class ProyectosxCarreraController extends Controller
         $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
         'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+        ->where('proyecto.estado','=','1')
         ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
         ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
         ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)

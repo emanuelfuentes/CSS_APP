@@ -16,7 +16,24 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
-        $proyectos = Proyecto::paginate(5);
+        $proyectos = Proyecto::where('estado','=','1')->paginate(5);
+        return [
+            'pagination' => [
+                'total'         => $proyectos->total(),
+                'current_page'  => $proyectos->currentPage(),
+                'per_page'      => $proyectos->perPage(),
+                'last_page'     => $proyectos->lastPage(),
+                'from'          => $proyectos->firstItem(),
+                'to'            => $proyectos->lastItem(),
+            ],
+            'proyectos' => $proyectos
+        ];
+    }
+
+    public function proyectosNoDisponibles(Request $request)
+    {
+        if(!$request->ajax()) return redirect('/home');
+        $proyectos = Proyecto::where('estado','=','0')->paginate(5);
         return [
             'pagination' => [
                 'total'         => $proyectos->total(),
