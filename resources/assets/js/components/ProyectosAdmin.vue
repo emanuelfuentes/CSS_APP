@@ -15,58 +15,56 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <button type="button" @click="abrirModal('insertar', null)" class="btn btn-primary"><i class="icon-plus"></i> Agregar</button>
+                                    <button type="button" @click="abrirModal('insertar', null)" data-toggle="modal" data-target="#editModal" class="btn btn-primary"><i class="icon-plus"></i> Agregar</button>
                                 </div>
                             </div>
                         </div>
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
-                                    <th>Estado</th>
-                                    <th>Información</th>
+                                    <th style="text-align: center;">Estado</th>
+                                    <th style="text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr id="fila" v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td id="icons-pos" style="text-align: center;">
-                                        <div class="button-container">
-                                            <button type="button" @click="abrirModal('editar', proyecto)" class="btn btn-warning btn-sm">
-                                                <i class="icon-pencil"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div class="button-container" v-if="proyecto.estado">
-                                            <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-danger btn-sm">
-                                                <i class="icon-lock"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div class="button-container" v-else>
-                                            <button type="button" @click="abrirModal('estado', proyecto)" class="btn btn-success btn-sm">
-                                                <i class="icon-lock-open"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div class="button-container">
-                                            <button type="button" @click="abrirModal('estudiantes', proyecto)" class="btn btn-info btn-sm">
-                                                <i class="icon-people"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                    </td>
-                                    <td id="pos" v-text="proyecto.nombre"></td>
-                                    <td id="pos" v-text="proyecto.descripcion"></td>
-                                    <td id="estado" style="text-align: center;">
+                                    <td id="pos" v-text="proyecto.nombre" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="pos" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="estado" style="text-align: center;" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success" id="estadod" style="text-align:center">Disponible</span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger" id="estadond">No disponible</span>
+                                            <span class="badge badge-danger" id="estadond">No <br> disponible</span>
                                         </div>
                                     </td>
-                                    <td style="text-align: center;">
-                                        <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm" style="border-radius: 100%;">
-                                          <i class="icon-info"></i>
-                                        </button>  &nbsp;
+                                    <td id="icons-pos" >
+                                        <div class="button-container">
+                                            <button type="button" @click="abrirModal('editar', proyecto)" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-sm" style="width: 100%;">
+                                                <i class="icon-pencil"></i>
+                                                <span class="btn-label">Editar</span>
+                                            </button>
+                                        </div>
+                                        <div class="button-container" v-if="proyecto.estado">
+                                            <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-danger btn-sm" style="margin: 8px 0; width: 100%;">
+                                                <i class="icon-lock"></i>
+                                                <span class="btn-label">Desactivar</span>
+                                            </button>
+                                        </div>
+                                        <div class="button-container" v-else>
+                                            <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
+                                                <i class="icon-lock-open"></i>
+                                                <span class="btn-label">Activar</span>
+                                            </button>
+                                        </div>
+                                        <div class="button-container">
+                                            <button type="button" @click="abrirModal('estudiantes', proyecto)" data-toggle="modal" data-target="#membersModal" class="btn btn-info btn-sm" style="width: 100%;">
+                                                <i class="icon-people"></i>
+                                                <span class="btn-label">Miembros</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -89,7 +87,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal editar proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" style="display: none; overflow-y: scroll;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="editModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -100,7 +98,7 @@
                                 <h4 class="modal-title">Editar proyecto existente</h4>
                             </div>
                             
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -229,7 +227,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="actualizarInsertarProyecto()">Guardar</button>
                         </div>
                     </div>
@@ -239,12 +237,12 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal estado del proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="statusModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Estado del proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" data-dismiss="modal" class="close" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -255,7 +253,7 @@
                             <h2>¿Activar este proyecto?</h2>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
                         </div>
                     </div>
@@ -265,12 +263,12 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio de modal de estudiantes por proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal3}" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="membersModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg modal-student" role="document">
                     <div class="modal-content modal-student">
                         <div class="modal-header">
                             <h4 class="modal-title">Estudiantes</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -314,7 +312,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
                 </div>
@@ -347,12 +345,12 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal5}" role="dialog" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="projectDetailModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -425,7 +423,7 @@
                             </table>
                         </div> -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

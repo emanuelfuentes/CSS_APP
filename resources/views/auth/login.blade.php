@@ -71,7 +71,7 @@
                   </div>
 
                   <div class="d-flex justify-content-center">
-                    <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2 mx-auto" type="submit">Iniciar sesion</button>
+                    <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2 mx-auto" style="background-image: linear-gradient( 109.6deg,  rgba(39,142,255,1) 11.2%, rgba(98,113,255,0.78) 100.2% );" type="submit">Iniciar sesion</button>
                   </div>
 
                   <div class="d-flex justify-content-center mt-4" style="gap: 24px;">

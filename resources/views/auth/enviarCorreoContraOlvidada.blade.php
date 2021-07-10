@@ -29,11 +29,13 @@
         {{ csrf_field() }}
         <div class="heading">
           <h1>Cambiar contraseña</h1>
+        </div>
+        <div style="padding: 0 16px;">
           <p>Por favor ingrese su carnet y se le enviará un link al correo asociado para poder realizar el cambio de contraseña. 
           <a style="color:red">Se puede realizar el cambio de contraseña una vez por día.</a></p>
         </div>
 
-        <div class="form-group mb-2">
+        <div class="form-group mb-2" style="padding: 0 16px;">
           <input type="text" class="form-control" name="carnet" value="{{ old('carnet') }}">
           @if($errors->first('no_verificado'))
             {!!$errors->first('no_verificado','<span style="color:red">:message</span>')!!}
@@ -49,7 +51,7 @@
         </div>
         
         <div class="col-md-6 col-md-offset-4">
-          <button type="submit" id='btn-submit' class="btn btn-primary">Enviar link</button>
+          <button type="submit" id='btn-submit' style="margin-left: 16px; margin-bottom: 16px; background-image: linear-gradient( 109.6deg,  rgba(39,142,255,1) 11.2%, rgba(98,113,255,0.78) 100.2% );" class="btn btn-primary">Enviar link</button>
         </div>
       </form>
 
