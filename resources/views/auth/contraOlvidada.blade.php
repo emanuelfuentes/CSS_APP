@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/olvidec.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/changePassword.css') }}">
     <link href="{{ asset('js/plantilla.css') }}" >
     <link href="{{ asset('js/jquery.min.css') }}" >
     <link href="{{ asset('js/bootstrap.min.css') }}" >
@@ -55,12 +55,14 @@
 </body> -->
 
 <body>
-    <div class="container">
+    <div class="container" id="main-container">
         <div class="card-body" id="cuerpoc">
-            <h2 id="titulo">Cambiar contraseña</h2>
 
             <form id="form" action="{{ url('/cambiar_contra_olvidada/'.$user->correo) }}" method="post">
             {{ csrf_field() }}
+                <div id="heading">
+                    <h1>Cambiar contraseña</h1>
+                </div>
                 <label for="user" class="label-form">Usuario</label>
                 <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
@@ -79,8 +81,9 @@
                 @else
                     <span style="visibility: hidden; margin-bottom:0.5em">.</span>
                 @endif
+                <div class="col-md-6 col-md-offset-4">
                 <button type="submit" id="submit">Establecer contraseña</button>
-
+                </div>
             </form>
         </div>
     </div>
