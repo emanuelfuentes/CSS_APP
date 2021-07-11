@@ -57,32 +57,33 @@
 <body>
     <div class="container" id="main-container">
         <div class="card-body" id="cuerpoc">
-
-            <form id="form" action="{{ url('/cambiar_contra_olvidada/'.$user->correo) }}" method="post">
+            <form id="form-horizontal" action="{{ url('/cambiar_contra_olvidada/'.$user->correo) }}" method="post">
             {{ csrf_field() }}
                 <div id="heading">
                     <h1>Cambiar contraseña</h1>
                 </div>
-                <label for="user" class="label-form">Usuario</label>
-                <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
+                <div class="form-group row" id="form-group">
+                    <label id="luser" for="user" class="label-form">Usuario</label>
+                    <input class="form-control" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
-                <label for="password" class="label-form">Contraseña</label>
-                <input type="password" name="contraseña" id="contraseña">
-                @if($errors->first('contraseña'))
-                    {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
-                @else
-                    <span style="visibility: hidden;">.</span>
-                @endif
+                    <label id="lpassword" for="password" class="label-form">Contraseña</label>
+                    <input class="form-control" type="password" name="contraseña" id="contraseña">
+                    @if($errors->first('contraseña'))
+                        {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
+                    @else
+                        <span style="visibility: hidden;">.</span>
+                    @endif
 
-                <label for="password_confirm" class="label-form">Confirmar contraseña</label>
-                <input type="password" name="confirmar" id="confirmar">
-                @if($errors->first('confirmar'))
-                    {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
-                @else
-                    <span style="visibility: hidden; margin-bottom:0.5em">.</span>
-                @endif
+                    <label for="password_confirm" class="label-form">Confirmar contraseña</label>
+                    <input class="form-control" type="password" name="confirmar" id="confirmar">
+                    @if($errors->first('confirmar'))
+                        {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
+                    @else
+                        <span style="visibility: hidden;">.</span>
+                    @endif
+                </div>
                 <div class="col-md-6 col-md-offset-4">
-                <button type="submit" id="submit">Establecer contraseña</button>
+                <button type="submit" id="submit" class="btn btn-primary">Establecer contraseña</button>
                 </div>
             </form>
         </div>
