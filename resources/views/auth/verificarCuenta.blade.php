@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/olvidec.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/verifyAccount.css') }}">
     <link href="{{ asset('js/plantilla.css') }}" >
     <link href="{{ asset('js/jquery.min.css') }}" >
     <link href="{{ asset('js/bootstrap.min.css') }}" >
@@ -15,16 +15,54 @@
     <script src="js/plantilla.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>-->
-    <title>Document</title>
+    <title>Verificar Cuenta</title>
 </head>
-<body class="cuerpo">
+
+<body>
+    <div class="container" id="main-container">
+        <div class="card-body" id="cuerpoc">
+            <form id="form-horizontal" action="{{ url('/verificar_usuario/'.$user->correo) }}" method="post">
+            {{ csrf_field() }}
+                <div class="heading">
+                    <h1>Verifique su cuenta</h1>
+                </div>
+                <div class="form-group row" id="form-group">
+
+                    <label id="luser" for="user" class="label-form">Usuario</label>
+                    <input class="form-control" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
+
+                    <label id="lpassword" for="password" class="label-form">Contraseña</label>
+                    <input class="form-control" type="password" name="contraseña" id="contraseña">
+                    @if($errors->first('contraseña'))
+                        {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
+                    @else
+                        <span style="visibility: hidden;">.</span>
+                    @endif
+
+                    <label for="password_confirm" class="label-form">Confirmar contraseña</label>
+                    <input class="form-control" type="password" name="confirmar" id="confirmar">
+                    @if($errors->first('confirmar'))
+                        {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
+                    @else
+                        <span style="visibility: hidden;">.</span>
+                    @endif
+                </div>
+                <div class="col-md-6 col-md-offset-4">
+                    <button type="submit" id="submit" class="btn btn-primary">Verificar cuenta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<!--<body class="cuerpo">
     <div class="container">
         <div class="card-group">
             <div class="card">
                 <div class="card-body" id="cuerpoc">
-                    <!--<img class="icon" src="img/lock.png" width="125" height="150">-->
+                    <img class="icon" src="img/lock.png" width="125" height="150">
                     <h2 id="titulo">Verifique su cuenta</h2>
-                    <!--<h2 id="usuario">{{$user->correo}}</h2>-->
+                    <h2 id="usuario">{{$user->correo}}</h2>
 
                     <form id="form" action="{{ url('/verificar_usuario/'.$user->correo) }}" method="post">
                     {{ csrf_field() }}
@@ -46,15 +84,15 @@
                         @else
                             <span style="visibility: hidden; margin-bottom:0.5em">.</span>
                         @endif
-                        <button type="submit" id="submit">Establecer contraseña</button>
+                        <button type="submit" id="submit">Verificar cuenta</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
+</body>-->
     <style>
-    <?php include "css/olvidec.css" ?>
+    <?php include "css/verifyAccount.css" ?>
     </style>
     <style>
     <?php include "css/bootstrap.min.css" ?>
