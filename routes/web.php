@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('main');
     
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/get_user', 'UserController@getUser');
 
     Route::middleware(['Administrador'])->group(function () {
         Route::get('/todos_proyectos', 'ProyectoController@index');
@@ -56,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['NormalUser'])->group(function () {
-        Route::get('/get_user', 'UserController@getUser');
+        
         Route::get('/ya_aplico', 'UserController@yaAplico');
         Route::get('/pxe_estudiante', 'ProyectoxEstudianteController@pxePorId');
         Route::get('/proyectos_aplicados', 'ProyectoxEstudianteController@proyectosAplicados');

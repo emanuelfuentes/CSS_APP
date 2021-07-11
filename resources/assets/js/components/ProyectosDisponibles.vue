@@ -175,6 +175,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 user_id : 0,
+                user_email: '',
                 ya_aplico_hoy : 0,
                 descripcion : '',
                 arrayProyectos : [''],
@@ -230,6 +231,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 let me = this
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
                     me.user_id = response.data.idUser;
+                    me.user_email = response.data.correo;
                 })
                 .catch(function (error) {
                     console.log(error);

@@ -86,6 +86,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 carnet : '',
+                user_email: '',
                 nombres : '',
                 apellidos : '',
                 idCarrera : 0,
@@ -116,6 +117,12 @@ import {API_HOST} from '../constants/endpoint.js';
                 $('#facultad').change(function(){
                     me.getCarreras(false)
                 })
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_email = response.data.correo;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             buscarEstudiante(){
                 let me = this

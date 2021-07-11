@@ -75,6 +75,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 user_id : 0,
+                user_email: '',
                 correo : '',
                 carnet : 0,
                 nombres : '',
@@ -105,6 +106,12 @@ import {API_HOST} from '../constants/endpoint.js';
                     me.carrera = res.nombre_c;
                     me.facultad = res.nombre_f;
                     me.perfil = res.anio_carrera;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_email = response.data.correo;
                 })
                 .catch(function (error) {
                     console.log(error);

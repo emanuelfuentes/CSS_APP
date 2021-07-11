@@ -170,6 +170,7 @@ import { API_HOST } from "../constants/endpoint.js";
 export default {
   data() {
     return {
+      user_email: '',
       nombre: "",
       descripcion: "",
       arrayProyectos: [""],
@@ -231,6 +232,12 @@ export default {
         })
         .catch(function (error) {
           console.log(error);
+        });
+        axios.get(`${API_HOST}/get_user`).then(function (response) {
+            me.user_email = response.data.correo;
+        })
+        .catch(function (error) {
+            console.log(error);
         });
     },
     cambiarPagina(page){

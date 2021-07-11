@@ -34685,6 +34685,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             user_id: 0,
+            user_email: '',
             correo: '',
             carnet: 0,
             nombres: '',
@@ -34715,6 +34716,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 me.carrera = res.nombre_c;
                 me.facultad = res.nombre_f;
                 me.perfil = res.anio_carrera;
+            }).catch(function (error) {
+                console.log(error);
+            });
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_email = response.data.correo;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -35108,6 +35114,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      user_email: '',
       nombre: "",
       descripcion: "",
       arrayProyectos: [""],
@@ -35167,6 +35174,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var proyectos = respuesta.proyectos.data;
         me.arrayProyectos = proyectos;
         me.pagination = respuesta.pagination;
+      }).catch(function (error) {
+        console.log(error);
+      });
+      axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/get_user").then(function (response) {
+        me.user_email = response.data.correo;
       }).catch(function (error) {
         console.log(error);
       });
@@ -35843,6 +35855,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             user_id: 0,
+            user_email: '',
             ya_aplico_hoy: 0,
             descripcion: '',
             arrayProyectos: [''],
@@ -35899,6 +35912,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var me = this;
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
                 me.user_id = response.data.idUser;
+                me.user_email = response.data.correo;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -36563,6 +36577,8 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -36713,33 +36729,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {
+        var _ref;
+
+        return _ref = {
+            user_email: '',
             nombre: '',
-            user_id: '',
-            descripcion: '',
-            arrayProyectos: [''],
-            arrayPXE: [''],
-            modal: 0,
-            modal2: 0,
-            id_proyecto: 0,
-            modal_encargado: '',
-            modal_nombre: '',
-            modal_desc: '',
-            modal_tipo_horas: '',
-            modal_cupos: 0,
-            modal_horario: '',
-            modal_fecha_in: '',
-            modal_fecha_fin: '',
-            pagination: {
-                'total': 0,
-                'current_page': 0,
-                'per_page': 0,
-                'last_page': 0,
-                'from': 0,
-                'to': 0
-            },
-            offset: 3
-        };
+            user_id: ''
+        }, _defineProperty(_ref, 'user_email', ''), _defineProperty(_ref, 'descripcion', ''), _defineProperty(_ref, 'arrayProyectos', ['']), _defineProperty(_ref, 'arrayPXE', ['']), _defineProperty(_ref, 'modal', 0), _defineProperty(_ref, 'modal2', 0), _defineProperty(_ref, 'id_proyecto', 0), _defineProperty(_ref, 'modal_encargado', ''), _defineProperty(_ref, 'modal_nombre', ''), _defineProperty(_ref, 'modal_desc', ''), _defineProperty(_ref, 'modal_tipo_horas', ''), _defineProperty(_ref, 'modal_cupos', 0), _defineProperty(_ref, 'modal_horario', ''), _defineProperty(_ref, 'modal_fecha_in', ''), _defineProperty(_ref, 'modal_fecha_fin', ''), _defineProperty(_ref, 'pagination', {
+            'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0
+        }), _defineProperty(_ref, 'offset', 3), _ref;
     },
 
     computed: {
@@ -36787,6 +36790,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
                 me.user_id = response.data.idUser;
+                me.user_email = response.data.correo;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -37863,6 +37867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            user_email: '',
             arrayProyectos: [],
             arrayCarreras: [''],
             arrayPerfiles: [''],
@@ -37944,6 +37949,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
             me.getCarrerasAndPerfils();
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_email = response.data.correo;
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
         cambiarPagina: function cambiarPagina(page) {
             var me = this;
@@ -40135,6 +40145,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             carnet: '',
+            user_email: '',
             nombres: '',
             apellidos: '',
             idCarrera: 0,
@@ -40165,6 +40176,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             $('#facultad').change(function () {
                 me.getCarreras(false);
+            });
+            axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/get_user').then(function (response) {
+                me.user_email = response.data.correo;
+            }).catch(function (error) {
+                console.log(error);
             });
         },
         buscarEstudiante: function buscarEstudiante() {
