@@ -34678,6 +34678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -34717,6 +34718,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        logout: function logout() {
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/logout';
+            axios.post(url).then(function () {
+                return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
+            });
         }
     },
     mounted: function mounted() {
@@ -34734,11 +34741,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Perfil")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
@@ -34794,16 +34819,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Perfil")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -35086,6 +35101,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -35184,6 +35200,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         default:
           break;
       }
+    },
+    logout: function logout() {
+      var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/logout";
+      axios.post(url).then(function () {
+        return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/";
+      });
     }
   },
   mounted: function mounted() {
@@ -35200,18 +35222,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Historial")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -35399,7 +35441,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35427,7 +35469,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35467,16 +35509,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [_vm._v("Historial")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -35803,6 +35835,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -35944,6 +35978,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 default:
                     break;
             }
+        },
+        logout: function logout() {
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/logout';
+            axios.post(url).then(function () {
+                return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
+            });
         }
     },
     mounted: function mounted() {
@@ -35960,7 +36000,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Proyectos Disponibles")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
@@ -35983,7 +36043,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -36008,7 +36068,7 @@ var render = function() {
                             _vm._v("  \n                                    ")
                           ])
                         : _c("div", [
-                            _vm._m(2, true),
+                            _vm._m(1, true),
                             _vm._v("  \n                                    ")
                           ])
                     ]),
@@ -36183,7 +36243,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -36349,18 +36409,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Proyectos Disponibles")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -36660,6 +36708,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36791,6 +36840,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 default:
                     break;
             }
+        },
+        logout: function logout() {
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/logout';
+            axios.post(url).then(function () {
+                return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
+            });
         }
     },
     mounted: function mounted() {
@@ -36807,18 +36862,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Proyectos Aplicados")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -37017,7 +37092,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37053,7 +37128,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37138,7 +37213,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -37177,18 +37252,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Proyectos Aplicados")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37358,6 +37421,7 @@ exports.push([module.i, "\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
+//
 //
 //
 //
@@ -38180,6 +38244,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        logout: function logout() {
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/logout';
+            axios.post(url).then(function () {
+                return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
+            });
         }
     },
     mounted: function mounted() {
@@ -38196,11 +38266,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Administración de Proyectos")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group row" }, [
@@ -38231,7 +38321,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -38296,7 +38386,7 @@ var render = function() {
                                   [_vm._v("Disponible")]
                                 )
                               ])
-                            : _c("div", [_vm._m(3, true)])
+                            : _c("div", [_vm._m(2, true)])
                         ]
                       ),
                       _vm._v(" "),
@@ -39037,7 +39127,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(4),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -39431,7 +39521,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(5),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -39782,18 +39872,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Administración de Proyectos")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Listado de Proyectos\n                ")
@@ -40050,6 +40128,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40156,6 +40235,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 default:
                     break;
             }
+        },
+        logout: function logout() {
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/logout';
+            axios.post(url).then(function () {
+                return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
+            });
         }
     },
     mounted: function mounted() {
@@ -40172,11 +40257,31 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _vm._m(0),
+    _c("ol", { staticClass: "breadcrumb" }, [
+      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+      _vm._v(" "),
+      _c("li", { staticClass: "breadcrumb-item active" }, [
+        _vm._v("Administración de Estudiantes")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.logout()
+            }
+          }
+        },
+        [_vm._v("Cerrar sesión")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "row" }, [
@@ -40487,18 +40592,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Administración de Estudiantes")
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

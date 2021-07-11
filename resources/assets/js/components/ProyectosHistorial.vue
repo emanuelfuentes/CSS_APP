@@ -4,6 +4,7 @@
     <ol class="breadcrumb">
       <li class="breadcrumb-item">Inicio</li>
       <li class="breadcrumb-item active">Historial</li>
+      <button type="button" class="btn btn-primary" @click ="logout()">Cerrar sesión</button>
     </ol>
     <div class="container-fluid">
       <!-- Ejemplo de tabla Listado -->
@@ -260,6 +261,10 @@ export default {
           break;
       }
     },
+      logout(){
+          var url = `${API_HOST}/logout`;
+          axios.post(url).then(() => location.href = `${API_HOST}/`)
+      }
   },
   mounted() {
     this.bindData();
