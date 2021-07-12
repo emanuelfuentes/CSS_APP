@@ -6,7 +6,7 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                <ul class="nav navbar-nav ml-auto" id="logout" style="margin-right: 10px">
+                <ul class="nav navbar-nav ml-auto" id="logout">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" >
                             <span class="d-md-down-none" v-text="user_email"></span>
@@ -15,8 +15,7 @@
                             <div class="dropdown-header text-center">
                                 <strong>Cuenta</strong>
                             </div>
-                            <a class="dropdown-item" 
-                            @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                            <button class="dropdown-item" type="button" @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</button>
                         </div>
                     </li>
                 </ul>

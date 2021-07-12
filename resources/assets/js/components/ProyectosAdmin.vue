@@ -15,8 +15,8 @@
                     <div class="dropdown-header text-center">
                         <strong>Cuenta</strong>
                     </div>
-                    <a class="dropdown-item" 
-                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                    <button class="dropdown-item" type="button" 
+                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</button>
                 </div>
             </li>
         </ul>
