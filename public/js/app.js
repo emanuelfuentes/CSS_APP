@@ -38140,22 +38140,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         cerrarModal: function cerrarModal() {
-            if (this.modal == 1) {
+            if (this.modal == 1 || this.modal4 == 1) {
                 this.modal = 0;
-                this.arrayCarreraPerfil = [[]];
-                this.modal_nombre = '';
-                this.modal_encargado = '';
-                this.modal_cupos = '';
-                this.modal_desc = '';
-                this.modal_horario = '';
-                this.modal_contraparte = '';
-                this.modal_tipo_horas = '';
-                this.contraparte = '';
-                this.modal_fecha_in = '';
-                this.modal_fecha_fin = '';
-                this.errorProyecto = [];
-                this.errorDateMsg = '';
-            } else if (this.modal4 == 1) {
                 this.modal4 = 0;
             } else {
                 this.add_edit_flag = 0;
@@ -38175,7 +38161,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal = 1;
                         this.add_edit_flag = 1;
                         this.flagError = false;
-                        this.errorPerfilMsg = "";
+                        this.arrayCarreraPerfil = [[]];
+                        this.modal_nombre = '';
+                        this.modal_encargado = '';
+                        this.modal_cupos = '';
+                        this.modal_desc = '';
+                        this.modal_horario = '';
+                        this.modal_contraparte = '';
+                        this.modal_tipo_horas = '';
+                        this.contraparte = '';
+                        this.modal_fecha_in = '';
+                        this.modal_fecha_fin = '';
+                        this.errorProyecto = [];
+                        this.errorPerfilMsg = '';
+
                         break;
                     }
                 case "editar":
@@ -38293,7 +38292,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         aceptarRechazarEstudiante: function aceptarRechazarEstudiante() {
             var me = this;
             var estadoEst = 2;
-            if (me.flagEstudiante) estadoEst = 1;
+            if (me.flagEstudiante) {
+                axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/rechazarestudiante', {
+                    'idUser': me.id_estudiante,
+                    'idProyecto': me.id_proyecto
+                }).catch(function (error) {
+                    console.log(error);
+                });
+                estadoEst = 1;
+            }
             axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/aplicarestudiante', {
                 'idUser': me.id_estudiante,
                 'idProyecto': me.id_proyecto,
@@ -39622,7 +39629,11 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success btn-sm",
-                                    attrs: { type: "button" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#confirmModal"
+                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.abrirModal(
@@ -39646,7 +39657,11 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-danger btn-sm",
-                                    attrs: { type: "button" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#confirmModal"
+                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.abrirModal(
@@ -39712,8 +39727,12 @@ var render = function() {
       {
         staticClass: "modal fade",
         class: { mostrar: _vm.modal4 },
-        staticStyle: { display: "none", "overflow-y": "scroll" },
-        attrs: { tabindex: "-1", role: "dialog", "aria-hidden": "true" }
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          id: "confirmModal",
+          "aria-hidden": "true"
+        }
       },
       [
         _c(
@@ -39741,7 +39760,11 @@ var render = function() {
                   "button",
                   {
                     staticClass: "close",
-                    attrs: { type: "button", "aria-label": "Close" },
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.cerrarModal()
@@ -39767,7 +39790,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-secondary",
-                    attrs: { type: "button" },
+                    attrs: { type: "button", "data-dismiss": "modal" },
                     on: {
                       click: function($event) {
                         return _vm.cerrarModal()
