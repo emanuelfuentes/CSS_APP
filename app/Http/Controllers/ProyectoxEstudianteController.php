@@ -85,10 +85,13 @@ class ProyectoxEstudianteController extends Controller{
 
         $rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
 
-        foreach($rechazarEstudiante as $rechazar){
-            $rechazar->estado = 2;
-            $rechazar->save();
+        if($rechazarEstudiante != null){
+            foreach($rechazarEstudiante as $rechazar){
+                $rechazar->estado = 2;
+                $rechazar->save();
+            }
         }
+        
     }
 
     public function aplicar(Request $request){
