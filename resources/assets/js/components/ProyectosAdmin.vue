@@ -294,10 +294,10 @@
                                         <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                         <td>
                                             <div v-if="estudiante.estado == 0">
-                                                <button type="button" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
+                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
                                                     Aceptar
                                                 </button>  &nbsp;
-                                                <button type="button" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
+                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
                                                     Rechazar
                                                 </button>  &nbsp;
                                             </div>
@@ -320,7 +320,7 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal de confirmacion para aceptar o rechazar estudiantes-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal4}" role="dialog" style="display: none; overflow-y: scroll;" aria-hidden="true">
+            <div class="modal fade" :class="{'mostrar' : modal4}" tabindex="-1" role="dialog" id="confirmModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
@@ -330,7 +330,7 @@
                             <div v-else>
                                 <h4 class="modal-title">Rechazar estudiante</h4>
                             </div>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -338,7 +338,7 @@
                             <h5 v-text="nombre_estudiante_msg"></h5>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
                         </div>
                     </div>
@@ -685,7 +685,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     this.errorDateMsg = '';
                 }
                 else if(this.modal4 == 1){
-                    this.modal4 = 0;
+                    this.modal4 = 0
                 }
                 else{
                     this.add_edit_flag = 0;
@@ -825,7 +825,15 @@ import {API_HOST} from '../constants/endpoint.js';
             aceptarRechazarEstudiante(){
                 let me = this;
                 var estadoEst = 2;
-                if(me.flagEstudiante) estadoEst = 1;
+                if(me.flagEstudiante){
+                    axios.put(`${API_HOST}/rechazarestudiante`, {
+                        'idUser' : me.id_estudiante,
+                        'idProyecto' : me.id_proyecto,
+                    }).catch(function (error) {
+                        console.log(error);
+                    }); 
+                    estadoEst = 1;
+                }
                 axios.put(`${API_HOST}/aplicarestudiante`, {
                     'idUser' : me.id_estudiante,
                     'idProyecto' : me.id_proyecto,

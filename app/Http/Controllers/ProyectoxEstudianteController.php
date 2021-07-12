@@ -78,6 +78,19 @@ class ProyectoxEstudianteController extends Controller{
         $this->sendEmailAceptadoRechazado($mailData, $estado);
     }
 
+    public function rechazarEstudiante(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $idProyecto = $request->idProyecto;
+        $idUser = $request->idUser;
+
+        $rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
+
+        foreach($rechazarEstudiante as $rechazar){
+            $rechazar->estado = 2;
+            $rechazar->save();
+        }
+    }
+
     public function aplicar(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $pXe = new ProyectoxEstudiante();
