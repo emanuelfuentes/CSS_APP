@@ -3,3 +3,14 @@
 .main{
     font-family: 'Abel';
 }
+
+.sidebar {
+    background-color: #003C71;
+
+}
+
+@media screen and (min-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
