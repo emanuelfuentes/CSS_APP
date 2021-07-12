@@ -40,7 +40,6 @@ class ProyectosxCarreraController extends Controller
         ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
         ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
         ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)
-        ->orWhere('proyectoxcarrera.idCarrera', '=', 8)
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
         
         return [
