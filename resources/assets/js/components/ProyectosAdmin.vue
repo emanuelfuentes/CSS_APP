@@ -668,24 +668,9 @@ import {API_HOST} from '../constants/endpoint.js';
                 }); 
             },
             cerrarModal(){
-                if(this.modal == 1){
+                if(this.modal == 1 || this.modal4 == 1){
                     this.modal = 0;
-                    this.arrayCarreraPerfil = [[]];
-                    this.modal_nombre = '';
-                    this.modal_encargado = '';
-                    this.modal_cupos = ''
-                    this.modal_desc = '';
-                    this.modal_horario = '';
-                    this.modal_contraparte = '';
-                    this.modal_tipo_horas = '';
-                    this.contraparte = '';
-                    this.modal_fecha_in = '';
-                    this.modal_fecha_fin = '';
-                    this.errorProyecto = [];
-                    this.errorDateMsg = '';
-                }
-                else if(this.modal4 == 1){
-                    this.modal4 = 0
+                    this.modal4 = 0;
                 }
                 else{
                     this.add_edit_flag = 0;
@@ -702,7 +687,20 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal = 1;
                             this.add_edit_flag = 1;
                             this.flagError = false;
-                            this.errorPerfilMsg = "";
+                            this.arrayCarreraPerfil = [[]];
+                            this.modal_nombre = '';
+                            this.modal_encargado = '';
+                            this.modal_cupos = ''
+                            this.modal_desc = '';
+                            this.modal_horario = '';
+                            this.modal_contraparte = '';
+                            this.modal_tipo_horas = '';
+                            this.contraparte = '';
+                            this.modal_fecha_in = '';
+                            this.modal_fecha_fin = '';
+                            this.errorProyecto = [];
+                            this.errorPerfilMsg = '';
+
                             break;
                         }
                     case "editar":
