@@ -593,7 +593,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 else{
                     axios.put(`${API_HOST}/proyecto/actualizar`, {
                         'idProyecto' : this.id_proyecto,
-                        'estado' : this.modal_estado,
                         'contraparte' : this.modal_contraparte,
                         'cupos' : this.modal_cupos,
                         'descripcion' : this.modal_desc,
@@ -723,6 +722,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_encargado = '';
                             this.modal_cupos = ''
                             this.modal_desc = '';
+                            this.modal_correo = '';
                             this.modal_horario = '';
                             this.modal_contraparte = '';
                             this.modal_tipo_horas = '';
@@ -743,6 +743,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_encargado = data.encargado;
                             this.modal_nombre = data.nombre;
                             this.modal_desc = data.descripcion;
+                            this.modal_correo = data.correo_encargado;
                             this.modal_tipo_horas = data.tipo_horas;
                             this.modal_cupos = data.cupos;
                             this.modal_horario = data.horario;

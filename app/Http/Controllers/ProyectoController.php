@@ -115,7 +115,6 @@ class ProyectoController extends Controller
     public function update(Request $request)
     {
         $proyecto = Proyecto::findOrFail($request->idProyecto);
-        $proyecto->estado = $request->estado;
         $proyecto->contraparte = $request->contraparte;
         $proyecto->cupos = $request->cupos;
         $proyecto->descripcion = $request->descripcion;
