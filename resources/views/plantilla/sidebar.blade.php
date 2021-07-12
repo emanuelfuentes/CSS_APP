@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" style="height: 100%;">
             <nav class="sidebar-nav">
                 <ul class="nav">
                     <li class="nav-title">
