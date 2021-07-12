@@ -38679,308 +38679,344 @@ var render = function() {
     _vm._v(" "),
     _vm._m(2),
     _vm._v(" "),
-    _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#editModal"
+    _c(
+      "div",
+      {
+        staticClass: "container-fluid",
+        staticStyle: { "background-color": "white" }
+      },
+      [
+        _c("div", { staticClass: "card", staticStyle: { border: "none" } }, [
+          _c("div", { staticClass: "card-body" }, [
+            _c(
+              "div",
+              {
+                staticClass: "form-group row",
+                staticStyle: { "flex-direction": "row-reverse" }
+              },
+              [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "input-group",
+                      staticStyle: { "flex-direction": "row-reverse" }
                     },
-                    on: {
-                      click: function($event) {
-                        return _vm.abrirModal("insertar", null)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "icon-plus" }), _vm._v(" Agregar")]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
-            [
-              _vm._m(4),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.arrayProyectos, function(proyecto) {
-                  return _c(
-                    "tr",
-                    { key: proyecto.idProyecto, attrs: { id: "fila" } },
                     [
-                      _c("td", {
-                        attrs: {
-                          id: "pos",
-                          "data-toggle": "modal",
-                          "data-target": "#projectDetailModal"
-                        },
-                        domProps: { textContent: _vm._s(proyecto.nombre) },
-                        on: {
-                          click: function($event) {
-                            return _vm.abrirModal("info", proyecto)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        attrs: {
-                          id: "pos",
-                          "data-toggle": "modal",
-                          "data-target": "#projectDetailModal"
-                        },
-                        domProps: { textContent: _vm._s(proyecto.descripcion) },
-                        on: {
-                          click: function($event) {
-                            return _vm.abrirModal("info", proyecto)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
                       _c(
-                        "td",
+                        "button",
                         {
-                          staticStyle: { "text-align": "center" },
+                          staticClass: "btn btn-primary",
                           attrs: {
-                            id: "estado",
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#editModal"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.abrirModal("insertar", null)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "icon-plus" }),
+                          _vm._v(" Agregar Proyecto")
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered table-striped table-hover table-sm"
+              },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.arrayProyectos, function(proyecto) {
+                    return _c(
+                      "tr",
+                      { key: proyecto.idProyecto, attrs: { id: "fila" } },
+                      [
+                        _c("td", {
+                          attrs: {
+                            id: "pos",
                             "data-toggle": "modal",
                             "data-target": "#projectDetailModal"
+                          },
+                          domProps: { textContent: _vm._s(proyecto.nombre) },
+                          on: {
+                            click: function($event) {
+                              return _vm.abrirModal("info", proyecto)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          attrs: {
+                            id: "pos",
+                            "data-toggle": "modal",
+                            "data-target": "#projectDetailModal"
+                          },
+                          domProps: {
+                            textContent: _vm._s(proyecto.descripcion)
                           },
                           on: {
                             click: function($event) {
                               return _vm.abrirModal("info", proyecto)
                             }
                           }
-                        },
-                        [
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          {
+                            staticStyle: { "text-align": "center" },
+                            attrs: {
+                              id: "estado",
+                              "data-toggle": "modal",
+                              "data-target": "#projectDetailModal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal("info", proyecto)
+                              }
+                            }
+                          },
+                          [
+                            proyecto.estado
+                              ? _c("div", [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "badge badge-success",
+                                      staticStyle: { "text-align": "center" },
+                                      attrs: { id: "estadod" }
+                                    },
+                                    [_vm._v("Disponible")]
+                                  )
+                                ])
+                              : _c("div", [_vm._m(4, true)])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("td", { attrs: { id: "icons-pos" } }, [
+                          _c("div", { staticClass: "button-container" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-warning btn-sm",
+                                staticStyle: { width: "100%" },
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#editModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("editar", proyecto)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "icon-pencil" }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "btn-label" }, [
+                                  _vm._v("Editar")
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
                           proyecto.estado
-                            ? _c("div", [
+                            ? _c("div", { staticClass: "button-container" }, [
                                 _c(
-                                  "span",
+                                  "button",
                                   {
-                                    staticClass: "badge badge-success",
-                                    staticStyle: { "text-align": "center" },
-                                    attrs: { id: "estadod" }
+                                    staticClass: "btn btn-danger btn-sm",
+                                    staticStyle: {
+                                      margin: "8px 0",
+                                      width: "100%"
+                                    },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#statusModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "estado",
+                                          proyecto
+                                        )
+                                      }
+                                    }
                                   },
-                                  [_vm._v("Disponible")]
+                                  [
+                                    _c("i", { staticClass: "icon-lock" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "btn-label" }, [
+                                      _vm._v("Desactivar")
+                                    ])
+                                  ]
                                 )
                               ])
-                            : _c("div", [_vm._m(5, true)])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("td", { attrs: { id: "icons-pos" } }, [
-                        _c("div", { staticClass: "button-container" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-warning btn-sm",
-                              staticStyle: { width: "100%" },
-                              attrs: {
-                                type: "button",
-                                "data-toggle": "modal",
-                                "data-target": "#editModal"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal("editar", proyecto)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "icon-pencil" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "btn-label" }, [
-                                _vm._v("Editar")
-                              ])
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        proyecto.estado
-                          ? _c("div", { staticClass: "button-container" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  staticStyle: {
-                                    margin: "8px 0",
-                                    width: "100%"
-                                  },
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#statusModal"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.abrirModal("estado", proyecto)
+                            : _c("div", { staticClass: "button-container" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    staticStyle: {
+                                      margin: "8px 0",
+                                      width: "100%"
+                                    },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#statusModal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "estado",
+                                          proyecto
+                                        )
+                                      }
                                     }
-                                  }
-                                },
-                                [
-                                  _c("i", { staticClass: "icon-lock" }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "btn-label" }, [
-                                    _vm._v("Desactivar")
-                                  ])
-                                ]
-                              )
-                            ])
-                          : _c("div", { staticClass: "button-container" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-sm",
-                                  staticStyle: {
-                                    margin: "8px 0",
-                                    width: "100%"
                                   },
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#statusModal"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.abrirModal("estado", proyecto)
-                                    }
-                                  }
+                                  [
+                                    _c("i", { staticClass: "icon-lock-open" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "btn-label" }, [
+                                      _vm._v("Activar")
+                                    ])
+                                  ]
+                                )
+                              ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "button-container" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-info btn-sm",
+                                staticStyle: { width: "100%" },
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#membersModal"
                                 },
-                                [
-                                  _c("i", { staticClass: "icon-lock-open" }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "btn-label" }, [
-                                    _vm._v("Activar")
-                                  ])
-                                ]
-                              )
-                            ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "button-container" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-info btn-sm",
-                              staticStyle: { width: "100%" },
-                              attrs: {
-                                type: "button",
-                                "data-toggle": "modal",
-                                "data-target": "#membersModal"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.abrirModal("estudiantes", proyecto)
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal(
+                                      "estudiantes",
+                                      proyecto
+                                    )
+                                  }
                                 }
-                              }
-                            },
-                            [
-                              _c("i", { staticClass: "icon-people" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "btn-label" }, [
-                                _vm._v("Miembros")
-                              ])
-                            ]
-                          )
+                              },
+                              [
+                                _c("i", { staticClass: "icon-people" }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "btn-label" }, [
+                                  _vm._v("Miembros")
+                                ])
+                              ]
+                            )
+                          ])
                         ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("nav", [
+              _c(
+                "ul",
+                { staticClass: "pagination", staticStyle: { float: "right" } },
+                [
+                  _vm.pagination.current_page > 1
+                    ? _c("li", { staticClass: "page-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.cambiarPagina(
+                                  _vm.pagination.current_page - 1
+                                )
+                              }
+                            }
+                          },
+                          [_vm._v("Ant")]
+                        )
                       ])
-                    ]
-                  )
-                }),
-                0
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.pagesNumber, function(page) {
+                    return _c(
+                      "li",
+                      {
+                        key: page,
+                        staticClass: "page-item",
+                        class: [page == _vm.isActived ? "active" : ""]
+                      },
+                      [
+                        _c("a", {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          domProps: { textContent: _vm._s(page) },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.cambiarPagina(page)
+                            }
+                          }
+                        })
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm.pagination.current_page < _vm.pagination.last_page
+                    ? _c("li", { staticClass: "page-item" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link",
+                            attrs: { href: "#" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.cambiarPagina(
+                                  _vm.pagination.current_page + 1
+                                )
+                              }
+                            }
+                          },
+                          [_vm._v("Sig")]
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                2
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c("nav", [
-            _c(
-              "ul",
-              { staticClass: "pagination" },
-              [
-                _vm.pagination.current_page > 1
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.cambiarPagina(
-                                _vm.pagination.current_page - 1
-                              )
-                            }
-                          }
-                        },
-                        [_vm._v("Ant")]
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._l(_vm.pagesNumber, function(page) {
-                  return _c(
-                    "li",
-                    {
-                      key: page,
-                      staticClass: "page-item",
-                      class: [page == _vm.isActived ? "active" : ""]
-                    },
-                    [
-                      _c("a", {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        domProps: { textContent: _vm._s(page) },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.cambiarPagina(page)
-                          }
-                        }
-                      })
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm.pagination.current_page < _vm.pagination.last_page
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              return _vm.cambiarPagina(
-                                _vm.pagination.current_page + 1
-                              )
-                            }
-                          }
-                        },
-                        [_vm._v("Sig")]
-                      )
-                    ])
-                  : _vm._e()
-              ],
-              2
-            )
+            ])
           ])
         ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -39568,7 +39604,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(6),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -39962,7 +39998,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(7),
+                  _vm._m(6),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -40251,15 +40287,20 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-sm",
+                    staticClass: "table table-bordered table-sm",
                     staticStyle: { "font-size": "1.35em" }
                   },
                   [
                     _c("tbody", [
                       _c("tr", [
-                        _c("td", [_vm._v("Tipo")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Tipo")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
@@ -40267,33 +40308,53 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Cupos")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Cupos")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
                         })
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Horario")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Horario")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Encargado")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Encargado")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_encargado) }
                         })
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Descripción")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Descripción")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_desc) }
                         })
                       ])
@@ -40302,21 +40363,28 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: {
-                      click: function($event) {
-                        return _vm.cerrarModal()
+              _c(
+                "div",
+                {
+                  staticClass: "modal-footer",
+                  staticStyle: { "border-top": "none" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: {
+                        click: function($event) {
+                          return _vm.cerrarModal()
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("Cerrar")]
-                )
-              ])
+                    },
+                    [_vm._v("Cerrar")]
+                  )
+                ]
+              )
             ])
           ]
         )
@@ -40361,15 +40429,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-align-justify" }),
-      _vm._v(" Listado de Proyectos\n                ")
-    ])
   },
   function() {
     var _vm = this
