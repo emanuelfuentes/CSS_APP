@@ -25,21 +25,21 @@
                 <li class="breadcrumb-item">Inicio</li>
                 <li class="breadcrumb-item active">Administración de Proyectos</li>
             </ol>
-            <div class="container-fluid">
+            <div class="container-fluid" style="background-color: white;">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card">
+                <div class="card" style="border: none;"><!--
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Listado de Proyectos
-                    </div>
+                    </div>-->
                     <div class="card-body">
-                        <div class="form-group row">
+                        <div class="form-group row" style="flex-direction: row-reverse;">
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <button type="button" @click="abrirModal('insertar', null)" data-toggle="modal" data-target="#editModal" class="btn btn-primary"><i class="icon-plus"></i> Agregar</button>
+                                <div class="input-group" style="flex-direction: row-reverse;">
+                                    <button type="button" @click="abrirModal('insertar', null)" data-toggle="modal" data-target="#editModal" class="btn btn-primary"><i class="icon-plus"></i> Agregar Proyecto</button>
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-striped table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -90,7 +90,7 @@
                             </tbody>
                         </table>
                         <nav>
-                            <ul class="pagination">
+                            <ul class="pagination" style="float: right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
                                 </li>
@@ -382,7 +382,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-sm" style="font-size: 1.35em;">
+                            <table class="table table-bordered table-sm" style="font-size: 1.35em;">
                                 <!--<thead>
                                     <th>Tipo</th>
                                     <th>Cupos</th>
@@ -392,24 +392,24 @@
                                 </thead>-->
                                 <tbody>
                                     <tr>
-                                        <td>Tipo</td>
-                                        <td v-text="modal_tipo_horas"></td>
+                                        <th style="background-color: #dedede;">Tipo</th>
+                                            <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Cupos</td>
-                                        <td v-text="modal_cupos"></td>
+                                        <th style="background-color: #dedede;">Cupos</th>
+                                            <td v-text="modal_cupos" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Horario</td>
-                                        <td v-text="modal_horario"></td>
+                                        <th style="background-color: #dedede;">Horario</th>
+                                            <td v-text="modal_horario" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Encargado</td>
-                                        <td v-text="modal_encargado"></td>
+                                        <th style="background-color: #dedede;">Encargado</th>
+                                            <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Descripción</td>
-                                        <td v-text="modal_desc"></td>
+                                        <th style="background-color: #dedede;">Descripción</th>
+                                            <td v-text="modal_desc" style="padding-left: 16px;"></td>
                                     </tr>
                                     <!--<tr>
                                         <td v-text="modal_tipo_horas"></td>
@@ -449,7 +449,7 @@
                                 </tbody>
                             </table>
                         </div> -->
-                        <div class="modal-footer">
+                        <div class="modal-footer" style="border-top: none;">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>

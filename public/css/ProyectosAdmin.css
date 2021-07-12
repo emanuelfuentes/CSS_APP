@@ -2,6 +2,7 @@
 
 .main{
     font-family: 'Abel';
+    background-color: white;
 }
 
 .modal-primary{
@@ -42,6 +43,10 @@
 .modal-student{
     width: 65%;
     max-width: none;
+}
+
+.card-body {
+    padding: 0;
 }
 
 
