@@ -54,7 +54,13 @@
       idFact = $('#facultad').val()
       getCarreras()
     })
-  })
+
+    $('#gform').submit(function() {
+      $('#loading').show();
+      $('#registrarbtn').prop('disabled', true);
+    });
+  });
+  
 </script>
 <body>
   <div class="wrapper">
@@ -64,9 +70,13 @@
           <h1 id="titulo">Registrate</h1>
         </div>
         <div class="card p-4">
-          <form class="form-horizontal" method="POST" action="{{ route('registrar') }}">
+          <form id="gform" class="form-horizontal" method="POST" action="{{ route('registrar') }}">
             {{ csrf_field() }}
+            <div class="form-group">
+                <span> Una vez haya completado este formulario, <b><a style="color:red">por favor revise su correo institucional para completar el registro</a></b> </span>  
+            </div>
             <div class="card-body">
+              
               <div class="form-group">
                 <label for="carnet" class="label-form">Carnet</label>
                 <input id="carnet" type="text" class="form-control" name="carnet" value="{{ old('carnet') }}">
@@ -131,9 +141,14 @@
                   @endif
                 </div>
               </div>
+              <div style="display:none;" id="loading">
+                <div style=" display: flex;  flex-direction:column; justify-content: center; align-items: center;">
+                  <img src="../../../public/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
+                </div>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary" style="background-image: linear-gradient( 109.6deg,  rgba(39,142,255,1) 11.2%, rgba(98,113,255,0.78) 100.2% );" id="registrarbtn">Register</button>
-        </div>
+          </div>
         </form>
       </div>
     </div>
