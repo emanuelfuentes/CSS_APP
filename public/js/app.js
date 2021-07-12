@@ -38191,6 +38191,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38214,6 +38221,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_encargado: '',
             modal_nombre: '',
             modal_desc: '',
+            modal_correo: '',
             modal_tipo_horas: '',
             modal_cupos: '',
             modal_horario: '',
@@ -38307,6 +38315,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'horario': this.modal_horario,
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
+                    'correo_encargado': this.modal_correo,
                     'modificado_por': 'Usuario',
                     'createdAt': "this.modal_createdAt",
                     'carreraPerfil': this.arrayCarreraPerfil
@@ -38329,6 +38338,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     'horario': this.modal_horario,
                     'nombre': this.modal_nombre,
                     'tipo_horas': this.modal_tipo_horas,
+                    'correo_encargado': this.modal_correo,
                     'modificado_por': 'Usuario',
                     'createdAt': "this.modal_createdAt",
                     'carreraPerfil': this.arrayCarreraPerfil
@@ -38352,6 +38362,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.modal_cupos) this.errorProyecto.push(1);else this.errorProyecto.push(0);
             if (!this.modal_tipo_horas) this.errorProyecto.push(1);else this.errorProyecto.push(0);
             if (!this.modal_desc) this.errorProyecto.push(1);else this.errorProyecto.push(0);
+            if (!this.modal_correo) this.errorProyecto.push(1);else this.errorProyecto.push(0);
             if (!this.modal_horario) this.errorProyecto.push(1);else this.errorProyecto.push(0);
             if (!this.modal_contraparte) this.errorProyecto.push(1);else this.errorProyecto.push(0);
             if (!this.modal_fecha_in) {
@@ -39296,6 +39307,56 @@ var render = function() {
                         staticClass: "col-md-3 form-control-label",
                         attrs: { for: "text-input" }
                       },
+                      [_vm._v("Correo del encargado")]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-9" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.modal_correo,
+                            expression: "modal_correo"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          placeholder: "example@example.com"
+                        },
+                        domProps: { value: _vm.modal_correo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.modal_correo = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "error",
+                          class: {
+                            show: _vm.errorProyecto[5] == 1,
+                            hide: _vm.errorProyecto[5] != 1
+                          }
+                        },
+                        [_vm._v("El correo del encargado no puede ir vacío")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group row div-form" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-md-3 form-control-label",
+                        attrs: { for: "text-input" }
+                      },
                       [_vm._v("Horario")]
                     ),
                     _vm._v(" "),
@@ -39327,8 +39388,8 @@ var render = function() {
                         {
                           staticClass: "error",
                           class: {
-                            show: _vm.errorProyecto[5] == 1,
-                            hide: _vm.errorProyecto[5] != 1
+                            show: _vm.errorProyecto[6] == 1,
+                            hide: _vm.errorProyecto[6] != 1
                           }
                         },
                         [_vm._v("El horario no puede ir vacío")]
@@ -39374,8 +39435,8 @@ var render = function() {
                         {
                           staticClass: "error",
                           class: {
-                            show: _vm.errorProyecto[6] == 1,
-                            hide: _vm.errorProyecto[6] != 1
+                            show: _vm.errorProyecto[7] == 1,
+                            hide: _vm.errorProyecto[7] != 1
                           }
                         },
                         [_vm._v("La contraparte no puede ir vacía")]
@@ -39415,7 +39476,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errorProyecto[7] == 1 || _vm.errorProyecto[7] == 2
+                      _vm.errorProyecto[8] == 1 || _vm.errorProyecto[8] == 2
                         ? _c("div", [
                             _c("p", { staticClass: "show error" }, [
                               _vm._v(_vm._s(_vm.errorDateMsg))
@@ -39461,7 +39522,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errorProyecto[8] == 1 || _vm.errorProyecto[8] == 2
+                      _vm.errorProyecto[9] == 1 || _vm.errorProyecto[9] == 2
                         ? _c("div", [
                             _c("p", { staticClass: "show error" }, [
                               _vm._v(_vm._s(_vm.errorDateMsg))
