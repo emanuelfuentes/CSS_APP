@@ -16,23 +16,17 @@
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <!--<th>Opciones</th> -->
-                                    <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
-                                    <th>Información</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td>
-                                        <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
-                                            <i class="icon-trash"></i>
-                                        </button> &nbsp;
-                                    </td>
-                                    <td v-text="proyecto.nombre"></td>
-                                    <td v-text="proyecto.descripcion"></td>
+
+                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td>
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success">Disponible</span>
@@ -42,9 +36,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                    <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>
+                                        <div style="display: flex;">
+                                            <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
+                                                <i class="icon-trash"></i>
+                                                <span class="btn-label">Desaplicar</span>
+                                            </button> &nbsp;
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -68,7 +65,7 @@
             </div>
 
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" id="modal-info" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
