@@ -55,42 +55,6 @@
     </div>
 </body>
 
-<!--<body class="cuerpo">
-    <div class="container">
-        <div class="card-group">
-            <div class="card">
-                <div class="card-body" id="cuerpoc">
-                    <img class="icon" src="img/lock.png" width="125" height="150">
-                    <h2 id="titulo">Verifique su cuenta</h2>
-                    <h2 id="usuario">{{$user->correo}}</h2>
-
-                    <form id="form" action="{{ url('/verificar_usuario/'.$user->correo) }}" method="post">
-                    {{ csrf_field() }}
-                        <label for="user" class="label-form">Usuario</label>
-                        <input class="mb-2" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
-
-                        <label for="password" class="label-form">Contraseña</label>
-                        <input type="password" name="contraseña" id="contraseña">
-                        @if($errors->first('contraseña'))
-                            {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
-                        @else
-                            <span style="visibility: hidden;">.</span>
-                        @endif
-
-                        <label for="password_confirm" class="label-form">Confirmar contraseña</label>
-                        <input type="password" name="confirmar" id="confirmar">
-                        @if($errors->first('confirmar'))
-                            {!!$errors->first('confirmar','<span style="color: red;margin-bottom:0.5em">:message</span>')!!}
-                        @else
-                            <span style="visibility: hidden; margin-bottom:0.5em">.</span>
-                        @endif
-                        <button type="submit" id="submit">Verificar cuenta</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>-->
     <style>
     <?php include "css/verifyAccount.css" ?>
     </style>

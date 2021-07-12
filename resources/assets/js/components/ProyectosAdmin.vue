@@ -1,10 +1,29 @@
 <template>
     <main class="main">
             <!-- Breadcrumb -->
-            <ol class="breadcrumb">
+            <header class="app-header navbar container-fluid">
+        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <ul class="nav navbar-nav ml-auto" id="logout">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="d-md-down-none" v-text="user_email"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Cuenta</strong>
+                    </div>
+                    <a class="dropdown-item" 
+                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                </div>
+            </li>
+        </ul>
+    </header>
+            <ol class="breadcrumb" style="padding-left: 30px;">
                 <li class="breadcrumb-item">Inicio</li>
                 <li class="breadcrumb-item active">Administración de Proyectos</li>
-                <button type="button" class="btn btn-primary" @click ="logout()">Cerrar sesión</button>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -294,10 +313,10 @@
                                         <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                         <td>
                                             <div v-if="estudiante.estado == 0">
-                                                <button type="button" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
+                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
                                                     Aceptar
                                                 </button>  &nbsp;
-                                                <button type="button" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
+                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
                                                     Rechazar
                                                 </button>  &nbsp;
                                             </div>
@@ -320,7 +339,7 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal de confirmacion para aceptar o rechazar estudiantes-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal4}" role="dialog" style="display: none; overflow-y: scroll;" aria-hidden="true">
+            <div class="modal fade" :class="{'mostrar' : modal4}" tabindex="-1" role="dialog" id="confirmModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
@@ -330,7 +349,7 @@
                             <div v-else>
                                 <h4 class="modal-title">Rechazar estudiante</h4>
                             </div>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -338,7 +357,7 @@
                             <h5 v-text="nombre_estudiante_msg"></h5>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                             <button type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
                         </div>
                     </div>
@@ -668,23 +687,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 }); 
             },
             cerrarModal(){
-                if(this.modal == 1){
+                if(this.modal == 1 || this.modal4 == 1){
                     this.modal = 0;
-                    this.arrayCarreraPerfil = [[]];
-                    this.modal_nombre = '';
-                    this.modal_encargado = '';
-                    this.modal_cupos = ''
-                    this.modal_desc = '';
-                    this.modal_horario = '';
-                    this.modal_contraparte = '';
-                    this.modal_tipo_horas = '';
-                    this.contraparte = '';
-                    this.modal_fecha_in = '';
-                    this.modal_fecha_fin = '';
-                    this.errorProyecto = [];
-                    this.errorDateMsg = '';
-                }
-                else if(this.modal4 == 1){
                     this.modal4 = 0;
                 }
                 else{
@@ -702,7 +706,20 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal = 1;
                             this.add_edit_flag = 1;
                             this.flagError = false;
-                            this.errorPerfilMsg = "";
+                            this.arrayCarreraPerfil = [[]];
+                            this.modal_nombre = '';
+                            this.modal_encargado = '';
+                            this.modal_cupos = ''
+                            this.modal_desc = '';
+                            this.modal_horario = '';
+                            this.modal_contraparte = '';
+                            this.modal_tipo_horas = '';
+                            this.contraparte = '';
+                            this.modal_fecha_in = '';
+                            this.modal_fecha_fin = '';
+                            this.errorProyecto = [];
+                            this.errorPerfilMsg = '';
+
                             break;
                         }
                     case "editar":
@@ -825,7 +842,15 @@ import {API_HOST} from '../constants/endpoint.js';
             aceptarRechazarEstudiante(){
                 let me = this;
                 var estadoEst = 2;
-                if(me.flagEstudiante) estadoEst = 1;
+                if(me.flagEstudiante){
+                    axios.put(`${API_HOST}/rechazarestudiante`, {
+                        'idUser' : me.id_estudiante,
+                        'idProyecto' : me.id_proyecto,
+                    }).catch(function (error) {
+                        console.log(error);
+                    }); 
+                    estadoEst = 1;
+                }
                 axios.put(`${API_HOST}/aplicarestudiante`, {
                     'idUser' : me.id_estudiante,
                     'idProyecto' : me.id_proyecto,

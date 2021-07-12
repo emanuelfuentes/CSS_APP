@@ -35847,8 +35847,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36063,68 +36061,110 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", [
-                      _vm.ya_aplico_hoy == 0
-                        ? _c("div", [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success btn-sm",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.abrirModal("aplicar", proyecto)
-                                  }
-                                }
-                              },
-                              [_c("i", { staticClass: "icon-check" })]
-                            ),
-                            _vm._v("  \n                                    ")
-                          ])
-                        : _c("div", [
-                            _vm._m(1, true),
-                            _vm._v("  \n                                    ")
-                          ])
-                    ]),
-                    _vm._v(" "),
                     _c("td", {
-                      attrs: { id: "name_p" },
-                      domProps: { textContent: _vm._s(proyecto.nombre) }
+                      attrs: {
+                        id: "name_p",
+                        "data-toggle": "modal",
+                        "data-target": "modal-info"
+                      },
+                      domProps: { textContent: _vm._s(proyecto.nombre) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.descripcion) }
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "modal-info"
+                      },
+                      domProps: { textContent: _vm._s(proyecto.descripcion) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
-                    _c("td", [
-                      proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
+                    _c(
+                      "td",
+                      {
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "modal-info"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.abrirModal("info", proyecto)
+                          }
+                        }
+                      },
+                      [
+                        proyecto.estado
+                          ? _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-success" },
+                                [_vm._v("Disponible")]
+                              )
                             ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("No disponible")
+                          : _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("No disponible")]
+                              )
                             ])
-                          ])
-                    ]),
+                      ]
+                    ),
                     _vm._v(" "),
                     _c("td", [
                       _c(
-                        "button",
+                        "div",
                         {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("info", proyecto)
-                            }
-                          }
+                          staticClass: "button-container",
+                          staticStyle: { margin: "8px 0" }
                         },
-                        [_c("i", { staticClass: "icon-info" })]
-                      ),
-                      _vm._v("   \n                                ")
+                        [
+                          _vm.ya_aplico_hoy == 0
+                            ? _c("div", { staticStyle: { display: "flex" } }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-sm",
+                                    staticStyle: { width: "100%" },
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.abrirModal(
+                                          "aplicar",
+                                          proyecto
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "icon-check" }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "btn-label" }, [
+                                      _vm._v("Aplicar")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(
+                                  "  \n                                        "
+                                )
+                              ])
+                            : _c("div", [
+                                _vm._m(1, true),
+                                _vm._v(
+                                  "  \n                                        "
+                                )
+                              ])
+                        ]
+                      )
                     ])
                   ])
                 }),
@@ -36303,6 +36343,7 @@ var render = function() {
         attrs: {
           tabindex: "-1",
           role: "dialog",
+          id: "modal-info",
           "aria-labelledby": "myModalLabel",
           "aria-hidden": "true"
         }
@@ -36429,15 +36470,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Opciones")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Información")])
+        _c("th", [_vm._v("Opciones")])
       ])
     ])
   },
@@ -36449,9 +36488,14 @@ var staticRenderFns = [
       "button",
       {
         staticClass: "btn btn-success btn-sm",
+        staticStyle: { margin: "8px 0", width: "100%", display: "none" },
         attrs: { type: "button", disabled: "" }
       },
-      [_c("i", { staticClass: "icon-check" })]
+      [
+        _c("i", { staticClass: "icon-check" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "btn-label" }, [_vm._v("Aplicar")])
+      ]
     )
   },
   function() {
@@ -36579,9 +36623,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
 //
 //
 //
@@ -36903,29 +36944,30 @@ var render = function() {
                 "tbody",
                 _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-warning btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("desaplicar", proyecto)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-trash" })]
-                      ),
-                      _vm._v("  \n                                ")
-                    ]),
-                    _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.nombre) }
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "modal-info"
+                      },
+                      domProps: { textContent: _vm._s(proyecto.nombre) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.descripcion) }
+                      attrs: {
+                        "data-toggle": "modal",
+                        "data-target": "modal-info"
+                      },
+                      domProps: { textContent: _vm._s(proyecto.descripcion) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c("td", [
@@ -36943,19 +36985,28 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("info", proyecto)
+                      _c("div", { staticStyle: { display: "flex" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning btn-sm",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal("desaplicar", proyecto)
+                              }
                             }
-                          }
-                        },
-                        [_c("i", { staticClass: "icon-info" })]
-                      )
+                          },
+                          [
+                            _c("i", { staticClass: "icon-trash" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "btn-label" }, [
+                              _vm._v("Desaplicar")
+                            ])
+                          ]
+                        ),
+                        _vm._v("  \n                                    ")
+                      ])
                     ])
                   ])
                 }),
@@ -37050,6 +37101,7 @@ var render = function() {
         staticStyle: { display: "none" },
         attrs: {
           tabindex: "-1",
+          id: "modal-info",
           role: "dialog",
           "aria-labelledby": "myModalLabel",
           "aria-hidden": "true"
@@ -37271,15 +37323,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Opciones")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Información")])
+        _c("th", [_vm._v("Opciones")])
       ])
     ])
   },
@@ -37425,6 +37475,25 @@ exports.push([module.i, "\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38090,22 +38159,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         cerrarModal: function cerrarModal() {
-            if (this.modal == 1) {
+            if (this.modal == 1 || this.modal4 == 1) {
                 this.modal = 0;
-                this.arrayCarreraPerfil = [[]];
-                this.modal_nombre = '';
-                this.modal_encargado = '';
-                this.modal_cupos = '';
-                this.modal_desc = '';
-                this.modal_horario = '';
-                this.modal_contraparte = '';
-                this.modal_tipo_horas = '';
-                this.contraparte = '';
-                this.modal_fecha_in = '';
-                this.modal_fecha_fin = '';
-                this.errorProyecto = [];
-                this.errorDateMsg = '';
-            } else if (this.modal4 == 1) {
                 this.modal4 = 0;
             } else {
                 this.add_edit_flag = 0;
@@ -38125,7 +38180,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal = 1;
                         this.add_edit_flag = 1;
                         this.flagError = false;
-                        this.errorPerfilMsg = "";
+                        this.arrayCarreraPerfil = [[]];
+                        this.modal_nombre = '';
+                        this.modal_encargado = '';
+                        this.modal_cupos = '';
+                        this.modal_desc = '';
+                        this.modal_horario = '';
+                        this.modal_contraparte = '';
+                        this.modal_tipo_horas = '';
+                        this.contraparte = '';
+                        this.modal_fecha_in = '';
+                        this.modal_fecha_fin = '';
+                        this.errorProyecto = [];
+                        this.errorPerfilMsg = '';
+
                         break;
                     }
                 case "editar":
@@ -38243,7 +38311,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         aceptarRechazarEstudiante: function aceptarRechazarEstudiante() {
             var me = this;
             var estadoEst = 2;
-            if (me.flagEstudiante) estadoEst = 1;
+            if (me.flagEstudiante) {
+                axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/rechazarestudiante', {
+                    'idUser': me.id_estudiante,
+                    'idProyecto': me.id_proyecto
+                }).catch(function (error) {
+                    console.log(error);
+                });
+                estadoEst = 1;
+            }
             axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/aplicarestudiante', {
                 'idUser': me.id_estudiante,
                 'idProyecto': me.id_proyecto,
@@ -38276,31 +38352,64 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("ol", { staticClass: "breadcrumb" }, [
-      _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("li", { staticClass: "breadcrumb-item active" }, [
-        _vm._v("Administración de Proyectos")
-      ]),
+    _c("header", { staticClass: "app-header navbar container-fluid" }, [
+      _vm._m(0),
       _vm._v(" "),
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              return _vm.logout()
-            }
-          }
-        },
-        [_vm._v("Cerrar sesión")]
+        "ul",
+        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
+        [
+          _c("li", { staticClass: "nav-item dropdown" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link dropdown-toggle nav-link",
+                attrs: {
+                  "data-toggle": "dropdown",
+                  href: "#",
+                  role: "button",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false"
+                }
+              },
+              [
+                _c("span", {
+                  staticClass: "d-md-down-none",
+                  domProps: { textContent: _vm._s(_vm.user_email) }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "dropdown-item",
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.logout()
+                    }
+                  }
+                },
+                [
+                  _c("i", { staticClass: "fa fa-lock" }),
+                  _vm._v(" Cerrar sesión")
+                ]
+              )
+            ])
+          ])
+        ]
       )
     ]),
     _vm._v(" "),
+    _vm._m(2),
+    _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "form-group row" }, [
@@ -38331,7 +38440,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(1),
+              _vm._m(4),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -38396,7 +38505,7 @@ var render = function() {
                                   [_vm._v("Disponible")]
                                 )
                               ])
-                            : _c("div", [_vm._m(2, true)])
+                            : _c("div", [_vm._m(5, true)])
                         ]
                       ),
                       _vm._v(" "),
@@ -39137,7 +39246,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(3),
+                          _vm._m(6),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -39531,7 +39640,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("table", { staticClass: "table" }, [
-                  _vm._m(4),
+                  _vm._m(7),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -39572,7 +39681,11 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-success btn-sm",
-                                    attrs: { type: "button" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#confirmModal"
+                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.abrirModal(
@@ -39596,7 +39709,11 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass: "btn btn-danger btn-sm",
-                                    attrs: { type: "button" },
+                                    attrs: {
+                                      type: "button",
+                                      "data-toggle": "modal",
+                                      "data-target": "#confirmModal"
+                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.abrirModal(
@@ -39662,8 +39779,12 @@ var render = function() {
       {
         staticClass: "modal fade",
         class: { mostrar: _vm.modal4 },
-        staticStyle: { display: "none", "overflow-y": "scroll" },
-        attrs: { tabindex: "-1", role: "dialog", "aria-hidden": "true" }
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          id: "confirmModal",
+          "aria-hidden": "true"
+        }
       },
       [
         _c(
@@ -39691,7 +39812,11 @@ var render = function() {
                   "button",
                   {
                     staticClass: "close",
-                    attrs: { type: "button", "aria-label": "Close" },
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
                     on: {
                       click: function($event) {
                         return _vm.cerrarModal()
@@ -39717,7 +39842,7 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-secondary",
-                    attrs: { type: "button" },
+                    attrs: { type: "button", "data-dismiss": "modal" },
                     on: {
                       click: function($event) {
                         return _vm.cerrarModal()
@@ -39878,6 +40003,43 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
+        attrs: { type: "button" }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "dropdown-header text-center" }, [
+      _c("strong", [_vm._v("Cuenta")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "ol",
+      { staticClass: "breadcrumb", staticStyle: { "padding-left": "30px" } },
+      [
+        _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
+        _vm._v(" "),
+        _c("li", { staticClass: "breadcrumb-item active" }, [
+          _vm._v("Administración de Proyectos")
+        ])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
