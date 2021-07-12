@@ -107,7 +107,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal editar proyecto-->
-            <div class="modal fade" :class="{'mostrar' : modal}" tabindex="-1" role="dialog" id="editModal" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="editModal" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
