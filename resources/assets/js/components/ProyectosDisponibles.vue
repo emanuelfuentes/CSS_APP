@@ -22,30 +22,17 @@
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Descripción</th>
                                     <th>Estado</th>
-                                    <th>Información</th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td>
-                                        <div v-if="ya_aplico_hoy == 0">
-                                            <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm">
-                                                <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                        <div v-else>
-                                            <button type="button" class="btn btn-success btn-sm" disabled>
-                                                <i class="icon-check"></i>
-                                            </button> &nbsp;
-                                        </div>
-                                    </td>
-                                    <td v-text="proyecto.nombre" id="name_p"></td>
-                                    <td v-text="proyecto.descripcion"></td>
-                                    <td>
+                                    <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success">Disponible</span>
                                         </div>
@@ -53,10 +40,21 @@
                                             <span class="badge badge-danger">No disponible</span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
-                                          <i class="icon-info"></i>
-                                        </button>  &nbsp;
+                                    <td >
+                                        <div class="button-container" style="margin: 8px 0;">
+                                            <div v-if="ya_aplico_hoy == 0" style="display: flex;">
+                                                <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
+                                                    <i class="icon-check"></i>
+                                                    <span class="btn-label">Aplicar</span>
+                                                </button> &nbsp;
+                                            </div>
+                                            <div v-else>
+                                                <button type="button" class="btn btn-success btn-sm" disabled style="margin: 8px 0; width: 100%; display:none">
+                                                    <i class="icon-check"></i>
+                                                    <span class="btn-label">Aplicar</span>
+                                                </button> &nbsp;
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -105,7 +103,7 @@
             <!--Fin del modal-->
 
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" id="modal-info" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
