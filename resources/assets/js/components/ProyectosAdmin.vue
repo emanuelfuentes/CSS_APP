@@ -15,8 +15,8 @@
                     <div class="dropdown-header text-center">
                         <strong>Cuenta</strong>
                     </div>
-                    <a class="dropdown-item" 
-                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</a>
+                    <button class="dropdown-item" type="button" 
+                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</button>
                 </div>
             </li>
         </ul>
@@ -163,24 +163,31 @@
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
+                                    <label class="col-md-3 form-control-label" for="text-input">Correo del encargado</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="modal_correo" class="form-control" placeholder="example@example.com">
+                                        <p :class="{show: errorProyecto[5] == 1, hide: errorProyecto[5] != 1}" class="error">El correo del encargado no puede ir vacío</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Horario</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_horario" class="form-control" placeholder="Horario">
-                                        <p :class="{show: errorProyecto[5] == 1, hide: errorProyecto[5] != 1}" class="error">El horario no puede ir vacío</p>
+                                        <p :class="{show: errorProyecto[6] == 1, hide: errorProyecto[6] != 1}" class="error">El horario no puede ir vacío</p>
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Contraparte</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_contraparte" class="form-control" placeholder="Contraparte">
-                                        <p :class="{show: errorProyecto[6] == 1, hide: errorProyecto[6] != 1}" class="error">La contraparte no puede ir vacía</p>
+                                        <p :class="{show: errorProyecto[7] == 1, hide: errorProyecto[7] != 1}" class="error">La contraparte no puede ir vacía</p>
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de inicio</label>
                                     <div class="col-md-9">
                                         <input type="date" value="2017-06-01" v-model="modal_fecha_in">
-                                        <div v-if="errorProyecto[7] == 1 || errorProyecto[7] == 2">
+                                        <div v-if="errorProyecto[8] == 1 || errorProyecto[8] == 2">
                                             <p class="show error">{{errorDateMsg}}</p>
                                         </div>
                                         <div v-else>
@@ -192,7 +199,7 @@
                                     <label class="col-md-3 form-control-label" for="text-input">Fecha de finalización</label>
                                     <div class="col-md-9">
                                         <input type="date" value="2021-01-01" v-model="modal_fecha_fin">
-                                        <div v-if="errorProyecto[8] == 1 || errorProyecto[8] == 2">
+                                        <div v-if="errorProyecto[9] == 1 || errorProyecto[9] == 2">
                                             <p class="show error">{{errorDateMsg}}</p>
                                         </div>
                                         <div v-else>
@@ -477,6 +484,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_encargado : '',
                 modal_nombre : '',
                 modal_desc : '',
+                modal_correo : '',
                 modal_tipo_horas : '',
                 modal_cupos : '',
                 modal_horario : '',
@@ -571,6 +579,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
+                        'correo_encargado' : this.modal_correo,
                         'modificado_por' : 'Usuario',
                         'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
@@ -594,6 +603,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
+                        'correo_encargado' : this.modal_correo,
                         'modificado_por' : 'Usuario',
                         'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
@@ -619,6 +629,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(!this.modal_tipo_horas) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0)
                 if(!this.modal_desc) this.errorProyecto.push(1);
+                else this.errorProyecto.push(0)
+                if(!this.modal_correo) this.errorProyecto.push(1)
                 else this.errorProyecto.push(0)
                 if(!this.modal_horario) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0);

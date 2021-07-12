@@ -76,6 +76,7 @@ class ProyectoController extends Controller
         $proyecto->horario = $request->horario;
         $proyecto->nombre = $request->nombre;
         $proyecto->tipo_horas = $request->tipo_horas;
+        $proyecto->correo_encargado = $request->correo_encargado;
         $proyecto->modificado_por = $request->modificado_por;
         $proyecto->creado_en = $request->createdAt;
         $proyecto->save();
@@ -124,6 +125,7 @@ class ProyectoController extends Controller
         $proyecto->horario = $request->horario;
         $proyecto->nombre = $request->nombre;
         $proyecto->tipo_horas = $request->tipo_horas;
+        $proyecto->correo_encargado = $request->correo_encargado;
         $proyecto->modificado_por = $request->modificado_por;
         $proyecto->creado_en = $request->createdAt;
         $proyecto->save();
