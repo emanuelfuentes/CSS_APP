@@ -19,20 +19,30 @@
   <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/forgottenPassword.css">
+  <script src="js/jquery.min.js"></script>
 
 </head>
+<script>
+  $(document).ready(function() {
+    $('#gform').submit(function() {
+      $('#loading').show();
+      $('#btn-submit').prop('disabled', true);
+    });
+  });
+  
+</script>
 
 <body>
   <div class="container" id="main-container">
     <div class="form-container card-body">
-      <form class="form-horizontal" method="POST" action="{{ route('olvido_contrasenia') }}">
+      <form id="gform" class="form-horizontal" method="POST" action="{{ route('olvido_contrasenia') }}">
         {{ csrf_field() }}
         <div class="heading">
           <h1>Cambiar contraseña</h1>
         </div>
         <div style="padding: 0 16px;">
           <p>Por favor ingrese su carnet y se le enviará un link al correo asociado para poder realizar el cambio de contraseña. 
-          <a style="color:red">Se puede realizar el cambio de contraseña una vez por día.</a></p>
+          <b> <a style="color:red">Se puede realizar el cambio de contraseña una vez por día.</a> </b></p>
         </div>
 
         <div class="form-group mb-2" style="padding: 0 16px;">
@@ -48,6 +58,11 @@
           @else
           <span class="" style="visibility: hidden; color:red">.</span>
           @endif
+        </div>
+        <div style="display:none;" id="loading">
+          <div style=" display: flex;  flex-direction:column; justify-content: center; align-items: center;">
+            <img src="../../../public/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
+          </div>
         </div>
         
         <div class="col-md-6 col-md-offset-4">
