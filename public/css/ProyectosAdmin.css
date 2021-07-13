@@ -49,6 +49,9 @@
     padding: 0;
 }
 
+.search-student {
+    display: inline-block;
+}
 
 .dropdown-header {
     background-color: #003C71;

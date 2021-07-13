@@ -115,6 +115,23 @@ class ProyectoxEstudianteController extends Controller{
         $this->sendEmail($proyecto);
     }
 
+    public function aplicarPorAdmin(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $pXe = new ProyectoxEstudiante();
+        $pXe->idProyecto = $request->idProyecto;
+        $pXe->idUser = $request->idUser;
+        $pXe->estado = $request->estado;
+        $pXe->modificado_por = $request->modificado_por;
+        $pXe->save();
+
+        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
+        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+        ->where('users.idUser', '=', $request->idUser)
+        ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+        $this->sendEmail($proyecto);
+    }
+
     public function sendEmail($user){
         Mail::send(
             'emails.estudianteAplico',
