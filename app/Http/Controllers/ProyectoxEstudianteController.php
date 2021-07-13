@@ -63,16 +63,17 @@ class ProyectoxEstudianteController extends Controller{
         if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
-
         $estado = $request->estado;
-        $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
+
+        $proXEst = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)->first();
         $proXEst->estado = $estado;
         $proXEst->save();
         
         $mailData = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
         ->select('users.nombres', 'users.apellidos', 'users.correo','proyecto.encargado','proyecto.nombre')
-        ->where('proyectoxestudiante.idUser', '=', 2)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)
         ->first();
 
         $this->sendEmailAceptadoRechazado($mailData, $estado);
@@ -83,12 +84,17 @@ class ProyectoxEstudianteController extends Controller{
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
 
-        $rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
+        //$rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
+        $rechazarEstudiante = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '!=', $idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)->get();
 
-        foreach($rechazarEstudiante as $rechazar){
-            $rechazar->estado = 2;
-            $rechazar->save();
+        if($rechazarEstudiante != null){
+            foreach($rechazarEstudiante as $rechazar){
+                $rechazar->estado = 2;
+                $rechazar->save();
+            }
         }
+        
     }
 
     public function aplicar(Request $request){
@@ -104,6 +110,23 @@ class ProyectoxEstudianteController extends Controller{
         $user->ya_aplico_hoy = date('d-m-Y');
         $user->save();
         
+        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
+        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+        ->where('users.idUser', '=', $request->idUser)
+        ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+        $this->sendEmail($proyecto);
+    }
+
+    public function aplicarPorAdmin(Request $request){
+        if(!$request->ajax()) return redirect('/home');
+        $pXe = new ProyectoxEstudiante();
+        $pXe->idProyecto = $request->idProyecto;
+        $pXe->idUser = $request->idUser;
+        $pXe->estado = $request->estado;
+        $pXe->modificado_por = $request->modificado_por;
+        $pXe->save();
+
         $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
         ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')

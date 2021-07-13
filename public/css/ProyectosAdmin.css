@@ -53,6 +53,9 @@
     padding: 0;
 }
 
+.search-student {
+    display: inline-block;
+}
 
 .dropdown-header {
     background-color: #003C71;
@@ -78,10 +81,17 @@
     #sidebarMenu {
         margin-top: 55px;
     }
+    
+    #logout {
+        margin-right: 30px;
+    }
 }
 
 @media screen and (min-width: 991px) {
     #logout {
         margin-right: 30px;
+    }
+    .inputs{
+        width:80%;
     }
 }

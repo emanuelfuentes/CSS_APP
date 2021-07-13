@@ -7,10 +7,7 @@
             </ol>
             <div class="container-fluid" style="background-color: white;">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="border: none;"><!--
-                    <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Listado de Proyectos
-                    </div>-->
+                <div class="card" style="border: none;">
                     <div class="card-body">
                         <div class="form-group row" style="flex-direction: row-reverse;">
                             <div class="col-md-6">
@@ -280,6 +277,28 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input type="text" v-model="carnet" class="form-control" placeholder="Ingrese el carnet del estudiante">
+                                    <button type="button" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
+                                </div>
+                                <div class="input-group">
+                                    <div v-if="flagError" class="mt-2 text-danger">
+                                        No se ha encontrado resultados
+                                    </div>
+                                    <div v-else class="mt-2" style="visibility:hidden">
+                                        Nada
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="nombre_completo == ''">
+                                <h2 style="visibility:hidden; margin-bottom:0">Nada</h2>
+                            </div>
+                            <div v-else>
+                                <h2 class="col-md-8 search-student" v-text="nombre_completo" style="margin-bottom:0"></h2>
+                                <button class="btn btn-primary search-student" type="button" @click="aplicarPorAdmin()">Acptar</button>
+                            </div>
+                            
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -327,7 +346,11 @@
             <!--Fin del modal-->
             <!--Inicio del modal de confirmacion para aceptar o rechazar estudiantes-->
             <div class="modal fade" :class="{'mostrar' : modal4}" tabindex="-1" role="dialog" id="confirmModal" aria-hidden="true">
-                <div class="modal-dialog modal-primary" role="document">
+                <div v-if="loading==true">
+                    <spinner></spinner>
+                </div>
+                
+                <div v-else class="modal-dialog modal-primary" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
                             <div v-if="flagEstudiante">
@@ -336,7 +359,7 @@
                             <div v-else>
                                 <h4 class="modal-title">Rechazar estudiante</h4>
                             </div>
-                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
+                            <button id="cerrarModalARE1" type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -344,8 +367,9 @@
                             <h5 v-text="nombre_estudiante_msg"></h5>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
+                            
+                            <button id="cerrarModalARE2" type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
+                            <button id="aceptarRechazarEst" type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -446,6 +470,7 @@ import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
+                loading : false,
                 user_email: '',
                 arrayProyectos : [],
                 arrayCarreras : [''],
@@ -474,7 +499,9 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_carrera : 0,
                 modal_perfil : 0,
                 modal_createdAt : '',
-                modal_estado: 0,
+                modal_estado : 0,
+                carnet : '',
+                nombre_completo : '',
                 errorProyecto : [''],
                 errorDateMsg : '',
                 errorPerfilMsg : '',
@@ -573,7 +600,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 else{
                     axios.put(`${API_HOST}/proyecto/actualizar`, {
                         'idProyecto' : this.id_proyecto,
-                        'estado' : this.modal_estado,
                         'contraparte' : this.modal_contraparte,
                         'cupos' : this.modal_cupos,
                         'descripcion' : this.modal_desc,
@@ -703,6 +729,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_encargado = '';
                             this.modal_cupos = ''
                             this.modal_desc = '';
+                            this.modal_correo = '';
                             this.modal_horario = '';
                             this.modal_contraparte = '';
                             this.modal_tipo_horas = '';
@@ -723,6 +750,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_encargado = data.encargado;
                             this.modal_nombre = data.nombre;
                             this.modal_desc = data.descripcion;
+                            this.modal_correo = data.correo_encargado;
                             this.modal_tipo_horas = data.tipo_horas;
                             this.modal_cupos = data.cupos;
                             this.modal_horario = data.horario;
@@ -747,6 +775,9 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.id_proyecto = data.idProyecto;
                             this.modal_nombre = data.nombre;
                             this.modal_cupos = data.cupos;
+                            this.carnet = '';
+                            this.nombre_completo = ''
+                            this.id_estudiante = 0;
                             this.getEstudiantes()
                             break;
                         }
@@ -831,8 +862,44 @@ import {API_HOST} from '../constants/endpoint.js';
                     console.log(error);
                 });
             },
+            buscarEstudiante(){
+                let me = this
+                //this.errorActualizar = false
+                var url = `${API_HOST}/estudiante_por_carnet`
+                axios.get(url, {
+                    params:{
+                        carnet: me.carnet
+                    }
+                }).then(function (response) {
+                    var estudiante = response.data[0];
+                    if(estudiante != null){
+                        me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
+                        me.id_estudiante = estudiante.idUser;
+                    }
+                    else me.flagError = true
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            aplicarPorAdmin(){
+                let me = this
+                var url = `${API_HOST}/aplicarporadmin`
+                axios.post(url, {
+                    'idProyecto' : me.id_proyecto,
+                    'idUser' : me.id_estudiante,
+                    'estado' : 1,
+                    'modificado_por' : 'admin'
+                }).then(function (response) {
+                    me.getEstudiantes();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             aceptarRechazarEstudiante(){
                 let me = this;
+                me.loading = true;
                 var estadoEst = 2;
                 if(me.flagEstudiante){
                     axios.put(`${API_HOST}/rechazarestudiante`, {
@@ -848,6 +915,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     'idProyecto' : me.id_proyecto,
                     'estado' : estadoEst
                 }).then(function (response) {
+                    me.loading = false;
                     me.cerrarModal();
                     me.getEstudiantes();
                 }).catch(function (error) {

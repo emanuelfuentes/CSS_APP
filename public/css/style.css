@@ -1210,7 +1210,7 @@ pre {
 @media (max-width: 991px) {
   .table-responsive {
     display: block;
-    width: 100%;
+    width: 80%;
     overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar; }
     .table-responsive.table-bordered {
@@ -1218,7 +1218,7 @@ pre {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25;
@@ -1229,6 +1229,13 @@ pre {
   border: 1px solid #c2cfd6;
   border-radius: 0;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+
+  @media (max-width: 760px) {
+    .form-control{
+      width: 45%;
+    }
+  }
+
   .form-control::-ms-expand {
     background-color: transparent;
     border: 0; }
@@ -9102,9 +9109,9 @@ hr.transparent {
   .d-sm-down-none {
     display: none !important; } }
 
-@media (max-width: 991px) {
+/*@media (max-width: 991px) {
   .d-md-down-none {
-    display: none !important; } }
+    display: none !important; } }*/
 
 @media (max-width: 1199px) {
   .d-lg-down-none {

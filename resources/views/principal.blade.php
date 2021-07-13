@@ -48,6 +48,7 @@
         </ul>
     </header>
 
+<div id="app">
     <div class="app-body" style="margin-top: 0;">
 
     @if(Auth::check())
@@ -59,6 +60,7 @@
     @else
 
     @endif
+
         <!-- Contenido Principal -->
         @yield('dashboard')
         <!-- /Fin del contenido principal -->
