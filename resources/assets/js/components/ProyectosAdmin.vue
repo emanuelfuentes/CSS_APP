@@ -1,26 +1,6 @@
 <template>
     <main class="main">
             <!-- Breadcrumb -->
-            <header class="app-header navbar container-fluid">
-        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <ul class="nav navbar-nav ml-auto" id="logout">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-md-down-none" v-text="user_email"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
-                        <strong>Cuenta</strong>
-                    </div>
-                    <button class="dropdown-item" type="button" 
-                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</button>
-                </div>
-            </li>
-        </ul>
-    </header>
             <ol class="breadcrumb" style="padding-left: 30px;">
                 <li class="breadcrumb-item">Inicio</li>
                 <li class="breadcrumb-item active">Administración de Proyectos</li>
@@ -39,7 +19,7 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-hover table-sm">
+                        <table class="table table-bordered table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -92,13 +72,13 @@
                         <nav>
                             <ul class="pagination" style="float: right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_right_black_24dp.svg" alt="chevron-right"></a>
                                 </li>
                             </ul>
                         </nav>

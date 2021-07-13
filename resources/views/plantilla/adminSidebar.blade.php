@@ -1,4 +1,4 @@
-<div class="sidebar" style="height: 100%;">
+<div class="sidebar" style="height: 100%; top: 0;" id="sidebarMenu" >
             <nav class="sidebar-nav">
                 <ul class="nav">
                     <li class="nav-title">
