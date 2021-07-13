@@ -84,7 +84,6 @@ class ProyectoxEstudianteController extends Controller{
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
 
-        //$rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
         $rechazarEstudiante = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '!=', $idProyecto)
         ->where('proyectoxestudiante.idUser', '=', $idUser)->get();
 
@@ -119,20 +118,27 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function aplicarPorAdmin(Request $request){
-        if(!$request->ajax()) return redirect('/home');
-        $pXe = new ProyectoxEstudiante();
-        $pXe->idProyecto = $request->idProyecto;
-        $pXe->idUser = $request->idUser;
-        $pXe->estado = $request->estado;
-        $pXe->modificado_por = $request->modificado_por;
-        $pXe->save();
+        $verify = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $request->idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $request->idUser)->first();
+        if($verify == null){
+            if(!$request->ajax()) return redirect('/home');
+            $pXe = new ProyectoxEstudiante();
+            $pXe->idProyecto = $request->idProyecto;
+            $pXe->idUser = $request->idUser;
+            $pXe->estado = $request->estado;
+            $pXe->modificado_por = $request->modificado_por;
+            $pXe->save();
 
-        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
-        ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
-        ->select('proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
-        ->where('users.idUser', '=', $request->idUser)
-        ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
-        $this->sendEmail($proyecto,2);
+            $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+            ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
+            ->select('proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+            ->where('users.idUser', '=', $request->idUser)
+            ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+            $this->sendEmail($proyecto,2);
+        }
+        else{
+            return "El estudiante ya está en el proyecto";
+        }
     }
 
     public function sendEmail($user, $mailType){
