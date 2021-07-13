@@ -34564,7 +34564,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\n.sidebar-fixed .sidebar {\r\n    height: 100%;\n}\n@media screen and (min-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\n@media screen and (max-width: 991px) {\n.breadcrumb {\r\n        margin-top: 55px;\n}\n#sidebarMenu {\r\n        margin-top: 55px;\n}\n#logout {\r\n        margin-right: 30px;\n}\n.main{\r\n        overflow: scroll;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\n@media screen and (min-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\n.sidebar-fixed .sidebar {\r\n    height: 100%;\n}\n@media screen and (max-width: 991px) {\n.breadcrumb {\r\n        margin-top: 55px;\n}\n#sidebarMenu {\r\n        margin-top: 55px;\n}\n#logout {\r\n        margin-right: 30px;\n}\n.main{\r\n        overflow: scroll;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -35237,7 +35237,7 @@ var render = function() {
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
+            { staticClass: "table table-bordered table-hover table-sm" },
             [
               _vm._m(2),
               _vm._v(" "),
@@ -36034,7 +36034,7 @@ var render = function() {
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
+            { staticClass: "table table-bordered table-hover table-sm" },
             [
               _vm._m(1),
               _vm._v(" "),
@@ -36084,13 +36084,17 @@ var render = function() {
                       },
                       [
                         proyecto.estado
-                          ? _c("div", [
-                              _c(
-                                "span",
-                                { staticClass: "badge badge-success" },
-                                [_vm._v("Disponible")]
-                              )
-                            ])
+                          ? _c(
+                              "div",
+                              { staticStyle: { "text-align": "center" } },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "badge badge-success" },
+                                  [_vm._v("Disponible")]
+                                )
+                              ]
+                            )
                           : _c("div", [
                               _c(
                                 "span",
@@ -36910,7 +36914,7 @@ var render = function() {
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
+            { staticClass: "table table-bordered table-hover table-sm" },
             [
               _vm._m(2),
               _vm._v(" "),
@@ -36946,11 +36950,17 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", [
                       proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
-                            ])
-                          ])
+                        ? _c(
+                            "div",
+                            { staticStyle: { "text-align": "center" } },
+                            [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-success" },
+                                [_vm._v("Disponible")]
+                              )
+                            ]
+                          )
                         : _c("div", [
                             _c("span", { staticClass: "badge badge-danger" }, [
                               _vm._v("No disponible")
@@ -36959,7 +36969,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _c("div", { staticStyle: { display: "flex" } }, [
+                      _c("div", { staticStyle: { "text-align": "center" } }, [
                         _c(
                           "button",
                           {

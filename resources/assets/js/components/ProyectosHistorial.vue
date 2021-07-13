@@ -13,7 +13,7 @@
           <i class="fa fa-align-justify"></i> Historial de proyectos
         </div>
         <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
+          <table class="table table-bordered table-hover table-sm">
             <thead>
               <tr>
                 <!--<th>Opciones</th> -->

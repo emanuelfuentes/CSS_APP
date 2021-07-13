@@ -18,7 +18,7 @@
                             </b>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -32,7 +32,7 @@
                                     <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
-                                        <div v-if="proyecto.estado">
+                                        <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success">Disponible</span>
                                         </div>
                                         <div v-else>

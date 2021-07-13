@@ -144,9 +144,7 @@ import {API_HOST} from '../constants/endpoint.js';
 .button1 {background-color: #008CBA;}
 .button2 {background-color: #008CBA;}
 
-.sidebar-fixed .sidebar {
-    height: 100%;
-}
+
 
 @media screen and (min-width: 991px) {
     #logout {
@@ -154,6 +152,9 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 }
 
+.sidebar-fixed .sidebar {
+    height: 100%;
+}
 
 @media screen and (max-width: 991px) {
     .breadcrumb {

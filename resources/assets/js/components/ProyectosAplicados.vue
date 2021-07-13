@@ -12,7 +12,7 @@
                         <i class="fa fa-align-justify"></i> Proyectos aplicados
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -27,7 +27,7 @@
                                     <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td>
-                                        <div v-if="proyecto.estado">
+                                        <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success">Disponible</span>
                                         </div>
                                         <div v-else>
@@ -35,7 +35,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div style="display: flex;">
+                                        <div style="text-align: center;">
                                             <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-trash"></i>
                                                 <span class="btn-label">Desaplicar</span>
