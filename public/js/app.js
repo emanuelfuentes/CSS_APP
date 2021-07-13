@@ -35078,30 +35078,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35177,6 +35153,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(error);
       });
     },
+    estadoProyecto: function estadoProyecto() {
+      var me = this;
+      axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + "/proyecto/estado", {
+        'idProyecto': this.id_proyecto,
+        'estado': 1
+      }).then(function (response) {
+        me.cerrarModal();
+        me.bindData();
+      }).catch(function (error) {
+        console.log(error);
+      });
+    },
     cambiarPagina: function cambiarPagina(page) {
       var me = this;
       me.pagination.current_page = page;
@@ -35184,6 +35172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     cerrarModal: function cerrarModal() {
       this.modal = 0;
+      this.moda2 = 0;
     },
     abrirModal: function abrirModal(modelo) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -35201,6 +35190,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.modal_horario = data.horario;
             this.modal_fecha_in = data.fecha_inicio;
             this.modal_fecha_fin = data.fecha_fin;
+            break;
+          }
+        case "estado":
+          {
+            this.modal2 = 1;
+            this.id_proyecto = data.idProyecto;
             break;
           }
         default:
@@ -35255,19 +35250,7 @@ var render = function() {
                       domProps: { textContent: _vm._s(proyecto.descripcion) }
                     }),
                     _vm._v(" "),
-                    _c("td", [
-                      proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
-                            ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("No disponible")
-                            ])
-                          ])
-                    ]),
+                    _vm._m(3, true),
                     _vm._v(" "),
                     _c("td", { staticStyle: { "text-align": "center" } }, [
                       _c(
@@ -35286,7 +35269,34 @@ var render = function() {
                           _vm._v(" "),
                           _c("span", [_vm._v("Información")])
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "button-container" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-success btn-sm",
+                            staticStyle: { margin: "8px 0", width: "100%" },
+                            attrs: {
+                              type: "button",
+                              "data-toggle": "modal",
+                              "data-target": "#statusModal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.abrirModal("estado", proyecto)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "icon-lock" }),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "btn-label" }, [
+                              _vm._v("Activar")
+                            ])
+                          ]
+                        )
+                      ])
                     ])
                   ])
                 }),
@@ -35432,7 +35442,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(3),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35460,7 +35470,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35489,7 +35499,92 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n            Cerrar\n          ")]
+                  [_vm._v("Cerrar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          id: "statusModal",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-primary modal-lg",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h4", { staticClass: "modal-title" }, [
+                  _vm._v("Estado del proyecto")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.cerrarModal()
+                      }
+                    }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.estadoProyecto()
+                      }
+                    }
+                  },
+                  [_vm._v("Confirmar")]
                 )
               ])
             ])
@@ -35539,7 +35634,19 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Información")])
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("div", [
+        _c("span", { staticClass: "badge badge-danger" }, [
+          _vm._v("No disponible")
+        ])
       ])
     ])
   },
@@ -35563,6 +35670,14 @@ var staticRenderFns = [
       _c("th", [_vm._v("Encargado")]),
       _vm._v(" "),
       _c("th", [_vm._v("Descripción")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h2", [_vm._v("¿Activar este proyecto?")])
     ])
   }
 ]
@@ -37926,15 +38041,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37969,7 +38075,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_carrera: 0,
             modal_perfil: 0,
             modal_createdAt: '',
-            modal_estado: 0,
             carnet: '',
             nombre_completo: '',
             errorProyecto: [''],
@@ -38155,12 +38260,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         estadoProyecto: function estadoProyecto() {
             var me = this;
-            var state;
-            if (this.modal_estado == 1) state = 0;else state = 1;
-            console.log(this.id_proyecto);
             axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/estado', {
                 'idProyecto': this.id_proyecto,
-                'estado': state
+                'estado': 0
             }).then(function (response) {
                 me.cerrarModal();
                 me.bindData();
@@ -38232,7 +38334,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     {
                         this.modal2 = 1;
                         this.id_proyecto = data.idProyecto;
-                        this.modal_estado = data.estado;
                         break;
                     }
                 case "estudiantes":
@@ -38558,71 +38659,32 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          proyecto.estado
-                            ? _c("div", { staticClass: "button-container" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm",
-                                    staticStyle: {
-                                      margin: "8px 0",
-                                      width: "100%"
-                                    },
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "modal",
-                                      "data-target": "#statusModal"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "estado",
-                                          proyecto
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "icon-lock" }),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "btn-label" }, [
-                                      _vm._v("Desactivar")
-                                    ])
-                                  ]
-                                )
-                              ])
-                            : _c("div", { staticClass: "button-container" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success btn-sm",
-                                    staticStyle: {
-                                      margin: "8px 0",
-                                      width: "100%"
-                                    },
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "modal",
-                                      "data-target": "#statusModal"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "estado",
-                                          proyecto
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "icon-lock-open" }),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "btn-label" }, [
-                                      _vm._v("Activar")
-                                    ])
-                                  ]
-                                )
-                              ]),
+                          _c("div", { staticClass: "button-container" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                staticStyle: { margin: "8px 0", width: "100%" },
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "modal",
+                                  "data-target": "#statusModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.abrirModal("estado", proyecto)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "icon-lock" }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "btn-label" }, [
+                                  _vm._v("Desactivar")
+                                ])
+                              ]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "button-container" }, [
                             _c(
@@ -39658,13 +39720,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm.modal_estado
-                ? _c("div", { staticClass: "modal-body" }, [
-                    _c("h2", [_vm._v("¿Desactivar este proyecto?")])
-                  ])
-                : _c("div", { staticClass: "modal-body" }, [
-                    _c("h2", [_vm._v("¿Activar este proyecto?")])
-                  ]),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -39754,7 +39810,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "col" }, [
-                      _vm._m(4),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group" }, [
                         _c("input", {
@@ -39873,7 +39929,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "table-responsive" }, [
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(5),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -40338,6 +40394,14 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Rango")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h2", [_vm._v("¿Desactivar este proyecto?")])
     ])
   },
   function() {
