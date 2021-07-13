@@ -65,7 +65,8 @@ class ProyectoxEstudianteController extends Controller{
         $idUser = $request->idUser;
         $estado = $request->estado;
 
-        $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
+        $proXEst = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)->first();
         $proXEst->estado = $estado;
         $proXEst->save();
         
@@ -83,7 +84,9 @@ class ProyectoxEstudianteController extends Controller{
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
 
-        $rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
+        //$rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
+        $rechazarEstudiante = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '!=', $idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)->get();
 
         if($rechazarEstudiante != null){
             foreach($rechazarEstudiante as $rechazar){
