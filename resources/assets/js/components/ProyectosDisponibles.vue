@@ -97,7 +97,11 @@
             </div>
             <!--Inicio del modal aplicar a proyecto-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg" role="document">
+                <div v-if="loading==true">
+                    <spinner></spinner>
+                </div>
+                
+                <div v-else class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Aplicar a proyecto</h4>
@@ -191,6 +195,7 @@ import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
+                loading : false,
                 user_id : 0,
                 user_email: '',
                 ya_aplico_hoy : 0,
@@ -284,6 +289,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             aplicarProyecto(){
                 let me = this
+                me.loading = true;
                 axios.post(`${API_HOST}/proyecto/aplicar`, {
                     'idProyecto' : this.id_proyecto,
                     'idUser' : this.user_id,
@@ -291,6 +297,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     'modificado_por' : 'admin'
                 })
                 .then(function (response) {
+                    me.loading = false;
                     me.cerrarModal();
                 })
                 .catch(function (error) {
