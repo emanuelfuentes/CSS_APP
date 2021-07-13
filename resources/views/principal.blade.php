@@ -48,7 +48,6 @@
         </ul>
     </header>
 
-<div id="app">
     <div class="app-body" style="margin-top: 0;">
 
     @if(Auth::check())
@@ -77,5 +76,4 @@
     <script src="js/app.js"></script>
     <script src="js/plantilla.js"></script>
 </body>
-
 </html>

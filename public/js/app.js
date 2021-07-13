@@ -34679,26 +34679,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -34767,65 +34747,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(3),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
@@ -34881,27 +34807,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -35197,25 +35102,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35342,71 +35228,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(3),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -35599,7 +35432,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35627,7 +35460,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -35667,27 +35500,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -36033,26 +35845,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36221,61 +36013,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
@@ -36298,7 +36036,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(3),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -36401,7 +36139,7 @@ var render = function() {
                                 )
                               ])
                             : _c("div", [
-                                _vm._m(4, true),
+                                _vm._m(2, true),
                                 _vm._v(
                                   "  \n                                        "
                                 )
@@ -36542,7 +36280,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(5),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
                     _c(
@@ -36709,27 +36447,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37043,25 +36760,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37203,72 +36901,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(3),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -37478,7 +37122,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(5),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37514,7 +37158,7 @@ var render = function() {
                     staticClass: "table table-bordered table-striped table-sm"
                   },
                   [
-                    _vm._m(6),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
@@ -37599,7 +37243,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(7),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -37638,27 +37282,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -37838,22 +37461,6 @@ exports.push([module.i, "\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -38791,61 +38398,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c(
       "div",
@@ -38899,12 +38452,9 @@ var render = function() {
             _vm._v(" "),
             _c(
               "table",
-              {
-                staticClass:
-                  "table table-bordered table-striped table-hover table-sm"
-              },
+              { staticClass: "table table-bordered table-hover table-sm" },
               [
-                _vm._m(3),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -38971,7 +38521,7 @@ var render = function() {
                                     [_vm._v("Disponible")]
                                   )
                                 ])
-                              : _c("div", [_vm._m(4, true)])
+                              : _c("div", [_vm._m(2, true)])
                           ]
                         ),
                         _vm._v(" "),
@@ -39118,6 +38668,13 @@ var render = function() {
                           "a",
                           {
                             staticClass: "page-link",
+                            staticStyle: {
+                              display: "flex",
+                              "justify-content": "center",
+                              "align-items": "center",
+                              width: "32px",
+                              height: "35px"
+                            },
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
@@ -39128,7 +38685,15 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Ant")]
+                          [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "/public/icons/chevron_left_black_24dp.svg",
+                                alt: "chevron-left"
+                              }
+                            })
+                          ]
                         )
                       ])
                     : _vm._e(),
@@ -39163,6 +38728,13 @@ var render = function() {
                           "a",
                           {
                             staticClass: "page-link",
+                            staticStyle: {
+                              display: "flex",
+                              "justify-content": "center",
+                              "align-items": "center",
+                              width: "32px",
+                              height: "35px"
+                            },
                             attrs: { href: "#" },
                             on: {
                               click: function($event) {
@@ -39173,7 +38745,15 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Sig")]
+                          [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "/public/icons/chevron_right_black_24dp.svg",
+                                alt: "chevron-right"
+                              }
+                            })
+                          ]
                         )
                       ])
                     : _vm._e()
@@ -39772,7 +39352,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(5),
+                          _vm._m(3),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -40165,107 +39745,8 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.carnet,
-                          expression: "carnet"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Ingrese el carnet del estudiante"
-                      },
-                      domProps: { value: _vm.carnet },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.carnet = $event.target.value
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.buscarEstudiante()
-                          }
-                        }
-                      },
-                      [_vm._v("Buscar")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _vm.flagError
-                      ? _c("div", { staticClass: "mt-2 text-danger" }, [
-                          _vm._v(
-                            "\n                                    No se ha encontrado resultados\n                                "
-                          )
-                        ])
-                      : _c(
-                          "div",
-                          {
-                            staticClass: "mt-2",
-                            staticStyle: { visibility: "hidden" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    Nada\n                                "
-                            )
-                          ]
-                        )
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm.nombre_completo == ""
-                  ? _c("div", [
-                      _c(
-                        "h2",
-                        {
-                          staticStyle: {
-                            visibility: "hidden",
-                            "margin-bottom": "0"
-                          }
-                        },
-                        [_vm._v("Nada")]
-                      )
-                    ])
-                  : _c("div", [
-                      _c("h2", {
-                        staticClass: "col-md-8 search-student",
-                        staticStyle: { "margin-bottom": "0" },
-                        domProps: { textContent: _vm._s(_vm.nombre_completo) }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary search-student",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.aplicarPorAdmin()
-                            }
-                          }
-                        },
-                        [_vm._v("Acptar")]
-                      )
-                    ]),
-                _vm._v(" "),
-                _c("table", { staticClass: "table" }, [
-                  _vm._m(6),
+                _c("div", { staticClass: "col" }, [
+                  _vm._m(4),
                   _vm._v(" "),
                   _c("div", { staticClass: "input-group" }, [
                     _c("input", {
@@ -40380,7 +39861,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "table-responsive" }, [
                   _c("table", { staticClass: "table" }, [
-                    _vm._m(7),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -40794,27 +40275,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
       "ol",
       { staticClass: "breadcrumb", staticStyle: { "padding-left": "30px" } },
       [
@@ -41091,26 +40551,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -41245,65 +40685,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", { staticClass: "main" }, [
-    _c("header", { staticClass: "app-header navbar container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "nav navbar-nav ml-auto", attrs: { id: "logout" } },
-        [
-          _c("li", { staticClass: "nav-item dropdown" }, [
-            _c(
-              "a",
-              {
-                staticClass: "nav-link dropdown-toggle nav-link",
-                attrs: {
-                  "data-toggle": "dropdown",
-                  href: "#",
-                  role: "button",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false"
-                }
-              },
-              [
-                _c("span", {
-                  staticClass: "d-md-down-none",
-                  domProps: { textContent: _vm._s(_vm.user_email) }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-menu dropdown-menu-right" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "dropdown-item",
-                  staticStyle: { cursor: "pointer" },
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.logout()
-                    }
-                  }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-lock" }),
-                  _vm._v(" Cerrar sesión")
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(3),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "row" }, [
@@ -41407,7 +40793,7 @@ var render = function() {
               staticStyle: { margin: "20px 0px 0px 20px" }
             },
             [
-              _vm._m(4),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c(
@@ -41453,7 +40839,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c(
@@ -41499,7 +40885,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c(
@@ -41623,27 +41009,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto",
-        attrs: { type: "button" }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "dropdown-header text-center" }, [
-      _c("strong", [_vm._v("Cuenta")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
