@@ -320,7 +320,7 @@
                                         <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
                                             <td v-text="estudiante.nombres"></td>
                                             <td v-text="estudiante.apellidos"></td>
-                                            <td>Proximamente</td>
+                                            <td v-text="estudiante.correo"></td>
                                             <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
                                             <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                             <td>
@@ -864,6 +864,9 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }).then(function (response){
                     me.arrayEstudiantes = response.data;
+                    me.arrayEstudiantes.forEach(function(element, index, array){
+                        me.arrayEstudiantes[index].correo = element.correo.substr(0, 8);
+                    })
                 })
                 .catch(function (error) {
                     console.log(error);
