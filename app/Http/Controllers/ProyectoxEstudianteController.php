@@ -84,7 +84,6 @@ class ProyectoxEstudianteController extends Controller{
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
 
-        //$rechazarEstudiante = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto != :idProyecto AND pe.idUser = :idUser')->get();
         $rechazarEstudiante = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '!=', $idProyecto)
         ->where('proyectoxestudiante.idUser', '=', $idUser)->get();
 
@@ -115,36 +114,57 @@ class ProyectoxEstudianteController extends Controller{
         ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
         ->where('users.idUser', '=', $request->idUser)
         ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
-        $this->sendEmail($proyecto);
+        $this->sendEmail($proyecto, 1);
     }
 
     public function aplicarPorAdmin(Request $request){
-        if(!$request->ajax()) return redirect('/home');
-        $pXe = new ProyectoxEstudiante();
-        $pXe->idProyecto = $request->idProyecto;
-        $pXe->idUser = $request->idUser;
-        $pXe->estado = $request->estado;
-        $pXe->modificado_por = $request->modificado_por;
-        $pXe->save();
+        $verify = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $request->idProyecto)
+        ->where('proyectoxestudiante.idUser', '=', $request->idUser)->first();
+        if($verify == null){
+            if(!$request->ajax()) return redirect('/home');
+            $pXe = new ProyectoxEstudiante();
+            $pXe->idProyecto = $request->idProyecto;
+            $pXe->idUser = $request->idUser;
+            $pXe->estado = $request->estado;
+            $pXe->modificado_por = $request->modificado_por;
+            $pXe->save();
 
-        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
-        ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
-        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
-        ->where('users.idUser', '=', $request->idUser)
-        ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
-        $this->sendEmail($proyecto);
+            $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+            ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
+            ->select('proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+            ->where('users.idUser', '=', $request->idUser)
+            ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+            $this->sendEmail($proyecto,2);
+        }
+        else{
+            return "El estudiante ya está en el proyecto";
+        }
     }
 
-    public function sendEmail($user){
-        Mail::send(
-            'emails.estudianteAplico',
-            ['user' => $user],
-            function($message) use ($user){
-                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                $message->to($user->correo_encargado);
-                $message->subject("Aplicación de un estudiante en su proyecto.");
-            }
-        );
+    public function sendEmail($user, $mailType){
+        if($mailType == 1){
+            Mail::send(
+                'emails.estudianteAplico',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo_encargado);
+                    $message->subject("Aplicación de un estudiante en su proyecto.");
+                }
+            );
+        }
+        else{
+            Mail::send(
+                'emails.agregadoPorAdmin',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo);
+                    $message->subject("Actualización de ingreso a proyecto de horas sociales");
+                }
+            );
+        }
+        
     }
 
     public function sendEmailAceptadoRechazado($mailData, $estado){

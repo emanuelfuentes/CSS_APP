@@ -268,7 +268,10 @@
             <!--Fin del modal-->
             <!--Inicio de modal de estudiantes por proyecto-->
             <div class="modal fade" tabindex="-1" role="dialog" id="membersModal" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg modal-student" role="document">
+                <div v-if="loading==true">
+                    <spinner></spinner>
+                </div>
+                <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document">
                     <div class="modal-content modal-student">
                         <div class="modal-header">
                             <h4 class="modal-title">Estudiantes</h4>
@@ -286,8 +289,8 @@
                                     <button type="button" style="margin-left: 10px" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                                 </div>
                                 <div class="input-group">
-                                    <div v-if="flagError" class="mt-2 text-danger">
-                                        No se ha encontrado resultados
+                                    <div v-if="flagError" class="mt-2 mb-1">
+                                        <p class="text-danger" v-text="errorEstudianteMsg"></p>
                                     </div>
                                     <div v-else style="width: 100%; margin: 20px">
                                         <div v-if="nombre_completo == ''">
@@ -317,7 +320,7 @@
                                         <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
                                             <td v-text="estudiante.nombres"></td>
                                             <td v-text="estudiante.apellidos"></td>
-                                            <td>Proximamente</td>
+                                            <td v-text="estudiante.correo"></td>
                                             <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
                                             <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                             <td>
@@ -509,6 +512,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 errorProyecto : [''],
                 errorDateMsg : '',
                 errorPerfilMsg : '',
+                errorEstudianteMsg : '',
                 flagError : false,
                 flagEstudiante : false,
                 pagination : {
@@ -780,8 +784,10 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_nombre = data.nombre;
                             this.modal_cupos = data.cupos;
                             this.carnet = '';
-                            this.nombre_completo = ''
+                            this.nombre_completo = '';
                             this.id_estudiante = 0;
+                            this.flagError = false;
+                            this.errorEstudianteMsg = '';
                             this.getEstudiantes()
                             break;
                         }
@@ -861,6 +867,9 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }).then(function (response){
                     me.arrayEstudiantes = response.data;
+                    me.arrayEstudiantes.forEach(function(element, index, array){
+                        me.arrayEstudiantes[index].correo = element.correo.substr(0, 8);
+                    })
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -880,7 +889,10 @@ import {API_HOST} from '../constants/endpoint.js';
                         me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                         me.id_estudiante = estudiante.idUser;
                     }
-                    else me.flagError = true
+                    else{
+                        me.errorEstudianteMsg = "No se ha encontrado resultados";
+                        me.flagError = true;
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -888,6 +900,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             aplicarPorAdmin(){
                 let me = this
+                me.loading = true;
                 var url = `${API_HOST}/aplicarporadmin`
                 axios.post(url, {
                     'idProyecto' : me.id_proyecto,
@@ -895,6 +908,11 @@ import {API_HOST} from '../constants/endpoint.js';
                     'estado' : 1,
                     'modificado_por' : 'admin'
                 }).then(function (response) {
+                    if(response.data){
+                        me.errorEstudianteMsg = response.data;
+                        me.flagError = true;
+                    }
+                    me.loading = false;
                     me.getEstudiantes();
                 })
                 .catch(function (error) {
