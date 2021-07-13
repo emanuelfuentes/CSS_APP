@@ -38080,6 +38080,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errorProyecto: [''],
             errorDateMsg: '',
             errorPerfilMsg: '',
+            errorEstudianteMsg: '',
             flagError: false,
             flagEstudiante: false,
             pagination: {
@@ -38345,6 +38346,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.carnet = '';
                         this.nombre_completo = '';
                         this.id_estudiante = 0;
+                        this.flagError = false;
+                        this.errorEstudianteMsg = '';
                         this.getEstudiantes();
                         break;
                     }
@@ -38420,6 +38423,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
+                me.arrayEstudiantes.forEach(function (element, index, array) {
+                    me.arrayEstudiantes[index].correo = element.correo.substr(0, 8);
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -38437,7 +38443,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (estudiante != null) {
                     me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                     me.id_estudiante = estudiante.idUser;
-                } else me.flagError = true;
+                } else {
+                    me.errorEstudianteMsg = "No se ha encontrado resultados";
+                    me.flagError = true;
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -38452,6 +38461,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'estado': 1,
                 'modificado_por': 'admin'
             }).then(function (response) {
+                if (response.data) {
+                    me.errorEstudianteMsg = response.data;
+                    me.flagError = true;
+                }
                 me.loading = false;
                 me.getEstudiantes();
             }).catch(function (error) {
@@ -39856,10 +39869,13 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group" }, [
                         _vm.flagError
-                          ? _c("div", { staticClass: "mt-2 text-danger" }, [
-                              _vm._v(
-                                "\n                                    No se ha encontrado resultados\n                                "
-                              )
+                          ? _c("div", { staticClass: "mt-2 mb-1" }, [
+                              _c("p", {
+                                staticClass: "text-danger",
+                                domProps: {
+                                  textContent: _vm._s(_vm.errorEstudianteMsg)
+                                }
+                              })
                             ])
                           : _c(
                               "div",
@@ -39947,7 +39963,11 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              _c("td", [_vm._v("Proximamente")]),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(estudiante.correo)
+                                }
+                              }),
                               _vm._v(" "),
                               _c("td", {
                                 domProps: {

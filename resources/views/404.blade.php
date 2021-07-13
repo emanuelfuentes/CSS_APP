@@ -14,7 +14,7 @@
     </span>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">
         <h1>Oops, parece que algo salió mal.</h1>
-        <p>La página que está buscando no existe.</p>
+        <p>La página que está buscando no existe o no está disponible temporalmente.</p>
         <p>Puede usar este botón para regresar.</p>
         <div class="d-flex justify-content-center">
             <form action="{{url('/')}}" method="post">

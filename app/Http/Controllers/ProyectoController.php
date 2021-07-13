@@ -65,6 +65,7 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$request->ajax()) return redirect('/home');
         $proyecto = new Proyecto();
         $proyecto->estado = $request->estado;
         $proyecto->contraparte = $request->contraparte;
@@ -114,6 +115,7 @@ class ProyectoController extends Controller
 
     public function update(Request $request)
     {
+        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->contraparte = $request->contraparte;
         $proyecto->cupos = $request->cupos;
@@ -146,6 +148,7 @@ class ProyectoController extends Controller
     
     public function state(Request $request)
     {
+        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();
