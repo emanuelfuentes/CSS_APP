@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/estudiantesxproyecto', 'ProyectoxEstudianteController@estudiantesPorProyecto');
         Route::put('/aplicarestudiante', 'ProyectoxEstudianteController@aceptarRechazarEstudiante');
         Route::put('/rechazarestudiante', 'ProyectoxEstudianteController@rechazarEstudiante');
+        Route::post('/aplicarporadmin', 'ProyectoxEstudianteController@aplicarPorAdmin');
         Route::get('/estudiante_por_carnet', 'UserController@estudiantePorCarnet');
         Route::get('/facultad', 'FacultadController@index');
         Route::put('/estudiante/actualizar', 'UserController@actualizarEstudiante');
