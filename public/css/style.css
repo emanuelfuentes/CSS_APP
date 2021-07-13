@@ -1230,9 +1230,9 @@ pre {
   border-radius: 0;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
 
-  @media (max-width: 760px) {
+  @media (max-width: 775px) {
     .form-control{
-      width: 45%;
+      width: 85%;
     }
   }
 
@@ -7766,7 +7766,7 @@ base-chart.chart {
       flex-direction: column;
   padding: 0;
   color: #fff;
-  background: #29363d; }
+  background: #003C71; }
   .sidebar .sidebar-close {
     position: absolute;
     right: 0;
@@ -7813,12 +7813,12 @@ base-chart.chart {
       margin-left: -10px;
       -webkit-appearance: none; }
     .sidebar .sidebar-nav::-webkit-scrollbar-track {
-      background-color: #33444c;
+      background-color: #003C71;
       border-right: 1px solid #1f292e;
       border-left: 1px solid #1f292e; }
     .sidebar .sidebar-nav::-webkit-scrollbar-thumb {
       height: 50px;
-      background-color: #151b1f;
+      background-color: #003C71;
       background-clip: content-box;
       border-color: transparent;
       border-style: solid;

@@ -33,7 +33,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4" style="margin: 25px 0px 20px 20px;">
+                            <div class="col-md-8" style="margin: 25px 0px 20px 20px;">
                                 <div class="form-group">
                                     <input type="text" v-model="carnet" class="form-control inputs" placeholder="Ingrese el carnet del estudiante">
                                     <div v-if="flagError" class="mt-2 text-danger">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-md-3" style="margin: 20px 0px 0px 20px;">
+                        <div class="col-md-8" style="margin: 20px 0px 0px 20px;">
                             <div class="form-group row">
                                 <label class="form-control-label">Facultad</label>
                             </div>
@@ -235,11 +235,6 @@ import {API_HOST} from '../constants/endpoint.js';
 </script>
 <style lang="scss">
 
-@media screen and (min-width: 991px) {
-    .inputs{
-        width: 80%;
-    }
-}
 
 @media screen and (min-width: 760px) {
     .inputs{
@@ -248,7 +243,7 @@ import {API_HOST} from '../constants/endpoint.js';
 }
 @media screen and (max-width: 760px) {
     .inputs{
-        width: 45%;
+        width: 70%;
     }
 }
 

@@ -38303,9 +38303,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -40709,7 +40706,7 @@ exports = module.exports = __webpack_require__(2)(false);
 exports.push([module.i, "@import url(/public/css/ProyectosAdmin.css);", ""]);
 
 // module
-exports.push([module.i, "\n@media screen and (min-width: 991px) {\n.inputs {\n    width: 80%;\n}\n}\n@media screen and (min-width: 760px) {\n.inputs {\n    width: 80%;\n}\n}\n@media screen and (max-width: 760px) {\n.inputs {\n    width: 45%;\n}\n}\n", ""]);
+exports.push([module.i, "\n@media screen and (min-width: 760px) {\n.inputs {\n    width: 80%;\n}\n}\n@media screen and (max-width: 760px) {\n.inputs {\n    width: 70%;\n}\n}\n", ""]);
 
 // exports
 
@@ -41025,7 +41022,7 @@ var render = function() {
             _c(
               "div",
               {
-                staticClass: "col-md-4",
+                staticClass: "col-md-8",
                 staticStyle: { margin: "25px 0px 20px 20px" }
               },
               [
@@ -41118,7 +41115,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "col-md-3",
+              staticClass: "col-md-8",
               staticStyle: { margin: "20px 0px 0px 20px" }
             },
             [

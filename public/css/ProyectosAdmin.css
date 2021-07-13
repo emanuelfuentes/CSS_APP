@@ -73,6 +73,11 @@
     #logout {
         margin-right: 30px;
     }
+
+    .main{
+        overflow: scroll;
+    }
+    
 }
 
 @media screen and (min-width: 991px) {
@@ -80,6 +85,6 @@
         margin-right: 30px;
     }
     .inputs{
-        width:80%;
+        width: 100%;
     }
 }
