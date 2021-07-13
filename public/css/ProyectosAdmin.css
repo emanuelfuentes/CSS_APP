@@ -70,10 +70,16 @@
     .breadcrumb {
         margin-top: 55px;
     }
+    #logout {
+        margin-right: 30px;
+    }
 }
 
 @media screen and (min-width: 991px) {
     #logout {
         margin-right: 30px;
+    }
+    .inputs{
+        width:80%;
     }
 }

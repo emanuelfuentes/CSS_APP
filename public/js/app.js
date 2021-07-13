@@ -35213,6 +35213,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -35433,7 +35435,7 @@ var render = function() {
                           ])
                     ]),
                     _vm._v(" "),
-                    _c("td", [
+                    _c("td", { staticStyle: { "text-align": "center" } }, [
                       _c(
                         "button",
                         {
@@ -35445,7 +35447,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_c("i", { staticClass: "icon-info" })]
+                        [
+                          _c("i", { staticClass: "icon-info" }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Información")])
+                        ]
                       )
                     ])
                   ])
@@ -35543,7 +35549,8 @@ var render = function() {
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "myModalLabel",
-          "aria-hidden": "true"
+          "aria-hidden": "true",
+          id: "modal-info"
         }
       },
       [
@@ -37821,9 +37828,6 @@ exports.push([module.i, "\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
-//
-//
-//
 //
 //
 //
@@ -40674,7 +40678,7 @@ exports = module.exports = __webpack_require__(2)(false);
 exports.push([module.i, "@import url(/public/css/ProyectosAdmin.css);", ""]);
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "\n@media screen and (min-width: 991px) {\n.inputs {\n    width: 80%;\n}\n}\n@media screen and (min-width: 760px) {\n.inputs {\n    width: 80%;\n}\n}\n@media screen and (max-width: 760px) {\n.inputs {\n    width: 45%;\n}\n}\n", ""]);
 
 // exports
 
@@ -40686,6 +40690,10 @@ exports.push([module.i, "\n", ""]);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
+//
+//
+//
+//
 //
 //
 //
@@ -40983,32 +40991,58 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.carnet,
-                      expression: "carnet"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Ingrese el carnet del estudiante"
-                  },
-                  domProps: { value: _vm.carnet },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+            _c(
+              "div",
+              {
+                staticClass: "col-md-4",
+                staticStyle: { margin: "25px 0px 20px 20px" }
+              },
+              [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.carnet,
+                        expression: "carnet"
                       }
-                      _vm.carnet = $event.target.value
+                    ],
+                    staticClass: "form-control inputs",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Ingrese el carnet del estudiante"
+                    },
+                    domProps: { value: _vm.carnet },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.carnet = $event.target.value
+                      }
                     }
-                  }
-                }),
+                  }),
+                  _vm._v(" "),
+                  _vm.flagError
+                    ? _c("div", { staticClass: "mt-2 text-danger" }, [
+                        _vm._v(
+                          "\n                                    No se ha encontrado resultados\n                                "
+                        )
+                      ])
+                    : _c(
+                        "div",
+                        {
+                          staticClass: "mt-2",
+                          staticStyle: { display: "none" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    Nada\n                                "
+                          )
+                        ]
+                      )
+                ]),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -41023,29 +41057,8 @@ var render = function() {
                   },
                   [_vm._v("Buscar")]
                 )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group" }, [
-                _vm.flagError
-                  ? _c("div", { staticClass: "mt-2 text-danger" }, [
-                      _vm._v(
-                        "\n                                    No se ha encontrado resultados\n                                "
-                      )
-                    ])
-                  : _c(
-                      "div",
-                      {
-                        staticClass: "mt-2",
-                        staticStyle: { visibility: "hidden" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                    Nada\n                                "
-                        )
-                      ]
-                    )
-              ])
-            ])
+              ]
+            )
           ])
         ])
       ]),
@@ -41071,203 +41084,207 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c("label", { staticClass: "form-control-label" }, [
-                _vm._v("Facultad")
+          _c(
+            "div",
+            {
+              staticClass: "col-md-3",
+              staticStyle: { margin: "20px 0px 0px 20px" }
+            },
+            [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.idFacultad,
+                        expression: "idFacultad"
+                      }
+                    ],
+                    staticClass: "form-control custom-select",
+                    attrs: { id: "facultad " },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.idFacultad = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.arrayFacultad, function(facultad) {
+                    return _c(
+                      "option",
+                      {
+                        key: facultad.idFacultad,
+                        domProps: { value: facultad.idFacultad }
+                      },
+                      [_vm._v(_vm._s(facultad.nombre))]
+                    )
+                  }),
+                  0
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.idFacultad,
-                      expression: "idFacultad"
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.idCarrera,
+                        expression: "idCarrera"
+                      }
+                    ],
+                    staticClass: "form-control custom-select",
+                    attrs: { id: "carrera" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.idCarrera = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
                     }
-                  ],
-                  staticClass: "form-control custom-select",
-                  attrs: { id: "facultad" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.idFacultad = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.arrayFacultad, function(facultad) {
-                  return _c(
-                    "option",
-                    {
-                      key: facultad.idFacultad,
-                      domProps: { value: facultad.idFacultad }
-                    },
-                    [_vm._v(_vm._s(facultad.nombre))]
-                  )
-                }),
-                0
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c("label", { staticClass: "form-control-label" }, [
-                _vm._v("Carrera")
+                  },
+                  _vm._l(_vm.arrayCarreraFact, function(carrera) {
+                    return _c(
+                      "option",
+                      {
+                        key: carrera.idCarrera,
+                        domProps: { value: carrera.idCarrera }
+                      },
+                      [_vm._v(_vm._s(carrera.nombre))]
+                    )
+                  }),
+                  0
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.idCarrera,
-                      expression: "idCarrera"
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.idPerfil,
+                        expression: "idPerfil"
+                      }
+                    ],
+                    staticClass: "form-control custom-select",
+                    attrs: { id: "perfil" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.idPerfil = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
                     }
-                  ],
-                  staticClass: "form-control custom-select",
-                  attrs: { id: "carrera" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.idCarrera = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.arrayCarreraFact, function(carrera) {
-                  return _c(
-                    "option",
-                    {
-                      key: carrera.idCarrera,
-                      domProps: { value: carrera.idCarrera }
-                    },
-                    [_vm._v(_vm._s(carrera.nombre))]
-                  )
-                }),
-                0
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c("label", { staticClass: "form-control-label" }, [
-                _vm._v("Año de carrera")
+                  },
+                  _vm._l(_vm.arrayPerfil, function(perfil) {
+                    return _c(
+                      "option",
+                      {
+                        key: perfil.idPerfil,
+                        domProps: { value: perfil.idPerfil }
+                      },
+                      [_vm._v(_vm._s(perfil.perfil))]
+                    )
+                  }),
+                  0
+                )
               ]),
               _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
+              _vm.errorActualizar == 1
+                ? _c(
+                    "div",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.idPerfil,
-                      expression: "idPerfil"
-                    }
-                  ],
-                  staticClass: "form-control custom-select",
-                  attrs: { id: "carrera" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.idPerfil = $event.target.multiple
-                        ? $$selectedVal
-                        : $$selectedVal[0]
-                    }
-                  }
-                },
-                _vm._l(_vm.arrayPerfil, function(perfil) {
-                  return _c(
-                    "option",
-                    {
-                      key: perfil.idPerfil,
-                      domProps: { value: perfil.idPerfil }
+                      staticClass: "alert alert-success row",
+                      staticStyle: { "margin-bottom": "0" },
+                      attrs: { id: "message", role: "alert" }
                     },
-                    [_vm._v(_vm._s(perfil.perfil))]
+                    [
+                      _vm._v(
+                        "\n                            Estudiante actualizado correctamente\n                        "
+                      )
+                    ]
                   )
-                }),
-                0
-              )
-            ]),
-            _vm._v(" "),
-            _vm.errorActualizar == 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "alert alert-success row",
-                    staticStyle: { "margin-bottom": "0" },
-                    attrs: { id: "message", role: "alert" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Estudiante actualizado correctamente\n                        "
-                    )
-                  ]
-                )
-              : _vm.errorActualizar == 2
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "alert alert-danger row",
-                    staticStyle: { "margin-bottom": "0" },
-                    attrs: { id: "message", role: "alert" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Busque un estudiante\n                        "
-                    )
-                  ]
-                )
-              : _vm.errorActualizar == 3
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "alert alert-danger row",
-                    staticStyle: { "margin-bottom": "0" },
-                    attrs: { id: "message", role: "alert" }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Seleccione una carrera\n                        "
-                    )
-                  ]
-                )
-              : _c(
-                  "div",
-                  {
-                    staticClass: "alert row",
-                    staticStyle: { visibility: "hidden", "margin-bottom": "0" },
-                    attrs: { role: "alert" }
-                  },
-                  [_vm._v(".")]
-                )
-          ])
+                : _vm.errorActualizar == 2
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger row",
+                      staticStyle: { "margin-bottom": "0" },
+                      attrs: { id: "message", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Busque un estudiante\n                        "
+                      )
+                    ]
+                  )
+                : _vm.errorActualizar == 3
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger row",
+                      staticStyle: { "margin-bottom": "0" },
+                      attrs: { id: "message", role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            Seleccione una carrera\n                        "
+                      )
+                    ]
+                  )
+                : _c(
+                    "div",
+                    {
+                      staticClass: "alert row",
+                      staticStyle: {
+                        visibility: "hidden",
+                        "margin-bottom": "0"
+                      },
+                      attrs: { role: "alert" }
+                    },
+                    [_vm._v(".")]
+                  )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-footer" }, [
@@ -41334,6 +41351,34 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fa fa-align-justify" }),
       _vm._v(" Estudiantes\n                ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "form-control-label" }, [_vm._v("Facultad")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("label", { staticClass: "form-control-label" }, [_vm._v("Carrera")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "form-control-label", attrs: { for: "perfil" } },
+        [_vm._v("Año de carrera")]
+      )
     ])
   }
 ]

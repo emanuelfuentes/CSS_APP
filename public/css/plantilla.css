@@ -1259,6 +1259,12 @@ pre {
     background-color: #c2cfd6;
     opacity: 1; }
 
+    @media (max-width: 760px) {
+      .form-control{
+        width: 45%;
+      }
+    }
+
 select.form-control:not([size]):not([multiple]) {
   height: calc(2.09375rem + 2px); }
 

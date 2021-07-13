@@ -33,19 +33,17 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <input type="text" v-model="carnet" class="form-control" placeholder="Ingrese el carnet del estudiante">
-                                    <button type="submit" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
-                                </div>
-                                <div class="input-group">
+                            <div class="col-md-4" style="margin: 25px 0px 20px 20px;">
+                                <div class="form-group">
+                                    <input type="text" v-model="carnet" class="form-control inputs" placeholder="Ingrese el carnet del estudiante">
                                     <div v-if="flagError" class="mt-2 text-danger">
                                         No se ha encontrado resultados
                                     </div>
-                                    <div v-else class="mt-2" style="visibility:hidden">
+                                    <div v-else class="mt-2" style="display:none;">
                                         Nada
                                     </div>
                                 </div>
+                                <button type="submit" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -60,22 +58,28 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="col-md-6">
+                        <div class="col-md-3" style="margin: 20px 0px 0px 20px;">
                             <div class="form-group row">
                                 <label class="form-control-label">Facultad</label>
-                                <select class="form-control custom-select" id="facultad" v-model="idFacultad">
+                            </div>
+                            <div class="form-group row">
+                                <select class="form-control custom-select" id="facultad " v-model="idFacultad">
                                     <option v-for="facultad in arrayFacultad" :value="facultad.idFacultad" :key="facultad.idFacultad">{{facultad.nombre}}</option>
                                 </select>
                             </div>
                             <div class="form-group row">
                                 <label class="form-control-label">Carrera</label>
+                            </div>
+                            <div class="form-group row">
                                 <select class="form-control custom-select" id="carrera" v-model="idCarrera">
                                     <option v-for="carrera in arrayCarreraFact" :value="carrera.idCarrera" :key="carrera.idCarrera">{{carrera.nombre}}</option>
                                 </select>
                             </div>
                             <div class="form-group row">
-                                <label class="form-control-label">Año de carrera</label>
-                                <select class="form-control custom-select" id="carrera" v-model="idPerfil">
+                                <label for="perfil" class="form-control-label">Año de carrera</label>
+                            </div>
+                            <div class="form-group row">
+                                <select class="form-control custom-select" id="perfil" v-model="idPerfil">
                                     <option v-for="perfil in arrayPerfil" :value="perfil.idPerfil" :key="perfil.idPerfil">{{perfil.perfil}}</option>
                                 </select>
                             </div>
@@ -230,5 +234,23 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style lang="scss">
+
+@media screen and (min-width: 991px) {
+    .inputs{
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 760px) {
+    .inputs{
+        width: 80%;
+    }
+}
+@media screen and (max-width: 760px) {
+    .inputs{
+        width: 45%;
+    }
+}
+
 @import '/public/css/ProyectosAdmin.css';
 </style>
