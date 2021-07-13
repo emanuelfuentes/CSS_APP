@@ -289,8 +289,8 @@
                                     <button type="button" style="margin-left: 10px" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                                 </div>
                                 <div class="input-group">
-                                    <div v-if="flagError" class="mt-2 text-danger">
-                                        No se ha encontrado resultados
+                                    <div v-if="flagError" class="mt-2 mb-1">
+                                        <p class="text-danger" v-text="errorEstudianteMsg"></p>
                                     </div>
                                     <div v-else style="width: 100%; margin: 20px">
                                         <div v-if="nombre_completo == ''">
@@ -512,6 +512,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 errorProyecto : [''],
                 errorDateMsg : '',
                 errorPerfilMsg : '',
+                errorEstudianteMsg : '',
                 flagError : false,
                 flagEstudiante : false,
                 pagination : {
@@ -783,8 +784,10 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_nombre = data.nombre;
                             this.modal_cupos = data.cupos;
                             this.carnet = '';
-                            this.nombre_completo = ''
+                            this.nombre_completo = '';
                             this.id_estudiante = 0;
+                            this.flagError = false;
+                            this.errorEstudianteMsg = '';
                             this.getEstudiantes()
                             break;
                         }
@@ -886,7 +889,10 @@ import {API_HOST} from '../constants/endpoint.js';
                         me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                         me.id_estudiante = estudiante.idUser;
                     }
-                    else me.flagError = true
+                    else{
+                        me.errorEstudianteMsg = "No se ha encontrado resultados";
+                        me.flagError = true;
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -902,6 +908,10 @@ import {API_HOST} from '../constants/endpoint.js';
                     'estado' : 1,
                     'modificado_por' : 'admin'
                 }).then(function (response) {
+                    if(response.data){
+                        me.errorEstudianteMsg = response.data;
+                        me.flagError = true;
+                    }
                     me.loading = false;
                     me.getEstudiantes();
                 })
