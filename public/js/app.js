@@ -34564,7 +34564,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\n@media screen and (min-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\n@media screen and (max-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\r\n", ""]);
+exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\n.sidebar-fixed .sidebar {\r\n    height: 100%;\n}\n@media screen and (min-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\n@media screen and (max-width: 991px) {\n.breadcrumb {\r\n        margin-top: 55px;\n}\n#sidebarMenu {\r\n        margin-top: 55px;\n}\n#logout {\r\n        margin-right: 30px;\n}\n.main{\r\n        overflow: scroll;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -35661,7 +35661,7 @@ exports = module.exports = __webpack_require__(2)(false);
 exports.push([module.i, "@import url(/public/css/ProyectosDisponibles.css);", ""]);
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n.sidebar-fixed .sidebar {\nheight: 100%;\n}\n@media screen and (max-width: 991px) {\n.breadcrumb {\n        margin-top: 55px;\n}\n#sidebarMenu {\n        margin-top: 55px;\n}\n#logout {\n        margin-right: 30px;\n}\n.main{\n        overflow: scroll;\n}\n}\n", ""]);
 
 // exports
 

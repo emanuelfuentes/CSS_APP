@@ -340,5 +340,28 @@ import {API_HOST} from '../constants/endpoint.js';
         position: absolute !important;
         background-color: #3c29297a !important;
     }
+    .sidebar-fixed .sidebar {
+    height: 100%;
+    }
+
+    @media screen and (max-width: 991px) {
+        .breadcrumb {
+            margin-top: 55px;
+        }
+
+        #sidebarMenu {
+            margin-top: 55px;
+        }
+        
+        #logout {
+            margin-right: 30px;
+        }
+
+        .main{
+            overflow: scroll;
+        }
+        
+    }
+
     @import '/public/css/ProyectosDisponibles.css';
 </style>
