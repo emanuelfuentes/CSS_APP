@@ -24,6 +24,7 @@ Vue.component('todos-proyectos', require('./components/ProyectosDisponibles.vue'
 Vue.component('mis-proyectos', require('./components/ProyectosAplicados.vue'));
 Vue.component('admin-proyectos', require('./components/ProyectosAdmin.vue'));
 Vue.component('admin-estudiantes', require('./components/EstudiantesAdmin.vue'))
+Vue.component('spinner', require('./components/Spinner.vue'))
 
 
 const app = new Vue({

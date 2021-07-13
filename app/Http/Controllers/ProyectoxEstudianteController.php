@@ -63,8 +63,8 @@ class ProyectoxEstudianteController extends Controller{
         if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
-
         $estado = $request->estado;
+
         $proXEst = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pe WHERE pe.idProyecto = :idProyecto AND pe.idUser = :idUser')->first();
         $proXEst->estado = $estado;
         $proXEst->save();
@@ -72,7 +72,7 @@ class ProyectoxEstudianteController extends Controller{
         $mailData = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
         ->select('users.nombres', 'users.apellidos', 'users.correo','proyecto.encargado','proyecto.nombre')
-        ->where('proyectoxestudiante.idUser', '=', 2)
+        ->where('proyectoxestudiante.idUser', '=', $idUser)
         ->first();
 
         $this->sendEmailAceptadoRechazado($mailData, $estado);

@@ -1432,6 +1432,7 @@ Vue.component('todos-proyectos', __webpack_require__(55));
 Vue.component('mis-proyectos', __webpack_require__(60));
 Vue.component('admin-proyectos', __webpack_require__(65));
 Vue.component('admin-estudiantes', __webpack_require__(70));
+Vue.component('spinner', __webpack_require__(75));
 
 var app = new Vue({
   el: '#app',
@@ -38284,11 +38285,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            loading: false,
             user_email: '',
             arrayProyectos: [],
             arrayCarreras: [''],
@@ -38414,7 +38421,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/proyecto/actualizar', {
                     'idProyecto': this.id_proyecto,
-                    'estado': this.modal_estado,
                     'contraparte': this.modal_contraparte,
                     'cupos': this.modal_cupos,
                     'descripcion': this.modal_desc,
@@ -38542,6 +38548,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal_encargado = '';
                         this.modal_cupos = '';
                         this.modal_desc = '';
+                        this.modal_correo = '';
                         this.modal_horario = '';
                         this.modal_contraparte = '';
                         this.modal_tipo_horas = '';
@@ -38562,6 +38569,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.modal_encargado = data.encargado;
                         this.modal_nombre = data.nombre;
                         this.modal_desc = data.descripcion;
+                        this.modal_correo = data.correo_encargado;
                         this.modal_tipo_horas = data.tipo_horas;
                         this.modal_cupos = data.cupos;
                         this.modal_horario = data.horario;
@@ -38667,6 +38675,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         aceptarRechazarEstudiante: function aceptarRechazarEstudiante() {
             var me = this;
+            me.loading = true;
             var estadoEst = 2;
             if (me.flagEstudiante) {
                 axios.put(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/rechazarestudiante', {
@@ -38682,6 +38691,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'idProyecto': me.id_proyecto,
                 'estado': estadoEst
             }).then(function (response) {
+                me.loading = false;
                 me.cerrarModal();
                 me.getEstudiantes();
             }).catch(function (error) {
@@ -40231,88 +40241,97 @@ var render = function() {
         }
       },
       [
-        _c(
-          "div",
-          {
-            staticClass: "modal-dialog modal-primary",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content " }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _vm.flagEstudiante
-                  ? _c("div", [
-                      _c("h4", { staticClass: "modal-title" }, [
-                        _vm._v("Aceptar estudiante")
-                      ])
-                    ])
-                  : _c("div", [
-                      _c("h4", { staticClass: "modal-title" }, [
-                        _vm._v("Rechazar estudiante")
-                      ])
-                    ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.cerrarModal()
+        _vm.loading == true
+          ? _c("div", [_c("spinner")], 1)
+          : _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-primary",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content " }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _vm.flagEstudiante
+                      ? _c("div", [
+                          _c("h4", { staticClass: "modal-title" }, [
+                            _vm._v("Aceptar estudiante")
+                          ])
+                        ])
+                      : _c("div", [
+                          _c("h4", { staticClass: "modal-title" }, [
+                            _vm._v("Rechazar estudiante")
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: {
+                          id: "cerrarModalARE1",
+                          type: "button",
+                          "data-dismiss": "modal",
+                          "aria-label": "Close"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.cerrarModal()
+                          }
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("h5", {
+                      domProps: {
+                        textContent: _vm._s(_vm.nombre_estudiante_msg)
                       }
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h5", {
-                  domProps: { textContent: _vm._s(_vm.nombre_estudiante_msg) }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: {
-                      click: function($event) {
-                        return _vm.cerrarModal()
-                      }
-                    }
-                  },
-                  [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.aceptarRechazarEstudiante()
-                      }
-                    }
-                  },
-                  [_vm._v("Confirmar")]
-                )
-              ])
-            ])
-          ]
-        )
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: {
+                          id: "cerrarModalARE2",
+                          type: "button",
+                          "data-dismiss": "modal"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.cerrarModal()
+                          }
+                        }
+                      },
+                      [_vm._v("Cerrar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { id: "aceptarRechazarEst", type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.aceptarRechazarEstudiante()
+                          }
+                        }
+                      },
+                      [_vm._v("Confirmar")]
+                    )
+                  ])
+                ])
+              ]
+            )
       ]
     ),
     _vm._v(" "),
@@ -41343,6 +41362,131 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8e7323b6", module.exports)
+  }
+}
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(76)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(78)
+/* template */
+var __vue_template__ = __webpack_require__(79)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Spinner.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-36a7cc9c", Component.options)
+  } else {
+    hotAPI.reload("data-v-36a7cc9c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(77);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("561a391a", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36a7cc9c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Spinner.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-36a7cc9c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Spinner.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.loader,\r\n.loader:after {\r\n  border-radius: 50%;\r\n  width: 10em;\r\n  height: 10em;\n}\n.loader {\r\n  margin: 60px auto;\r\n  font-size: 10px;\r\n  position: relative;\r\n  text-indent: -9999em;\r\n  border-top: 1.1em solid rgba(0,60,113, 0.2);\r\n  border-right: 1.1em solid rgba(0,60,113, 0.2);\r\n  border-bottom: 1.1em solid rgba(0,60,113, 0.2);\r\n  border-left: 1.1em solid #003c71;\r\n  -webkit-transform: translateZ(0);\r\n  -ms-transform: translateZ(0);\r\n  transform: translateZ(0);\r\n  -webkit-animation: load8 1.1s infinite linear;\r\n  animation: load8 1.1s infinite linear;\n}\n@-webkit-keyframes load8 {\n0% {\r\n    -webkit-transform: rotate(0deg);\r\n    transform: rotate(0deg);\n}\n100% {\r\n    -webkit-transform: rotate(360deg);\r\n    transform: rotate(360deg);\n}\n}\n@keyframes load8 {\n0% {\r\n    -webkit-transform: rotate(0deg);\r\n    transform: rotate(0deg);\n}\n100% {\r\n    -webkit-transform: rotate(360deg);\r\n    transform: rotate(360deg);\n}\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'spinner'
+});
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "loader" }, [_vm._v("Cargando...")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-36a7cc9c", module.exports)
   }
 }
 
