@@ -1,26 +1,7 @@
 <template>
   <main class="main">
     <!-- Breadcrumb -->
-    <header class="app-header navbar container-fluid">
-        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <ul class="nav navbar-nav ml-auto" id="logout">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="d-md-down-none" v-text="user_email"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
-                        <strong>Cuenta</strong>
-                    </div>
-                    <a class="dropdown-item" 
-                    @click="logout()" style="cursor: pointer;"><i class="fa fa-lock"></i> Cerrar sesión</a>
-                </div>
-            </li>
-        </ul>
-    </header>
+    
     <ol class="breadcrumb" style="padding-left: 30px;">
       <li class="breadcrumb-item">Inicio</li>
       <li class="breadcrumb-item active">Historial</li>

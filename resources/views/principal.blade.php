@@ -18,7 +18,35 @@
 
 </head>
 
-<body class="app sidebar-fixed aside-menu-fixed aside-menu-hidden ">
+<body class="app sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<div id="app">
+
+<header class="app-header navbar container-fluid">
+        <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" data-toggle="collapse" data-target="#sidebarMenu" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        
+        <ul class="nav navbar-nav ml-auto" id=logout>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="d-md-down-none"> {{Auth::user()->correo}} </span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header text-center">
+                        <strong>Cuenta</strong>
+                    </div>
+                    <a class="dropdown-item" href="{{route('logout')}}" 
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> Cerrar sesión</a>
+
+                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none;">
+                        {{ csrf_field() }}
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </header>
 
 <div id="app">
     <div class="app-body" style="margin-top: 0;">

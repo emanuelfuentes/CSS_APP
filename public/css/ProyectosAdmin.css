@@ -50,6 +50,10 @@
     max-width: none;
 }
 
+.sidebar-fixed .sidebar {
+    height: 100%;
+}
+
 .card-body {
     padding: 0;
 }
@@ -78,6 +82,11 @@
     .breadcrumb {
         margin-top: 55px;
     }
+
+    #sidebarMenu {
+        margin-top: 55px;
+    }
+    
     #logout {
         margin-right: 30px;
     }
