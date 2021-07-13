@@ -297,65 +297,69 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="col-md-6">
+                            <div class="col">
                                 <div class="input-group">
-                                    <input type="text" v-model="carnet" class="form-control" placeholder="Ingrese el carnet del estudiante">
-                                    <button type="button" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
+                                    <label >Ingrese el carnet del estudiante que desea agregar al proyecto</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" v-model="carnet" class="form-control" placeholder="Carnet del estudiante">
+                                    <button type="button" style="margin-left: 10px" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                                 </div>
                                 <div class="input-group">
                                     <div v-if="flagError" class="mt-2 text-danger">
                                         No se ha encontrado resultados
                                     </div>
-                                    <div v-else class="mt-2" style="visibility:hidden">
-                                        Nada
+                                    <div v-else style="width: 100%; margin: 20px">
+                                        <div v-if="nombre_completo == ''">
+                                            <h2 style="visibility:hidden; margin-bottom:0">Nada</h2>
+                                        </div>
+                                        <div v-else>
+                                            <input type="text" disabled class="col-md-5 search-student" v-model="nombre_completo" style="margin-bottom:0">
+                                            <button class="btn btn-primary search-student" type="button" @click="aplicarPorAdmin()">Agregar estudiante</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="nombre_completo == ''">
-                                <h2 style="visibility:hidden; margin-bottom:0">Nada</h2>
+
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                        <tr>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Carnet</th>
+                                            <th>Año de carrera</th>
+                                            <th>Carrera</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
+                                            <td v-text="estudiante.nombres"></td>
+                                            <td v-text="estudiante.apellidos"></td>
+                                            <td>Proximamente</td>
+                                            <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
+                                            <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
+                                            <td>
+                                                <div v-if="estudiante.estado == 0">
+                                                    <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
+                                                        Aceptar
+                                                    </button>  &nbsp;
+                                                    <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
+                                                        Rechazar
+                                                    </button>  &nbsp;
+                                                </div>
+                                                <div v-else-if="estudiante.estado == 1">
+                                                    ACEPTADO
+                                                </div>
+                                                <div v-else>
+                                                    RECHAZADO
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div v-else>
-                                <h2 class="col-md-8 search-student" v-text="nombre_completo" style="margin-bottom:0"></h2>
-                                <button class="btn btn-primary search-student" type="button" @click="aplicarPorAdmin()">Acptar</button>
-                            </div>
-                            
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Carnet</th>
-                                        <th>Año de carrera</th>
-                                        <th>Carrera</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
-                                        <td v-text="estudiante.nombres"></td>
-                                        <td v-text="estudiante.apellidos"></td>
-                                        <td>Proximamente</td>
-                                        <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
-                                        <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
-                                        <td>
-                                            <div v-if="estudiante.estado == 0">
-                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
-                                                    Aceptar
-                                                </button>  &nbsp;
-                                                <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, false)" class="btn btn-danger btn-sm">
-                                                    Rechazar
-                                                </button>  &nbsp;
-                                            </div>
-                                            <div v-else-if="estudiante.estado == 1">
-                                                ACEPTADO
-                                            </div>
-                                            <div v-else>
-                                                RECHAZADO
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>

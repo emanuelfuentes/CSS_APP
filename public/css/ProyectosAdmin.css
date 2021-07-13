@@ -40,8 +40,13 @@
 .div-form{
     margin-bottom: 0em;
 }
+.modal-primary .modal-content{
+    width: 100%;
+    max-width: none;
+}
+
 .modal-student{
-    width: 65%;
+    width: 80%;
     max-width: none;
 }
 

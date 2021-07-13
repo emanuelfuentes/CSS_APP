@@ -314,4 +314,15 @@ import {API_HOST} from '../constants/endpoint.js';
         position: absolute !important;
         background-color: #3c29297a !important;
     }
+    @media screen and (min-width: 991px) {
+    #logout {
+        margin-right: 30px;
+        }
+    }
+    @media screen and (max-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
+
 </style>

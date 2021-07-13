@@ -14,3 +14,8 @@
         margin-right: 30px;
     }
 }
+@media screen and (max-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}

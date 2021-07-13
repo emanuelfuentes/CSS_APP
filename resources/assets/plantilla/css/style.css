@@ -7564,7 +7564,9 @@ base-chart.chart {
   background-color: #20a8d8; }
 
 .modal-secondary .modal-content {
-  border-color: #a4b7c1; }
+  border-color: #a4b7c1;
+  width: 100%; 
+  }
 
 .modal-secondary .modal-header {
   color: #fff;

@@ -34564,7 +34564,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\r\n", ""]);
+exports.push([module.i, "\n.button {\r\n  border: none;\r\n  color: white;\r\n  padding: 16px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  display: inline-block;\r\n  font-size: 16px;\r\n  margin: 4px 2px;\r\n  cursor: pointer;\n}\n.button1 {background-color: #008CBA;\n}\n.button2 {background-color: #008CBA;\n}\n@media screen and (min-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\n@media screen and (max-width: 991px) {\n#logout {\r\n        margin-right: 30px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -36887,7 +36887,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    position : absolute !important;\n}\n.mostrar{\n    display : list-item !important;\n    opacity : 1 !important;\n    position: absolute !important;\n    background-color: #3c29297a !important;\n}\n", ""]);
+exports.push([module.i, "\n.modal-content{\n        width : 100% !important;\n        position : absolute !important;\n}\n.mostrar{\n        display : list-item !important;\n        opacity : 1 !important;\n        position: absolute !important;\n        background-color: #3c29297a !important;\n}\n@media screen and (min-width: 991px) {\n#logout {\n        margin-right: 30px;\n}\n}\n@media screen and (max-width: 991px) {\n#logout {\n        margin-right: 30px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -38303,6 +38303,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38338,6 +38364,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_perfil: 0,
             modal_createdAt: '',
             modal_estado: 0,
+            carnet: '',
+            nombre_completo: '',
             errorProyecto: [''],
             errorDateMsg: '',
             errorPerfilMsg: '',
@@ -38607,6 +38635,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.id_proyecto = data.idProyecto;
                         this.modal_nombre = data.nombre;
                         this.modal_cupos = data.cupos;
+                        this.carnet = '';
+                        this.nombre_completo = '';
+                        this.id_estudiante = 0;
                         this.getEstudiantes();
                         break;
                     }
@@ -38682,6 +38713,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        buscarEstudiante: function buscarEstudiante() {
+            var me = this;
+            //this.errorActualizar = false
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante_por_carnet';
+            axios.get(url, {
+                params: {
+                    carnet: me.carnet
+                }
+            }).then(function (response) {
+                var estudiante = response.data[0];
+                if (estudiante != null) {
+                    me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
+                    me.id_estudiante = estudiante.idUser;
+                } else me.flagError = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        aplicarPorAdmin: function aplicarPorAdmin() {
+            var me = this;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/aplicarporadmin';
+            axios.post(url, {
+                'idProyecto': me.id_proyecto,
+                'idUser': me.id_estudiante,
+                'estado': 1,
+                'modificado_por': 'admin'
+            }).then(function (response) {
+                me.getEstudiantes();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -40106,117 +40169,237 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c("table", { staticClass: "table" }, [
+                _c("div", { staticClass: "col" }, [
                   _vm._m(6),
                   _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.arrayEstudiantes, function(estudiante) {
-                      return _c("tr", { key: estudiante.idEstudiante }, [
-                        _c("td", {
-                          domProps: { textContent: _vm._s(estudiante.nombres) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: {
-                            textContent: _vm._s(estudiante.apellidos)
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.carnet,
+                          expression: "carnet"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Carnet del estudiante"
+                      },
+                      domProps: { value: _vm.carnet },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Proximamente")]),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.arrayPerfiles[estudiante.idPerfil - 1].perfil
-                            )
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: {
-                            textContent: _vm._s(
-                              _vm.arrayCarreras[estudiante.idCarrera - 1].nombre
-                            )
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", [
-                          estudiante.estado == 0
-                            ? _c("div", [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success btn-sm",
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "modal",
-                                      "data-target": "#confirmModal"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "confirmacion",
-                                          estudiante,
-                                          true
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                Aceptar\n                                            "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(
-                                  "   \n                                            "
-                                ),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm",
-                                    attrs: {
-                                      type: "button",
-                                      "data-toggle": "modal",
-                                      "data-target": "#confirmModal"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.abrirModal(
-                                          "confirmacion",
-                                          estudiante,
-                                          false
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                                Rechazar\n                                            "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(
-                                  "   \n                                        "
-                                )
-                              ])
-                            : estudiante.estado == 1
-                            ? _c("div", [
-                                _vm._v(
-                                  "\n                                            ACEPTADO\n                                        "
-                                )
-                              ])
-                            : _c("div", [
-                                _vm._v(
-                                  "\n                                            RECHAZADO\n                                        "
-                                )
-                              ])
-                        ])
-                      ])
+                          _vm.carnet = $event.target.value
+                        }
+                      }
                     }),
-                    0
-                  )
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        staticStyle: { "margin-left": "10px" },
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.buscarEstudiante()
+                          }
+                        }
+                      },
+                      [_vm._v("Buscar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm.flagError
+                      ? _c("div", { staticClass: "mt-2 text-danger" }, [
+                          _vm._v(
+                            "\n                                    No se ha encontrado resultados\n                                "
+                          )
+                        ])
+                      : _c(
+                          "div",
+                          { staticStyle: { width: "100%", margin: "20px" } },
+                          [
+                            _vm.nombre_completo == ""
+                              ? _c("div", [
+                                  _c(
+                                    "h2",
+                                    {
+                                      staticStyle: {
+                                        visibility: "hidden",
+                                        "margin-bottom": "0"
+                                      }
+                                    },
+                                    [_vm._v("Nada")]
+                                  )
+                                ])
+                              : _c("div", [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.nombre_completo,
+                                        expression: "nombre_completo"
+                                      }
+                                    ],
+                                    staticClass: "col-md-5 search-student",
+                                    staticStyle: { "margin-bottom": "0" },
+                                    attrs: { type: "text", disabled: "" },
+                                    domProps: { value: _vm.nombre_completo },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.nombre_completo =
+                                          $event.target.value
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-primary search-student",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.aplicarPorAdmin()
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Agregar estudiante")]
+                                  )
+                                ])
+                          ]
+                        )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c("table", { staticClass: "table" }, [
+                    _vm._m(7),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.arrayEstudiantes, function(estudiante) {
+                        return _c("tr", { key: estudiante.idEstudiante }, [
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(estudiante.nombres)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(estudiante.apellidos)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [_vm._v("Proximamente")]),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.arrayPerfiles[estudiante.idPerfil - 1]
+                                  .perfil
+                              )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.arrayCarreras[estudiante.idCarrera - 1]
+                                  .nombre
+                              )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [
+                            estudiante.estado == 0
+                              ? _c("div", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-success btn-sm",
+                                      attrs: {
+                                        type: "button",
+                                        "data-toggle": "modal",
+                                        "data-target": "#confirmModal"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "confirmacion",
+                                            estudiante,
+                                            true
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                    Aceptar\n                                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    "   \n                                                "
+                                  ),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger btn-sm",
+                                      attrs: {
+                                        type: "button",
+                                        "data-toggle": "modal",
+                                        "data-target": "#confirmModal"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.abrirModal(
+                                            "confirmacion",
+                                            estudiante,
+                                            false
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                                    Rechazar\n                                                "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(
+                                    "   \n                                            "
+                                  )
+                                ])
+                              : estudiante.estado == 1
+                              ? _c("div", [
+                                  _vm._v(
+                                    "\n                                                ACEPTADO\n                                            "
+                                  )
+                                ])
+                              : _c("div", [
+                                  _vm._v(
+                                    "\n                                                RECHAZADO\n                                            "
+                                  )
+                                ])
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -40587,6 +40770,16 @@ var staticRenderFns = [
         _c("th", [_vm._v("Carrera")]),
         _vm._v(" "),
         _c("th", [_vm._v("Rango")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group" }, [
+      _c("label", [
+        _vm._v("Ingrese el carnet del estudiante que desea agregar al proyecto")
       ])
     ])
   },

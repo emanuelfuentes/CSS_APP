@@ -163,4 +163,15 @@ import {API_HOST} from '../constants/endpoint.js';
 
 .button1 {background-color: #008CBA;}
 .button2 {background-color: #008CBA;}
+
+@media screen and (min-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
+@media screen and (max-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
 </style>
