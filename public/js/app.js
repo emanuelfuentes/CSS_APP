@@ -38303,6 +38303,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38338,6 +38360,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             modal_perfil: 0,
             modal_createdAt: '',
             modal_estado: 0,
+            carnet: '',
+            nombre_completo: '',
             errorProyecto: [''],
             errorDateMsg: '',
             errorPerfilMsg: '',
@@ -38607,6 +38631,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.id_proyecto = data.idProyecto;
                         this.modal_nombre = data.nombre;
                         this.modal_cupos = data.cupos;
+                        this.carnet = '';
+                        this.nombre_completo = '';
+                        this.id_estudiante = 0;
                         this.getEstudiantes();
                         break;
                     }
@@ -38682,6 +38709,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        buscarEstudiante: function buscarEstudiante() {
+            var me = this;
+            //this.errorActualizar = false
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/estudiante_por_carnet';
+            axios.get(url, {
+                params: {
+                    carnet: me.carnet
+                }
+            }).then(function (response) {
+                var estudiante = response.data[0];
+                if (estudiante != null) {
+                    me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
+                    me.id_estudiante = estudiante.idUser;
+                } else me.flagError = true;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        aplicarPorAdmin: function aplicarPorAdmin() {
+            var me = this;
+            var url = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/aplicarporadmin';
+            axios.post(url, {
+                'idProyecto': me.id_proyecto,
+                'idUser': me.id_estudiante,
+                'estado': 1,
+                'modificado_por': 'admin'
+            }).then(function (response) {
+                me.getEstudiantes();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -40106,6 +40165,105 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.carnet,
+                          expression: "carnet"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Ingrese el carnet del estudiante"
+                      },
+                      domProps: { value: _vm.carnet },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.carnet = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.buscarEstudiante()
+                          }
+                        }
+                      },
+                      [_vm._v("Buscar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm.flagError
+                      ? _c("div", { staticClass: "mt-2 text-danger" }, [
+                          _vm._v(
+                            "\n                                    No se ha encontrado resultados\n                                "
+                          )
+                        ])
+                      : _c(
+                          "div",
+                          {
+                            staticClass: "mt-2",
+                            staticStyle: { visibility: "hidden" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                    Nada\n                                "
+                            )
+                          ]
+                        )
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.nombre_completo == ""
+                  ? _c("div", [
+                      _c(
+                        "h2",
+                        {
+                          staticStyle: {
+                            visibility: "hidden",
+                            "margin-bottom": "0"
+                          }
+                        },
+                        [_vm._v("Nada")]
+                      )
+                    ])
+                  : _c("div", [
+                      _c("h2", {
+                        staticClass: "col-md-8 search-student",
+                        staticStyle: { "margin-bottom": "0" },
+                        domProps: { textContent: _vm._s(_vm.nombre_completo) }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary search-student",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.aplicarPorAdmin()
+                            }
+                          }
+                        },
+                        [_vm._v("Acptar")]
+                      )
+                    ]),
+                _vm._v(" "),
                 _c("table", { staticClass: "table" }, [
                   _vm._m(6),
                   _vm._v(" "),
