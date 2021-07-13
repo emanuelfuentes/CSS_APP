@@ -18,10 +18,9 @@
 
 </head>
 
-<body class="app sidebar-fixed aside-menu-fixed aside-menu-hidden">
-<div id="app">
-    
+<body class="app sidebar-fixed aside-menu-fixed aside-menu-hidden ">
 
+<div id="app">
     <div class="app-body" style="margin-top: 0;">
 
     @if(Auth::check())
@@ -33,6 +32,7 @@
     @else
 
     @endif
+
         <!-- Contenido Principal -->
         @yield('dashboard')
         <!-- /Fin del contenido principal -->

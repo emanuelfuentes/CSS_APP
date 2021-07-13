@@ -59,13 +59,14 @@
                     <span class="badge badge-danger">No disponible</span>
                   </div>
                 </td>
-                <td>
+                <td style="text-align: center;">
                   <button
                     type="button"
                     @click="abrirModal('info', proyecto)"
                     class="btn btn-info btn-sm"
                   >
                     <i class="icon-info"></i>
+                    <span>Información</span>
                   </button>
                 </td>
               </tr>
@@ -121,6 +122,7 @@
       aria-labelledby="myModalLabel"
       style="display: none"
       aria-hidden="true"
+      id="modal-info"
     >
       <div class="modal-dialog modal-primary modal-lg" role="document">
         <div class="modal-content">
