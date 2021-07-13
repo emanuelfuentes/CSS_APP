@@ -115,7 +115,7 @@ class ProyectoxEstudianteController extends Controller{
         ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
         ->where('users.idUser', '=', $request->idUser)
         ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
-        $this->sendEmail($proyecto);
+        $this->sendEmail($proyecto, 1);
     }
 
     public function aplicarPorAdmin(Request $request){
@@ -129,22 +129,36 @@ class ProyectoxEstudianteController extends Controller{
 
         $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
-        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+        ->select('proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
         ->where('users.idUser', '=', $request->idUser)
         ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
-        $this->sendEmail($proyecto);
+        $this->sendEmail($proyecto,2);
     }
 
-    public function sendEmail($user){
-        Mail::send(
-            'emails.estudianteAplico',
-            ['user' => $user],
-            function($message) use ($user){
-                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                $message->to($user->correo_encargado);
-                $message->subject("Aplicación de un estudiante en su proyecto.");
-            }
-        );
+    public function sendEmail($user, $mailType){
+        if($mailType == 1){
+            Mail::send(
+                'emails.estudianteAplico',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo_encargado);
+                    $message->subject("Aplicación de un estudiante en su proyecto.");
+                }
+            );
+        }
+        else{
+            Mail::send(
+                'emails.agregadoPorAdmin',
+                ['user' => $user],
+                function($message) use ($user){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($user->correo);
+                    $message->subject("Actualización de ingreso a proyecto de horas sociales");
+                }
+            );
+        }
+        
     }
 
     public function sendEmailAceptadoRechazado($mailData, $estado){

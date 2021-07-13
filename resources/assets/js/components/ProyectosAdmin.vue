@@ -268,7 +268,10 @@
             <!--Fin del modal-->
             <!--Inicio de modal de estudiantes por proyecto-->
             <div class="modal fade" tabindex="-1" role="dialog" id="membersModal" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg modal-student" role="document">
+                <div v-if="loading==true">
+                    <spinner></spinner>
+                </div>
+                <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document">
                     <div class="modal-content modal-student">
                         <div class="modal-header">
                             <h4 class="modal-title">Estudiantes</h4>
@@ -888,6 +891,7 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             aplicarPorAdmin(){
                 let me = this
+                me.loading = true;
                 var url = `${API_HOST}/aplicarporadmin`
                 axios.post(url, {
                     'idProyecto' : me.id_proyecto,
@@ -895,6 +899,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     'estado' : 1,
                     'modificado_por' : 'admin'
                 }).then(function (response) {
+                    me.loading = false;
                     me.getEstudiantes();
                 })
                 .catch(function (error) {
