@@ -59,14 +59,14 @@
     </div>
 
     <!--Inicio del modal informacion de proyecto-->
-    <div class="modal fade" tabindex="-1" :class="{ mostrar: modal }" role="dialog" aria-labelledby="myModalLabel" style="display: none" aria-hidden="true" id="modal-info">
+    <div class="modal fade" tabindex="-1" :class="{ mostrar: modal }" role="dialog" aria-labelledby="myModalLabel" style="display: none" aria-hidden="true" id="#modal-info">
       <div class="modal-dialog modal-primary modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" v-text="modal_nombre">
               Aplicar a proyecto
             </h4>
-            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -98,7 +98,7 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -121,7 +121,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                    <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="estadoProyecto()">Confirmar</button>
                 </div>
             </div>
             <!-- /.modal-content -->

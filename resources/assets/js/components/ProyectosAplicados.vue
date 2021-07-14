@@ -33,7 +33,7 @@
                                     </td>
                                     <td style="text-align: center;">
                                         <div style="display: flex;">
-                                            <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
+                                            <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-trash"></i>
                                                 <span class="btn-label">Desaplicar</span>
                                             </button> &nbsp;
@@ -66,7 +66,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="modal_nombre"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -105,7 +105,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -114,12 +114,12 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal eliminar-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" id="modal-eliminar" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="nombre"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -127,8 +127,8 @@
                             <h2>¿Eliminar proyecto de su lista de aplicados?</h2>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="desAplicarProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="desAplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

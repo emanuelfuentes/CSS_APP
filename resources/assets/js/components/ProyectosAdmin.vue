@@ -181,7 +181,7 @@
                                 <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Carreras</label>
                                     <div class="col-md-9">
-                                        <button type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
+                                        <button id="agregarCP" type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
                                         <table class="table-sm table-borderless">
                                             <thead>
                                                 <tr>
@@ -226,7 +226,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="actualizarInsertarProyecto()">Guardar</button>
+                            <button type="button" class="btn btn-primary" v-bind:data-dismiss="flagErrorProyecto ? '' : 'modal'" @click ="actualizarInsertarProyecto()">Guardar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -249,7 +249,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="estadoProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -367,7 +367,7 @@
                         <div class="modal-footer">
                             
                             <button id="cerrarModalARE2" type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button id="aceptarRechazarEst" type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
+                            <button id="aceptarRechazarEst" type="button" class="btn btn-primary" data-dismiss="modal" @click ="aceptarRechazarEstudiante()">Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -435,6 +435,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 user_email: '',
                 arrayProyectos : [],
                 arrayCarreras : [''],
+                arrayCarrerasSin : [''],
+                arrayCarrerasCon : [''],
                 arrayPerfiles : [''],
                 arrayCarreraPerfil : [[]],
                 arrayEstudiantes : [],
@@ -467,6 +469,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 errorPerfilMsg : '',
                 errorEstudianteMsg : '',
                 flagError : false,
+                flagErrorProyecto : false,
                 flagEstudiante : false,
                 pagination : {
                     'total' : 0,
@@ -646,7 +649,11 @@ import {API_HOST} from '../constants/endpoint.js';
                 })
                 this.errorPerfilMsg += msg1 + msg2 + msg3;
 
-                if(!this.errorProyecto.find(element => element > 0)) return false;
+                if(!this.errorProyecto.find(element => element > 0)){
+                    this.flagErrorProyecto = false
+                    return false;
+                } 
+                this.flagErrorProyecto = true
                 return true;
             },
             estadoProyecto(){
@@ -695,7 +702,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_fecha_fin = '';
                             this.errorProyecto = [];
                             this.errorPerfilMsg = '';
-
+                            this.flagErrorProyecto = false;
                             break;
                         }
                     case "editar":
@@ -716,6 +723,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_contraparte = data.contraparte;
                             this.modal_createdAt = data.createdAt;
                             this.flagError = false;
+                            this.flagErrorProyecto = false;
                             this.errorPerfilMsg = "";
                             break;
                         }
@@ -769,9 +777,11 @@ import {API_HOST} from '../constants/endpoint.js';
             getCarrerasAndPerfils(){
                 let me = this
                 axios.get(`${API_HOST}/carrera`).then(function (response) {
-                    me.arrayCarreras = response.data;
-                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"})
-                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"})
+                    me.arrayCarrerasSin = response.data;
+                    me.arrayCarreras = me.arrayCarrerasSin.slice();
+                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"});
+                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"});
+                    me.arrayCarrerasCon = me.arrayCarreras.slice();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -838,6 +848,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     if(estudiante != null){
                         me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                         me.id_estudiante = estudiante.idUser;
+                        me.flagError = false;
                     }
                     else{
                         me.errorEstudianteMsg = "No se ha encontrado resultados";
@@ -901,8 +912,23 @@ import {API_HOST} from '../constants/endpoint.js';
         },
         watch:{
             arrayCarreraPerfil:function(val){
-                if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
-                    
+                if(this.arrayCarreraPerfil.length > 0){
+                    if(this.arrayCarreraPerfil[this.arrayCarreraPerfil.length-1][0]){
+                        if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
+                            document.getElementById("agregarCP").disabled = true;
+                        }
+                        else{
+                            document.getElementById("agregarCP").disabled = false;
+                            this.arrayCarreras = this.arrayCarrerasSin.slice();
+                        }
+                    }
+                    else{
+                        document.getElementById("agregarCP").disabled = true;
+                    }
+                }
+                else{
+                    document.getElementById("agregarCP").disabled = false;
+                    this.arrayCarreras = this.arrayCarrerasCon.slice();
                 }
             }
         },

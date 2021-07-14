@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Proyecto;
 use App\ProyectoxCarrera;
+use App\Carrera;
 
 class ProyectoController extends Controller
 {
@@ -85,12 +86,31 @@ class ProyectoController extends Controller
         $arraycp = $request->carreraPerfil;
 
         for($i = 0; $i < count($arraycp); $i++){
-            $pxc = new ProyectoxCarrera();
-            $pxc->idProyecto = $proyecto->idProyecto;
-            $pxc->idCarrera = $arraycp[$i][0];
-            $pxc->limite_inf = $arraycp[$i][1];
-            $pxc->limite_sup = $arraycp[$i][2];
-            $pxc->save();
+            if($arraycp[$i][0] == -1 || $arraycp[$i][0] == -2){
+                $this->todasLasCarreras($proyecto->idProyecto, $arraycp[$i]);
+            }
+            else{
+                $pxc = new ProyectoxCarrera();
+                $pxc->idProyecto = $proyecto->idProyecto;
+                $pxc->idCarrera = $arraycp[$i][0];
+                $pxc->limite_inf = $arraycp[$i][1];
+                $pxc->limite_sup = $arraycp[$i][2];
+                $pxc->save();
+            }
+        }
+    }
+
+    private function todasLasCarreras(int $idProyecto, array $options){
+        $carreras = Carrera::all();
+        for($i = 0; $i < count($carreras); $i++){
+            if($options[0] == -1 || ($options[0] == -2 && ($carreras[$i]->idCarrera != 3 && $carreras[$i]->idCarrera != 9 && $carreras[$i]->idCarrera != 10))){
+                $pxc = new ProyectoxCarrera();
+                $pxc->idProyecto = $idProyecto;
+                $pxc->idCarrera = $carreras[$i]->idCarrera;
+                $pxc->limite_inf = $options[1];
+                $pxc->limite_sup = $options[2];
+                $pxc->save();
+            }
         }
     }
 
