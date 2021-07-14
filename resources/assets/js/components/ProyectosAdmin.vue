@@ -44,16 +44,10 @@
                                                 <span class="btn-label">Editar</span>
                                             </button>
                                         </div>
-                                        <div class="button-container" v-if="proyecto.estado">
+                                        <div class="button-container">
                                             <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-danger btn-sm" style="margin: 8px 0; width: 100%;">
                                                 <i class="icon-lock"></i>
                                                 <span class="btn-label">Desactivar</span>
-                                            </button>
-                                        </div>
-                                        <div class="button-container" v-else>
-                                            <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
-                                                <i class="icon-lock-open"></i>
-                                                <span class="btn-label">Activar</span>
                                             </button>
                                         </div>
                                         <div class="button-container">
@@ -250,11 +244,8 @@
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
-                        <div v-if="modal_estado" class="modal-body">
+                        <div class="modal-body">
                             <h2>¿Desactivar este proyecto?</h2>
-                        </div>
-                        <div v-else class="modal-body">
-                            <h2>¿Activar este proyecto?</h2>
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
@@ -465,7 +456,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_carrera : 0,
                 modal_perfil : 0,
                 modal_createdAt : '',
-                modal_estado : 0,
                 carnet : '',
                 nombre_completo : '',
                 errorProyecto : [''],
@@ -657,13 +647,9 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             estadoProyecto(){
                 let me = this;
-                var state;
-                if(this.modal_estado == 1) state = 0;
-                else state = 1;
-                console.log(this.id_proyecto)
                 axios.put(`${API_HOST}/proyecto/estado`, {
                     'idProyecto' : this.id_proyecto,
-                    'estado' : state
+                    'estado' : 0
                 }).then(function (response) {
                     me.cerrarModal();
                     me.bindData();
@@ -733,7 +719,6 @@ import {API_HOST} from '../constants/endpoint.js';
                         {
                             this.modal2 = 1;
                             this.id_proyecto = data.idProyecto;
-                            this.modal_estado = data.estado;
                             break;
                         }
                     case "estudiantes":

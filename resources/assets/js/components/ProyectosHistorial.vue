@@ -21,60 +21,47 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Estado</th>
+                <th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(proyecto, index) in arrayProyectos"
-                :key="proyecto.idProyecto"
-              >
+              <tr v-for="(proyecto, index) in arrayProyectos" :key="proyecto.idProyecto">
                 <td>{{ index + 1 }}</td>
                 <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
-                <td v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
-                <td style="text-align: center;">
-                  <div v-if="proyecto.estado" @click="abrirModal('info', proyecto)">
-                    <span class="badge badge-success" style="border-radius: 5px"><img src="icons/check2.svg"></span>
-                  </div>
-                  <div v-else @click="abrirModal('info', proyecto)">
                         <span class="badge badge-danger" style="border-radius: 5px"><img src="icons/x.svg"></span>
+                  <div v-else @click="abrirModal('info', proyecto)">
+                  </div>
+                    <span class="badge badge-success" style="border-radius: 5px"><img src="icons/check2.svg"></span>
+                  <div v-if="proyecto.estado" @click="abrirModal('info', proyecto)">
+                <td style="text-align: center;">
+                <td v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
                   </div>
                 </td>
+                </td>
+                <td style="text-align: center;">
+                  <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
+                    <i class="icon-info"></i>
+                    <span>Información</span>
+                  </button>
+                  <div class="button-container">
+                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
+                          <i class="icon-lock"></i>
+                          <span class="btn-label">Activar</span>
+                      </button>
+                  </div>
               </tr>
             </tbody>
           </table>
           <nav>
             <ul class="pagination">
               <li class="page-item" v-if="pagination.current_page > 1">
-                <a
-                  class="page-link"
-                  href="#"
-                  @click.prevent="cambiarPagina(pagination.current_page - 1)"
-                  >Ant</a
-                >
+                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
               </li>
-              <li
-                class="page-item"
-                v-for="page in pagesNumber"
-                :key="page"
-                :class="[page == isActived ? 'active' : '']"
-              >
-                <a
-                  class="page-link"
-                  href="#"
-                  @click.prevent="cambiarPagina(page)"
-                  v-text="page"
-                ></a>
+              <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page" ></a>
               </li>
-              <li
-                class="page-item"
-                v-if="pagination.current_page < pagination.last_page"
-              >
-                <a
-                  class="page-link"
-                  href="#"
-                  @click.prevent="cambiarPagina(pagination.current_page + 1)"
-                  >Sig</a
-                >
+              <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" >Sig</a>
               </li>
             </ul>
           </nav>
@@ -84,28 +71,14 @@
     </div>
 
     <!--Inicio del modal informacion de proyecto-->
-    <div
-      class="modal fade"
-      tabindex="-1"
-      :class="{ mostrar: modal }"
-      role="dialog"
-      aria-labelledby="myModalLabel"
-      style="display: none"
-      aria-hidden="true"
-      id="modal-info"
-    >
+    <div class="modal fade" tabindex="-1" :class="{ mostrar: modal }" role="dialog" aria-labelledby="myModalLabel" style="display: none" aria-hidden="true" id="modal-info">
       <div class="modal-dialog modal-primary modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" v-text="modal_nombre">
               Aplicar a proyecto
             </h4>
-            <button
-              type="button"
-              class="close"
-              @click="cerrarModal()"
-              aria-label="Close"
-            >
+            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -137,18 +110,35 @@
             </table>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              @click="cerrarModal()"
-            >
-              Cerrar
-            </button>
+            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
           </div>
         </div>
         <!-- /.modal-content -->
       </div>
       <!-- /.modal-dialog -->
+    </div>
+    <!--Fin del modal-->
+    <!--Inicio del modal estado del proyecto-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="statusModal" aria-hidden="true">
+        <div class="modal-dialog modal-primary modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Estado del proyecto</h4>
+                    <button type="button" data-dismiss="modal" class="close" @click="cerrarModal()" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>¿Activar este proyecto?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                    <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
     <!--Fin del modal-->
   </main>
@@ -230,6 +220,18 @@ export default {
             console.log(error);
         });
     },
+    estadoProyecto(){
+      let me = this;
+      axios.put(`${API_HOST}/proyecto/estado`, {
+          'idProyecto' : this.id_proyecto,
+          'estado' : 1
+      }).then(function (response) {
+          me.cerrarModal();
+          me.bindData();
+      }).catch(function (error) {
+          console.log(error);
+      }); 
+  },
     cambiarPagina(page){
       let me = this;
       me.pagination.current_page = page;
@@ -238,6 +240,7 @@ export default {
 
     cerrarModal() {
       this.modal = 0;
+      this.moda2 = 0;
     },
     abrirModal(modelo, data = []) {
       switch (modelo) {
@@ -253,6 +256,12 @@ export default {
           this.modal_fecha_in = data.fecha_inicio;
           this.modal_fecha_fin = data.fecha_fin;
           break;
+        }
+        case "estado": {
+          this.modal2 = 1;
+          this.id_proyecto = data.idProyecto;
+          break;
+
         }
         default:
           break;

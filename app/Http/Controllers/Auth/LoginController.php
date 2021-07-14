@@ -15,6 +15,7 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request){
+        
         if(strpos($request->carnet, '@') == true){
             $user = User::whereCorreo($request->carnet)->first();
             if($user == null){
@@ -88,7 +89,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        //return view('auth.login');
         return redirect('/');
     }
 }
