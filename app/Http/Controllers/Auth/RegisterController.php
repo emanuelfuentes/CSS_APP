@@ -90,9 +90,9 @@ class RegisterController extends Controller
     protected function validator(Request $request)
     {
         $this->validate($request, [
-            'carnet' => 'required|numeric|regex:/[0-9]{8}/',
-            'nombres' => 'required|string',
-            'apellidos' => 'required|string',
+            'carnet' => 'required|numeric|digits:8',
+            'nombres' => 'required|regex:/([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ]*)*)+$/',
+            'apellidos' => 'required|regex:/([a-zA-ZñÑáéíóúÁÉÍÓÚ])+((\s*)+([a-zA-ZñÑáéíóúÁÉÍÓÚ]*)*)+$/',
             'g-recaptcha-response' => 'required|captcha'
         ]);
     }
