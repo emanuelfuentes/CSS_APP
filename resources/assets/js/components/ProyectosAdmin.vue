@@ -226,7 +226,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="actualizarInsertarProyecto()">Guardar</button>
+                            <button type="button" class="btn btn-primary" v-bind:data-dismiss="flagErrorProyecto ? '' : 'modal'" @click ="actualizarInsertarProyecto()">Guardar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -465,6 +465,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 errorPerfilMsg : '',
                 errorEstudianteMsg : '',
                 flagError : false,
+                flagErrorProyecto : false,
                 flagEstudiante : false,
                 pagination : {
                     'total' : 0,
@@ -644,7 +645,11 @@ import {API_HOST} from '../constants/endpoint.js';
                 })
                 this.errorPerfilMsg += msg1 + msg2 + msg3;
 
-                if(!this.errorProyecto.find(element => element > 0)) return false;
+                if(!this.errorProyecto.find(element => element > 0)){
+                    this.flagErrorProyecto = false
+                    return false;
+                } 
+                this.flagErrorProyecto = true
                 return true;
             },
             estadoProyecto(){
@@ -693,7 +698,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_fecha_fin = '';
                             this.errorProyecto = [];
                             this.errorPerfilMsg = '';
-
+                            this.flagErrorProyecto = false;
                             break;
                         }
                     case "editar":
@@ -714,6 +719,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_contraparte = data.contraparte;
                             this.modal_createdAt = data.createdAt;
                             this.flagError = false;
+                            this.flagErrorProyecto = false;
                             this.errorPerfilMsg = "";
                             break;
                         }
