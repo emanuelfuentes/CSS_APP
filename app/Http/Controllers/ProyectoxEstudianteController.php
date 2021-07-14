@@ -118,6 +118,7 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function aplicarPorAdmin(Request $request){
+        if(!$request->ajax()) return redirect('/home');
         $verify = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $request->idProyecto)
         ->where('proyectoxestudiante.idUser', '=', $request->idUser)->first();
         if($verify == null){

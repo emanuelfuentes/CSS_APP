@@ -27,6 +27,7 @@ class ForgotPasswordController extends Controller
 
     //se muestra el formulario para verificar la cuenta, solo se puede usar 1 vez
     public function formularioVerificar($email){
+        if(!$request->ajax()) return redirect('/home');
         $user = User::whereCorreo($email)->first();
         if($user->verificado == 0){
             return view('auth.verificarCuenta')->with(['user'=>$user]);
@@ -38,6 +39,7 @@ class ForgotPasswordController extends Controller
 
     //se verifica la cuenta y redirige al login
     public function verificarUsuario(Request $request, $email){
+        if(!$request->ajax()) return redirect('/home');
         $this->validatePassword($request);
 
         $user = User::whereCorreo($email)->first();
@@ -47,11 +49,13 @@ class ForgotPasswordController extends Controller
 
     //Se muestra el formulario para solicitar nueva contraseña
     public function formularioEnviarCorreoContraOlvidada(Request $request){
+        if(!$request->ajax()) return redirect('/home');
         return view('auth.enviarCorreoContraOlvidada');
     }
 
     //Se envía al correo ingresado un link para cambiar la contraseña
     public function enviarCorreoContraOlvidada(Request $request){
+        if(!$request->ajax()) return redirect('/home');
         $this->validateMail($request);
         $email = $request->carnet . "@uca.edu.sv";
         $user = User::whereCorreo($email)->first();
@@ -80,6 +84,7 @@ class ForgotPasswordController extends Controller
 
     //Se muestra el formulario para cambiar la contraseña olvidada
     public function formularioOlvidoContrsenia($email){
+        if(!$request->ajax()) return redirect('/home');
         $user = User::whereCorreo($email)->first();
         if($user->ultima_fecha_contra == date('d-m-Y')){
             return redirect('/');
@@ -90,6 +95,7 @@ class ForgotPasswordController extends Controller
     }
 
     public function cambiarContraseniaOlvidada(Request $request, $email){
+        if(!$request->ajax()) return redirect('/home');
         $this->validatePassword($request);
         $user = User::whereCorreo($email)->first();
         $user->update(['password'=> $request->contraseña]);

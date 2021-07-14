@@ -30,7 +30,7 @@ class ProyectosxCarreraController extends Controller
     }
 
     public function proyectosPorCarrera(Request $request){
-        //if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
 
         $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
