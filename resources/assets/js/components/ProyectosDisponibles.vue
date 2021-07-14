@@ -28,9 +28,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
-                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td>
                                         <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
@@ -320,6 +320,10 @@ import {API_HOST} from '../constants/endpoint.js';
     #footer{
     margin-left: 0px;
 }
+
+    .modal-primary .modal-header{
+        background-color: #003C71;
+    }
     .modal-content{
         width : 100% !important;
         position : absolute !important;
