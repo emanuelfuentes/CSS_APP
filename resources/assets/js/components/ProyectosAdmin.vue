@@ -31,10 +31,10 @@
                                     <td id="pos" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
                                     <td id="estado" style="text-align: center;" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado">
-                                            <span class="badge badge-success" id="estadod" style="text-align:center">Disponible</span>
+                                            <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger" id="estadond">No <br> disponible</span>
+                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
                                     <td id="icons-pos" >
@@ -384,15 +384,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-bordered table-sm" style="font-size: 1.35em;">
-                                <!--<thead>
-                                    <th>Tipo</th>
-                                    <th>Cupos</th>
-                                    <th>Horario</th>
-                                    <th>Encargado</th>
-                                    <th>Descripción</th>
-                                </thead>-->
-                                <tbody>
+                            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+                                <tbody>                                    
+                                    <tr>
+                                        <th style="background-color: #dedede;">Descripción</th>
+                                            <td v-text="modal_desc" style="padding-left: 16px;"></td>
+                                    </tr>
                                     <tr>
                                         <th style="background-color: #dedede;">Tipo</th>
                                             <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
@@ -409,48 +406,10 @@
                                         <th style="background-color: #dedede;">Encargado</th>
                                             <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
-                                    <tr>
-                                        <th style="background-color: #dedede;">Descripción</th>
-                                            <td v-text="modal_desc" style="padding-left: 16px;"></td>
-                                    </tr>
-                                    <!--<tr>
-                                        <td v-text="modal_tipo_horas"></td>
-                                        <td v-text="modal_cupos"></td>
-                                        <td v-text="modal_horario"></td>
-                                        <td v-text="modal_encargado"></td>
-                                        <td v-text="modal_desc"></td>
-                                    </tr>-->
+
                                 </tbody>
                             </table>
                         </div>
-                        <!--<div class="modal-body">
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <th>Tipo</th>
-                                    <th>Cupos</th>
-                                    <th>Horario</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td v-text="modal_tipo_horas"></td>
-                                        <td v-text="modal_cupos"></td>
-                                        <td v-text="modal_horario"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <th>Encargado</th>
-                                    <th>Descripción</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td v-text="modal_encargado"></td>
-                                        <td v-text="modal_desc"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
                         <div class="modal-footer" style="border-top: none;">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
@@ -807,6 +766,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 let me = this
                 axios.get(`${API_HOST}/carrera`).then(function (response) {
                     me.arrayCarreras = response.data;
+                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"})
+                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"})
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -934,11 +895,27 @@ import {API_HOST} from '../constants/endpoint.js';
                 axios.post(url).then(() => location.href = `${API_HOST}/`)
             }
         },
+        watch:{
+            arrayCarreraPerfil:function(val){
+                if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
+                    
+                }
+            }
+        },
         mounted() {
             this.bindData();
-        }
+        },
     }
 </script>
 <style lang="scss">
+
+@media screen and (max-width: 575px) {
+    #membersModal{
+        left: 10%;
+    }
+}
+
+
+
 @import '/public/css/ProyectosAdmin.css';
 </style>

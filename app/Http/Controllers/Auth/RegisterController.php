@@ -25,6 +25,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    private function formatStr($cadena) {
+        $no_permitidas = array ("á","é","í","ó","ú","Á","É","Í","Ó","Ú","ñ","À","Ã","Ì","Ò","Ù","Ã™","Ã ","Ã¨","Ã¬","Ã²","Ã¹","ç","Ç",
+        "Ã¢","ê","Ã®","Ã´","Ã»","Ã‚","ÃŠ","ÃŽ","Ã”","Ã›","ü","Ã¶","Ã–","Ã¯","Ã¤","«","Ò","Ã","Ã„","Ã‹");
+        $permitidas = array ("a","e","i","o","u","A","E","I","O","U","Ñ","A","E","I","O","U","a","e","i","o","u","c","C","a","e",
+        "i","o","u","A","E","I","O","U","u","o","O","i","a","e","U","I","A","E");
+        $texto = str_replace($no_permitidas, $permitidas ,$cadena);
+        return $texto;
+    }
+
     public function showForm(){
         $facultades = Facultad::all();
         return view('auth.register')->with('fact', $facultades);
@@ -37,8 +46,8 @@ class RegisterController extends Controller
         $user = User::whereCorreo($email)->first();
 
         if($user == null){
-            $nombre = $request->nombres;
-            $apellido = $request->apellidos;
+            $nombre = $this->formatStr($request->nombres);
+            $apellido = $this->formatStr($request->apellidos);
             $carnet = $request->carnet;
             $genero = $request->genero;
             $carrera = $request->carrera;
@@ -49,8 +58,8 @@ class RegisterController extends Controller
             }
 
             User::create([
-                'nombres' => $nombre,
-                'apellidos' => $apellido,
+                'nombres' => strtoupper($nombre),
+                'apellidos' => strtoupper($apellido),
                 'correo' => $email,
                 'estado' => 1,
                 'genero' => $genero,

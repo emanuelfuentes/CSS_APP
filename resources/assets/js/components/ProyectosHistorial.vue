@@ -4,20 +4,17 @@
     
     <ol class="breadcrumb" style="padding-left: 30px;">
       <li class="breadcrumb-item">Inicio</li>
-      <li class="breadcrumb-item active">Historial</li>
+      <li class="breadcrumb-item active">Historial de Proyectos</li>
     </ol>
     <div class="container-fluid">
       <!-- Ejemplo de tabla Listado -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fa fa-align-justify"></i> Historial de proyectos
-        </div>
+      <div class="card" style="border: none;">
         <div class="card-body">
-          <table class="table table-bordered table-striped table-sm">
+          <table class="table table-bordered table-hover table-sm">
             <thead>
               <tr>
                 <!--<th>Opciones</th> -->
-                <th>Numero</th>
+                <!--<th>Numero</th>-->
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Estado</th>
@@ -25,40 +22,34 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(proyecto, index) in arrayProyectos" :key="proyecto.idProyecto">
-                <td>{{ index + 1 }}</td>
-                <td v-text="proyecto.nombre"></td>
-                <td v-text="proyecto.descripcion"></td>
-                <td>
-                  <div >
-                    <span class="badge badge-danger">No disponible</span>
+              <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
+                <!--<td>{{ index + 1 }}</td>-->
+                <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
+                <td v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
+                <td @click="abrirModal('info', proyecto)" style="text-align: center;">
+                  <div>
+                    <span class="badge badge-danger" style="border-radius: 5px"><img src="icons/x.svg"></span>
                   </div>
                 </td>
-                <td style="text-align: center;">
-                  <button type="button" @click="abrirModal('info', proyecto)" class="btn btn-info btn-sm">
-                    <i class="icon-info"></i>
-                    <span>Información</span>
-                  </button>
-                  <div class="button-container">
+                <td>
                       <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
                           <i class="icon-lock"></i>
                           <span class="btn-label">Activar</span>
                       </button>
-                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
           <nav>
-            <ul class="pagination">
+            <ul class="pagination" style="float: right;">
               <li class="page-item" v-if="pagination.current_page > 1">
-                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
               </li>
               <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                 <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page" ></a>
               </li>
               <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" >Sig</a>
+                <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_right_black_24dp.svg" alt="chevron-right"></a>
               </li>
             </ul>
           </nav>
@@ -80,30 +71,29 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-bordered table-striped table-sm">
-              <thead>
-                <th>Tipo</th>
-                <th>Cupos</th>
-                <th>Horario</th>
-              </thead>
-              <tbody>
+            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+              <tbody>                
                 <tr>
-                  <td v-text="modal_tipo_horas"></td>
-                  <td v-text="modal_cupos"></td>
-                  <td v-text="modal_horario"></td>
+                  <th style="background-color: #dedede;">Descripción</th>
+                  <td v-text="modal_desc" style="padding-left: 16px;"></td>
                 </tr>
-              </tbody>
-            </table>
-            <table class="table table-bordered table-striped table-sm">
-              <thead>
-                <th>Encargado</th>
-                <th>Descripción</th>
-              </thead>
-              <tbody>
                 <tr>
-                  <td v-text="modal_encargado"></td>
-                  <td v-text="modal_desc"></td>
+                  <th style="background-color: #dedede;">Tipo</th>
+                  <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                 </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Cupos</th>
+                  <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Horario</th>
+                  <td v-text="modal_horario" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Encargado</th>
+                  <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                </tr>
+
               </tbody>
             </table>
           </div>
@@ -283,7 +273,6 @@ export default {
 .mostrar {
   display: list-item !important;
   opacity: 1 !important;
-  position: absolute !important;
   background-color: #3c29297a !important;
 }
 </style>
