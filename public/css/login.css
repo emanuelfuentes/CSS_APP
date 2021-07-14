@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Abel';
+  src: url(../fonts/Abel-Regular.ttf);
+}
+
+
 * {
   font-family: 'Abel';
 }

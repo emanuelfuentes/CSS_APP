@@ -31,31 +31,31 @@
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-sm">
                             <tr>
-                                <th>Correo Institucional</th>
+                                <th style="background-color: #dedede">Correo Institucional</th>
                                 <td v-text="correo" ></td>
                             </tr>
                             <tr>
-                                <th>Carnet</th>
+                                <th style="background-color: #dedede">Carnet</th>
                                 <td v-text="carnet"></td>
                             </tr>
                             <tr>
-                                <th>Nombres</th>
+                                <th style="background-color: #dedede">Nombres</th>
                                 <td v-text="nombres"></td>
                             </tr>
                             <tr>
-                                <th>Apellidos</th>
+                                <th style="background-color: #dedede">Apellidos</th>
                                 <td v-text="apellidos"></td>
                             </tr>
                             <tr>
-                                <th>Facultad</th>
+                                <th style="background-color: #dedede">Facultad</th>
                                 <td v-text="facultad"></td>
                             </tr>
                             <tr>
-                                <th>Carrera</th>
+                                <th style="background-color: #dedede">Carrera</th>
                                 <td v-text="carrera"></td>
                             </tr>
                             <tr>
-                                <th>Perfil</th>
+                                <th style="background-color: #dedede">Perfil</th>
                                 <td v-text="perfil"></td>
                             </tr>
                         </table>
@@ -64,7 +64,10 @@
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
-            
+            <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
+                <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+                <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
+            </footer>
         </main>
 </template>
 
@@ -129,6 +132,10 @@ import {API_HOST} from '../constants/endpoint.js';
 </script>
 
 <style>
+#footer{
+    margin-left: 0px;
+}
+
 .button {
   border: none;
   color: white;
@@ -172,6 +179,8 @@ import {API_HOST} from '../constants/endpoint.js';
     .main{
         overflow: scroll;
     }
+
+    @import '/public/css/Font.css';
     
 }
 </style>

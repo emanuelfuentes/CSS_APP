@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Abel');
+@font-face {
+    font-family: 'Abel';
+    src: url(../fonts/Abel-Regular.ttf);
+}
+
 
 .main{
     font-family: 'Abel';

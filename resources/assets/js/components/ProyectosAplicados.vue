@@ -7,13 +7,13 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card">
+                <div class="card" style="border: none;">
                     <div class="card-body">
-                        <table class="table table-bordered table-hover table-sm">
+                        <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Descripción</th>
+                                    <th id="disappear">Descripción</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -21,8 +21,8 @@
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
 
-                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td>
                                         <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
@@ -136,6 +136,10 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
+                <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+                <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
+            </footer>
         </main>
 </template>
 
@@ -284,6 +288,10 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style>
+    #footer{
+    margin-left: 0px;
+    }
+
     .modal-content{
         width : 100% !important;
         position : absolute !important;
@@ -302,6 +310,14 @@ import {API_HOST} from '../constants/endpoint.js';
     #logout {
         margin-right: 30px;
     }
+
+    @media screen and (max-width: 500px) {
+    #disappear{
+        display: none;
+        }
+        
+    }
+    @import '/public/css/Font.css';
 }
 
 </style>

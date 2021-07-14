@@ -10,13 +10,13 @@
       <!-- Ejemplo de tabla Listado -->
       <div class="card" style="border: none;">
         <div class="card-body">
-          <table class="table table-bordered table-hover table-sm">
+          <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
             <thead>
               <tr>
                 <!--<th>Opciones</th> -->
                 <!--<th>Numero</th>-->
                 <th>Nombre</th>
-                <th>Descripción</th>
+                <th id="disappear">Descripción</th>
                 <th>Estado</th>
                 <th>Acciones</th>
               </tr>
@@ -24,8 +24,8 @@
             <tbody>
               <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                 <!--<td>{{ index + 1 }}</td>-->
-                <td v-text="proyecto.nombre" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
-                <td v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
+                <td id="disappear" v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
                 <td @click="abrirModal('info', proyecto)" style="text-align: center;">
                   <div>
                     <span class="badge badge-danger" style="border-radius: 5px"><img src="icons/x.svg"></span>
@@ -129,6 +129,10 @@
         <!-- /.modal-dialog -->
     </div>
     <!--Fin del modal-->
+    <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
+        <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+        <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
+    </footer>
   </main>
 </template>
 
@@ -266,6 +270,7 @@ export default {
 };
 </script>
 <style>
+
 .modal-content {
   width: 100% !important;
   position: absolute !important;
@@ -274,5 +279,13 @@ export default {
   display: list-item !important;
   opacity: 1 !important;
   background-color: #3c29297a !important;
+}
+
+@media screen and (max-width: 500px) {
+#disappear{
+    display: none;
+    }
+    
+@import '/public/css/Font.css';
 }
 </style>

@@ -67,10 +67,6 @@
 
 </div> <!--CLOSING VUE -->
 
-    <footer class="app-footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 12px;">
-        <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
-        <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
-    </footer>
 
     
     <script src="js/app.js"></script>
