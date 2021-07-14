@@ -330,7 +330,7 @@
                                                     <span class="badge badge-success" style=" margin-left: 10px; border-radius: 5px;"><img src="icons/check2.svg"></span>
                                                 </div>
                                                 <div v-else>
-                                                    <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
+                                                    <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                                 </div>
                                             </td>
                                         </tr>
