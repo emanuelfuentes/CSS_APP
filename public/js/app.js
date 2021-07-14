@@ -38413,6 +38413,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var me = this;
             axios.get(__WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/carrera').then(function (response) {
                 me.arrayCarreras = response.data;
+                me.arrayCarreras.push({ idCarrera: -1, idFacultad: -1, nombre: "Todas las carreras" });
+                me.arrayCarreras.push({ idCarrera: -2, idFacultad: -2, nombre: "Todas las carreras menos Psicología, Civil y Arquitectura" });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -38533,6 +38535,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post(url).then(function () {
                 return location.href = __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__["a" /* API_HOST */] + '/';
             });
+        }
+    },
+    watch: {
+        arrayCarreraPerfil: function arrayCarreraPerfil(val) {
+            if (this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2) {}
         }
     },
     mounted: function mounted() {
