@@ -9,7 +9,7 @@
 <main>
   <div class="container">
     <span style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-        <img src="../../../public/img/UCA.6b065e25.png" alt="uca" style="width: 164px; height: 220px;">
+        <img src="../public/img/UCA.6b065e25.png" alt="uca" style="width: 164px; height: 220px;">
         <p style="font-family: 'Abel'; font-size: 10px; color: white">Centro de Servicio Social</p>
     </span>
     <div style="display: flex; flex-direction: column; justify-content: center; align-items: center">

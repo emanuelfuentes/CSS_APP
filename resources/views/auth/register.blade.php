@@ -143,7 +143,7 @@
               </div>
               <div style="display:none;" id="loading">
                 <div style=" display: flex;  flex-direction:column; justify-content: center; align-items: center;">
-                  <img src="../../../public/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
+                  <img src="../public/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
                 </div>
               </div>
             </div>
