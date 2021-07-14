@@ -72,7 +72,7 @@ class LoginController extends Controller
     }
     protected function validateLogin(Request $request){
         $this->validate($request, [
-            'carnet' => 'required|numeric|regex:/[0-9]{8}/',
+            'carnet' => 'required|numeric|digits:8',
             'contraseña' => 'required|string',
             'g-recaptcha-response' => 'required|captcha'
         ]);

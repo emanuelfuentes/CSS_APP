@@ -77,6 +77,12 @@
         display: none;
     }
 }
+/* Ponelo por aqui lo del sidebar */
+@media screen and (max-width: 760px) {
+    .btn-label {
+        display: none;
+    }
+}
 
 @media screen and (max-width: 991px) {
     .breadcrumb {

@@ -16,7 +16,7 @@
 </template>-->
 
 <template>
-    <main class="main">
+    <main class="main" style="background-color: white;">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Inicio</li>
@@ -144,14 +144,34 @@ import {API_HOST} from '../constants/endpoint.js';
 .button1 {background-color: #008CBA;}
 .button2 {background-color: #008CBA;}
 
+
+
 @media screen and (min-width: 991px) {
     #logout {
         margin-right: 30px;
     }
 }
+
+.sidebar-fixed .sidebar {
+    height: 100%;
+}
+
 @media screen and (max-width: 991px) {
+    .breadcrumb {
+        margin-top: 55px;
+    }
+
+    #sidebarMenu {
+        margin-top: 55px;
+    }
+    
     #logout {
         margin-right: 30px;
     }
+
+    .main{
+        overflow: scroll;
+    }
+    
 }
 </style>

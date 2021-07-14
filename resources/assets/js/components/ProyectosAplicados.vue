@@ -1,5 +1,5 @@
 <template>
-    <main class="main">
+    <main class="main" style="background-color: white;">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Inicio</li>
@@ -8,11 +8,8 @@
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
-                    <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Proyectos aplicados
-                    </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -24,19 +21,19 @@
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
 
-                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td>
-                                        <div v-if="proyecto.estado">
-                                            <span class="badge badge-success">Disponible</span>
+                                        <div v-if="proyecto.estado" style="text-align: center;">
+                                            <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger">No disponible</span>
+                                            <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style="text-align: center;">
                                         <div style="display: flex;">
-                                            <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
+                                            <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-trash"></i>
                                                 <span class="btn-label">Desaplicar</span>
                                             </button> &nbsp;
@@ -46,15 +43,15 @@
                             </tbody>
                         </table>
                         <nav>
-                            <ul class="pagination">
+                            <ul class="pagination" style="float:right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_right_black_24dp.svg" alt="chevron-left">Sig</a>
                                 </li>
                             </ul>
                         </nav>
@@ -69,44 +66,46 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="modal_nombre"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <th>Tipo</th>
-                                    <th>Cupos</th>
-                                    <th>Horario</th>
-                                    <th>Inicio</th>
-                                    <th>Fin</th>
-                                </thead>
-                                <tbody>
+                            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+                                <tbody>                                    
                                     <tr>
-                                        <td v-text="modal_tipo_horas"></td>
-                                        <td v-text="modal_cupos"></td>
-                                        <td v-text="modal_horario"></td>
-                                        <td v-text="modal_fecha_in"></td>
-                                        <td v-text="modal_fecha_fin"></td>
+                                        <th style="background-color: #dedede;">Descripción</th>
+                                        <td v-text="modal_desc" style="padding-left: 16px;"></td>
                                     </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <th>Encargado</th>
-                                    <th>Descripción</th>
-                                </thead>
-                                <tbody>
                                     <tr>
-                                        <td v-text="modal_encargado"></td>
-                                        <td v-text="modal_desc"></td>
+                                        <th style="background-color: #dedede;">Tipo</th>
+                                        <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Cupos</th>
+                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Horario</th>
+                                        <td v-text="modal_horario" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Inicio</th>
+                                        <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fin</th>
+                                        <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Encargado</th>
+                                        <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -115,12 +114,12 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal eliminar-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" id="modal-eliminar" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="nombre"></h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -128,8 +127,8 @@
                             <h2>¿Eliminar proyecto de su lista de aplicados?</h2>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="desAplicarProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="desAplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -292,7 +291,6 @@ import {API_HOST} from '../constants/endpoint.js';
     .mostrar{
         display : list-item !important;
         opacity : 1 !important;
-        position: absolute !important;
         background-color: #3c29297a !important;
     }
     @media screen and (min-width: 991px) {
