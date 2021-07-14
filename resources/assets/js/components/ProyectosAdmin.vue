@@ -271,7 +271,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="col">
+                            <div class="col" id="header-estudiante">
                                 <div class="input-group">
                                     <label >Ingrese el carnet del estudiante que desea agregar al proyecto</label>
                                 </div>
@@ -914,6 +914,8 @@ import {API_HOST} from '../constants/endpoint.js';
         left: 10%;
     }
 }
+
+#header-estudiante
 
 
 
