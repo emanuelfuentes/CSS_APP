@@ -9,14 +9,6 @@
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
-                    <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Listado de Proyectos  
-                            <b style="color:red">
-                                <i v-if="ya_aplico_hoy == 0">  </i>
-                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.  </i>
-                                
-                            </b>
-                    </div>
                     <div class="card-body">
                         <table class="table table-bordered table-hover table-sm">
                             <thead>
@@ -33,10 +25,10 @@
                                     <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado" style="text-align: center;">
-                                            <span class="badge badge-success">Disponible</span>
+                                            <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger">No disponible</span>
+                                            <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
                                     <td >
@@ -59,15 +51,15 @@
                             </tbody>
                         </table>
                         <nav>
-                            <ul class="pagination">
+                            <ul class="pagination" style="float: right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)">Ant</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)">Sig</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_right_black_24dp.svg" alt="chevron-left"></a>
                                 </li>
                             </ul>
                         </nav>
@@ -321,7 +313,6 @@ import {API_HOST} from '../constants/endpoint.js';
     .mostrar{
         display : list-item !important;
         opacity : 1 !important;
-        position: absolute !important;
         background-color: #3c29297a !important;
     }
     .sidebar-fixed .sidebar {

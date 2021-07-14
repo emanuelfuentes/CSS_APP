@@ -34,7 +34,7 @@
                                             <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
+                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
                                     <td id="icons-pos" >
@@ -908,5 +908,14 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style lang="scss">
+
+@media screen and (max-width: 575px) {
+    #membersModal{
+        left: 10%;
+    }
+}
+
+
+
 @import '/public/css/ProyectosAdmin.css';
 </style>
