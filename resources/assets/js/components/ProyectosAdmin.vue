@@ -844,6 +844,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     if(estudiante != null){
                         me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                         me.id_estudiante = estudiante.idUser;
+                        me.flagError = false;
                     }
                     else{
                         me.errorEstudianteMsg = "No se ha encontrado resultados";
