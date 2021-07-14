@@ -181,7 +181,7 @@
                                 <div class="form-group row div-form">
                                     <label class="col-md-3 form-control-label" for="text-input">Carreras</label>
                                     <div class="col-md-9">
-                                        <button type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
+                                        <button id="agregarCP" type="button" @click="agregarACP()" class="btn btn-primary mb-2"><i class="icon-plus"></i> Agregar</button>
                                         <table class="table-sm table-borderless">
                                             <thead>
                                                 <tr>
@@ -472,6 +472,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 user_email: '',
                 arrayProyectos : [],
                 arrayCarreras : [''],
+                arrayCarrerasSin : [''],
+                arrayCarrerasCon : [''],
                 arrayPerfiles : [''],
                 arrayCarreraPerfil : [[]],
                 arrayEstudiantes : [],
@@ -806,9 +808,11 @@ import {API_HOST} from '../constants/endpoint.js';
             getCarrerasAndPerfils(){
                 let me = this
                 axios.get(`${API_HOST}/carrera`).then(function (response) {
-                    me.arrayCarreras = response.data;
-                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"})
-                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"})
+                    me.arrayCarrerasSin = response.data;
+                    me.arrayCarreras = me.arrayCarrerasSin.slice();
+                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"});
+                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"});
+                    me.arrayCarrerasCon = me.arrayCarreras.slice();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -938,8 +942,23 @@ import {API_HOST} from '../constants/endpoint.js';
         },
         watch:{
             arrayCarreraPerfil:function(val){
-                if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
-                    
+                if(this.arrayCarreraPerfil.length > 0){
+                    if(this.arrayCarreraPerfil[this.arrayCarreraPerfil.length-1][0]){
+                        if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
+                            document.getElementById("agregarCP").disabled = true;
+                        }
+                        else{
+                            document.getElementById("agregarCP").disabled = false;
+                            this.arrayCarreras = this.arrayCarrerasSin.slice();
+                        }
+                    }
+                    else{
+                        document.getElementById("agregarCP").disabled = true;
+                    }
+                }
+                else{
+                    document.getElementById("agregarCP").disabled = false;
+                    this.arrayCarreras = this.arrayCarrerasCon.slice();
                 }
             }
         },
