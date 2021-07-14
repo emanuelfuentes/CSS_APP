@@ -822,6 +822,8 @@ import {API_HOST} from '../constants/endpoint.js';
                 let me = this
                 axios.get(`${API_HOST}/carrera`).then(function (response) {
                     me.arrayCarreras = response.data;
+                    me.arrayCarreras.push({idCarrera : -1, idFacultad : -1, nombre : "Todas las carreras"})
+                    me.arrayCarreras.push({idCarrera : -2, idFacultad : -2, nombre : "Todas las carreras menos Psicología, Civil y Arquitectura"})
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -949,9 +951,16 @@ import {API_HOST} from '../constants/endpoint.js';
                 axios.post(url).then(() => location.href = `${API_HOST}/`)
             }
         },
+        watch:{
+            arrayCarreraPerfil:function(val){
+                if(this.arrayCarreraPerfil[0][0] == -1 || this.arrayCarreraPerfil[0][0] == -2){
+                    
+                }
+            }
+        },
         mounted() {
             this.bindData();
-        }
+        },
     }
 </script>
 <style lang="scss">
