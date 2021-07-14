@@ -21,7 +21,6 @@
                 <th>Nombre</th>
                 <th>Descripción</th>
                 <th>Estado</th>
-                <th>Información</th>
               </tr>
             </thead>
             <tbody>
@@ -30,25 +29,15 @@
                 :key="proyecto.idProyecto"
               >
                 <td>{{ index + 1 }}</td>
-                <td v-text="proyecto.nombre"></td>
-                <td v-text="proyecto.descripcion"></td>
-                <td>
-                  <div v-if="proyecto.estado">
-                    <span class="badge badge-success">Disponible</span>
-                  </div>
-                  <div v-else>
-                    <span class="badge badge-danger">No disponible</span>
-                  </div>
-                </td>
+                <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
+                <td v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
                 <td style="text-align: center;">
-                  <button
-                    type="button"
-                    @click="abrirModal('info', proyecto)"
-                    class="btn btn-info btn-sm"
-                  >
-                    <i class="icon-info"></i>
-                    <span>Información</span>
-                  </button>
+                  <div v-if="proyecto.estado" @click="abrirModal('info', proyecto)">
+                    <span class="badge badge-success" style="border-radius: 5px"><img src="icons/check2.svg"></span>
+                  </div>
+                  <div v-else @click="abrirModal('info', proyecto)">
+                        <span class="badge badge-danger" style="border-radius: 5px"><img src="icons/x.svg"></span>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -121,30 +110,29 @@
             </button>
           </div>
           <div class="modal-body">
-            <table class="table table-bordered table-striped table-sm">
-              <thead>
-                <th>Tipo</th>
-                <th>Cupos</th>
-                <th>Horario</th>
-              </thead>
-              <tbody>
+            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+              <tbody>                
                 <tr>
-                  <td v-text="modal_tipo_horas"></td>
-                  <td v-text="modal_cupos"></td>
-                  <td v-text="modal_horario"></td>
+                  <th style="background-color: #dedede;">Descripción</th>
+                  <td v-text="modal_desc" style="padding-left: 16px;"></td>
                 </tr>
-              </tbody>
-            </table>
-            <table class="table table-bordered table-striped table-sm">
-              <thead>
-                <th>Encargado</th>
-                <th>Descripción</th>
-              </thead>
-              <tbody>
                 <tr>
-                  <td v-text="modal_encargado"></td>
-                  <td v-text="modal_desc"></td>
+                  <th style="background-color: #dedede;">Tipo</th>
+                  <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                 </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Cupos</th>
+                  <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Horario</th>
+                  <td v-text="modal_horario" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Encargado</th>
+                  <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                </tr>
+
               </tbody>
             </table>
           </div>

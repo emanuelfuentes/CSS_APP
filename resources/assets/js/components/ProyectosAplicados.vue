@@ -74,25 +74,46 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
+                            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+                                <!--<thead>
                                     <th>Tipo</th>
                                     <th>Cupos</th>
                                     <th>Horario</th>
                                     <th>Inicio</th>
                                     <th>Fin</th>
-                                </thead>
-                                <tbody>
+                                </thead>-->
+                                <tbody>                                    
                                     <tr>
-                                        <td v-text="modal_tipo_horas"></td>
-                                        <td v-text="modal_cupos"></td>
-                                        <td v-text="modal_horario"></td>
-                                        <td v-text="modal_fecha_in"></td>
-                                        <td v-text="modal_fecha_fin"></td>
+                                        <th style="background-color: #dedede;">Descripción</th>
+                                        <td v-text="modal_desc" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Tipo</th>
+                                        <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Cupos</th>
+                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Horario</th>
+                                        <td v-text="modal_horario" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Inicio</th>
+                                        <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fin</th>
+                                        <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Encargado</th>
+                                        <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <table class="table table-bordered table-striped table-sm">
+                            <!--<table class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <th>Encargado</th>
                                     <th>Descripción</th>
@@ -103,7 +124,7 @@
                                         <td v-text="modal_desc"></td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>

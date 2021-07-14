@@ -116,47 +116,31 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <table class="table table-sm" style="font-size: 1.35em;">
-                               <!-- <thead>
-                                    <th>Tipo</th>
-                                    <th>Cupos</th>
-                                    <th>Horario</th>
-                                </thead>-->
-                                <tbody>
+                            <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
+                                <tbody>                                    
                                     <tr>
-                                        <td>Tipo</td>
-                                        <td v-text="modal_tipo_horas"></td>
+                                        <th style="background-color: #dedede;">Descripción</th>
+                                        <td v-text="modal_desc" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Cupos</td>
-                                        <td v-text="modal_cupos"></td>
+                                        <th style="background-color: #dedede;">Tipo</th>
+                                        <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Horario</td>
-                                        <td v-text="modal_horario"></td>
+                                        <th style="background-color: #dedede;">Cupos</th>
+                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Encargado</td>
-                                        <td v-text="modal_encargado"></td>
+                                        <th style="background-color: #dedede;">Horario</th>
+                                        <td v-text="modal_horario" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <td>Descripción</td>
-                                        <td v-text="modal_desc"></td>
+                                        <th style="background-color: #dedede;">Encargado</th>
+                                        <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
+
                                 </tbody>
                             </table>
-                            <!--<table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <th>Encargado</th>
-                                    <th>Descripción</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td v-text="modal_encargado"></td>
-                                        <td v-text="modal_desc"></td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModalDos()">Cerrar</button>

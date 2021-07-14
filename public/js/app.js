@@ -35090,18 +35090,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35248,45 +35236,47 @@ var render = function() {
                     _c("td", [_vm._v(_vm._s(index + 1))]),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.nombre) }
+                      domProps: { textContent: _vm._s(proyecto.nombre) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(proyecto.descripcion) }
+                      domProps: { textContent: _vm._s(proyecto.descripcion) },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("info", proyecto)
+                        }
+                      }
                     }),
                     _vm._v(" "),
-                    _c("td", [
-                      proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
-                            ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("No disponible")
-                            ])
-                          ])
-                    ]),
-                    _vm._v(" "),
                     _c("td", { staticStyle: { "text-align": "center" } }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.abrirModal("info", proyecto)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "icon-info" }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v("Información")])
-                        ]
-                      )
+                      proyecto.estado
+                        ? _c(
+                            "div",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.abrirModal("info", proyecto)
+                                }
+                              }
+                            },
+                            [_vm._m(3, true)]
+                          )
+                        : _c(
+                            "div",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.abrirModal("info", proyecto)
+                                }
+                              }
+                            },
+                            [_vm._m(4, true)]
+                          )
                     ])
                   ])
                 }),
@@ -35429,47 +35419,75 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-bordered table-striped table-sm"
+                    staticClass: "table table-bordered table-sm",
+                    staticStyle: { "font-size": "1.35em", "margin-top": "10px" }
                   },
                   [
-                    _vm._m(3),
-                    _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Descripción")]
+                        ),
+                        _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Tipo")]
+                        ),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Cupos")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Horario")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped table-sm"
-                  },
-                  [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("tbody", [
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
-                        _c("td", {
-                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        }),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Encargado")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
-                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
                         })
                       ])
                     ])
@@ -35537,9 +35555,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Estado")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Información")])
+        _c("th", [_vm._v("Estado")])
       ])
     ])
   },
@@ -35547,23 +35563,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cupos")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Horario")])
-    ])
+    return _c(
+      "span",
+      {
+        staticClass: "badge badge-success",
+        staticStyle: { "border-radius": "5px" }
+      },
+      [_c("img", { attrs: { src: "icons/check2.svg" } })]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Encargado")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Descripción")])
-    ])
+    return _c(
+      "span",
+      {
+        staticClass: "badge badge-danger",
+        staticStyle: { "border-radius": "5px" }
+      },
+      [_c("img", { attrs: { src: "icons/x.svg" } })]
+    )
   }
 ]
 render._withStripped = true
@@ -35673,22 +35693,6 @@ exports.push([module.i, "\n.modal-content{\n    width : 100% !important;\n    po
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -36377,15 +36381,33 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-sm",
-                    staticStyle: { "font-size": "1.35em" }
+                    staticClass: "table table-bordered table-sm",
+                    staticStyle: { "font-size": "1.35em", "margin-top": "10px" }
                   },
                   [
                     _c("tbody", [
                       _c("tr", [
-                        _c("td", [_vm._v("Tipo")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Descripción")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Tipo")]
+                        ),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
@@ -36393,34 +36415,41 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Cupos")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Cupos")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
                         })
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Horario")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Horario")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
                       ]),
                       _vm._v(" "),
                       _c("tr", [
-                        _c("td", [_vm._v("Encargado")]),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Encargado")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c("td", [_vm._v("Descripción")]),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: { textContent: _vm._s(_vm.modal_desc) }
                         })
                       ])
                     ])
@@ -36622,6 +36651,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_endpoint_js__ = __webpack_require__(4);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -37129,55 +37179,101 @@ var render = function() {
                 _c(
                   "table",
                   {
-                    staticClass: "table table-bordered table-striped table-sm"
+                    staticClass: "table table-bordered table-sm",
+                    staticStyle: { "font-size": "1.35em", "margin-top": "10px" }
                   },
                   [
-                    _vm._m(3),
-                    _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Descripción")]
+                        ),
+                        _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Tipo")]
+                        ),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: {
                             textContent: _vm._s(_vm.modal_tipo_horas)
                           }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Cupos")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_cupos) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Horario")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Inicio")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_fecha_in) }
-                        }),
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Fin")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
+                          staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_fecha_fin) }
                         })
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped table-sm"
-                  },
-                  [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("tbody", [
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
-                        _c("td", {
-                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        }),
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Encargado")]
+                        ),
                         _vm._v(" "),
                         _c("td", {
-                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_encargado) }
                         })
                       ])
                     ])
@@ -37253,7 +37349,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(5),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -37327,32 +37423,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cupos")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Horario")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Inicio")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Fin")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Encargado")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Descripción")])
     ])
   },
   function() {
@@ -37904,47 +37974,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -37985,6 +38014,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             errorProyecto: [''],
             errorDateMsg: '',
             errorPerfilMsg: '',
+            errorEstudianteMsg: '',
             flagError: false,
             flagEstudiante: false,
             pagination: {
@@ -38254,6 +38284,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.carnet = '';
                         this.nombre_completo = '';
                         this.id_estudiante = 0;
+                        this.flagError = false;
+                        this.errorEstudianteMsg = '';
                         this.getEstudiantes();
                         break;
                     }
@@ -38329,6 +38361,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }).then(function (response) {
                 me.arrayEstudiantes = response.data;
+                me.arrayEstudiantes.forEach(function (element, index, array) {
+                    me.arrayEstudiantes[index].correo = element.correo.substr(0, 8);
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -38346,7 +38381,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (estudiante != null) {
                     me.nombre_completo = estudiante.nombres + " " + estudiante.apellidos;
                     me.id_estudiante = estudiante.idUser;
-                } else me.flagError = true;
+                } else {
+                    me.errorEstudianteMsg = "No se ha encontrado resultados";
+                    me.flagError = true;
+                }
             }).catch(function (error) {
                 console.log(error);
             });
@@ -38361,6 +38399,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'estado': 1,
                 'modificado_por': 'admin'
             }).then(function (response) {
+                if (response.data) {
+                    me.errorEstudianteMsg = response.data;
+                    me.flagError = true;
+                }
                 me.loading = false;
                 me.getEstudiantes();
             }).catch(function (error) {
@@ -38525,18 +38567,8 @@ var render = function() {
                           },
                           [
                             proyecto.estado
-                              ? _c("div", [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass: "badge badge-success",
-                                      staticStyle: { "text-align": "center" },
-                                      attrs: { id: "estadod" }
-                                    },
-                                    [_vm._v("Disponible")]
-                                  )
-                                ])
-                              : _c("div", [_vm._m(2, true)])
+                              ? _c("div", [_vm._m(2, true)])
+                              : _c("div", [_vm._m(3, true)])
                           ]
                         ),
                         _vm._v(" "),
@@ -39367,7 +39399,7 @@ var render = function() {
                         "table",
                         { staticClass: "table-sm table-borderless" },
                         [
-                          _vm._m(3),
+                          _vm._m(4),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -39764,7 +39796,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "col" }, [
-                      _vm._m(4),
+                      _vm._m(5),
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group" }, [
                         _c("input", {
@@ -39810,10 +39842,13 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group" }, [
                         _vm.flagError
-                          ? _c("div", { staticClass: "mt-2 text-danger" }, [
-                              _vm._v(
-                                "\n                                    No se ha encontrado resultados\n                                "
-                              )
+                          ? _c("div", { staticClass: "mt-2 mb-1" }, [
+                              _c("p", {
+                                staticClass: "text-danger",
+                                domProps: {
+                                  textContent: _vm._s(_vm.errorEstudianteMsg)
+                                }
+                              })
                             ])
                           : _c(
                               "div",
@@ -39883,7 +39918,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "table-responsive" }, [
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(5),
+                        _vm._m(6),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -39901,7 +39936,11 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              _c("td", [_vm._v("Proximamente")]),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(estudiante.correo)
+                                }
+                              }),
                               _vm._v(" "),
                               _c("td", {
                                 domProps: {
@@ -40187,10 +40226,23 @@ var render = function() {
                   "table",
                   {
                     staticClass: "table table-bordered table-sm",
-                    staticStyle: { "font-size": "1.35em" }
+                    staticStyle: { "font-size": "1.35em", "margin-top": "10px" }
                   },
                   [
                     _c("tbody", [
+                      _c("tr", [
+                        _c(
+                          "th",
+                          { staticStyle: { "background-color": "#dedede" } },
+                          [_vm._v("Descripción")]
+                        ),
+                        _vm._v(" "),
+                        _c("td", {
+                          staticStyle: { "padding-left": "16px" },
+                          domProps: { textContent: _vm._s(_vm.modal_desc) }
+                        })
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
                         _c(
                           "th",
@@ -40242,19 +40294,6 @@ var render = function() {
                         _c("td", {
                           staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_encargado) }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "th",
-                          { staticStyle: { "background-color": "#dedede" } },
-                          [_vm._v("Descripción")]
-                        ),
-                        _vm._v(" "),
-                        _c("td", {
-                          staticStyle: { "padding-left": "16px" },
-                          domProps: { textContent: _vm._s(_vm.modal_desc) }
                         })
                       ])
                     ])
@@ -40334,8 +40373,26 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "span",
-      { staticClass: "badge badge-danger", attrs: { id: "estadond" } },
-      [_vm._v("No "), _c("br"), _vm._v(" disponible")]
+      {
+        staticClass: "badge badge-success",
+        staticStyle: { "text-align": "center", "border-radius": "5px" },
+        attrs: { id: "estadod" }
+      },
+      [_c("img", { attrs: { src: "icons/check2.svg" } })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      {
+        staticClass: "badge badge-danger",
+        staticStyle: { "text-align": "center", "border-radius": "5px" },
+        attrs: { id: "estadond" }
+      },
+      [_c("img", { attrs: { src: "icons/check2.svg" } })]
     )
   },
   function() {
