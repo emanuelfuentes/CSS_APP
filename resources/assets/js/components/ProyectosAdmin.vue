@@ -915,7 +915,7 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 }
 
-#header-estudiante
+#header-estudiante{}
 
 
 

@@ -1,5 +1,5 @@
 <template>
-    <main class="main">
+    <main class="main" style="background-color: white;">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Inicio</li>
@@ -31,8 +31,8 @@
                                             <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div style="text-align: center;">
+                                    <td style="text-align: center;">
+                                        <div style="display: flex;">
                                             <button type="button" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-trash"></i>
                                                 <span class="btn-label">Desaplicar</span>

@@ -1,5 +1,5 @@
 <template>
-    <main class="main">
+    <main class="main" style="background-color: white;">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Inicio</li>
@@ -9,6 +9,13 @@
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
+                    <div style="margin: 20px 0px 0px 20px;" >
+                            <b style="color:red">
+                                <i v-if="ya_aplico_hoy == 0">  </i>
+                                <i v-else>  No puede aplicar a otro proyecto este día. Inténtelo mañana nuevamente.  </i>
+                                
+                            </b>
+                    </div>
                     <div class="card-body">
                         <table class="table table-bordered table-hover table-sm">
                             <thead>

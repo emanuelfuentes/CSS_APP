@@ -16,7 +16,7 @@
 </template>-->
 
 <template>
-    <main class="main">
+    <main class="main" style="background-color: white;">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Inicio</li>
