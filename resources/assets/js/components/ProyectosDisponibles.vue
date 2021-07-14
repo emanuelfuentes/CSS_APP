@@ -8,7 +8,7 @@
             
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card">
+                <div class="card" style="border: none;">
                     <div style="margin: 20px 0px 0px 20px;" >
                             <b style="color:red">
                                 <i v-if="ya_aplico_hoy == 0">  </i>
@@ -17,11 +17,11 @@
                             </b>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered table-hover table-sm">
+                        <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Descripción</th>
+                                    <th id="disappear">Descripción</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -29,7 +29,7 @@
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
@@ -38,7 +38,7 @@
                                             <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                         </div>
                                     </td>
-                                    <td >
+                                    <td>
                                         <div class="button-container" style="margin: 8px 0;">
                                             <div v-if="ya_aplico_hoy == 0" style="display: flex;">
                                                 <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
@@ -46,8 +46,8 @@
                                                     <span class="btn-label">Aplicar</span>
                                                 </button> &nbsp;
                                             </div>
-                                            <div v-else>
-                                                <button type="button" class="btn btn-success btn-sm" disabled style="margin: 8px 0; width: 100%; display:none">
+                                            <div v-else style="display: flex;">
+                                                <button type="button" class="btn btn-success btn-sm" disabled style="margin: 8px 0; width: 100%;">
                                                     <i class="icon-check"></i>
                                                     <span class="btn-label">Aplicar</span>
                                                 </button> &nbsp;
@@ -150,6 +150,10 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
+                <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+                <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
+            </footer>
         </main>
 </template>
 
@@ -313,6 +317,9 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style>
+    #footer{
+    margin-left: 0px;
+}
     .modal-content{
         width : 100% !important;
         position : absolute !important;
@@ -341,6 +348,13 @@ import {API_HOST} from '../constants/endpoint.js';
 
         .main{
             overflow: scroll;
+        }
+        
+    }
+
+    @media screen and (max-width: 500px) {
+        #disappear{
+            display: none;
         }
         
     }

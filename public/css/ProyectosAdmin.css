@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Abel');
+@font-face {
+    font-family: 'Abel';
+    src: url(../fonts/Abel-Regular.ttf);
+}
+
+
+.main{
+    font-family: 'Abel';
+}
 
 .main{
     font-family: 'Abel';
     background-color: white;
 }
 
-.modal-primary{
-    background-color: #003C71;
-}
 
-.modal-header{
+.modal-primary .modal-header{
     background-color: #003C71;
     display: flex;
     flex-flow: row;

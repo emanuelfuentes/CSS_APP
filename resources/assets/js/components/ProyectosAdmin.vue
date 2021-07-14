@@ -16,11 +16,11 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-hover table-sm">
+                        <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Descripción</th>
+                                    <th id="disappear">Descripción</th>
                                     <th style="text-align: center;">Estado</th>
                                     <th style="text-align: center;">Acciones</th>
                                 </tr>
@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr id="fila" v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td id="pos" v-text="proyecto.nombre" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
-                                    <td id="pos" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
                                     <td id="estado" style="text-align: center;" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado">
                                             <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
@@ -263,7 +263,7 @@
                     <spinner></spinner>
                 </div>
                 <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document">
-                    <div class="modal-content modal-student">
+                    <div class="modal-content modal-student" style="font-size: 1.35em;">
                         <div class="modal-header">
                             <h4 class="modal-title">Estudiantes</h4>
                             <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
@@ -271,25 +271,25 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="col" id="header-estudiante">
-                                <div class="input-group">
+                            <div id="header-estudiante">
+                                <div >
                                     <label >Ingrese el carnet del estudiante que desea agregar al proyecto</label>
                                 </div>
-                                <div class="input-group">
-                                    <input type="text" v-model="carnet" class="form-control" placeholder="Carnet del estudiante">
-                                    <button type="button" style="margin-left: 10px" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
+                                <div >
+                                    <input type="text" v-model="carnet" style="width: 40vw;" placeholder="Carnet del estudiante">
+                                    <button type="button" id="student-button" style="margin-left: 5px;" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                                 </div>
-                                <div class="input-group">
+                                <div>
                                     <div v-if="flagError" class="mt-2 mb-1">
                                         <p class="text-danger" v-text="errorEstudianteMsg"></p>
                                     </div>
-                                    <div v-else style="width: 100%; margin: 20px">
+                                    <div v-else >
                                         <div v-if="nombre_completo == ''">
                                             <h2 style="visibility:hidden; margin-bottom:0">Nada</h2>
                                         </div>
                                         <div v-else>
-                                            <input type="text" disabled class="col-md-5 search-student" v-model="nombre_completo" style="margin-bottom:0">
-                                            <button class="btn btn-primary search-student" type="button" @click="aplicarPorAdmin()">Agregar estudiante</button>
+                                            <input type="text" disabled  v-model="nombre_completo" style="margin-bottom:0; width: 40vw;">
+                                            <button id="student-button" class="btn btn-primary search-student" type="button" style="margin: 10px 5px 10px 5px;" @click="aplicarPorAdmin()">Agregar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -308,7 +308,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante">
+                                        <tr v-for="estudiante in arrayEstudiantes" :key="estudiante.idEstudiante" >
                                             <td v-text="estudiante.nombres"></td>
                                             <td v-text="estudiante.apellidos"></td>
                                             <td v-text="estudiante.correo"></td>
@@ -324,10 +324,10 @@
                                                     </button>  &nbsp;
                                                 </div>
                                                 <div v-else-if="estudiante.estado == 1">
-                                                    ACEPTADO
+                                                    <span class="badge badge-success" style=" margin-left: 10px; border-radius: 5px;"><img src="icons/check2.svg"></span>
                                                 </div>
                                                 <div v-else>
-                                                    RECHAZADO
+                                                    <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -419,6 +419,10 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
+                <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+                <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
+            </footer>
         </main>
 </template>
 
@@ -909,13 +913,39 @@ import {API_HOST} from '../constants/endpoint.js';
 </script>
 <style lang="scss">
 
+#footer{
+    margin-left: 0px;
+}
+
+@media screen and (min-width: 575px) {
+    #student-button{
+        font-size: 1em;
+        width: 12vw;
+    }
+}
+
 @media screen and (max-width: 575px) {
     #membersModal{
         left: 10%;
     }
+    #student-button{
+        font-size: .75em;
+    }
 }
 
-#header-estudiante{}
+@media screen and (max-width: 450px) {
+    #student-button{
+        font-size: .5em;
+    }
+}
+
+@media screen and (max-width: 500px) {
+#disappear{
+    display: none;
+    }
+    
+}
+
 
 
 
