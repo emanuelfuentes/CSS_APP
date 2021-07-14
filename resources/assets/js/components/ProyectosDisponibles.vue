@@ -8,7 +8,10 @@
             
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="border: none;">
+                <div v-if="loadTable==true" class="card" style="border: none;">
+                    <table-loader></table-loader>
+                </div>
+                <div v-else class="card" style="border: none;">
                     <div style="margin: 20px 0px 0px 20px;" >
                             <b style="color:red">
                                 <i v-if="ya_aplico_hoy == 0">  </i>
@@ -163,6 +166,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 loading : false,
+                loadTable : false,
                 user_id : 0,
                 user_email: '',
                 ya_aplico_hoy : 0,
@@ -217,7 +221,8 @@ import {API_HOST} from '../constants/endpoint.js';
         },
         methods:{
             bindData(page){
-                let me = this
+                let me = this;
+                me.loadTable = true;
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
                     me.user_id = response.data.idUser;
                     me.user_email = response.data.correo;
@@ -244,6 +249,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     var proyectos = respuesta.proyectos.data;
                     me.arrayProyectos = proyectos;
                     me.pagination = respuesta.pagination;
+                    me.loadTable = false;
                 })
                 .catch(function (error) {
                     console.log(error);

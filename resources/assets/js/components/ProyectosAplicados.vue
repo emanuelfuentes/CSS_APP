@@ -7,7 +7,10 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="border: none;">
+                <div v-if="loadTable==true" class="card" style="border: none;">
+                    <table-loader></table-loader>
+                </div>
+                <div v-else class="card" style="border: none;">
                     <div class="card-body">
                         <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
@@ -148,6 +151,7 @@ import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
+                loadTable : false,
                 user_email: '',
                 nombre : '',
                 user_id : '',
@@ -204,6 +208,7 @@ import {API_HOST} from '../constants/endpoint.js';
         methods:{
             bindData(page){
                 let me = this
+                me.loadTable = true;
                 var url = `${API_HOST}/proyectos_aplicados` /*?page=' + page*/;
                 axios.get(url).then(function (response) {
                     var respuesta = response.data;
@@ -216,6 +221,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     })
                     me.arrayProyectos = auxiliar;
                     me.pagination = respuesta.pagination;
+                    me.loadTable = false;
                 })
                 .catch(function (error) {
                     console.log(error);

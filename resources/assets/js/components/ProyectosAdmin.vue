@@ -7,7 +7,10 @@
             </ol>
             <div class="container-fluid" style="background-color: white;">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card" style="border: none;">
+                <div v-if="loadTable==true" class="card" style="border: none;">
+                    <table-loader></table-loader>
+                </div>
+                <div v-else class="card" style="border: none;">
                     <div class="card-body">
                         <div class="form-group row" style="flex-direction: row-reverse;">
                             <div class="col-md-6">
@@ -432,6 +435,7 @@ import {API_HOST} from '../constants/endpoint.js';
         data(){
             return{
                 loading : false,
+                loadTable : false,
                 user_email: '',
                 arrayProyectos : [],
                 arrayCarreras : [''],
@@ -509,19 +513,21 @@ import {API_HOST} from '../constants/endpoint.js';
         methods:{
             bindData(page){
                 let me = this;
+                me.loadTable = true;
                 //var url = '/public/proyecto?page=' + page;
-                var url = `${API_HOST}/todos_proyectos?page=${page}`
-                axios.get(url).then(function (response) {
-                    var respuesta = response.data;
-                    me.arrayProyectos = respuesta.proyectos.data;
-                    me.pagination = respuesta.pagination;
+                var url = `${API_HOST}/todos_proyectos?page=${page}`;
+                me.getCarrerasAndPerfils();
+                axios.get(`${API_HOST}/get_user`).then(function (response) {
+                    me.user_email = response.data.correo;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-                me.getCarrerasAndPerfils();
-                axios.get(`${API_HOST}/get_user`).then(function (response) {
-                    me.user_email = response.data.correo;
+                axios.get(url).then(function (response) {
+                    var respuesta = response.data;
+                    me.arrayProyectos = respuesta.proyectos.data;
+                    me.pagination = respuesta.pagination;
+                    me.loadTable = false;
                 })
                 .catch(function (error) {
                     console.log(error);

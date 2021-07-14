@@ -5,12 +5,21 @@
       primaryColor="#f3f3f3"
       secondaryColor="#cccccc"
     >
-      <rect x="48" y="8" rx="3" ry="3" width="88" height="6" />
-      <rect x="48" y="26" rx="3" ry="3" width="52" height="6" />
-      <rect x="0" y="56" rx="3" ry="3" width="410" height="6" />
-      <rect x="0" y="72" rx="3" ry="3" width="380" height="6" />
-      <rect x="0" y="88" rx="3" ry="3" width="178" height="6" />
-      <circle cx="20" cy="20" r="20" />
+      <rect x="0" y="0" rx="3" ry="3" width="370" height="6" />
+      <rect x="0" y="16" rx="3" ry="3" width="320" height="6" />
+      <rect x="0" y="32" rx="3" ry="3" width="270" height="6" />
+
+      <rect x="0" y="64" rx="3" ry="3" width="370" height="6" />
+      <rect x="0" y="80" rx="3" ry="3" width="320" height="6" />
+      <rect x="0" y="96" rx="3" ry="3" width="270" height="6" />
+
+      <rect x="0" y="128" rx="3" ry="3" width="370" height="6" />
+      <rect x="0" y="144" rx="3" ry="3" width="320" height="6" />
+      <rect x="0" y="160" rx="3" ry="3" width="270" height="6" />
+
+      <rect x="0" y="192" rx="3" ry="3" width="370" height="6" />
+      <rect x="0" y="208" rx="3" ry="3" width="320" height="6" />
+      <rect x="0" y="224" rx="3" ry="3" width="270" height="6" />
     </content-loader>
   </div>
 </template>
@@ -27,7 +36,7 @@ export default {
 </script>
 
 <style>
-#app {
+#TableLoader {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
