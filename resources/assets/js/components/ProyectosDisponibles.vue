@@ -28,9 +28,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
+                                    <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
                                         </div>
@@ -41,7 +41,7 @@
                                     <td >
                                         <div class="button-container" style="margin: 8px 0;">
                                             <div v-if="ya_aplico_hoy == 0" style="display: flex;">
-                                                <button type="button" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
+                                                <button type="button" data-toggle="modal" data-target="#modal-aplicar" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
                                                     <i class="icon-check"></i>
                                                     <span class="btn-label">Aplicar</span>
                                                 </button> &nbsp;
@@ -75,7 +75,7 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal aplicar a proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" id="modal-aplicar" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div v-if="loading==true">
                     <spinner></spinner>
                 </div>
@@ -84,7 +84,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Aplicar a proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -94,8 +94,8 @@
                             le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="aplicarProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -110,7 +110,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="modal_nombre">Aplicar a proyecto</h4>
-                            <button type="button" class="close" @click="cerrarModalDos()" aria-label="Close">
+                            <button type="button" class="close" data-dismiss="modal" @click="cerrarModalDos()" aria-label="Close">
                               <span aria-hidden="true">×</span>
                             </button>
                         </div>
@@ -142,7 +142,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" @click="cerrarModalDos()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModalDos()">Cerrar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->

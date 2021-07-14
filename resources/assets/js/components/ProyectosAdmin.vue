@@ -226,7 +226,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="actualizarInsertarProyecto()">Guardar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="actualizarInsertarProyecto()">Guardar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -249,7 +249,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" @click ="estadoProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="estadoProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -367,7 +367,7 @@
                         <div class="modal-footer">
                             
                             <button id="cerrarModalARE2" type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button id="aceptarRechazarEst" type="button" class="btn btn-primary" @click ="aceptarRechazarEstudiante()">Confirmar</button>
+                            <button id="aceptarRechazarEst" type="button" class="btn btn-primary" data-dismiss="modal" @click ="aceptarRechazarEstudiante()">Confirmar</button>
                         </div>
                     </div>
                 </div>
