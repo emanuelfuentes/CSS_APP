@@ -35068,16 +35068,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -35226,22 +35216,18 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
-      _c("div", { staticClass: "card" }, [
-        _vm._m(1),
-        _vm._v(" "),
+      _c("div", { staticClass: "card", staticStyle: { border: "none" } }, [
         _c("div", { staticClass: "card-body" }, [
           _c(
             "table",
             { staticClass: "table table-bordered table-hover table-sm" },
             [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.arrayProyectos, function(proyecto, index) {
+                _vm._l(_vm.arrayProyectos, function(proyecto) {
                   return _c("tr", { key: proyecto.idProyecto }, [
-                    _c("td", [_vm._v(_vm._s(index + 1))]),
-                    _vm._v(" "),
                     _c("td", {
                       domProps: { textContent: _vm._s(proyecto.nombre) },
                       on: {
@@ -35260,36 +35246,42 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _c("td", [
-                      proyecto.estado
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Disponible")
-                            ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("No disponible")
-                            ])
-                          ])
-                    ]),
+                    _c(
+                      "td",
+                      {
+                        staticStyle: { "text-align": "center" },
+                        on: {
+                          click: function($event) {
+                            return _vm.abrirModal("info", proyecto)
+                          }
+                        }
+                      },
+                      [_vm._m(2, true)]
+                    ),
                     _vm._v(" "),
-                    _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _c("td", [
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-info btn-sm",
-                          attrs: { type: "button" },
+                          staticClass: "btn btn-success btn-sm",
+                          staticStyle: { margin: "8px 0", width: "100%" },
+                          attrs: {
+                            type: "button",
+                            "data-toggle": "modal",
+                            "data-target": "#statusModal"
+                          },
                           on: {
                             click: function($event) {
-                              return _vm.abrirModal("info", proyecto)
+                              return _vm.abrirModal("estado", proyecto)
                             }
                           }
                         },
                         [
-                          _c("i", { staticClass: "icon-info" }),
+                          _c("i", { staticClass: "icon-lock" }),
                           _vm._v(" "),
-                          _c("span", [_vm._v("Información")])
+                          _c("span", { staticClass: "btn-label" }, [
+                            _vm._v("Activar")
+                          ])
                         ]
                       )
                     ])
@@ -35303,7 +35295,7 @@ var render = function() {
           _c("nav", [
             _c(
               "ul",
-              { staticClass: "pagination" },
+              { staticClass: "pagination", staticStyle: { float: "right" } },
               [
                 _vm.pagination.current_page > 1
                   ? _c("li", { staticClass: "page-item" }, [
@@ -35311,6 +35303,13 @@ var render = function() {
                         "a",
                         {
                           staticClass: "page-link",
+                          staticStyle: {
+                            display: "flex",
+                            "justify-content": "center",
+                            "align-items": "center",
+                            width: "32px",
+                            height: "35px"
+                          },
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -35321,7 +35320,14 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Ant")]
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/public/icons/chevron_left_black_24dp.svg",
+                              alt: "chevron-left"
+                            }
+                          })
+                        ]
                       )
                     ])
                   : _vm._e(),
@@ -35356,6 +35362,13 @@ var render = function() {
                         "a",
                         {
                           staticClass: "page-link",
+                          staticStyle: {
+                            display: "flex",
+                            "justify-content": "center",
+                            "align-items": "center",
+                            width: "32px",
+                            height: "35px"
+                          },
                           attrs: { href: "#" },
                           on: {
                             click: function($event) {
@@ -35366,7 +35379,14 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Sig")]
+                        [
+                          _c("img", {
+                            attrs: {
+                              src: "/public/icons/chevron_right_black_24dp.svg",
+                              alt: "chevron-right"
+                            }
+                          })
+                        ]
                       )
                     ])
                   : _vm._e()
@@ -35438,8 +35458,6 @@ var render = function() {
                     staticStyle: { "font-size": "1.35em", "margin-top": "10px" }
                   },
                   [
-                    _vm._m(3),
-                    _vm._v(" "),
                     _c("tbody", [
                       _c("tr", [
                         _c(
@@ -35493,20 +35511,8 @@ var render = function() {
                           staticStyle: { "padding-left": "16px" },
                           domProps: { textContent: _vm._s(_vm.modal_horario) }
                         })
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "table",
-                  {
-                    staticClass: "table table-bordered table-striped table-sm"
-                  },
-                  [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("tbody", [
+                      ]),
+                      _vm._v(" "),
                       _c("tr", [
                         _c(
                           "th",
@@ -35593,7 +35599,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(6),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -35643,7 +35649,7 @@ var staticRenderFns = [
         _c("li", { staticClass: "breadcrumb-item" }, [_vm._v("Inicio")]),
         _vm._v(" "),
         _c("li", { staticClass: "breadcrumb-item active" }, [
-          _vm._v("Historial")
+          _vm._v("Historial de Proyectos")
         ])
       ]
     )
@@ -35652,26 +35658,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fa fa-align-justify" }),
-      _vm._v(" Historial de proyectos\n      ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Numero")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Información")])
+        _c("th", [_vm._v("Acciones")])
       ])
     ])
   },
@@ -35679,22 +35674,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Tipo")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Cupos")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Horario")])
+    return _c("div", [
+      _c(
+        "span",
+        {
+          staticClass: "badge badge-danger",
+          staticStyle: { "border-radius": "5px" }
+        },
+        [_c("img", { attrs: { src: "icons/x.svg" } })]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("th", [_vm._v("Encargado")]),
-      _vm._v(" "),
-      _c("th", [_vm._v("Descripción")])
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("h2", [_vm._v("¿Activar este proyecto?")])
     ])
   }
 ]
@@ -38077,56 +38073,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39809,7 +39755,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm._m(4),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
@@ -39899,7 +39845,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "col" }, [
-                      _vm._m(5),
+                      _vm._m(6),
                       _vm._v(" "),
                       _c("div", { staticClass: "input-group" }, [
                         _c("input", {
@@ -40021,7 +39967,7 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "table-responsive" }, [
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(6),
+                        _vm._m(7),
                         _vm._v(" "),
                         _c(
                           "tbody",
