@@ -180,7 +180,7 @@ import {API_HOST} from '../constants/endpoint.js';
         overflow: scroll;
     }
 
-    @import '/public/css/Font.css';
+    @import '/css/Font.css';
     
 }
 </style>

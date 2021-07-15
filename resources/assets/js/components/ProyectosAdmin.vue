@@ -34,10 +34,10 @@
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
                                     <td id="estado" style="text-align: center;" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado">
-                                            <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="icons/check2.svg"></span>
+                                            <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
                                         </div>
                                         <div v-else>
-                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
+                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
                                         </div>
                                     </td>
                                     <td id="icons-pos" >
@@ -66,13 +66,13 @@
                         <nav>
                             <ul class="pagination" style="float: right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/public/icons/chevron_right_black_24dp.svg" alt="chevron-right"></a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_right_black_24dp.svg" alt="chevron-right"></a>
                                 </li>
                             </ul>
                         </nav>
@@ -327,10 +327,10 @@
                                                     </button>  &nbsp;
                                                 </div>
                                                 <div v-else-if="estudiante.estado == 1">
-                                                    <span class="badge badge-success" style=" margin-left: 10px; border-radius: 5px;"><img src="icons/check2.svg"></span>
+                                                    <span class="badge badge-success" style=" margin-left: 10px; border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
                                                 </div>
                                                 <div v-else>
-                                                    <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="icons/x.svg"></span>
+                                                    <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -981,5 +981,5 @@ import {API_HOST} from '../constants/endpoint.js';
 
 
 
-@import '/public/css/ProyectosAdmin.css';
+@import '/css/ProyectosAdmin.css';
 </style>

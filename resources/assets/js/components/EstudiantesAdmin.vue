@@ -231,5 +231,5 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 }
 
-@import '/public/css/ProyectosAdmin.css';
+@import '/css/ProyectosAdmin.css';
 </style>
