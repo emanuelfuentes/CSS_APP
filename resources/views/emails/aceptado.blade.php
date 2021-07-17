@@ -20,7 +20,7 @@
     <p style="color:gray">
         Este es un correo autogenerado por el sistema. <br>
         Centro de servicio social, UCA | css@uca.edu.sv <br>
-        Tel. 2210-6600 | 2210-6680
+        Tel. 2210-6600 ext.427 | 2210-6680
     </p>
 </body>
 </html>
