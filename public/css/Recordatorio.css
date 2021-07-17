@@ -1,0 +1,21 @@
+.recordatorio-container {
+    padding-bottom: 37.88%;
+    padding-top: 60px;
+    position: relative;
+}
+
+.recordatorio-container img {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+    .container-fluid {
+        margin-top: 55px;
+    }
+}
