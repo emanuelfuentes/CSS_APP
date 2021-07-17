@@ -52,29 +52,42 @@ class ForgotPasswordController extends Controller
 
     //Se envía al correo ingresado un link para cambiar la contraseña
     public function enviarCorreoContraOlvidada(Request $request){
-        $this->validateMail($request);
-        $email = $request->carnet . "@uca.edu.sv";
-        $user = User::whereCorreo($email)->first();
-        
-        if($user == null) {
-            return back()
-            ->withErrors(['correo_inexistente' => trans('auth.carnet_inexistente')])
-            ->withInput(request(['carnet']));
-        }
-        elseif($user->verificado == 0 && $user != null){
-            return back()
-            ->withErrors(['no_verificado' => trans('auth.carnet_no_verificado')])
-            ->withInput(request(['carnet']));
-        }
-        elseif($user->ultima_fecha_contra == date('d-m-Y')){
-            return back()
-            ->withErrors(['cambio_fecha' => trans('auth.ya_cambio_contra')])
-            ->withInput(request(['carnet'])); 
+
+        if(strpos($request->carnet, '@') == true){
+            $user = User::whereCorreo($request->carnet)->first();
+            if($user == null){
+                return back()
+                ->withErrors(['correo_inexistente' => trans('auth.cuenta_inexistente')])
+                ->withInput(request(['carnet']));
+            }
+            else{
+                $this->sendEmail($user);
+            }
         }
         else{
-            $this->sendEmail($user);
+            $this->validateMail($request);
+            $email = $request->carnet . "@uca.edu.sv";
+            $user = User::whereCorreo($email)->first();
+            
+            if($user == null) {
+                return back()
+                ->withErrors(['correo_inexistente' => trans('auth.carnet_inexistente')])
+                ->withInput(request(['carnet']));
+            }
+            elseif($user->verificado == 0 && $user != null){
+                return back()
+                ->withErrors(['no_verificado' => trans('auth.carnet_no_verificado')])
+                ->withInput(request(['carnet']));
+            }
+            elseif($user->ultima_fecha_contra == date('d-m-Y')){
+                return back()
+                ->withErrors(['cambio_fecha' => trans('auth.ya_cambio_contra')])
+                ->withInput(request(['carnet'])); 
+            }
+            else{
+                $this->sendEmail($user);
+            }
         }
-        
         return redirect('/');
     }
 
