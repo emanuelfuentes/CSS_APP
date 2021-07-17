@@ -145,7 +145,12 @@
                                     <label class="col-md-3 form-control-label" for="text-input">Correo del encargado</label>
                                     <div class="col-md-9">
                                         <input type="text" v-model="modal_correo" class="form-control" placeholder="example@example.com">
-                                        <p :class="{show: errorProyecto[5] == 1, hide: errorProyecto[5] != 1}" class="error">El correo del encargado no puede ir vacío</p>
+                                        <div v-if="errorProyecto[5] != 2">   
+                                            <p :class="{show: errorProyecto[5] == 1, hide: errorProyecto[5] != 1}" class="error">El correo del encargado no puede ir vacío</p>
+                                        </div>
+                                        <div v-else>
+                                            <p class="error">El correo no es válido</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
@@ -596,6 +601,10 @@ import {API_HOST} from '../constants/endpoint.js';
                     }); 
                 }
             },
+            regexCorreo(correo){
+                let re = new RegExp("^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$");
+                return re.test(correo)
+            },
             validarProyecto(){
                 this.errorProyecto = [];
                 this.flagError = false;
@@ -613,6 +622,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(!this.modal_desc) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0)
                 if(!this.modal_correo) this.errorProyecto.push(1)
+                else if(!this.regexCorreo(this.modal_correo)) this.errorProyecto.push(2)
                 else this.errorProyecto.push(0)
                 if(!this.modal_horario) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0);
