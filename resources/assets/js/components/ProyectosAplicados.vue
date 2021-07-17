@@ -140,7 +140,7 @@
             </div>
             <!--Fin del modal-->
             <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
-                <span><a href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
+                <span><a target="_blank" href="http://www.uca.edu.sv/servicio-social/">Centro de Servicio Social | UCA</a> &copy; 2021</span>
                 <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
             </footer>
         </main>
