@@ -1,8 +1,8 @@
 <template>
   <main class="main" style="background-color: white;">
     <div class="container-fluid">
-      <div class="card">
-        <img src="/public/img/recordatorio.ae2960e4.png" />
+      <div class="card recordatorio-container">
+        <img src="/img/recordatorio.ae2960e4.png" />
       </div>
     </div>
     <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
@@ -10,5 +10,7 @@
         <span>Desarrollado por <a href="#"></a>Grupo de Horas Sociales</span>
     </footer>
   </main>
-  
 </template>
+<style>
+@import '/css/Recordatorio.css';
+</style>
