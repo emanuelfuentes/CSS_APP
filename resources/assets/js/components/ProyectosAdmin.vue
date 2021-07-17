@@ -116,7 +116,12 @@
                                     <label class="col-md-3 form-control-label" for="text-input">Cupos</label>
                                     <div class="col-md-9">
                                         <input type="number" v-model="modal_cupos" class="form-control" placeholder="Cupos">
-                                        <p :class="{show: errorProyecto[2] == 1, hide: errorProyecto[2] != 1}" class="error">Los cupos no pueden ir vacios</p>
+                                        <div v-if="errorProyecto[2] != 2">   
+                                            <p :class="{show: errorProyecto[2] == 1, hide: errorProyecto[2] != 1}" class="error">Los cupos no pueden ir vacios</p>
+                                        </div>
+                                        <div v-else>
+                                            <p class="error">El cupo no es valido</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
@@ -601,6 +606,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(!this.modal_encargado) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0);
                 if(!this.modal_cupos) this.errorProyecto.push(1);
+                else if(this.modal_cupos < 1) this.errorProyecto.push(2);
                 else this.errorProyecto.push(0);
                 if(!this.modal_tipo_horas) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0)
