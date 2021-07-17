@@ -51,6 +51,12 @@ class RegisterController extends Controller
             $carnet = $request->carnet;
             $genero = $request->genero;
             $carrera = $request->carrera;
+
+            if((substr($carnet, -2)) > date('y')){
+                return back()
+                ->withErrors(['carnet' => trans('auth.carnet_invalido')])
+                ->withInput(request(['carnet', 'apellidos', 'nombres']));
+            }
             $perfil = (date('y') - (substr($carnet, -2))) + 1;
 
             if($perfil >= 6){
