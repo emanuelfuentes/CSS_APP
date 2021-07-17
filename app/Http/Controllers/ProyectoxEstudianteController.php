@@ -55,7 +55,8 @@ class ProyectoxEstudianteController extends Controller{
         //$estudiantes = User::query('SELECT * FROM users u INNER JOIN proyectoxestudiante pe ON u.idUser = pe.idUser WHERE pe.idProyecto = :idProyecto')->get();
         $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.genero', 'users.idPerfil', 'users.idCarrera', 'proyectoxestudiante.estado', 'users.idUser')
-        ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)->get();
+        ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)
+        ->orderBy('proyectoxestudiante.estado')->get();
         return $estudiantes;
     }
 
