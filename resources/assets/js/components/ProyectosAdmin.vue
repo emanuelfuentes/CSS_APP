@@ -556,15 +556,16 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(!this.id_proyecto){
                     axios.post(`${API_HOST}/proyecto/insertar`, {
                         'idProyecto' : this.id_proyecto,
+                        'nombre' : this.modal_nombre,
                         'estado' : 1,
                         'contraparte' : this.modal_contraparte,
+                        'cupos_act' : 0,
                         'cupos' : this.modal_cupos,
                         'descripcion' : this.modal_desc,
                         'encargado' : this.modal_encargado,
                         'fecha_inicio' : this.modal_fecha_in,
                         'fecha_fin' : this.modal_fecha_fin,
                         'horario' : this.modal_horario,
-                        'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
                         'correo_encargado' : this.modal_correo,
                         'modificado_por' : 'Usuario',
@@ -580,6 +581,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 else{
                     axios.put(`${API_HOST}/proyecto/actualizar`, {
                         'idProyecto' : this.id_proyecto,
+                        'nombre' : this.modal_nombre,
                         'contraparte' : this.modal_contraparte,
                         'cupos' : this.modal_cupos,
                         'descripcion' : this.modal_desc,
@@ -587,7 +589,6 @@ import {API_HOST} from '../constants/endpoint.js';
                         'fecha_inicio' : this.modal_fecha_in,
                         'fecha_fin' : this.modal_fecha_fin,
                         'horario' : this.modal_horario,
-                        'nombre' : this.modal_nombre,
                         'tipo_horas' : this.modal_tipo_horas,
                         'correo_encargado' : this.modal_correo,
                         'modificado_por' : 'Usuario',

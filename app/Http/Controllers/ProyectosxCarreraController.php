@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProyectoxCarrera;
 use App\Proyecto;
+use Illuminate\Support\Facades\DB;
 
 class ProyectosxCarreraController extends Controller
 {
@@ -32,15 +33,16 @@ class ProyectosxCarreraController extends Controller
     public function proyectosPorCarrera(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
-
+        
         $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
-        'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+        'proyecto.tipo_horas', 'proyecto.cupos_act','proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
         ->where('proyecto.estado','=','1')
         ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
         ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
         ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)
         ->where('proyecto.fecha_inicio', '>=', date('Y-m-d'))
+        ->whereRaw('proyecto.cupos_act < proyecto.cupos')
         ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
         
         return [

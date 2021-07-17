@@ -15,15 +15,16 @@ class CreateProyectoTable extends Migration
     {
         Schema::create('proyecto', function (Blueprint $table) {
             $table->increments('idProyecto');
+            $table->string('nombre', 150);
             $table->tinyInteger('estado');
             $table->string('contraparte', 150);
+            $table->smallInteger('cupos_act');
             $table->smallInteger('cupos');
-            $table->string('descripcion', 3000);
+            $table->string('descripcion', 2000);
             $table->string('encargado', 150);
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('horario', 100);
-            $table->string('nombre', 150);
             $table->string('tipo_horas', 10);
             $table->string('correo_encargado', 100)->nullable();
             $table->string('modificado_por', 150)->nullable();
