@@ -68,15 +68,16 @@ class ProyectoController extends Controller
     {
         if(!$request->ajax()) return redirect('/home');
         $proyecto = new Proyecto();
+        $proyecto->nombre = $request->nombre;
         $proyecto->estado = $request->estado;
         $proyecto->contraparte = $request->contraparte;
+        $proyecto->cupos_act = $request->cupos_act;
         $proyecto->cupos = $request->cupos;
         $proyecto->descripcion = $request->descripcion;
         $proyecto->encargado = $request->encargado;
         $proyecto->fecha_inicio = $request->fecha_inicio;
         $proyecto->fecha_fin = $request->fecha_fin;
         $proyecto->horario = $request->horario;
-        $proyecto->nombre = $request->nombre;
         $proyecto->tipo_horas = $request->tipo_horas;
         $proyecto->correo_encargado = $request->correo_encargado;
         $proyecto->modificado_por = $request->modificado_por;

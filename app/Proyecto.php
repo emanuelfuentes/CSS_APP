@@ -8,5 +8,5 @@ class Proyecto extends Model
 {
     protected $table = 'proyecto';
     protected $primaryKey = 'idProyecto';
-    protected $fillable = ['contraparte', 'cupos', 'descripcion', 'encargado', 'horario', 'nombre', 'correo_encargado'];
+    protected $fillable = ['contraparte', 'cupos_act', 'cupos', 'descripcion', 'encargado', 'horario', 'nombre', 'correo_encargado'];
 }
