@@ -25,7 +25,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th id="disappear">Descripción</th>
-                                    <th style="width: 10px">Estado</th>
+                                    <th style="width: 10px">Cupos</th>
                                     <th style="width: 10px">Opciones</th>
                                 </tr>
                             </thead>
@@ -33,14 +33,7 @@
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td>
-                                        <div v-if="proyecto.estado" style="text-align: center;">
-                                            <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
-                                        </div>
-                                    </td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" @click="abrirModal('info', proyecto)"></td>
                                     <td>
                                         <div class="button-container" style="margin: 8px 0; display: flex;justify-content: center;">
                                             <div v-if="ya_aplico_hoy == 0" style="display: flex;">
@@ -130,7 +123,7 @@
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede;">Cupos</th>
-                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                        <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede;">Horario</th>
@@ -139,6 +132,14 @@
                                     <tr>
                                         <th style="background-color: #dedede;">Encargado</th>
                                         <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fecha inicial</th>
+                                        <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fecha final</th>
+                                        <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                                     </tr>
 
                                 </tbody>
@@ -179,10 +180,12 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_nombre : '',
                 modal_desc : '',
                 modal_tipo_horas : '',
+                modal_cupos_act : 0,
                 modal_cupos : 0,
                 modal_horario : '',
                 modal_fecha_in : '',
                 modal_fecha_fin : '',
+                modal_estado : '',
                 arrayPXE : [''],
                 pagination : {
                     'total' : 0,
@@ -301,10 +304,12 @@ import {API_HOST} from '../constants/endpoint.js';
                         this.modal_nombre = data.nombre;
                         this.modal_desc = data.descripcion;
                         this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos_act = data.cupos_act;
                         this.modal_cupos = data.cupos;
                         this.modal_horario = data.horario;
                         this.modal_fecha_in = data.fecha_inicio;
                         this.modal_fecha_fin = data.fecha_fin;
+                        this.modal_estado = data.estado;
                         break;
                     }
                     default:
