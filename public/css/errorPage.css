@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Abel';
+    src: url(../fonts/Abel-Regular.ttf);
+  }
+  
+body {
+    background-color: #003C71;
+  }
+
+span{
+    margin-top: 20px;
+    text-align: center;
+}
+
+body{
+    font-family: 'Abel';
+    color: white;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+#title{
+    font-size: 11em;
+    font-weight: 1100;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+  
+#subtitle{
+        font-size: 3em;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+        
+}
+
+#texto{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+    font-weight: 100;
+    text-align: center;
+}
+
+#css {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+    text-align: center;
+}
+#regresar{
+    color: white;
+    padding: 2vh 4vw; 
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
