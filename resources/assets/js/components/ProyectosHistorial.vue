@@ -86,7 +86,7 @@
                 </tr>
                 <tr>
                   <th style="background-color: #dedede;">Cupos</th>
-                  <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                  <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                 </tr>
                 <tr>
                   <th style="background-color: #dedede;">Horario</th>
@@ -95,6 +95,14 @@
                 <tr>
                   <th style="background-color: #dedede;">Encargado</th>
                   <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Fecha inicial</th>
+                  <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Fecha final</th>
+                  <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                 </tr>
 
               </tbody>
@@ -156,6 +164,7 @@ export default {
       modal_nombre: "",
       modal_desc: "",
       modal_tipo_horas: "",
+      modal_cupos_act : 0,
       modal_cupos: 0,
       modal_horario: "",
       modal_fecha_in: "",
@@ -249,6 +258,7 @@ export default {
           this.modal_nombre = data.nombre;
           this.modal_desc = data.descripcion;
           this.modal_tipo_horas = data.tipo_horas;
+          this.modal_cupos_act = data.cupos_act;
           this.modal_cupos = data.cupos;
           this.modal_horario = data.horario;
           this.modal_fecha_in = data.fecha_inicio;
