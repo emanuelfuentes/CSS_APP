@@ -138,6 +138,7 @@
                                     <label class="col-md-3 form-control-label" for="text-input">Descripción</label>
                                     <div class="col-md-9">
                                         <textarea type="text" v-model="modal_desc" class="form-control" placeholder="Descripción"></textarea>
+                                        <span>{{modal_desc.length}}/2000</span>
                                         <p :class="{show: errorProyecto[4] == 1, hide: errorProyecto[4] != 1}" class="error">La Descripción no puede ir vacía</p>
                                     </div>
                                 </div>
