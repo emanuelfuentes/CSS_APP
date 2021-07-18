@@ -25,8 +25,8 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th id="disappear">Descripción</th>
-                                    <th>Estado</th>
-                                    <th>Opciones</th>
+                                    <th style="width: 10px">Estado</th>
+                                    <th style="width: 10px">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="button-container" style="margin: 8px 0;">
+                                        <div class="button-container" style="margin: 8px 0; display: flex;justify-content: center;">
                                             <div v-if="ya_aplico_hoy == 0" style="display: flex;">
                                                 <button type="button" data-toggle="modal" data-target="#modal-aplicar" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
                                                     <i class="icon-check"></i>
@@ -367,6 +367,17 @@ import {API_HOST} from '../constants/endpoint.js';
             display: none;
         }
         
+    }
+
+        @media screen and (max-width: 450px) {
+        .btn-label {
+            display: none;
+        }
+    }
+    @media screen and (max-width: 760px) {
+        .btn-label {
+            display: none;
+        }
     }
 
     @import '/css/ProyectosDisponibles.css';

@@ -34,7 +34,7 @@
                     <span class="d-md-down-none"> {{Auth::user()->correo}} </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-header text-center">
+                    <div class="dropdown-header text-center" style="color: white; background-color: #003C71;">
                         <strong>Cuenta</strong>
                     </div>
                     <a class="dropdown-item" href="{{route('logout')}}" 

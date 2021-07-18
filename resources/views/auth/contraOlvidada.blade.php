@@ -30,7 +30,7 @@
                     <input class="form-control" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
 
                     <label id="lpassword" for="password" class="label-form">Contraseña</label>
-                    <input class="form-control" type="password" name="contraseña" id="contraseña">
+                    <input class="form-control" type="password" name="contraseña" id="contraseña" placeholder="Contraseña entre 8-20 caracteres">
                     @if($errors->first('contraseña'))
                         {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
                     @else

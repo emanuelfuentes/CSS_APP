@@ -17,8 +17,8 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th id="disappear">Descripción</th>
-                                    <th>Estado</th>
-                                    <th>Opciones</th>
+                                    <th style="width: 10px">Estado</th>
+                                    <th style="width: 10px">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,7 +34,7 @@
                                             <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
                                         </div>
                                     </td>
-                                    <td style="text-align: center;">
+                                    <td style="text-align: center; display:flex; justify-content: center; border: none">
                                         <div style="display: flex;">
                                             <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
                                                 <i class="icon-trash"></i>
@@ -322,6 +322,18 @@ import {API_HOST} from '../constants/endpoint.js';
         display: none;
         }
         
+    }
+
+    @media screen and (max-width: 450px) {
+        .btn-label {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+        .btn-label {
+            display: none;
+        }
     }
     @import '/css/Font.css';
 }

@@ -24,8 +24,8 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th id="disappear">Descripción</th>
-                                    <th style="text-align: center;">Estado</th>
-                                    <th style="text-align: center;">Acciones</th>
+                                    <th style="text-align: center; width: 10px;">Estado</th>
+                                    <th style="text-align: center; width: 10px;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -275,7 +275,8 @@
                 <div v-if="loading==true">
                     <spinner></spinner>
                 </div>
-                <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document">
+                <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document" style=
+                "margin: 10px;">
                     <div class="modal-content modal-student" style="font-size: 1.35em;">
                         <div class="modal-header">
                             <h4 class="modal-title">Estudiantes</h4>
@@ -289,8 +290,8 @@
                                     <label >Ingrese el carnet del estudiante que desea agregar al proyecto</label>
                                 </div>
                                 <div >
-                                    <input type="text" v-model="carnet" style="width: 40vw;" placeholder="Carnet del estudiante">
-                                    <button type="button" id="student-button" style="margin-left: 5px;" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
+                                    <input type="text" v-model="carnet" style="width: 38vw;" placeholder="Carnet del estudiante">
+                                    <button type="button" id="student-button" style="margin-left: 5px; width: 75px; background-color: #003C71;" @click="buscarEstudiante()" class="btn btn-primary">Buscar</button>
                                 </div>
                                 <div>
                                     <div v-if="flagError" class="mt-2 mb-1">
@@ -301,8 +302,8 @@
                                             <h2 style="visibility:hidden; margin-bottom:0">Nada</h2>
                                         </div>
                                         <div v-else>
-                                            <input type="text" disabled  v-model="nombre_completo" style="margin-bottom:0; width: 40vw;">
-                                            <button id="student-button" class="btn btn-primary search-student" type="button" style="margin: 10px 5px 10px 5px;" @click="aplicarPorAdmin()">Agregar</button>
+                                            <input type="text" disabled  v-model="nombre_completo" style="margin-bottom:0; width: 38vw;">
+                                            <button id="student-button" class="btn btn-primary search-student" type="button" style="margin: 10px 5px 10px 5px; width: 75px; background-color: #003C71;" @click="aplicarPorAdmin()">Agregar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -328,7 +329,7 @@
                                             <td v-text="arrayPerfiles[estudiante.idPerfil-1].perfil"></td>
                                             <td v-text="arrayCarreras[estudiante.idCarrera-1].nombre"></td>
                                             <td>
-                                                <div v-if="estudiante.estado == 0">
+                                                <div v-if="estudiante.estado == 0" style="display: flex; flex-direction: row;">
                                                     <button type="button" data-toggle="modal" data-target="#confirmModal" @click="abrirModal('confirmacion', estudiante, true)" class="btn btn-success btn-sm">
                                                         Aceptar
                                                     </button>  &nbsp;
@@ -966,7 +967,7 @@ import {API_HOST} from '../constants/endpoint.js';
     margin-left: 0px;
 }
 
-@media screen and (min-width: 575px) {
+@media screen and (max-width: 900px) {
     #student-button{
         font-size: 1em;
         width: 12vw;
@@ -974,9 +975,6 @@ import {API_HOST} from '../constants/endpoint.js';
 }
 
 @media screen and (max-width: 575px) {
-    #membersModal{
-        left: 10%;
-    }
     #student-button{
         font-size: .75em;
     }
