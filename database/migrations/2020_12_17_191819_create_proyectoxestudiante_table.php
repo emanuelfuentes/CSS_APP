@@ -16,7 +16,6 @@ class CreateProyectoxestudianteTable extends Migration
         Schema::create('proyectoxestudiante', function (Blueprint $table) {
             $table->increments('idProyectoEstudiante');
             $table->tinyInteger('estado');
-            $table->string('modificado_por', 100);
             $table->timestamps();
 
             $table->unsignedInteger('idProyecto');

@@ -103,7 +103,6 @@ class ProyectoxEstudianteController extends Controller{
         $pXe->idProyecto = $request->idProyecto;
         $pXe->idUser = $request->idUser;
         $pXe->estado = $request->estado;
-        $pXe->modificado_por = $request->modificado_por;
         $pXe->save();
 
         $user = Auth()->user();
@@ -128,7 +127,6 @@ class ProyectoxEstudianteController extends Controller{
             $pXe->idProyecto = $request->idProyecto;
             $pXe->idUser = $request->idUser;
             $pXe->estado = $request->estado;
-            $pXe->modificado_por = $request->modificado_por;
             $pXe->save();
 
             $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')

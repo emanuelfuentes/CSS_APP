@@ -267,7 +267,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     'idProyecto' : this.id_proyecto,
                     'idUser' : this.user_id,
                     'estado' : 0,
-                    'modificado_por' : 'admin'
                 })
                 .then(function (response) {
                     me.loading = false;

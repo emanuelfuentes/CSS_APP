@@ -570,8 +570,6 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'tipo_horas' : this.modal_tipo_horas,
                         'correo_encargado' : this.modal_correo,
-                        'modificado_por' : 'Usuario',
-                        'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
                         me.cerrarModal();
@@ -593,8 +591,6 @@ import {API_HOST} from '../constants/endpoint.js';
                         'horario' : this.modal_horario,
                         'tipo_horas' : this.modal_tipo_horas,
                         'correo_encargado' : this.modal_correo,
-                        'modificado_por' : 'Usuario',
-                        'createdAt' : "this.modal_createdAt",
                         'carreraPerfil' : this.arrayCarreraPerfil
                     }).then(function (response) {
                         me.cerrarModal();
@@ -892,7 +888,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     'idProyecto' : me.id_proyecto,
                     'idUser' : me.id_estudiante,
                     'estado' : 1,
-                    'modificado_por' : 'admin'
                 }).then(function (response) {
                     if(response.data){
                         me.errorEstudianteMsg = response.data;
