@@ -18,10 +18,10 @@
               <tr>
                 <!--<th>Opciones</th> -->
                 <!--<th>Numero</th>-->
-                <th>Nombre</th>
-                <th id="disappear">Descripción</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th style="text-align: center;">Nombre</th>
+                <th id="disappear" style="text-align: center;">Descripción</th>
+                <th style="width: 10px; text-align: center;">Estado</th>
+                <th style="width: 10px; text-align: center;">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -30,15 +30,19 @@
                 <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
                 <td id="disappear" v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
                 <td @click="abrirModal('info', proyecto)" style="text-align: center;">
-                  <div>
+                  <div style="display: flex; flex-direction: row; justify-content: center; border: none;">
                     <span class="badge badge-danger" style="border-radius: 5px"><img src="/img/icons/x.svg"></span>
                   </div>
                 </td>
-                <td>
-                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
+                <td >
+                  <div style="margin: 8px -7px 8px -7px;">
+                    <div style="display: flex; flex-direction: row; justify-content: center; margin: 0px 10px;">
+                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0;">
                           <i class="icon-lock"></i>
                           <span class="btn-label">Activar</span>
                       </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>

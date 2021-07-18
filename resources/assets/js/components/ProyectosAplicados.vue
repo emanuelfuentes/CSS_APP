@@ -15,10 +15,10 @@
                         <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th id="disappear">Descripción</th>
-                                    <th style="width: 10px">Estado</th>
-                                    <th style="width: 10px">Opciones</th>
+                                    <th style="text-align: center;">Nombre</th>
+                                    <th style="text-align: center;" id="disappear">Descripción</th>
+                                    <th style="width: 10%; text-align: center;">Estado</th>
+                                    <th style="width: 10%; text-align: center;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,7 +26,7 @@
 
                                     <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td>
+                                    <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
                                         <div v-if="proyecto.estado" style="text-align: center;">
                                             <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
                                         </div>
@@ -34,12 +34,14 @@
                                             <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
                                         </div>
                                     </td>
-                                    <td style="text-align: center; display:flex; justify-content: center; border: none">
-                                        <div style="display: flex;">
-                                            <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm">
-                                                <i class="icon-trash"></i>
-                                                <span class="btn-label">Desaplicar</span>
-                                            </button> &nbsp;
+                                    <td>
+                                        <div style="margin: 8px -9px 8px -5px;">
+                                            <div style="display: flex; margin: 0px 10px;">
+                                                <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm" style="border-radius: 5px;">
+                                                    <i class="icon-trash"></i>
+                                                    <span class="btn-label">Desaplicar</span>
+                                                </button> &nbsp;
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -77,31 +79,31 @@
                             <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
                                 <tbody>                                    
                                     <tr>
-                                        <th style="background-color: #dedede;">Descripción</th>
+                                        <th style="background-color: #dedede; width: 15%;">Descripción</th>
                                         <td v-text="modal_desc" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Tipo</th>
+                                        <th style="background-color: #dedede; width: 15%;">Tipo</th>
                                         <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Cupos</th>
+                                        <th style="background-color: #dedede; width: 15%;">Cupos</th>
                                         <td v-text="modal_cupos" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Horario</th>
+                                        <th style="background-color: #dedede; width: 15%;">Horario</th>
                                         <td v-text="modal_horario" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Inicio</th>
+                                        <th style="background-color: #dedede; width: 15%;">Inicio</th>
                                         <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Fin</th>
+                                        <th style="background-color: #dedede; width: 15%;">Fin</th>
                                         <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Encargado</th>
+                                        <th style="background-color: #dedede; width: 15%;">Encargado</th>
                                         <td v-text="modal_encargado" style="padding-left: 16px;"></td>
                                     </tr>
                                 </tbody>
