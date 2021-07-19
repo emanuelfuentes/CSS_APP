@@ -70,6 +70,10 @@ class ProyectoxEstudianteController extends Controller{
         ->where('proyectoxestudiante.idUser', '=', $idUser)->first();
         $proXEst->estado = $estado;
         $proXEst->save();
+
+        $restarCupo = Proyecto::where('proyecto.idProyecto', '=', $idProyecto)->first();
+        $restarCupo->cupos_act = $restarCupo->cupos_act + 1;
+        $restarCupo->save();
         
         $mailData = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
