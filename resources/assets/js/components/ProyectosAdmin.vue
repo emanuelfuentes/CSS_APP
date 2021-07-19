@@ -307,7 +307,9 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div>
+                                <p>Cupos disponibles: {{ modal_cupos_act }}</p>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table" >
                                     <thead>
@@ -656,7 +658,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     this.flagError = true
                     msg4 = "Debe agregar carreras"
                 }
-
                 
                 this.arrayCarreraPerfil.forEach(document => {
                     if((!document[0] || !document[1] || !document[2]) && flagCP1){
@@ -876,6 +877,16 @@ import {API_HOST} from '../constants/endpoint.js';
                 .catch(function (error) {
                     console.log(error);
                 });
+                axios.get(`${API_HOST}/cupos_actuales`, {
+                    params:{
+                        idProyecto: me.id_proyecto
+                    }
+                }).then(function (response){
+                    me.modal_cupos_act = response.data.cupos - response.data.cupos_act;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             buscarEstudiante(){
                 let me = this
@@ -916,6 +927,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                     me.loading = false;
                     me.getEstudiantes();
+                    me.bindData();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -942,6 +954,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     me.loading = false;
                     me.cerrarModal();
                     me.getEstudiantes();
+                    me.bindData();
                 }).catch(function (error) {
                     console.log(error);
                 }); 

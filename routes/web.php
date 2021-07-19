@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/estudiante_por_carnet', 'UserController@estudiantePorCarnet');
         Route::get('/facultad', 'FacultadController@index');
         Route::put('/estudiante/actualizar', 'UserController@actualizarEstudiante');
+        Route::get('/cupos_actuales', 'ProyectoController@cuposActuales');
     });
 
     Route::middleware(['NormalUser'])->group(function () {

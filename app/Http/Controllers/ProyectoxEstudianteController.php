@@ -52,7 +52,7 @@ class ProyectoxEstudianteController extends Controller{
     public function estudiantesPorProyecto(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
-        //$estudiantes = User::query('SELECT * FROM users u INNER JOIN proyectoxestudiante pe ON u.idUser = pe.idUser WHERE pe.idProyecto = :idProyecto')->get();
+        
         $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->select('users.nombres', 'users.apellidos', 'users.correo', 'users.genero', 'users.idPerfil', 'users.idCarrera', 'proyectoxestudiante.estado', 'users.idUser')
         ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)
@@ -132,6 +132,10 @@ class ProyectoxEstudianteController extends Controller{
             $pXe->idUser = $request->idUser;
             $pXe->estado = $request->estado;
             $pXe->save();
+
+            $restarCupo = Proyecto::where('proyecto.idProyecto', '=', $request->idProyecto)->first();
+            $restarCupo->cupos_act = $restarCupo->cupos_act + 1;
+            $restarCupo->save();
 
             $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
             ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')

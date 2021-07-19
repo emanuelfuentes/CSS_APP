@@ -167,12 +167,15 @@ class ProyectoController extends Controller
         }
     }
     
-    
     public function state(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();
+    }
+
+    public function cuposActuales(Request $request){
+        return Proyecto::select('proyecto.cupos_act', 'proyecto.cupos')->where('idProyecto', '=', $request->idProyecto)->first();
     }
 }
