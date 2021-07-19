@@ -233,7 +233,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" v-bind:data-dismiss="flagErrorProyecto ? '' : 'modal'" @click ="actualizarInsertarProyecto()">Guardar</button>
+                            <button type="button" class="btn btn-primary" v-bind:data-dismiss="flagErrorProyecto ? '' : 'modal' " @click ="actualizarInsertarProyecto()">Guardar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -556,7 +556,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(this.validarProyecto()){
                     return;
                 }
-                console.log(this.arrayCarreraPerfil)
                 let me = this;
                 if(!this.id_proyecto){
                     axios.post(`${API_HOST}/proyecto/insertar`, {
@@ -664,16 +663,19 @@ import {API_HOST} from '../constants/endpoint.js';
                             msg3 = "No puede seleccionar la misma carrera más de una vez."
                             flagCP3 = false;
                             this.flagError = true;
-                            console.log(i)
-                            console.log(j)
                         }
                         j++
                     })
                     i++;
                 })
                 this.errorPerfilMsg += msg1 + msg2 + msg3;
-                if(!!this.errorProyecto.find(element => element > 0) || !this.flagError){
-                    console.log("Sos baka")
+                var tempFlag = false
+                if(this.errorProyecto.find(element => element > 0) == undefined){
+                    tempFlag = true
+                }
+                if(tempFlag || !this.flagError){
+                    //No hay errores
+                    console.log("Probando")
                     this.flagErrorProyecto = false
                     return false;
                 } 
@@ -828,7 +830,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     }
                 }).then(function(response){
                     var i = 0;
-                    console.log(response.data)
                     response.data.forEach(document =>{
                         me.arrayCarreraPerfil[i][0] = document.idCarrera;
                         me.arrayCarreraPerfil[i][1] = document.limite_inf;
