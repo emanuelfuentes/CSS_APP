@@ -18,7 +18,7 @@
               <tr>
                 <!--<th>Opciones</th> -->
                 <!--<th>Numero</th>-->
-                <th style="text-align: center;">Nombre</th>
+                <th style="text-align: center; width: 10%;">Nombre</th>
                 <th id="disappear" style="text-align: center;">Descripción</th>
                 <th style="width: 10px; text-align: center;">Estado</th>
                 <th style="width: 10px; text-align: center;">Acciones</th>

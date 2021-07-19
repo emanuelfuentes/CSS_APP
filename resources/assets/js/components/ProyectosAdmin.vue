@@ -22,7 +22,7 @@
                         <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">Nombre</th>
+                                    <th style="text-align: center; width: 10%;">Nombre</th>
                                     <th id="disappear" style="text-align: center;">Descripción</th>
                                     <th style="text-align: center; width: 10%;">Cupos</th>
                                     <th style="text-align: center; width: 10%;">Acciones</th>
