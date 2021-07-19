@@ -18,10 +18,10 @@
               <tr>
                 <!--<th>Opciones</th> -->
                 <!--<th>Numero</th>-->
-                <th>Nombre</th>
-                <th id="disappear">Descripción</th>
-                <th>Estado</th>
-                <th>Acciones</th>
+                <th style="text-align: center;">Nombre</th>
+                <th id="disappear" style="text-align: center;">Descripción</th>
+                <th style="width: 10px; text-align: center;">Estado</th>
+                <th style="width: 10px; text-align: center;">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -30,15 +30,19 @@
                 <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
                 <td id="disappear" v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
                 <td @click="abrirModal('info', proyecto)" style="text-align: center;">
-                  <div>
+                  <div style="display: flex; flex-direction: row; justify-content: center; border: none;">
                     <span class="badge badge-danger" style="border-radius: 5px"><img src="/img/icons/x.svg"></span>
                   </div>
                 </td>
-                <td>
-                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0; width: 100%;">
+                <td >
+                  <div style="margin: 8px -7px 8px -7px;">
+                    <div style="display: flex; flex-direction: row; justify-content: center; margin: 0px 10px;">
+                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0;">
                           <i class="icon-lock"></i>
                           <span class="btn-label">Activar</span>
                       </button>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -86,7 +90,7 @@
                 </tr>
                 <tr>
                   <th style="background-color: #dedede;">Cupos</th>
-                  <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                  <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                 </tr>
                 <tr>
                   <th style="background-color: #dedede;">Horario</th>
@@ -95,6 +99,14 @@
                 <tr>
                   <th style="background-color: #dedede;">Encargado</th>
                   <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Fecha inicial</th>
+                  <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                </tr>
+                <tr>
+                  <th style="background-color: #dedede;">Fecha final</th>
+                  <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                 </tr>
 
               </tbody>
@@ -156,6 +168,7 @@ export default {
       modal_nombre: "",
       modal_desc: "",
       modal_tipo_horas: "",
+      modal_cupos_act : 0,
       modal_cupos: 0,
       modal_horario: "",
       modal_fecha_in: "",
@@ -249,6 +262,7 @@ export default {
           this.modal_nombre = data.nombre;
           this.modal_desc = data.descripcion;
           this.modal_tipo_horas = data.tipo_horas;
+          this.modal_cupos_act = data.cupos_act;
           this.modal_cupos = data.cupos;
           this.modal_horario = data.horario;
           this.modal_fecha_in = data.fecha_inicio;

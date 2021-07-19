@@ -23,34 +23,27 @@
                         <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th id="disappear">Descripción</th>
-                                    <th style="width: 10px">Estado</th>
-                                    <th style="width: 10px">Opciones</th>
+                                    <th style="text-align: center;">Nombre</th>
+                                    <th style="text-align: center;" id="disappear">Descripción</th>
+                                    <th style="width: 10%; text-align: center;">Cupos</th>
+                                    <th style="width: 10%; text-align: center;">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
                                     <td>
-                                        <div v-if="proyecto.estado" style="text-align: center;">
-                                            <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="button-container" style="margin: 8px 0; display: flex;justify-content: center;">
-                                            <div v-if="ya_aplico_hoy == 0" style="display: flex;">
-                                                <button type="button" data-toggle="modal" data-target="#modal-aplicar" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%;">
+                                        <div class="button-container" style="margin: 8px 0px 8px 4px;">
+                                            <div v-if="ya_aplico_hoy == 0" style="display: flex; margin: 0px 10px;">
+                                                <button type="button" data-toggle="modal" data-target="#modal-aplicar" @click="abrirModal('aplicar', proyecto)" class="btn btn-success btn-sm" style="width: 100%; border-radius: 5px;">
                                                     <i class="icon-check"></i>
                                                     <span class="btn-label">Aplicar</span>
                                                 </button> &nbsp;
                                             </div>
-                                            <div v-else style="display: flex;">
-                                                <button type="button" class="btn btn-success btn-sm" disabled style="margin: 8px 0; width: 100%;">
+                                            <div v-else style="display: flex; margin: 0px 10px;">
+                                                <button type="button" class="btn btn-success btn-sm" disabled style="width: 100%; border-radius: 5px;">
                                                     <i class="icon-check"></i>
                                                     <span class="btn-label">Aplicar</span>
                                                 </button> &nbsp;
@@ -121,24 +114,32 @@
                             <table class="table table-bordered table-sm" style="font-size: 1.35em; margin-top: 10px">
                                 <tbody>                                    
                                     <tr>
-                                        <th style="background-color: #dedede;">Descripción</th>
+                                        <th style="background-color: #dedede; width: 15%">Descripción</th>
                                         <td v-text="modal_desc" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Tipo</th>
+                                        <th style="background-color: #dedede; width: 15%">Tipo</th>
                                         <td v-text="modal_tipo_horas" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Cupos</th>
-                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                        <th style="background-color: #dedede; width: 15%">Cupos</th>
+                                        <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Horario</th>
+                                        <th style="background-color: #dedede; width: 15%">Horario</th>
                                         <td v-text="modal_horario" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
-                                        <th style="background-color: #dedede;">Encargado</th>
+                                        <th style="background-color: #dedede; width: 15%">Encargado</th>
                                         <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede; width: 15%">Fecha inicial</th>
+                                        <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede; width: 15%">Fecha final</th>
+                                        <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                                     </tr>
 
                                 </tbody>
@@ -179,10 +180,12 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_nombre : '',
                 modal_desc : '',
                 modal_tipo_horas : '',
+                modal_cupos_act : 0,
                 modal_cupos : 0,
                 modal_horario : '',
                 modal_fecha_in : '',
                 modal_fecha_fin : '',
+                modal_estado : '',
                 arrayPXE : [''],
                 pagination : {
                     'total' : 0,
@@ -301,10 +304,12 @@ import {API_HOST} from '../constants/endpoint.js';
                         this.modal_nombre = data.nombre;
                         this.modal_desc = data.descripcion;
                         this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos_act = data.cupos_act;
                         this.modal_cupos = data.cupos;
                         this.modal_horario = data.horario;
                         this.modal_fecha_in = data.fecha_inicio;
                         this.modal_fecha_fin = data.fecha_fin;
+                        this.modal_estado = data.estado;
                         break;
                     }
                     default:
@@ -365,19 +370,12 @@ import {API_HOST} from '../constants/endpoint.js';
         #disappear{
             display: none;
         }
+        .btn-label {
+            display: none;
+        }
         
     }
 
-        @media screen and (max-width: 450px) {
-        .btn-label {
-            display: none;
-        }
-    }
-    @media screen and (max-width: 760px) {
-        .btn-label {
-            display: none;
-        }
-    }
 
     @import '/css/ProyectosDisponibles.css';
 </style>

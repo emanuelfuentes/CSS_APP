@@ -22,24 +22,17 @@
                         <table class="table table-bordered table-hover table-sm" style="font-size: 1.25em;">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th id="disappear">Descripción</th>
-                                    <th style="text-align: center; width: 10px;">Estado</th>
-                                    <th style="text-align: center; width: 10px;">Acciones</th>
+                                    <th style="text-align: center;">Nombre</th>
+                                    <th id="disappear" style="text-align: center;">Descripción</th>
+                                    <th style="text-align: center; width: 10%;">Cupos</th>
+                                    <th style="text-align: center; width: 10%;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr id="fila" v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                                     <td id="pos" v-text="proyecto.nombre" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)"></td>
-                                    <td id="estado" style="text-align: center;" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)">
-                                        <div v-if="proyecto.estado">
-                                            <span class="badge badge-success" id="estadod" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger" id="estadond" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
-                                        </div>
-                                    </td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="#projectDetailModal" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
                                     <td id="icons-pos" >
                                         <div class="button-container">
                                             <button type="button" @click="abrirModal('editar', proyecto)" data-toggle="modal" data-target="#editModal" class="btn btn-warning btn-sm" style="width: 100%;">
@@ -339,10 +332,10 @@
                                                     </button>  &nbsp;
                                                 </div>
                                                 <div v-else-if="estudiante.estado == 1">
-                                                    <span class="badge badge-success" style=" margin-left: 10px; border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
+                                                    <span  class="badge badge-success" style="border-radius: 5px;"><img id="estadoa" src="/img/icons/check2.svg" style="display: none; margin-right: 5px;"><p id="estadoap" style="display: inline;">ACEPTADO</p></span>
                                                 </div>
                                                 <div v-else>
-                                                    <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
+                                                    <span  class="badge badge-danger" style="border-radius: 5px;"><img id="estador" src="/img/icons/x.svg" style="display: none; margin-right: 5px;"><p id="estadorp" style="display: inline;">RECHAZADO</p></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -411,7 +404,7 @@
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede;">Cupos</th>
-                                            <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                            <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede;">Horario</th>
@@ -420,6 +413,14 @@
                                     <tr>
                                         <th style="background-color: #dedede;">Encargado</th>
                                             <td v-text="modal_encargado" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fecha inicial</th>
+                                            <td v-text="modal_fecha_in" style="padding-left: 16px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="background-color: #dedede;">Fecha final</th>
+                                            <td v-text="modal_fecha_fin" style="padding-left: 16px;"></td>
                                     </tr>
 
                                 </tbody>
@@ -470,6 +471,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_desc : '',
                 modal_correo : '',
                 modal_tipo_horas : '',
+                modal_cupos_act : 0,
                 modal_cupos : '',
                 modal_horario : '',
                 modal_fecha_in : '',
@@ -788,6 +790,7 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_nombre = data.nombre;
                             this.modal_desc = data.descripcion;
                             this.modal_tipo_horas = data.tipo_horas;
+                            this.modal_cupos_act = data.cupos_act;
                             this.modal_cupos = data.cupos;
                             this.modal_horario = data.horario;
                             this.modal_fecha_in = data.fecha_inicio;
@@ -992,7 +995,21 @@ import {API_HOST} from '../constants/endpoint.js';
 #disappear{
     display: none;
     }
-    
+}
+
+@media screen and (max-width: 1000px) {
+    #estadoa{
+        display: inline;    
+    }
+    #estador{
+        display: inline;    
+    }
+    #estadoap{
+        display: none;
+    }
+    #estadorp{
+        display: none;
+    }
 }
 
 
