@@ -132,7 +132,12 @@
                                     <div class="col-md-9">
                                         <textarea type="text" v-model="modal_desc" class="form-control" placeholder="Descripción"></textarea>
                                         <span>{{modal_desc.length}}/2000</span>
-                                        <p :class="{show: errorProyecto[4] == 1, hide: errorProyecto[4] != 1}" class="error">La Descripción no puede ir vacía</p>
+                                        <div v-if="errorProyecto[4] != 2">   
+                                            <p :class="{show: errorProyecto[4] == 1, hide: errorProyecto[4] != 1}" class="error">La Descripción no puede ir vacía</p>
+                                        </div>
+                                        <div v-else>
+                                            <p class="error">La Descripción no puede superar el número máximo de caracteres</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row div-form">
@@ -621,6 +626,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(!this.modal_tipo_horas) this.errorProyecto.push(1);
                 else this.errorProyecto.push(0)
                 if(!this.modal_desc) this.errorProyecto.push(1);
+                else if(this.modal_desc.length > 2000) this.errorProyecto.push(2);
                 else this.errorProyecto.push(0)
                 if(!this.modal_correo) this.errorProyecto.push(1)
                 else if(!this.regexCorreo(this.modal_correo)) this.errorProyecto.push(2)
@@ -675,7 +681,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 }
                 if(tempFlag || !this.flagError){
                     //No hay errores
-                    console.log("Probando")
                     this.flagErrorProyecto = false
                     return false;
                 } 
