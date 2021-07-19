@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ProyectoxCarrera;
 use App\Proyecto;
+use App\Carrera;
 use Illuminate\Support\Facades\DB;
 
 class ProyectosxCarreraController extends Controller
@@ -28,6 +29,26 @@ class ProyectosxCarreraController extends Controller
     public function create()
     {
         //
+    }
+
+    private function totalCarreras(){
+        return Carrera::count();
+    }
+
+    public function proyectosPorCarreraEdit(Request $request){
+        $proyxcarrera = ProyectoxCarrera::where('idProyecto', '=', $request->idProyecto)->get();
+        
+        if($this->totalCarreras() == sizeof($proyxcarrera) || $this->totalCarreras()-3 == sizeof($proyxcarrera)){
+            $protemp = new ProyectoxCarrera();
+            if($this->totalCarreras() == sizeof($proyxcarrera)) $protemp->idCarrera = -1;
+            else $protemp->idCarrera = -2;
+            $protemp->idFacultad = -1;
+            $protemp->limite_inf = $proyxcarrera[0]->limite_inf;
+            $protemp->limite_sup = $proyxcarrera[0]->limite_sup;
+            $proyxcarrera = array($protemp);
+        }
+
+        return $proyxcarrera;
     }
 
     public function proyectosPorCarrera(Request $request){

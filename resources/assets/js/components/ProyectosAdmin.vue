@@ -554,6 +554,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(this.validarProyecto()){
                     return;
                 }
+                console.log(this.arrayCarreraPerfil)
                 let me = this;
                 if(!this.id_proyecto){
                     axios.post(`${API_HOST}/proyecto/insertar`, {
@@ -669,8 +670,8 @@ import {API_HOST} from '../constants/endpoint.js';
                     i++;
                 })
                 this.errorPerfilMsg += msg1 + msg2 + msg3;
-
-                if(!this.errorProyecto.find(element => element > 0)){
+                if(!!this.errorProyecto.find(element => element > 0) || !this.flagError){
+                    console.log("Sos baka")
                     this.flagErrorProyecto = false
                     return false;
                 } 
@@ -708,7 +709,6 @@ import {API_HOST} from '../constants/endpoint.js';
                         {
                             this.modal = 1;
                             this.add_edit_flag = 1;
-                            this.flagError = false;
                             this.arrayCarreraPerfil = [[]];
                             this.modal_nombre = '';
                             this.modal_encargado = '';
@@ -723,12 +723,13 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.modal_fecha_fin = '';
                             this.errorProyecto = [];
                             this.errorPerfilMsg = '';
+                            this.flagError = false;
                             this.flagErrorProyecto = false;
+                            this.arrayCarreraPerfil = [[]];
                             break;
                         }
                     case "editar":
                         {
-                            this.updateCarrerasAndPerfil();
                             this.modal = 1;
                             this.add_edit_flag = 2;
                             this.id_proyecto = data.idProyecto;
@@ -746,6 +747,8 @@ import {API_HOST} from '../constants/endpoint.js';
                             this.flagError = false;
                             this.flagErrorProyecto = false;
                             this.errorPerfilMsg = "";
+                            this.arrayCarreraPerfil = [[]];
+                            this.updateCarrerasAndPerfil();
                             break;
                         }
                     case "estado":
@@ -816,16 +819,19 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             updateCarrerasAndPerfil(){
                 let me = this
-                axios.get(`${API_HOST}/proyectosxcarrera`).then(function(response){
+                axios.get(`${API_HOST}/proyectosxcarrera`, {
+                    params:{
+                        idProyecto: me.id_proyecto
+                    }
+                }).then(function(response){
                     var i = 0;
+                    console.log(response.data)
                     response.data.forEach(document =>{
-                        if(document.idProyecto == me.id_proyecto){
-                            me.arrayCarreraPerfil[i][0] = document.idCarrera;
-                            me.arrayCarreraPerfil[i][1] = document.limite_inf;
-                            me.arrayCarreraPerfil[i][2] = document.limite_sup;
-                            me.arrayCarreraPerfil.push([]);
-                            i++;
-                        }
+                        me.arrayCarreraPerfil[i][0] = document.idCarrera;
+                        me.arrayCarreraPerfil[i][1] = document.limite_inf;
+                        me.arrayCarreraPerfil[i][2] = document.limite_sup;
+                        me.arrayCarreraPerfil.push([]);
+                        i++;
                     })
                     if(i != 0) me.arrayCarreraPerfil.pop() 
                 })

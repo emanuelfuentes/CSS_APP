@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/proyecto/estado', 'ProyectoController@state');
         Route::get('/carrera', 'CarreraController@index');
         Route::get('/perfil', 'PerfilController@index');
-        Route::get('/proyectosxcarrera', 'ProyectosxCarreraController@index');
+        Route::get('/proyectosxcarrera', 'ProyectosxCarreraController@proyectosPorCarreraEdit');
         Route::get('/estudiantesxproyecto', 'ProyectoxEstudianteController@estudiantesPorProyecto');
         Route::put('/aplicarestudiante', 'ProyectoxEstudianteController@aceptarRechazarEstudiante');
         Route::put('/rechazarestudiante', 'ProyectoxEstudianteController@rechazarEstudiante');

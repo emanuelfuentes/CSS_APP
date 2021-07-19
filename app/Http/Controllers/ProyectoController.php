@@ -153,12 +153,17 @@ class ProyectoController extends Controller
         $arraycp = $request->carreraPerfil;
 
         for($i = 0; $i < count($arraycp); $i++){
-            $pxc = new ProyectoxCarrera();
-            $pxc->idProyecto = $proyecto->idProyecto;
-            $pxc->idCarrera = $arraycp[$i][0];
-            $pxc->limite_inf = $arraycp[$i][1];
-            $pxc->limite_sup = $arraycp[$i][2];
-            $pxc->save();
+            if($arraycp[$i][0] == -1 || $arraycp[$i][0] == -2){
+                $this->todasLasCarreras($proyecto->idProyecto, $arraycp[$i]);
+            }
+            else{
+                $pxc = new ProyectoxCarrera();
+                $pxc->idProyecto = $proyecto->idProyecto;
+                $pxc->idCarrera = $arraycp[$i][0];
+                $pxc->limite_inf = $arraycp[$i][1];
+                $pxc->limite_sup = $arraycp[$i][2];
+                $pxc->save();
+            }
         }
     }
     
