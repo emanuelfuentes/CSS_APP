@@ -649,9 +649,15 @@ import {API_HOST} from '../constants/endpoint.js';
                 else this.errorProyecto.push(0);
                 
                 var flagCP1 = true, flagCP2 = true, flagCP3 = true;
-                var msg1 = "", msg2 = "", msg3 = "";
+                var msg1 = "", msg2 = "", msg3 = "", msg4 = "";
                 var i = 0, j = 0;
 
+                if(this.arrayCarreraPerfil.length == 0){
+                    this.flagError = true
+                    msg4 = "Debe agregar carreras"
+                }
+
+                
                 this.arrayCarreraPerfil.forEach(document => {
                     if((!document[0] || !document[1] || !document[2]) && flagCP1){
                         msg1 = "Debe seleccionar todos los campos. ";
@@ -674,7 +680,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     })
                     i++;
                 })
-                this.errorPerfilMsg += msg1 + msg2 + msg3;
+                this.errorPerfilMsg += msg1 + msg2 + msg3 + msg4;
                 var tempFlag = false
                 if(this.errorProyecto.find(element => element > 0) == undefined){
                     tempFlag = true
