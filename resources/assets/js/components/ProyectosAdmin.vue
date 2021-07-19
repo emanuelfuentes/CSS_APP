@@ -679,7 +679,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 if(this.errorProyecto.find(element => element > 0) == undefined){
                     tempFlag = true
                 }
-                if(tempFlag || !this.flagError){
+                if(tempFlag && !this.flagError){
                     //No hay errores
                     this.flagErrorProyecto = false
                     return false;
