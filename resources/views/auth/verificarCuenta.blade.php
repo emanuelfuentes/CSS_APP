@@ -30,9 +30,14 @@
 
                     <label id="luser" for="user" class="label-form">Usuario</label>
                     <input class="form-control" type="text" name="user" id="user" value="{{$user->correo}}" readonly>
-
+                    <span style="margin-top:8px;color:red"> <b>La contraseña debe de cumplir los siguientes requisitos:</b>    <br>
+                            -Mínimo 8 caracteres. <br>
+                            -Al menos 1 letra mayúscula. <br>
+                            -Al menos 1 caracter especial. <br>
+                            -Al menos 1 número. <br>
+                    </span>
                     <label id="lpassword" for="password" class="label-form">Contraseña</label>
-                    <input class="form-control" type="password" name="contraseña" id="contraseña" placeholder="Contraseña entre 8-20 caracteres">
+                    <input class="form-control" type="password" name="contraseña" id="contraseña">
                     @if($errors->first('contraseña'))
                         {!!$errors->first('contraseña','<span style="color: red;">:message</span>')!!}
                     @else
