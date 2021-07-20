@@ -54,17 +54,6 @@ class ProyectosxCarreraController extends Controller
     public function proyectosPorCarrera(Request $request){
         if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
-        /*
-        $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
-        ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
-        'proyecto.tipo_horas', 'proyecto.cupos_act','proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
-        ->where('proyecto.estado','=','1')
-        ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
-        ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
-        ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)
-        ->where('proyecto.fecha_inicio', '>=', date('Y-m-d'))
-        ->whereRaw('proyecto.cupos_act < proyecto.cupos')
-        ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);*/
         $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
         ->leftJoin('proyectoxestudiante', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
