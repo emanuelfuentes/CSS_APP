@@ -72,11 +72,11 @@
             </div>
             <!--Inicio del modal aplicar a proyecto-->
             <div class="modal fade" tabindex="-1" id="modal-aplicar" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <!--<div v-if="loading==true">
+                <div v-if="loading==1">
                     <spinner></spinner>
-                </div>-->
+                </div>
                 <!-- poner V-ELSE-->
-                <div class="modal-dialog modal-primary modal-lg" role="document">
+                <div v-if="loading == 0" class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Aplicar a proyecto</h4>
@@ -90,7 +90,7 @@
                             le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cerrarModal()">Cerrar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="aplicarProyecto()">Confirmar</button>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ import {API_HOST} from '../constants/endpoint.js';
     export default {
         data(){
             return{
-                loading : false,
+                loading : 0,
                 loadTable : false,
                 user_id : 0,
                 user_email: '',
@@ -265,14 +265,14 @@ import {API_HOST} from '../constants/endpoint.js';
             },
             aplicarProyecto(){
                 let me = this
-                me.loading = true;
+                me.loading = 1;
                 axios.post(`${API_HOST}/proyecto/aplicar`, {
                     'idProyecto' : this.id_proyecto,
                     'idUser' : this.user_id,
                     'estado' : 0,
                 })
                 .then(function (response) {
-                    me.loading = false;
+                    me.loading = 2;
                     me.cerrarModal();
                 })
                 .catch(function (error) {
@@ -293,6 +293,7 @@ import {API_HOST} from '../constants/endpoint.js';
                     case "aplicar":
                         {
                             this.modal = 1;
+                            this.loading = 0;
                             this.id_proyecto = data.idProyecto
                             break;
                         }
