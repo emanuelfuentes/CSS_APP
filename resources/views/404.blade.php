@@ -8,18 +8,18 @@
 </head>
 <main>
   <div class="container">
-    <span>
-        <img src="/img/UCA.6b065e25.png" alt="uca" style="width: 200px; height: 300px;">
-        <p id="css">Centro de Servicio Social</p>
-    </span>
+      <div style="text-align: center;">
+        <span>
+            <img src="/img/UCA.6b065e25.png" alt="uca" style="width: 150px; height: 200px;">
+            <p id="css">Centro de Servicio Social</p>
+        </span>
+    </div>
     <h1 id="title">Oops!</h1>
     <h2 id="subtitle">parece que algo salió mal. </h2>
     <p id="texto">La página que está buscando no existe o no está disponible temporalmente.</p>
-    <p id="texto">Puede usar este botón para regresar.</p>
-    <div class="d-flex justify-content-center">
-        <a href="{{url('/')}}"> regresar</a>
-        
-    </div>
+    <button type="button" id="errorbutton">
+        <a href="{{url('/')}}" id="errortext"> regresar</a>    
+    </button>
     
 </div>
 </main>

@@ -8,13 +8,15 @@ body {
   }
 
 span{
-    margin-top: 20px;
     text-align: center;
 }
 
-body{
+main{
     font-family: 'Abel';
     color: white;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .container{
@@ -23,14 +25,13 @@ body{
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-evenly;
-    height: 100%;
-    width: 100%;
-    overflow-y: scroll;
+    margin: 0px 6.5em;
+    height: 175%;
 }
 
 #title{
     font-size: 11em;
-    font-weight: 1100;
+    font-weight: bold;
     text-transform: uppercase;
     margin-top: 0;
     margin-bottom: 0;
@@ -38,33 +39,38 @@ body{
 }
   
 #subtitle{
-        font-size: 3em;
+        font-size: 5em;
         font-weight: 300;
         text-transform: uppercase;
-        margin-top: 0;
-        margin-bottom: 15px;
         text-align: center;
         
 }
 
 #texto{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 1.5em;
+    margin: 0.5em 0px;
+    font-size: 3em;
     font-weight: 100;
     text-align: center;
 }
 
 #css {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 1.5em;
+    margin: 2em 0px 1em 0px;
+    font-size: 2.5em;
     text-align: center;
 }
-#regresar{
-    color: white;
-    padding: 2vh 4vw; 
+
+#errorbutton{
+    padding: 1.5vh 4vw;
+    margin: 1.5em 0px;
     border-radius: 8px;
-    margin-top: 20px;
-    font-size: 1.5em;
+    color: white;
+}
+
+#errortext{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Abel';
+    font-weight: bold;
+    font-size: 3em;
+    color: black;
 }
