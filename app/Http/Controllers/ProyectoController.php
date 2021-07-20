@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Proyecto;
 use App\ProyectoxCarrera;
 use App\Carrera;
+use App\ProyectoxEstudiante;
 
 class ProyectoController extends Controller
 {
@@ -18,6 +19,16 @@ class ProyectoController extends Controller
     {
         if(!$request->ajax()) return redirect('/home');
         $proyectos = Proyecto::where('estado','=','1')->paginate(5);
+        $cupos = ProyectoxEstudiante::select('estado', 'idProyecto', 'idUser')->get();
+        for($i = 0; $i < count($proyectos); $i++){
+            $proyectos[$i]->notificaciones = 0;
+            for($j = 0; $j < count($cupos) ; $j++){
+                if($proyectos[$i]->idProyecto == $cupos[$j]->idProyecto && $cupos[$j]->estado == '0'){
+                    $proyectos[$i]->notificaciones = 1;
+                    break;
+                }
+            }
+        }
         return [
             'pagination' => [
                 'total'         => $proyectos->total(),

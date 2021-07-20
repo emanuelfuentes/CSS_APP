@@ -50,7 +50,7 @@
                                             <button type="button" @click="abrirModal('estudiantes', proyecto)" data-toggle="modal" data-target="#membersModal" class="btn btn-info btn-sm" id="membersbutton" style="width: 100%;">
                                                 <i class="icon-people"></i>
                                                 <span class="btn-label">Miembros</span>
-                                                <span id="badge">11</span>
+                                                <span id="badge" v-if="proyecto.notificaciones == 1" >9</span>
                                             </button>
                                         </div>
                                     </td>
@@ -536,7 +536,7 @@ import {API_HOST} from '../constants/endpoint.js';
             bindData(page){
                 let me = this;
                 me.loadTable = true;
-                //var url = '/public/proyecto?page=' + page;
+
                 var url = `${API_HOST}/todos_proyectos?page=${page}`;
                 me.getCarrerasAndPerfils();
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
