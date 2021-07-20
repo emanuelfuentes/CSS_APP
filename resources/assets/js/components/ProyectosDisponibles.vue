@@ -56,13 +56,13 @@
                         <nav>
                             <ul class="pagination" style="float: right;">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img :src="ruta + '/img/icons/chevron_left_black_24dp.svg'" alt="chevron-left"></a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_right_black_24dp.svg" alt="chevron-left"></a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img :src="ruta + '/img/icons/chevron_right_black_24dp.svg'" alt="chevron-left"></a>
                                 </li>
                             </ul>
                         </nav>
@@ -163,9 +163,11 @@
 
 <script>
 import {API_HOST} from '../constants/endpoint.js';
+import {API_HOST_ASSETS} from '../constants/endpoint.js';
     export default {
         data(){
             return{
+                ruta : API_HOST_ASSETS,
                 loading : 0,
                 loadTable : false,
                 user_id : 0,

@@ -1,3 +1,6 @@
+<?php
+    $ruta = App\Http\Controllers\UserController::ruta();
+?>
 <head>
 <meta charset="utf-8">
     <link href="css/errorPage.css" rel="stylesheet">
@@ -10,7 +13,7 @@
   <div class="container">
       <div style="text-align: center;">
         <span>
-            <img src="/img/UCA.6b065e25.png" alt="uca" style="width: 150px; height: 200px;">
+            <img src="<?php echo $ruta; ?>/img/UCA.6b065e25.png" alt="uca" style="width: 150px; height: 200px;">
             <p id="css">Centro de Servicio Social</p>
         </span>
     </div>

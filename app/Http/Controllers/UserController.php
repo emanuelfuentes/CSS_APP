@@ -41,4 +41,8 @@ class UserController extends Controller
         $estudiante->idPerfil = $request->idPerfil;
         $estudiante->save();
     }
+
+    public static function ruta(){
+        return '/css-proyecto/public'; 
+    }
 }

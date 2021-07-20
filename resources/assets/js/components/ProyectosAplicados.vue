@@ -26,14 +26,7 @@
 
                                     <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)">
-                                        <div v-if="proyecto.estado" style="text-align: center;">
-                                            <span class="badge badge-success" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/check2.svg"></span>
-                                        </div>
-                                        <div v-else>
-                                            <span class="badge badge-danger" style="text-align:center;  border-radius: 5px;"><img src="/img/icons/x.svg"></span>
-                                        </div>
-                                    </td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td>
                                         <div style="margin: 8px -9px 8px -5px;">
                                             <div style="display: flex; margin: 0px 10px;">
@@ -47,19 +40,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <nav>
-                            <ul class="pagination" style="float:right;">
-                                <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_left_black_24dp.svg" alt="chevron-left"></a>
-                                </li>
-                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page)" v-text="page"></a>
-                                </li>
-                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1)" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 35px;"><img src="/img/icons/chevron_right_black_24dp.svg" alt="chevron-left">Sig</a>
-                                </li>
-                            </ul>
-                        </nav>
                     </div>
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
@@ -88,7 +68,7 @@
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede; width: 15%;">Cupos</th>
-                                        <td v-text="modal_cupos" style="padding-left: 16px;"></td>
+                                        <td v-text="`${modal_cupos_act}${'/'}${modal_cupos}`" style="padding-left: 16px;"></td>
                                     </tr>
                                     <tr>
                                         <th style="background-color: #dedede; width: 15%;">Horario</th>
@@ -168,6 +148,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 modal_nombre : '',
                 modal_desc : '',
                 modal_tipo_horas : '',
+                modal_cupos_act : 0,
                 modal_cupos : 0,
                 modal_horario : '',
                 modal_fecha_in : '',
@@ -213,16 +194,7 @@ import {API_HOST} from '../constants/endpoint.js';
                 me.loadTable = true;
                 var url = `${API_HOST}/proyectos_aplicados` /*?page=' + page*/;
                 axios.get(url).then(function (response) {
-                    var respuesta = response.data;
-                    var proyectos = respuesta.proyectos.data;
-                    var auxiliar = [];
-                    proyectos.map((dato, key)=> {
-                        if(dato.estado){
-                            auxiliar.push(dato)
-                        }
-                    })
-                    me.arrayProyectos = auxiliar;
-                    me.pagination = respuesta.pagination;
+                    me.arrayProyectos = response.data;
                     me.loadTable = false;
                 })
                 .catch(function (error) {
@@ -249,11 +221,6 @@ import {API_HOST} from '../constants/endpoint.js';
                     console.log(error);
                 });
             },
-            cambiarPagina(page){
-                let me = this;
-                me.pagination.current_page = page;
-                me.bindData(page);
-            },
             cerrarModal(){
                 this.modal = 0;
                 this.modal2 = 0;
@@ -268,6 +235,7 @@ import {API_HOST} from '../constants/endpoint.js';
                         this.modal_nombre = data.nombre;
                         this.modal_desc = data.descripcion;
                         this.modal_tipo_horas = data.tipo_horas;
+                        this.modal_cupos_act = data.cupos_act;
                         this.modal_cupos = data.cupos;
                         this.modal_horario = data.horario;
                         this.modal_fecha_in = data.fecha_inicio;

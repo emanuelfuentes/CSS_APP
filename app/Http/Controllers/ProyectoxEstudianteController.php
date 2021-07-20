@@ -25,21 +25,11 @@ class ProyectoxEstudianteController extends Controller{
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('users', 'proyectoxestudiante.idUser','=','users.idUser')
         ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado',
-        'proyecto.tipo_horas', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+        'proyecto.tipo_horas', 'proyecto.cupos_act','proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
         ->where('proyectoxestudiante.idUser','=', $id)
-        ->orderBy('proyecto.idProyecto', 'desc')->paginate(10);
+        ->orderBy('proyecto.idProyecto', 'desc')->get();
         
-        return [
-            'pagination' => [
-                'total'         => $proyectos->total(),
-                'current_page'  => $proyectos->currentPage(),
-                'per_page'      => $proyectos->perPage(),
-                'last_page'     => $proyectos->lastPage(),
-                'from'          => $proyectos->firstItem(),
-                'to'            => $proyectos->lastItem(),
-            ],
-            'proyectos' => $proyectos
-        ];
+        return $proyectos;
     }
 
     public function pxePorId (Request $request) {
