@@ -50,7 +50,7 @@
                                             <button type="button" @click="abrirModal('estudiantes', proyecto)" data-toggle="modal" data-target="#membersModal" class="btn btn-info btn-sm" id="membersbutton" style="width: 100%;">
                                                 <i class="icon-people"></i>
                                                 <span class="btn-label">Miembros</span>
-                                                <span id="badge" v-if="proyecto.notificaciones == 1" >9</span>
+                                                <span id="badge" v-if="proyecto.notificaciones == 1" ></span>
                                             </button>
                                         </div>
                                     </td>
@@ -1000,9 +1000,9 @@ import {API_HOST} from '../constants/endpoint.js';
 
 #membersbutton #badge{
     position: absolute;
-    margin-top: -12px;
-    right: 7px;
-    padding: 1px 5px;
+    margin-top: -8px;
+    right: 9px;
+    padding: 6px 6px;
     border-radius: 50%;
     background-color: red;
     color: white;
