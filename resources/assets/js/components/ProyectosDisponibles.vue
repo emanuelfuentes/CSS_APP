@@ -31,9 +31,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-                                    <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
+                                    <td v-text="proyecto.nombre" id="name_p" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
                                     <td>
                                         <div class="button-container" style="margin: 8px 0px 8px 4px;">
                                             <div v-if="ya_aplico_hoy == 0" style="display: flex; margin: 0px 10px;">
@@ -71,12 +71,12 @@
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal aplicar a proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" id="modal-aplicar" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-                <div v-if="loading==true">
+            <div class="modal fade" tabindex="-1" id="modal-aplicar" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <!--<div v-if="loading==true">
                     <spinner></spinner>
-                </div>
-                
-                <div v-else class="modal-dialog modal-primary modal-lg" role="document">
+                </div>-->
+                <!-- poner V-ELSE-->
+                <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Aplicar a proyecto</h4>
@@ -101,7 +101,7 @@
             <!--Fin del modal-->
 
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" role="dialog" id="modal-info" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal-info" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
