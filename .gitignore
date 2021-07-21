@@ -11,8 +11,3 @@ npm-debug.log
 yarn-error.log
 .env
 
-public/js/app.js
-
-public/css/plantilla.css
-
-public/js/plantilla.js
