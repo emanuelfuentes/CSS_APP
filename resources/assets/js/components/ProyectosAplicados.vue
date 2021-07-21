@@ -17,7 +17,7 @@
                                 <tr>
                                     <th style="text-align: center; width: 10%;">Nombre</th>
                                     <th style="text-align: center;" id="disappear">Descripción</th>
-                                    <th style="width: 10%; text-align: center;">Estado</th>
+                                    <th style="width: 10%; text-align: center;">Cupos</th>
                                     <th style="width: 10%; text-align: center;">Opciones</th>
                                 </tr>
                             </thead>

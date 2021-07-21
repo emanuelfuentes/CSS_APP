@@ -1,3 +1,6 @@
+<?php
+    $ruta = App\Http\Controllers\UserController::ruta();
+?>
 <!DOCTYPE html>
 <!--
 * CoreUI - Free Bootstrap Admin Template
@@ -143,7 +146,7 @@
               </div>
               <div style="display:none;" id="loading">
                 <div style=" display: flex;  flex-direction:column; justify-content: center; align-items: center;">
-                  <img src="/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
+                  <img src="<?php echo $ruta; ?>/img/snake.gif" alt="Loading" /><span  > Cargando....</span>
                 </div>
               </div>
             </div>

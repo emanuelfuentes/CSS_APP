@@ -8,7 +8,6 @@
     <meta name="description" content="Centro de Servicio Social | UCA">
     <meta name="author" content="">
     <meta name="keyword" content="Sistema de inscripción de proyectos CSS UCA">
-    <link rel="shortcut icon" href="img/favicon.ico">
     <title>Centro de Servicio Social | UCA</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"

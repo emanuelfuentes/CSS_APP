@@ -103,7 +103,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 });
 
                 axios.get(`${API_HOST}/mi_carrera`).then(function (response) {
-                    console.log(response.data[0]);
                     var res = response.data[0];
                     me.carrera = res.nombre_c;
                     me.facultad = res.nombre_f;
@@ -125,7 +124,6 @@ import {API_HOST} from '../constants/endpoint.js';
             }
         },
         mounted() {
-            console.log('Component mounted.');
             this.bindData();
         }
     }
