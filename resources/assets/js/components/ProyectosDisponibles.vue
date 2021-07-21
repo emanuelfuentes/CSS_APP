@@ -330,6 +330,32 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
     }
 </script>
 <style>
+
+@font-face {
+    font-family: 'Abel';
+    src: url(/css-proyecto/public/fonts/Abel-Regular.ttf);
+}
+
+
+.main{
+    font-family: 'Abel';
+}
+
+.sidebar {
+    background-color: #003C71;
+
+}
+
+@media screen and (min-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
+@media screen and (max-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+}
     #footer{
     margin-left: 0px;
 }
@@ -379,6 +405,4 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
         
     }
 
-
-    @import '/css/ProyectosDisponibles.css';
 </style>

@@ -26,10 +26,10 @@
 
                                     <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
                                     <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
                                     <td>
                                         <div style="margin: 8px -9px 8px -5px;">
-                                            <div style="display: flex; margin: 0px 10px;">
+                                            <div style="display: flex; flex-direction: row; justify-content: center; margin: 0px 10px;">
                                                 <button type="button" data-toggle="modal" data-target="#modal-eliminar" @click="abrirModal('desaplicar', proyecto)" class="btn btn-warning btn-sm" style="border-radius: 5px;">
                                                     <i class="icon-trash"></i>
                                                     <span class="btn-label">Desaplicar</span>
@@ -264,6 +264,14 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 </script>
 <style>
+    @font-face {
+    font-family: 'Abel';
+    src: url(/css-proyecto/public/fonts/Abel-Regular.ttf);
+    }
+
+    .main{
+        font-family: 'Abel';
+    }
     #footer{
     margin-left: 0px;
     }
@@ -285,6 +293,7 @@ import {API_HOST} from '../constants/endpoint.js';
     @media screen and (max-width: 991px) {
     #logout {
         margin-right: 30px;
+        }
     }
 
     @media screen and (max-width: 500px) {
@@ -305,7 +314,5 @@ import {API_HOST} from '../constants/endpoint.js';
             display: none;
         }
     }
-    @import '/css/Font.css';
-}
 
 </style>

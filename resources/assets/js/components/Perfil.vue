@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-sm">
                             <tr>
-                                <th style="background-color: #dedede">Correo Institucional</th>
+                                <th style="background-color: #dedede; width: 10%;">Correo Institucional</th>
                                 <td v-text="correo" ></td>
                             </tr>
                             <tr>
@@ -132,6 +132,15 @@ import {API_HOST} from '../constants/endpoint.js';
 </script>
 
 <style>
+
+@font-face {
+    font-family: 'Abel';
+    src: url(/css-proyecto/public/fonts/Abel-Regular.ttf);
+}
+
+.main{
+    font-family: 'Abel';
+}
 #footer{
     margin-left: 0px;
 }
@@ -179,8 +188,6 @@ import {API_HOST} from '../constants/endpoint.js';
     .main{
         overflow: scroll;
     }
-
-    @import '/css/Font.css';
     
 }
 </style>

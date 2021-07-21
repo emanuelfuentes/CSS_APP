@@ -293,6 +293,15 @@ export default {
 </script>
 <style>
 
+@font-face {
+    font-family: 'Abel';
+    src: url(/css-proyecto/public/fonts/Abel-Regular.ttf);
+}
+
+.main{
+    font-family: 'Abel';
+}
+
 .modal-content {
   width: 100% !important;
   position: absolute !important;
@@ -307,7 +316,5 @@ export default {
 #disappear{
     display: none;
     }
-    
-@import '/css/Font.css';
 }
 </style>

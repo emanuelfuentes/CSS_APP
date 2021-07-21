@@ -219,6 +219,118 @@ import {API_HOST} from '../constants/endpoint.js';
 </script>
 <style lang="scss">
 
+@font-face {
+    font-family: 'Abel';
+    src: url(/css-proyecto/public/fonts/Abel-Regular.ttf);
+}
+
+.main{
+    font-family: 'Abel';
+    background-color: white;
+}
+
+
+.modal-primary .modal-header{
+    background-color: #003C71;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.button-container{
+    margin: 0em 0.25em;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    border-radius: 6px;
+}
+
+.error{
+    color: red;
+    margin: 0.25em;
+    margin-bottom: 0.5em;
+}
+.show{
+    visibility: visible;
+}
+.hide{
+    visibility: hidden;
+}
+.div-form{
+    margin-bottom: 0em;
+}
+.modal-primary .modal-content{
+    width: 100%;
+    max-width: none;
+}
+
+.modal-student{
+    max-width: none;
+}
+
+.sidebar-fixed .sidebar {
+    height: 100%;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.search-student {
+    display: inline-block;
+}
+
+.dropdown-header {
+    background-color: #003C71;
+    color: white;
+}
+
+.sidebar {
+    background-color: #003C71;
+
+}
+
+@media screen and (max-width: 450px) {
+    .btn-label {
+        display: none;
+    }
+}
+/* Ponelo por aqui lo del sidebar */
+@media screen and (max-width: 500px) {
+    .btn-label {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .breadcrumb {
+        margin-top: 55px;
+    }
+
+    #sidebarMenu {
+        margin-top: 55px;
+    }
+    
+    #logout {
+        margin-right: 30px;
+    }
+
+    .main{
+        overflow: scroll;
+    }
+    
+}
+
+@media screen and (min-width: 991px) {
+    #logout {
+        margin-right: 30px;
+    }
+    .inputs{
+        width: 100%;
+    }
+}
 
 @media screen and (min-width: 760px) {
     .inputs{
@@ -231,5 +343,4 @@ import {API_HOST} from '../constants/endpoint.js';
     }
 }
 
-@import '/css/ProyectosAdmin.css';
 </style>
