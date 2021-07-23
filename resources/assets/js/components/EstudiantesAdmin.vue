@@ -121,9 +121,6 @@ import {API_HOST} from '../constants/endpoint.js';
                 axios.get(`${API_HOST}/perfil`).then(function (response) {
                     me.arrayPerfil = response.data;
                 })
-                $('#facultad').change(function(){
-                    me.getCarreras(false)
-                })
                 axios.get(`${API_HOST}/get_user`).then(function (response) {
                     me.user_email = response.data.correo;
                 })
@@ -210,6 +207,11 @@ import {API_HOST} from '../constants/endpoint.js';
             logout(){
                 var url = `${API_HOST}/logout`;
                 axios.post(url).then(() => location.href = `${API_HOST}/`)
+            }
+        },
+        watch:{
+            idFacultad:function(val){
+                this.getCarreras(false);
             }
         },
         mounted(){
