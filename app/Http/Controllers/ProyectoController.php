@@ -18,7 +18,7 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         if(!$request->ajax()) return redirect('/home');
-        $proyectos = Proyecto::where('estado','=','1')->paginate(5);
+        $proyectos = Proyecto::where('estado','=','1')->orderByRaw('created_at DESC')->paginate(5);
         $cupos = ProyectoxEstudiante::select('estado', 'idProyecto', 'idUser')->get();
         for($i = 0; $i < count($proyectos); $i++){
             $proyectos[$i]->notificaciones = 0;
