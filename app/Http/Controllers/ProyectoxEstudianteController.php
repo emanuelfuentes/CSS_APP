@@ -196,8 +196,13 @@ class ProyectoxEstudianteController extends Controller{
         if(!$request->ajax()) return redirect('/home');
         $idUser = $request->idUser;
         $idProyecto = $request->idProyecto;
-        ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
-        ->where('idUser','=', $idUser)
-        ->delete();
+        $pxe = ProyectoxEstudiante::where('idProyecto','=', $idProyecto)
+        ->where('idUser','=', $idUser)->first();
+        if($pxe->estado == 1){
+            $p = Proyecto::where('idProyecto', '=', $pxe->idProyecto)->first();
+            $p->cupos_act = $p->cupos_act-1;
+            $p->save();
+        }
+        $pxe->delete();
     }
 }
