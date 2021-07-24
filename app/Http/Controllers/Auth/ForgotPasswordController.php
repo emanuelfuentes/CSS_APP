@@ -130,7 +130,7 @@ class ForgotPasswordController extends Controller
 
     protected function validatePassword(Request $request){
         $this->validate($request, [
-            'contraseña' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            'contraseña' => 'required|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^#])[A-Za-z\d@$!%*?&^#]{8,}$/',
             'confirmar' => 'required|same:contraseña'
         ]);
     }
