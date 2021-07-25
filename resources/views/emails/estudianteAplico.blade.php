@@ -13,7 +13,8 @@
             Un estudiante ha aplicado al proyecto de horas sociales a su cargo, {{ $user->nombre }}:<br>
                 Nombres: {{ $user->nombres }}.<br>
                 Apellidos: {{ $user->apellidos }}.<br>
-                Correo: {{ $user->correo }}.<br><br>
+                Correo: {{ $user->correo }}<br>
+                Carrera: {{ $user->n_carrera }}.<br><br>
 
             Se le sugiere revisar el sistema del Centro de Servicio Social UCA en el siguiente link para aceptar o rechazar dicha solicitud.<br>
             <a href="https://uca.edu.sv/css-proyecto/public/">https://uca.edu.sv/css-proyecto/public/</a>

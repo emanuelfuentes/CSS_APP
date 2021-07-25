@@ -107,7 +107,8 @@ class ProyectoxEstudianteController extends Controller{
         
         $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
-        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo')
+        ->join('carrera', 'carrera.idCarrera', '=', 'users.idCarrera')
+        ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo', 'carrera.nombre AS n_carrera')
         ->where('users.idUser', '=', $request->idUser)
         ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
         $this->sendEmail($proyecto, 1);

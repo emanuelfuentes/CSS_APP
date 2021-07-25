@@ -86,8 +86,8 @@
                         </div>
                         <div class="modal-body">
                             <h2>¿Esta seguro que desea aplicar a este proyecto?</h2>
-                            <p><b style="color:red">IMPORTANTE: </b>Este proceso se puede realizar una vez por día. Se le notificará al encargado sobre su aplicación y él 
-                            le notificará a usted si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
+                            <p><b style="color:red">IMPORTANTE: </b>Este proceso se puede realizar una vez por día. Se le notificará al encargado sobre su aplicación y luego 
+                            se le notificará a usted por correo si ha sido aceptado o no para pasar al siguiente proceso de aplicación.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
