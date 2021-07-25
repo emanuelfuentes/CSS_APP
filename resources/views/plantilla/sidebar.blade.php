@@ -1,5 +1,5 @@
 <?php
-    $ruta = App\Http\Controllers\UserController::ruta();
+    $ruta = App\Http\Controllers\UserController::ruta(1);
 ?>
 <div class="sidebar" style="height: 100%; top: 0;" id="sidebarMenu">
             <nav class="sidebar-nav">

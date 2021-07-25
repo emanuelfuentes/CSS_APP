@@ -42,7 +42,13 @@ class UserController extends Controller
         $estudiante->save();
     }
 
-    public static function ruta(){
-        return '/css-proyecto/public'; 
+    public static function ruta($flag){
+        if($flag == 1){
+            return '/css-proyecto/public';
+        }
+        else{
+            return 'https://uca.edu.sv/css-proyecto/public/';
+        }
+         
     }
 }

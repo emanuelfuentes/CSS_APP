@@ -1,5 +1,5 @@
 <?php
-    $ruta = App\Http\Controllers\UserController::ruta();
+    $ruta = App\Http\Controllers\UserController::ruta(1);
 ?>
 <head>
 <meta charset="utf-8">

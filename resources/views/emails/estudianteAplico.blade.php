@@ -1,3 +1,6 @@
+<?php
+    $ruta = App\Http\Controllers\UserController::ruta(2);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +20,7 @@
                 Carrera: {{ $user->n_carrera }}.<br><br>
 
             Se le sugiere revisar el sistema del Centro de Servicio Social UCA en el siguiente link para aceptar o rechazar dicha solicitud.<br>
-            <a href="https://uca.edu.sv/css-proyecto/public/">https://uca.edu.sv/css-proyecto/public/</a>
+            <a href="<?php echo $ruta; ?>"><?php echo $ruta; ?></a>
         </p><br>
         <p>
             Atentamente, Centro de Servicio Social.
