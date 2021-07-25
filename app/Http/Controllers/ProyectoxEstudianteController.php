@@ -71,6 +71,7 @@ class ProyectoxEstudianteController extends Controller{
         ->join('proyecto', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
         ->select('users.nombres', 'users.apellidos', 'users.correo','proyecto.encargado','proyecto.nombre')
         ->where('proyectoxestudiante.idUser', '=', $idUser)
+        ->where('proyectoxestudiante.idProyecto', '=', $idProyecto)
         ->first();
 
         $this->sendEmailAceptadoRechazado($mailData, $estado);
