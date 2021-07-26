@@ -249,20 +249,27 @@
             <!--Fin del modal-->
             <!--Inicio del modal estado del proyecto-->
             <div class="modal fade" tabindex="-1" role="dialog" id="statusModal" aria-hidden="true">
-                <div class="modal-dialog modal-primary modal-lg" role="document">
+                <div v-if="loading==true">
+                    <spinner></spinner>
+                </div>
+                <div v-else class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Estado del proyecto</h4>
+                            <h4 class="modal-title">¿Desactivar el proyecto {{ modal_nombre }}?</h4>
                             <button type="button" data-dismiss="modal" class="close" @click="cerrarModal()" aria-label="Close">
                                 <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h2>¿Desactivar este proyecto?</h2>
+                            <h5>Por favor escriba <b>{{ modal_nombre }}</b> para desactivar este proyecto</h5>
+                            <div class="col-md-9 -alt">
+                                <input type="text" v-model="modal_confirmar" class="form-control">
+                                <p :class="{show: errorEstado == 1, hide: errorEstado != 1}" class="error">El texto ingresado no coincide con el solicitado</p>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="estadoProyecto()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" v-bind:data-dismiss="flagErrorEstado ? '' : 'modal' " @click="estadoProyecto()">Confirmar</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
@@ -363,7 +370,6 @@
                 <div v-if="loading==true">
                     <spinner></spinner>
                 </div>
-                
                 <div v-else class="modal-dialog modal-primary" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
@@ -490,15 +496,18 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                 modal_carrera : 0,
                 modal_perfil : 0,
                 modal_createdAt : '',
+                modal_confirmar : '',
                 carnet : '',
                 nombre_completo : '',
                 errorProyecto : [''],
                 errorDateMsg : '',
                 errorPerfilMsg : '',
                 errorEstudianteMsg : '',
+                errorEstado : 0,
                 flagError : false,
                 flagErrorProyecto : false,
                 flagEstudiante : false,
+                flagErrorEstado : false,
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -699,15 +708,24 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
             },
             estadoProyecto(){
                 let me = this;
-                axios.put(`${API_HOST}/proyecto/estado`, {
-                    'idProyecto' : this.id_proyecto,
-                    'estado' : 0
-                }).then(function (response) {
-                    me.cerrarModal();
-                    me.bindData();
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
+                if(me.modal_confirmar != me.modal_nombre){
+                    me.errorEstado = 1
+                    me.flagErrorEstado = true
+                } 
+                else {
+                    me.flagErrorEstado = false
+                    //me.loading = true;
+                    axios.put(`${API_HOST}/proyecto/estado`, {
+                        'idProyecto' : this.id_proyecto,
+                        'estado' : 0
+                    }).then(function (response) {
+                        me.bindData();
+                        me.loading = false;
+                        me.cerrarModal();
+                    }).catch(function (error) {
+                        console.log(error);
+                    }); 
+                }
             },
             cerrarModal(){
                 if(this.modal == 1 || this.modal4 == 1){
@@ -774,6 +792,10 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                         {
                             this.modal2 = 1;
                             this.id_proyecto = data.idProyecto;
+                            this.modal_nombre = data.nombre;
+                            this.errorEstado = 0;
+                            this.modal_confirmar = '';
+                            this.flagErrorEstado = false;
                             break;
                         }
                     case "estudiantes":
@@ -1067,6 +1089,10 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
 .sidebar {
     background-color: #003C71;
 
+}
+
+.-alt {
+    padding-left: 0;
 }
 
 @media screen and (max-width: 450px) {
