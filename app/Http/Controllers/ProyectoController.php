@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Proyecto;
 use App\ProyectoxCarrera;
 use App\Carrera;
+use App\User;
 use App\ProyectoxEstudiante;
 
 class ProyectoController extends Controller
@@ -184,6 +185,32 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();
+
+        
+        $users = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
+        ->join('proyecto', 'proyecto.idProyecto', '=', 'proyectoxestudiante.idProyecto')
+        ->select('users.correo', 'proyecto.nombre AS p_nombre')
+        ->where('proyectoxestudiante.idProyecto', '=', '7')
+        ->where('proyectoxestudiante.estado', '=', '1')->get();
+        if(count($users) > 0){
+            $mailArray = [];
+            for($i=0; $i<count($users); $i++){
+                $mailArray[$i] = $users[$i]->correo;
+            }
+            $this->sendEmail($mailArray, $users[0]->p_nombre);
+        }
+    }
+
+    public function sendEmail($mails, $p_nombre){
+        Mail::send(
+            'emails.proyectoDesactivado',
+            ['mails' => $mails, 'nombre' => $p_nombre],
+            function($message) use ($mails, $p_nombre){
+                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                $message->to($mails);
+                $message->subject("Actualización de proyecto de horas sociales: ". $p_nombre);
+            }
+        );
     }
 
     public function cuposActuales(Request $request){
