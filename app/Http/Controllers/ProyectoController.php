@@ -8,6 +8,7 @@ use App\ProyectoxCarrera;
 use App\Carrera;
 use App\User;
 use App\ProyectoxEstudiante;
+use Mail;
 
 class ProyectoController extends Controller
 {
@@ -189,26 +190,26 @@ class ProyectoController extends Controller
         
         $users = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
         ->join('proyecto', 'proyecto.idProyecto', '=', 'proyectoxestudiante.idProyecto')
-        ->select('users.correo', 'proyecto.nombre AS p_nombre')
-        ->where('proyectoxestudiante.idProyecto', '=', '7')
-        ->where('proyectoxestudiante.estado', '=', '1')->get();
+        ->select('users.correo', 'proyecto.nombre')
+        ->where('proyectoxestudiante.idProyecto', '=', $request->idProyecto)
+        ->where('proyectoxestudiante.estado', '!=', '2')->get();
         if(count($users) > 0){
             $mailArray = [];
             for($i=0; $i<count($users); $i++){
                 $mailArray[$i] = $users[$i]->correo;
             }
-            $this->sendEmail($mailArray, $users[0]->p_nombre);
+            $this->sendEmail($mailArray, $users[0]);
         }
     }
 
-    public function sendEmail($mails, $p_nombre){
+    public function sendEmail($mails, $nombre){
         Mail::send(
             'emails.proyectoDesactivado',
-            ['mails' => $mails, 'nombre' => $p_nombre],
-            function($message) use ($mails, $p_nombre){
+            ['mails' => $mails, 'nombre'=> $nombre],
+            function($message) use ($mails, $nombre){
                 $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                $message->to($mails);
-                $message->subject("Actualización de proyecto de horas sociales: ". $p_nombre);
+                $message->bcc($mails);
+                $message->subject("Actualización de proyecto de horas sociales: ". $nombre->nombre);
             }
         );
     }

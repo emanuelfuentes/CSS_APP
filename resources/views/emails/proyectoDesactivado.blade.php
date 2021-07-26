@@ -13,7 +13,7 @@
     <div style="color:black">
         <p> Estimado/a estudiante.</p>
         <p>
-            Lamentamos informarle que el proyecto de horas sociales {{ $p_nombre }} ha sido <b style="color:red">suspendido</b> por motivos de fuerza mayor.
+            Lamentamos informarle que el proyecto de horas sociales {{ $nombre->nombre }} ha sido <b style="color:red">suspendido</b> por motivos de fuerza mayor.
             Agradecemos su interés mostrado y le invitamos a formar parte de otros proyectos disponibles. <br>
 
             Puede revisar los proyectos disponibles para usted en el siguiente enlace: <br>
