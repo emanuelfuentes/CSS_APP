@@ -23,10 +23,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
-
-                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)"></td>
-                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="modal-info" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
+                                    <td v-text="proyecto.nombre" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td id="disappear" v-text="proyecto.descripcion" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)"></td>
+                                    <td v-text="`${proyecto.cupos_act}${'/'}${proyecto.cupos}`" data-toggle="modal" data-target="#modal-info" @click="abrirModal('info', proyecto)" style="text-align: center;"></td>
                                     <td>
                                         <div style="margin: 8px -9px 8px -5px;">
                                             <div style="display: flex; flex-direction: row; justify-content: center; margin: 0px 10px;">
@@ -46,7 +45,7 @@
             </div>
 
             <!--Inicio del modal informacion de proyecto-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" id="modal-info" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" id="modal-info" role="dialog" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -99,7 +98,7 @@
             </div>
             <!--Fin del modal-->
             <!--Inicio del modal eliminar-->
-            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal2}" id="modal-eliminar" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade" tabindex="-1" id="modal-eliminar" role="dialog" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

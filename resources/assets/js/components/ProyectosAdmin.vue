@@ -249,10 +249,10 @@
             <!--Fin del modal-->
             <!--Inicio del modal estado del proyecto-->
             <div class="modal fade" tabindex="-1" role="dialog" id="statusModal" aria-hidden="true">
-                <div v-if="loading==true">
+                <div v-if="loading == 1">
                     <spinner></spinner>
                 </div>
-                <div v-else class="modal-dialog modal-primary modal-lg" role="document">
+                <div v-if="loading == 0" class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">¿Desactivar el proyecto {{ modal_nombre }}?</h4>
@@ -279,10 +279,10 @@
             <!--Fin del modal-->
             <!--Inicio de modal de estudiantes por proyecto-->
             <div class="modal fade" tabindex="-1" role="dialog" id="membersModal" aria-hidden="true">
-                <div v-if="loading==true">
+                <div v-if="loading == 1">
                     <spinner></spinner>
                 </div>
-                <div v-else class="modal-dialog modal-primary modal-lg modal-student" role="document" style=
+                <div v-if="loading == 0" class="modal-dialog modal-primary modal-lg modal-student" role="document" style=
                 "margin: 10px;">
                     <div class="modal-content modal-student" style="font-size: 1.35em;">
                         <div class="modal-header">
@@ -367,10 +367,10 @@
             <!--Fin del modal-->
             <!--Inicio del modal de confirmacion para aceptar o rechazar estudiantes-->
             <div class="modal fade" :class="{'mostrar' : modal4}" tabindex="-1" role="dialog" id="confirmModal" aria-hidden="true">
-                <div v-if="loading==true">
+                <div v-if="loading == 1">
                     <spinner></spinner>
                 </div>
-                <div v-else class="modal-dialog modal-primary" role="document">
+                <div v-if="loading == 0" class="modal-dialog modal-primary" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
                             <div v-if="flagEstudiante">
@@ -463,7 +463,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
         data(){
             return{
                 ruta : API_HOST_ASSETS,
-                loading : false,
+                loading : 0,
                 loadTable : false,
                 user_email: '',
                 arrayProyectos : [],
@@ -709,18 +709,18 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
             estadoProyecto(){
                 let me = this;
                 if(me.modal_confirmar != me.modal_nombre){
-                    me.errorEstado = 1
                     me.flagErrorEstado = true
-                } 
+                    me.errorEstado = 1
+                }
                 else {
-                    me.flagErrorEstado = false
-                    //me.loading = true;
+                    me.loading = 1
                     axios.put(`${API_HOST}/proyecto/estado`, {
                         'idProyecto' : this.id_proyecto,
                         'estado' : 0
                     }).then(function (response) {
+                        $('#statusModal').modal('hide');
+                        me.loading = 2;
                         me.bindData();
-                        me.loading = false;
                         me.cerrarModal();
                     }).catch(function (error) {
                         console.log(error);
@@ -741,6 +741,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                 }
             },
             abrirModal(modelo, data = [], flag){
+                this.loading = 0
                 switch (modelo) {
                     case "insertar":
                         {
@@ -939,7 +940,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
             },
             aplicarPorAdmin(){
                 let me = this
-                me.loading = true;
+                me.loading = 1;
                 var url = `${API_HOST}/aplicarporadmin`
                 axios.post(url, {
                     'idProyecto' : me.id_proyecto,
@@ -950,7 +951,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                         me.errorEstudianteMsg = response.data;
                         me.flagError = true;
                     }
-                    me.loading = false;
+                    me.loading = 0;
                     me.getEstudiantes();
                     me.bindData();
                 })
@@ -960,7 +961,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
             },
             aceptarRechazarEstudiante(){
                 let me = this;
-                me.loading = true;
+                me.loading = 1;
                 var estadoEst = 2;
                 if(me.flagEstudiante){
                     axios.put(`${API_HOST}/rechazarestudiante`, {
@@ -976,10 +977,12 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                     'idProyecto' : me.id_proyecto,
                     'estado' : estadoEst
                 }).then(function (response) {
-                    me.loading = false;
+                    $('#confirmModal').modal('hide');
+                    me.loading = 2;
                     me.cerrarModal();
                     me.getEstudiantes();
                     me.bindData();
+                    me.loading = 0;
                 }).catch(function (error) {
                     console.log(error);
                 }); 
@@ -1009,6 +1012,9 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                     document.getElementById("agregarCP").disabled = false;
                     this.arrayCarreras = this.arrayCarrerasCon.slice();
                 }
+            },
+            flagErrorEstado:function(){
+                console.log("Hola")
             }
         },
         mounted() {

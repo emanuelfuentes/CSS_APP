@@ -20,28 +20,17 @@
                 <!--<th>Numero</th>-->
                 <th style="text-align: center; width: 10%;">Nombre</th>
                 <th id="disappear" style="text-align: center;">Descripción</th>
-                <th style="width: 10px; text-align: center;">Estado</th>
-                <th style="width: 10px; text-align: center;">Acciones</th>
+                <th id="resized" style="width: 10px; text-align: center;">Estado</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="proyecto in arrayProyectos" :key="proyecto.idProyecto">
                 <!--<td>{{ index + 1 }}</td>-->
-                <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)"></td>
-                <td id="disappear" v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)"></td>
+                <td v-text="proyecto.nombre" @click="abrirModal('info', proyecto)" data-toggle="modal" data-target="#modal-info"></td>
+                <td id="disappear" v-text="proyecto.descripcion" @click="abrirModal('info', proyecto)" data-toggle="modal" data-target="#modal-info"></td>
                 <td @click="abrirModal('info', proyecto)" style="text-align: center;">
                   <div style="display: flex; flex-direction: row; justify-content: center; border: none;">
                     <span class="badge badge-danger" style="border-radius: 5px"><img :src="ruta + '/img/icons/x.svg'"></span>
-                  </div>
-                </td>
-                <td >
-                  <div style="margin: 8px -7px 8px -7px;">
-                    <div style="display: flex; flex-direction: row; justify-content: center; margin: 0px 10px;">
-                      <button type="button" @click="abrirModal('estado', proyecto)" data-toggle="modal" data-target="#statusModal" class="btn btn-success btn-sm" style="margin: 8px 0;">
-                          <i class="icon-lock"></i>
-                          <span class="btn-label">Activar</span>
-                      </button>
-                    </div>
                   </div>
                 </td>
               </tr>
@@ -66,7 +55,7 @@
     </div>
 
     <!--Inicio del modal informacion de proyecto-->
-    <div class="modal fade" tabindex="-1" :class="{ mostrar: modal }" role="dialog" aria-labelledby="myModalLabel" style="display: none" aria-hidden="true" id="#modal-info">
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal-info">
       <div class="modal-dialog modal-primary modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -119,29 +108,6 @@
         <!-- /.modal-content -->
       </div>
       <!-- /.modal-dialog -->
-    </div>
-    <!--Fin del modal-->
-    <!--Inicio del modal estado del proyecto-->
-    <div class="modal fade" tabindex="-1" role="dialog" id="statusModal" aria-hidden="true">
-        <div class="modal-dialog modal-primary modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Estado del proyecto</h4>
-                    <button type="button" data-dismiss="modal" class="close" @click="cerrarModal()" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h2>¿Activar este proyecto?</h2>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click ="estadoProyecto()">Confirmar</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
     </div>
     <!--Fin del modal-->
     <footer class="app-footer" id="footer" style="display: flex; flex-direction: column; justify-content: center; font-size: 15px; padding: 10px 0px">
@@ -233,24 +199,11 @@ export default {
             console.log(error);
         });
     },
-    estadoProyecto(){
-      let me = this;
-      axios.put(`${API_HOST}/proyecto/estado`, {
-          'idProyecto' : this.id_proyecto,
-          'estado' : 1
-      }).then(function (response) {
-          me.cerrarModal();
-          me.bindData();
-      }).catch(function (error) {
-          console.log(error);
-      }); 
-  },
     cambiarPagina(page){
       let me = this;
       me.pagination.current_page = page;
       me.bindData(page);
     },
-
     cerrarModal() {
       this.modal = 0;
       this.moda2 = 0;
@@ -270,12 +223,6 @@ export default {
           this.modal_fecha_in = data.fecha_inicio;
           this.modal_fecha_fin = data.fecha_fin;
           break;
-        }
-        case "estado": {
-          this.modal2 = 1;
-          this.id_proyecto = data.idProyecto;
-          break;
-
         }
         default:
           break;
@@ -313,8 +260,11 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
-#disappear{
+  #disappear{
     display: none;
-    }
+  }
+  #resized{
+    width: 1% !important;
+  }
 }
 </style>

@@ -75,7 +75,6 @@
                 <div v-if="loading==1">
                     <spinner></spinner>
                 </div>
-                <!-- poner V-ELSE-->
                 <div v-if="loading == 0" class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -274,6 +273,7 @@ import {API_HOST_ASSETS} from '../constants/endpoint.js';
                     'estado' : 0,
                 })
                 .then(function (response) {
+                    $('#modal-aplicar').modal('hide')
                     me.loading = 2;
                     me.cerrarModal();
                 })
