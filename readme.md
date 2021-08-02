@@ -32,6 +32,8 @@ npm run watch
 ```
 En caso de que los cambios no se vean reflejados, presionar Ctrl+F5, esto recarga el sitio web sin cache.
 
+Finalmente el sitio será accesible en el siguiente link [http://uca-css.test/css-proyecto/public](http://uca-css.test/css-proyecto/public).
+
 ## Producción
 
 Al momento de hacer el último commit antes de implementar los nuevos cambios en el servidor, ejecute el siguiente comando para activar el modo producción:
