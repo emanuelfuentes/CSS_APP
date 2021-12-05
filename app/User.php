@@ -17,11 +17,23 @@ class User extends Authenticatable
      * @var array
      */
 
+    protected $table = 'users';
     protected $primaryKey = 'idUser';
 
     protected $fillable = [
-        'nombres', 'apellidos', 'correo', 'estado', 'genero', 'verificado', 'ultima_fecha_contra', 'ya_aplico_hoy',
-        'idRol', 'idPerfil', 'idCarrera', 'password'
+        'nombres',
+        'apellidos',
+        'correo',
+        'estado',
+        'genero',
+        'verificado',
+        'ultima_fecha_contra',
+        'ya_aplico_hoy',
+        'idRol',
+        'idPerfil',
+        'idCarrera',
+        'password',
+        'api_token'
     ];
 
     /**

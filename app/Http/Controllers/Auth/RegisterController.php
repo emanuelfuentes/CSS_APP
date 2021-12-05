@@ -75,7 +75,8 @@ class RegisterController extends Controller
                 'idRol' => 2,
                 'idPerfil' => $perfil,
                 'idCarrera' => $carrera,
-                'password' => bcrypt('temporal')
+                'password' => bcrypt('temporal'),
+                'api_token' => $this->generarApiToken()
             ]);
             $user = User::whereCorreo($email)->first();
             $this->sendEmail($user);
