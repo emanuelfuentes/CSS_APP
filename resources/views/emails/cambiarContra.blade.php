@@ -9,11 +9,21 @@
 <body>
     <div style="color:black">
         <p> Estimado/a {{ $user->nombres }},</p>
-        <p>
-            se solicitó un cambio de contraseña debido a que fue olvidada, por favor haga
-            <a href="{{ url('cambiar_contra_olvidada/'.$user->correo) }}"> click aquí</a>
-            para crear una nueva.
-        </p>
+
+        @if(isset($token))
+            <p>
+                se solicitó un cambio de contraseña debido a que fue olvidada, por favor ingrese el siguiente código
+                <strong>{{ $token }}</strong>
+                para crear una nueva.
+            </p>
+        @else
+            <p>
+                se solicitó un cambio de contraseña debido a que fue olvidada, por favor haga
+                <a href="{{ url('cambiar_contra_olvidada/'.$user->correo) }}"> click aquí</a>
+                para crear una nueva.
+            </p>
+        @endif
+
         <p>
             Se le recuerda que este proceso puede realizarse <b style="color:red">una vez por día.</b>
         </p><br>

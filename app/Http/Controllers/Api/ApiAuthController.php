@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Mail;
 use App\User;
 use Carbon\Carbon;
 use App\PasswordResetToken;
@@ -54,7 +55,7 @@ class ApiAuthController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'error' => 'Invalid email or password'
+                'error' => 'Correo o clave incorrecta.'
             ], 400);
         }
     }
@@ -95,6 +96,15 @@ class ApiAuthController extends Controller
             'password'              => bcrypt('temporal'),
             'api_token'             => $this->generarApiToken()
         ]);
+        Mail::send(
+            'emails.verificar',
+            ['user' => $usuario],
+            function($message) use ($usuario){
+                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                $message->to($usuario->correo);
+                $message->subject("Solicitud de creación de cuenta.");
+            }
+        );
 
         return response()->json([
             'user' => $usuario,
@@ -118,12 +128,31 @@ class ApiAuthController extends Controller
         }
 
         $usuario = User::where('correo', '=', $request->correo)->firstOrFail();
-        $token = $this->generarPasswordResetToken($usuario->idUser);
-        $this->enviarPasswordResetEmail($usuario, $token);
+        if($usuario->ultima_fecha_contra >= date('d-m-Y')) {
+            return response()->json([
+                'error' => trans('auth.ya_cambio_contra')
+            ], 200);
+        } else {
+            $token = PasswordResetToken::create([
+                'idUser' => $usuario->idUser,
+                'token' => strtoupper(Str::random(5)),
+                'expires_at' => Carbon::now()->addHour(),
+            ]);
 
-        return response()->json([
-            'message' => 'PasswordResetToken generated and email sent',
-        ], 200);
+            Mail::send(
+                'emails.cambiarContra',
+                ['user' => $usuario, 'token' => $token->token],
+                function($message) use ($usuario){
+                    $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
+                    $message->to($usuario->correo);
+                    $message->subject("Solicitud para cambiar contraseña.");
+                }
+            );
+
+            return response()->json([
+                'message' => 'Solicitud de cambio de clave recibida, revise su correo electrónico.',
+            ], 200);
+        }
     }
 
     public function cambiarClave(Request $request) {
@@ -140,7 +169,7 @@ class ApiAuthController extends Controller
         $token = PasswordResetToken::where('token', $request->token)->firstOrFail();
         if(Carbon::now() > $token->expires_at) {
             return response()->json([
-                'error' => 'Token expired'
+                'error' => 'Token venció'
             ], 400);
         }
 
@@ -151,7 +180,7 @@ class ApiAuthController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Password updated successfully',
+            'message' => 'Se cambió la clave exitosamente.',
         ], 200);
     }
 
@@ -170,29 +199,5 @@ class ApiAuthController extends Controller
         $perfil = $fechaActual - $fechaIngresoEstudiante;
 
         return $perfil > 6 ? 6 : $perfil;
-    }
-
-
-    /**
-     * Recibe un idUsuario, genera un PasswordResetToken y lo retorna
-     *
-     * @param $idUsuario
-     * @return PasswordResetToken|\Illuminate\Database\Eloquent\Model
-     */
-    private function generarPasswordResetToken($idUsuario) {
-        return PasswordResetToken::create([
-            'idUser' => $idUsuario,
-            'token' => strtoupper(Str::random(5)),
-            'expires_at' => Carbon::now()->addHour(),
-        ]);
-    }
-
-    /**
-     * Envia el correo con el PasswordResetToken
-     *
-     * @param $token
-     */
-    private function enviarPasswordResetEmail($usuario, $token) {
-
     }
 }

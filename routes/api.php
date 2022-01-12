@@ -31,5 +31,11 @@ Route::middleware(['auth:api'])->group(function () {
 
 
 Route::get('/test', function () {
-    dd("HOLA");
+    Mail::raw('This is an test e-mail', function ($message) {
+        $message->to("josw.paredes1998@gmail.com", "someone");
+        $message->subject("hi checking");
+        $message->getSwiftMessage();
+    });
+
+    return 'HOLA';
 });
