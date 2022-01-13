@@ -23,7 +23,7 @@ class ApiAuthController extends Controller
     public function obtenerUsuarioPorApiToken(Request $request)
     {
         return response()->json([
-            'user' => $request->user(),
+            'user' => Auth()->user(),
         ], 200);
     }
 
