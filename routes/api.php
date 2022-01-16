@@ -34,36 +34,16 @@ Route::middleware(['auth:api', ])->group(function () {
     Route::get('/usuario', 'Api\ApiAuthController@obtenerUsuarioPorApiToken');
 
     // STUDENT ROUTES
-//    Route::get('/ya_aplico', 'Api\UserController@yaAplico');
-//    Route::get('/pxe_estudiante', 'Api\ProyectoxEstudianteController@pxePorId');
-//    Route::get('/proyectos_aplicados', 'Api\ProyectoxEstudianteController@proyectosAplicados');
-//    Route::get('/mi_carrera', 'Api\CarreraController@miCarrera');
-//    Route::get('/proyectos_carrera', 'Api\ProyectosxCarreraController@proyectosPorCarrera');
-//    Route::post('/proyecto/aplicar', 'Api\ProyectoxEstudianteController@aplicar');
-//    Route::post('/proyecto/desaplicar', 'Api\ProyectoxEstudianteController@deleteRow');
+    Route::get('/getProyectosDisponibles', 'Api\ProyectoController@getProyectosDisponibles');
+    Route::get('/getMisProyectos', 'Api\ProyectoController@getMisProyectos');
 
 
     // ADMIN ROUTES
     Route::middleware(['Administrador'])->group(function () {
         Route::prefix('admin')->group(function () {
-
-//            Route::get('/todos_proyectos', 'Api\ProyectoController@index');
-//            Route::get('/historial_proyectos', 'Api\ProyectoController@proyectosNoDisponibles');
-//            Route::post('/proyecto/insertar', 'Api\ProyectoController@store');
-//            Route::put('/proyecto/actualizar', 'Api\ProyectoController@update');
-//            Route::put('/proyecto/estado', 'Api\ProyectoController@state');
-//            Route::get('/carrera', 'Api\CarreraController@index');
-//            Route::get('/perfil', 'Api\PerfilController@index');
-//            Route::get('/proyectosxcarrera', 'Api\ProyectosxCarreraController@proyectosPorCarreraEdit');
-//            Route::get('/estudiantesxproyecto', 'Api\ProyectoxEstudianteController@estudiantesPorProyecto');
-//            Route::put('/aplicarestudiante', 'Api\ProyectoxEstudianteController@aceptarRechazarEstudiante');
-//            Route::put('/rechazarestudiante', 'Api\ProyectoxEstudianteController@rechazarEstudiante');
-//            Route::post('/aplicarporadmin', 'Api\ProyectoxEstudianteController@aplicarPorAdmin');
-//            Route::get('/estudiante_por_carnet', 'Api\UserController@estudiantePorCarnet');
-//            Route::get('/facultad', 'Api\FacultadController@index');
-//            Route::put('/estudiante/actualizar', 'Api\UserController@actualizarEstudiante');
-//            Route::get('/cupos_actuales', 'Api\ProyectoController@cuposActuales');
-
+            Route::get('/getAllStudents', 'Api\EstudianteController@getAllStudents');
+            Route::get('/getPerfiles', 'Api\EstudianteController@getPerfiles');
+            Route::put('/updateEstudiante', 'Api\EstudianteController@updateEstudiante');
         });
     });
 });

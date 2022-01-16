@@ -44,12 +44,12 @@ class ApiAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->messages(), 200);
+            return response()->json($validator->messages(), 400);
         }
 
-        $usuario = User::where('correo', '=', $request->correo)->firstOrFail();
+        $usuario = User::where('correo', '=', $request->correo)->with(['rol', 'perfil', 'carrera.facultad'])->first();
 
-        if (Hash::check($request->password, $usuario->password)) {
+        if ($usuario && Hash::check($request->password, $usuario->password)) {
             return response()->json([
                 'user' => $usuario,
             ], 200);
@@ -78,7 +78,7 @@ class ApiAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->messages(), 200);
+            return response()->json($validator->messages(), 400);
         }
 
         $usuario = User::create([
@@ -124,7 +124,7 @@ class ApiAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->messages(), 200);
+            return response()->json($validator->messages(), 400);
         }
 
         $usuario = User::where('correo', '=', $request->correo)->firstOrFail();
@@ -163,7 +163,7 @@ class ApiAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->messages(), 200);
+            return response()->json($validator->messages(), 400);
         }
 
         $token = PasswordResetToken::where('token', $request->token)->firstOrFail();

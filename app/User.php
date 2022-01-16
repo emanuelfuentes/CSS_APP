@@ -45,6 +45,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function rol()
+    {
+        return $this->hasOne('App\Rol', 'idRol', 'idRol');
+    }
+
+    public function perfil()
+    {
+        return $this->hasOne('App\Perfil', 'idPerfil', 'idPerfil');
+    }
+
+    public function carrera()
+    {
+        return $this->hasOne('App\Carrera', 'idCarrera', 'idCarrera');
+    }
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = Hash::make($password);
