@@ -33,14 +33,23 @@ Route::get('getCarrerasPorFacultad/{idFacultad}', 'Api\CarreraController@getCarr
 Route::middleware(['auth:api', ])->group(function () {
     Route::get('/usuario', 'Api\ApiAuthController@obtenerUsuarioPorApiToken');
 
-    // STUDENT ROUTES
+    // ESTUDIANTES
     Route::get('/getProyectosDisponibles', 'Api\ProyectoController@getProyectosDisponibles');
     Route::get('/getMisProyectos', 'Api\ProyectoController@getMisProyectos');
+    Route::post('/postAplicarProyecto', 'Api\ProyectoController@postAplicarProyecto');
+    Route::post('/postDesaplicarProyecto', 'Api\ProyectoController@postDesaplicarProyecto');
 
 
     // ADMIN ROUTES
     Route::middleware(['Administrador'])->group(function () {
         Route::prefix('admin')->group(function () {
+            // PROYECTOS
+            Route::get('/getTodosLosProyectos', 'Api\ProyectoController@getTodosLosProyectos');
+            Route::get('/getHistorialDeProyectos', 'Api\ProyectoController@getHistorialDeProyectos');
+            Route::put('/updateEstadoProyecto', 'Api\ProyectoController@updateEstadoProyecto');
+            Route::post('/storeProyecto', 'Api\ProyectoController@storeProyecto');
+
+            // ESTUDIANTES
             Route::get('/getAllStudents', 'Api\EstudianteController@getAllStudents');
             Route::get('/getPerfiles', 'Api\EstudianteController@getPerfiles');
             Route::put('/updateEstudiante', 'Api\EstudianteController@updateEstudiante');

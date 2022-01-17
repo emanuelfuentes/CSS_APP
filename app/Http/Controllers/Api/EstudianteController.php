@@ -52,8 +52,8 @@ class EstudianteController extends Controller
 
         $estudiante = User::where('idUser', '=', $request->idUsuario)->firstOrFail();
             $estudiante->correo = $request->correo;
-            $estudiante->idCarrera = $request->idCarrera;
-            $estudiante->idPerfil = $request->idPerfil;
+            $estudiante->idCarrera = $request->carrera;
+            $estudiante->idPerfil = $request->perfil;
             $estudiante->save();
 
         return response()->json($estudiante);

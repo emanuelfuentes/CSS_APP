@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +45,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function proyectos()
+    {
+        return $this->belongsToMany(Proyecto::class, 'proyectoxestudiante', 'idUser', 'idProyecto');
+    }
 
     public function rol()
     {

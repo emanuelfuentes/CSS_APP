@@ -11,6 +11,11 @@ class Carrera extends Model
     protected $fillable = ['idFacultad', 'nombre'];
 
 
+    public function proyectos()
+    {
+        return $this->belongsToMany('App\Proyecto', 'proyectoxcarrera', 'idCarrera', 'idProyecto');
+    }
+
     public function facultad()
     {
         return $this->belongsTo('App\Facultad', 'idFacultad', 'idFacultad');
