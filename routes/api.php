@@ -31,14 +31,13 @@ Route::get('getCarrerasPorFacultad/{idFacultad}', 'Api\CarreraController@getCarr
 
 ////APP ENDPOINTS
 Route::middleware(['auth:api', ])->group(function () {
-    Route::get('/usuario', 'Api\ApiAuthController@obtenerUsuarioPorApiToken');
-
     // ESTUDIANTES
+    Route::get('/getPermisoAplicar', 'Api\ProyectoController@getPermisoAplicar');
     Route::get('/getProyectosDisponibles', 'Api\ProyectoController@getProyectosDisponibles');
     Route::get('/getMisProyectos', 'Api\ProyectoController@getMisProyectos');
-    Route::post('/postAplicarProyecto', 'Api\ProyectoController@postAplicarProyecto');
-    Route::post('/postDesaplicarProyecto', 'Api\ProyectoController@postDesaplicarProyecto');
 
+    Route::post('/postAplicarProyecto', 'ProyectoxEstudianteController@aplicar');
+    Route::post('/postDesaplicarProyecto', 'ProyectoxEstudianteController@deleteRow');
 
     // ADMIN ROUTES
     Route::middleware(['Administrador'])->group(function () {
@@ -47,6 +46,7 @@ Route::middleware(['auth:api', ])->group(function () {
             Route::get('/getTodosLosProyectos', 'Api\ProyectoController@getTodosLosProyectos');
             Route::get('/getHistorialDeProyectos', 'Api\ProyectoController@getHistorialDeProyectos');
             Route::put('/updateEstadoProyecto', 'Api\ProyectoController@updateEstadoProyecto');
+            Route::put('/putUpdateProyecto', 'Api\ProyectoController@putUpdateProyecto');
             Route::post('/storeProyecto', 'Api\ProyectoController@storeProyecto');
 
             // ESTUDIANTES

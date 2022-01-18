@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\ProyectoxCarrera;
+use Mail;
+use Carbon\Carbon;
 use Auth;
 use App\Carrera;
 use App\Proyecto;
@@ -13,19 +16,43 @@ use Illuminate\Support\Facades\Validator;
 
 class ProyectoController extends Controller
 {
+    public function getPermisoAplicar() {
+        $user = Auth()->user();
+        if($user->ya_aplico_hoy == date('d-m-Y') ) {
+            return response()->json([
+                'mensaje' => 'No tiene permiso',
+                'permiso' => 0
+            ], 403);
+        }
+        else{
+            return response()->json([
+                'mensaje' => 'Si tiene permiso',
+                'permiso' => 1
+            ]);
+        }
+    }
+
     /**
      * Responde con todos los proyectos disponibles para que estudiantes puedan aplicar
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getProyectosDisponibles(){
-//        falta validar limite inferior, limite superior, cantidad de cupos
-        $proyectos = Auth()->user()
-                            ->carrera
-                            ->proyectos
-                            ->where('estado', 1);
-//                            ->where('cupos_act', '>', 'cupos');
+        $user = Auth()->user();
 
+        $proyectos = Proyecto::join('proyectoxcarrera', 'proyecto.idProyecto', '=','proyectoxcarrera.idProyecto')
+            ->leftJoin('proyectoxestudiante', 'proyectoxestudiante.idProyecto', '=', 'proyecto.idProyecto')
+            ->select('proyecto.idProyecto', 'proyecto.nombre','proyecto.descripcion','proyecto.estado', 'proyecto.tipo_horas', 'proyecto.cupos_act','proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+            ->where('proyecto.estado','=','1')
+//            ->where('proyecto.fecha_inicio', '>=', date('Y-m-d'))
+            ->where('proyectoxcarrera.limite_inf', '<=', $user->idPerfil)
+            ->where('proyectoxcarrera.limite_sup', '>=', $user->idPerfil)
+            ->where('proyectoxcarrera.idCarrera', '=', $user->idCarrera)
+            ->whereRaw('(proyectoxestudiante.idUser !=' . $user->idUser . ' OR proyectoxestudiante.idUser IS NULL)')
+            ->whereRaw('proyecto.idProyecto NOT IN (SELECT p.idProyecto FROM proyecto p, proyectoxestudiante pe WHERE p.idProyecto = pe.idProyecto AND pe.idUser = ' . $user->idUser . ')')
+            ->whereRaw('proyecto.cupos_act < proyecto.cupos')
+            ->groupBy('proyecto.idProyecto', 'proyecto.nombre', 'proyecto.descripcion', 'proyecto.estado', 'proyecto.tipo_horas', 'proyecto.cupos_act', 'proyecto.cupos', 'proyecto.horario', 'proyecto.encargado','proyecto.fecha_inicio','proyecto.fecha_fin')
+            ->orderBy('proyecto.idProyecto', 'desc')->get();
 
         return response()->json($proyectos);
     }
@@ -42,50 +69,79 @@ class ProyectoController extends Controller
         return response()->json($proyectos);
     }
 
-    public function postAplicarProyecto(Request $request) {
+    public function putUpdateProyecto(Request $request) {
         $validator = Validator::make($request->all(), [
-            'idProyecto'            => 'required',
-            'idUser'       => 'required',
-            'estado'             => 'required',
+            'idProyecto'        => 'required',
+            'nombre'            => 'required',
+            'contraparte'       => 'required',
+            'cupos'             => 'required',
+            'descripcion'       => 'required',
+            'encargado'         => 'required',
+            'fecha_inicio'      => 'required',
+            'fecha_fin'         => 'required',
+            'horario'           => 'required',
+            'tipo_horas'        => 'required',
+            'correo_encargado'  => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->messages(), 400);
         }
 
-        $pXe = new ProyectoxEstudiante();
-            $pXe->idProyecto = $request->idProyecto;
-            $pXe->idUser = $request->idUser;
-            $pXe->estado = $request->estado;
-        $pXe->save();
+        $proyecto = Proyecto::findOrFail($request->idProyecto);
+            $proyecto->nombre = $request->nombre;
+            $proyecto->contraparte = $request->contraparte;
+            $proyecto->cupos = $request->cupos;
+            $proyecto->descripcion = $request->descripcion;
+            $proyecto->encargado = $request->encargado;
+            $proyecto->fecha_inicio = $request->fecha_inicio;
+            $proyecto->fecha_fin = $request->fecha_fin;
+            $proyecto->horario = $request->horario;
+            $proyecto->tipo_horas = $request->tipo_horas;
+            $proyecto->correo_encargado = $request->correo_encargado;
+        $proyecto->save();
 
-        $user = Auth()->user();
-        $user->ya_aplico_hoy = date('d-m-Y');
-        $user->save();
+        $arraycp = $request->carreraPerfil;
 
-        $proyecto = ProyectoxEstudiante::join('users', 'users.idUser', '=', 'proyectoxestudiante.idUser')
-            ->join('proyecto', 'proyecto.idProyecto','=', 'proyectoxestudiante.idProyecto')
-            ->join('carrera', 'carrera.idCarrera', '=', 'users.idCarrera')
-            ->select('proyecto.correo_encargado', 'proyecto.encargado', 'proyecto.nombre', 'users.nombres', 'users.apellidos', 'users.correo', 'carrera.nombre AS n_carrera')
-            ->where('users.idUser', '=', $request->idUser)
-            ->where('proyecto.idProyecto','=', $request->idProyecto)->first();
+        if($arraycp) {
+            ProyectoxCarrera::where('idProyecto', '=', $request->idProyecto)->delete();
 
-        Mail::send(
-            'emails.estudianteAplico',
-            ['user' => $user],
-            function($message) use ($user){
-                $message->from("automatic.noreply.css@gmail.com", "Centro de Servicio Social");
-                $message->to($user->correo_encargado);
-                $message->subject("Aplicación de un estudiante en su proyecto.");
+            for($i = 0; $i < count($arraycp); $i++){
+                if($arraycp[$i][0] == -1 || $arraycp[$i][0] == -2){
+                    $this->todasLasCarreras($proyecto->idProyecto, $arraycp[$i]);
+                }
+                else{
+                    $pxc = new ProyectoxCarrera();
+                    $pxc->idProyecto = $proyecto->idProyecto;
+                    $pxc->idCarrera = $arraycp[$i][0];
+                    $pxc->limite_inf = $arraycp[$i][1];
+                    $pxc->limite_sup = $arraycp[$i][2];
+                    $pxc->save();
+                }
             }
-        );
+        }
+
+        return response()->json($proyecto);
+    }
+
+    private function todasLasCarreras(int $idProyecto, array $options){
+        $carreras = Carrera::all();
+        for($i = 0; $i < count($carreras); $i++){
+            if($options[0] == -1 || ($options[0] == -2 && ($carreras[$i]->idCarrera != 3 && $carreras[$i]->idCarrera != 9 && $carreras[$i]->idCarrera != 10))){
+                $pxc = new ProyectoxCarrera();
+                $pxc->idProyecto = $idProyecto;
+                $pxc->idCarrera = $carreras[$i]->idCarrera;
+                $pxc->limite_inf = $options[1];
+                $pxc->limite_sup = $options[2];
+                $pxc->save();
+            }
+        }
     }
 
     public function postDesaplicarProyecto(Request $request){
         $validator = Validator::make($request->all(), [
             'idProyecto' => 'required',
             'idUser'     => 'required',
-
         ]);
 
         if ($validator->fails()) {

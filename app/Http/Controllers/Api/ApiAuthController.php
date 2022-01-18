@@ -15,20 +15,6 @@ use Illuminate\Support\Facades\Validator;
 class ApiAuthController extends Controller
 {
     /**
-     * Obtiene el api_token del request y retorna el usuario correspondiente
-     *
-     * @param Request $request
-     * @return mixed
-     */
-    public function obtenerUsuarioPorApiToken(Request $request)
-    {
-        return response()->json([
-            'user' => Auth()->user(),
-        ], 200);
-    }
-
-
-    /**
      * Recibe el correo completo (incluyendo el @uca.edu.sv) y contrasena del usuario
      * Lo autentica y retorna el usuario con su api token
      *
@@ -50,6 +36,12 @@ class ApiAuthController extends Controller
         $usuario = User::where('correo', '=', $request->correo)->with(['rol', 'perfil', 'carrera.facultad'])->first();
 
         if ($usuario && Hash::check($request->password, $usuario->password)) {
+
+            if(!$usuario->api_token) {
+                $usuario->api_token = $this->generarApiToken();
+                $usuario->save();
+            }
+
             return response()->json([
                 'user' => $usuario,
             ], 200);
@@ -81,6 +73,11 @@ class ApiAuthController extends Controller
             return response()->json($validator->messages(), 400);
         }
 
+        $idPerfil = 1;
+        if(str_contains($request->correo, '@uca.edu.sv')) {
+            $this->determinarPerfilDeAlumno($request->correo);
+        }
+
         $usuario = User::create([
             'nombres'               => strtoupper($request->nombres),
             'apellidos'             => strtoupper($request->apellidos),
@@ -91,7 +88,7 @@ class ApiAuthController extends Controller
             'ultima_fecha_contra'   => '1-1-2000',
             'ya_aplico_hoy'         => '1-1-2000',
             'idRol'                 => 2,
-            'idPerfil'              => $this->determinarPerfilDeAlumno($request->correo),
+            'idPerfil'              => $idPerfil,
             'idCarrera'             => $request->carrera,
             'password'              => bcrypt('temporal'),
             'api_token'             => $this->generarApiToken()

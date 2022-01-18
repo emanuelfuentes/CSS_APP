@@ -19,7 +19,7 @@ class CarreraController extends Controller
     }
 
     public function miCarrera(Request $request){
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->idUser;
         $carrera = Carrera::join('users', 'users.idCarrera', '=','carrera.idCarrera')
         ->join('facultad', 'carrera.idFacultad', '=', 'facultad.idFacultad')
@@ -30,7 +30,7 @@ class CarreraController extends Controller
     }
 
     public function carreraPorFact(Request $request){
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $carreras = Carrera::where('idFacultad', '=', $request->idFact)->get();
         return $carreras;
     }

@@ -19,7 +19,7 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $proyectos = Proyecto::where('estado','=','1')->orderByRaw('created_at DESC')->paginate(5);
         $cupos = ProyectoxEstudiante::select('estado', 'idProyecto', 'idUser')->get();
         for($i = 0; $i < count($proyectos); $i++){
@@ -46,7 +46,7 @@ class ProyectoController extends Controller
 
     public function proyectosNoDisponibles(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $proyectos = Proyecto::where('estado','=','0')->paginate(5);
         return [
             'pagination' => [
@@ -79,7 +79,7 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $proyecto = new Proyecto();
         $proyecto->nombre = $request->nombre;
         $proyecto->estado = $request->estado;
@@ -147,18 +147,18 @@ class ProyectoController extends Controller
 
     public function update(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
-        $proyecto->contraparte = $request->contraparte;
-        $proyecto->cupos = $request->cupos;
-        $proyecto->descripcion = $request->descripcion;
-        $proyecto->encargado = $request->encargado;
-        $proyecto->fecha_inicio = $request->fecha_inicio;
-        $proyecto->fecha_fin = $request->fecha_fin;
-        $proyecto->horario = $request->horario;
-        $proyecto->nombre = $request->nombre;
-        $proyecto->tipo_horas = $request->tipo_horas;
-        $proyecto->correo_encargado = $request->correo_encargado;
+            $proyecto->contraparte = $request->contraparte;
+            $proyecto->cupos = $request->cupos;
+            $proyecto->descripcion = $request->descripcion;
+            $proyecto->encargado = $request->encargado;
+            $proyecto->fecha_inicio = $request->fecha_inicio;
+            $proyecto->fecha_fin = $request->fecha_fin;
+            $proyecto->horario = $request->horario;
+            $proyecto->nombre = $request->nombre;
+            $proyecto->tipo_horas = $request->tipo_horas;
+            $proyecto->correo_encargado = $request->correo_encargado;
         $proyecto->save();
 
         ProyectoxCarrera::where('idProyecto', '=', $request->idProyecto)->delete();
@@ -182,7 +182,7 @@ class ProyectoController extends Controller
     
     public function state(Request $request)
     {
-        if(!$request->ajax()) return redirect('/home');
+//        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();
