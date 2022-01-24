@@ -13,7 +13,7 @@ class Carrera extends Model
 
     public function proyectos()
     {
-        return $this->belongsToMany('App\Proyecto', 'proyectoxcarrera', 'idCarrera', 'idProyecto');
+        return $this->belongsToMany('App\Proyecto', 'proyectoxcarrera', 'idProyecto', 'idCarrera' )->withPivot('estado');
     }
 
     public function facultad()

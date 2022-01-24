@@ -22,10 +22,8 @@ Route::post('/olvide-clave',        'Api\ApiAuthController@olvideClave' );
 Route::post('/cambiar-clave',       'Api\ApiAuthController@cambiarClave');
 
 
-//Obtener todas las facultades
 Route::get('getFacultades', 'Api\FacultadController@getFacultades');
-
-// Obtener Carreras por ID de Facultad
+Route::get('getCarreras', 'Api\CarreraController@getCarreras');
 Route::get('getCarrerasPorFacultad/{idFacultad}', 'Api\CarreraController@getCarrerasPorFacultad');
 
 
@@ -46,8 +44,10 @@ Route::middleware(['auth:api', ])->group(function () {
             Route::get('/getTodosLosProyectos', 'Api\ProyectoController@getTodosLosProyectos');
             Route::get('/getHistorialDeProyectos', 'Api\ProyectoController@getHistorialDeProyectos');
             Route::put('/updateEstadoProyecto', 'Api\ProyectoController@updateEstadoProyecto');
-            Route::put('/putUpdateProyecto', 'Api\ProyectoController@putUpdateProyecto');
-            Route::post('/storeProyecto', 'Api\ProyectoController@storeProyecto');
+            Route::put('/putUpdateProyecto', 'ProyectoController@update');
+            Route::put('/putAplicarEnProyecto', 'ProyectoxEstudianteController@aceptarRechazarEstudiante');
+            Route::post('/storeProyecto', 'ProyectoController@store');
+            Route::post('/postApplyStudent', 'Api\ProyectoController@postApplyStudent');
 
             // ESTUDIANTES
             Route::get('/getAllStudents', 'Api\EstudianteController@getAllStudents');

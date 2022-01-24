@@ -8,13 +8,13 @@ use App\Carrera;
 class UserController extends Controller
 {
     public function getUser(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
         return $user;
     }
 
     public function yaAplico(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $user = Auth()->user();
         if($user->ya_aplico_hoy == date('d-m-Y') ) {
             return 1;
@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     public function estudiantePorCarnet(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $estudiante = User::where('correo', '=', $request->carnet . '@uca.edu.sv')->first();
         $carrera = null;
         if($estudiante){
@@ -35,7 +35,7 @@ class UserController extends Controller
     }
 
     public function actualizarEstudiante(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $estudiante = User::where('correo', '=', $request->carnet . '@uca.edu.sv')->first();
         $estudiante->idCarrera = $request->idCarrera;
         $estudiante->idPerfil = $request->idPerfil;

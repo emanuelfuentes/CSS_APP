@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\DB;
 class ProyectoxEstudianteController extends Controller{
     public function index(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $proyectoXestudiantes = ProyectoxEstudiante::all();
         return $proyectoXestudiantes;
     }
     public function proyectosAplicados(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $id = Auth()->user()->idUser;
         $proyectos = ProyectoxEstudiante::join('proyecto', 'proyecto.idProyecto', '=','proyectoxestudiante.idProyecto')
         ->join('users', 'proyectoxestudiante.idUser','=','users.idUser')
@@ -33,14 +33,14 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function pxePorId (Request $request) {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $req = $request->idUser;
         $pXe = ProyectoxEstudiante::query('SELECT * FROM proyectoxestudiante pxe WHERE pxe.idUser = :req')->get();
         return $pXe;
     }
 
     public function estudiantesPorProyecto(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         
         $estudiantes = User::join('proyectoxestudiante', 'users.idUser', '=', 'proyectoxestudiante.idUser')
@@ -51,7 +51,6 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function aceptarRechazarEstudiante(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
         $estado = $request->estado;
@@ -75,10 +74,12 @@ class ProyectoxEstudianteController extends Controller{
         ->first();
 
         $this->sendEmailAceptadoRechazado($mailData, $estado);
+
+        return response()->json(['message' => 'Proyecto actualizado']);
     }
 
     public function rechazarEstudiante(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $idProyecto = $request->idProyecto;
         $idUser = $request->idUser;
 
@@ -95,7 +96,6 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function aplicar(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
         $pXe = new ProyectoxEstudiante();
         $pXe->idProyecto = $request->idProyecto;
         $pXe->idUser = $request->idUser;
@@ -120,11 +120,11 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function aplicarPorAdmin(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $verify = ProyectoxEstudiante::where('proyectoxestudiante.idProyecto', '=', $request->idProyecto)
         ->where('proyectoxestudiante.idUser', '=', $request->idUser)->first();
         if($verify == null){
-//            if(!$request->ajax()) return redirect('/home');
+            if(!$request->ajax()) return redirect('/home');
             $pXe = new ProyectoxEstudiante();
             $pXe->idProyecto = $request->idProyecto;
             $pXe->idUser = $request->idUser;
@@ -199,7 +199,6 @@ class ProyectoxEstudianteController extends Controller{
     }
 
     public function deleteRow(Request $request){
-//        if(!$request->ajax()) return redirect('/home');
         $idUser = $request->idUser;
         $idProyecto = $request->idProyecto;
         $pxe = ProyectoxEstudiante::where('idProyecto','=', $idProyecto)

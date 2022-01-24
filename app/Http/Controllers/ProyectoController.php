@@ -19,7 +19,7 @@ class ProyectoController extends Controller
      */
     public function index(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $proyectos = Proyecto::where('estado','=','1')->orderByRaw('created_at DESC')->paginate(5);
         $cupos = ProyectoxEstudiante::select('estado', 'idProyecto', 'idUser')->get();
         for($i = 0; $i < count($proyectos); $i++){
@@ -46,7 +46,7 @@ class ProyectoController extends Controller
 
     public function proyectosNoDisponibles(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $proyectos = Proyecto::where('estado','=','0')->paginate(5);
         return [
             'pagination' => [
@@ -79,7 +79,6 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
         $proyecto = new Proyecto();
         $proyecto->nombre = $request->nombre;
         $proyecto->estado = $request->estado;
@@ -110,6 +109,8 @@ class ProyectoController extends Controller
                 $pxc->save();
             }
         }
+
+        return response()->json('Proyecto creado exitosamente');
     }
 
     private function todasLasCarreras(int $idProyecto, array $options){
@@ -147,7 +148,6 @@ class ProyectoController extends Controller
 
     public function update(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
             $proyecto->contraparte = $request->contraparte;
             $proyecto->cupos = $request->cupos;
@@ -178,11 +178,13 @@ class ProyectoController extends Controller
                 $pxc->save();
             }
         }
+
+        return response()->json('Proyecto actualizado exitosamente');
     }
     
     public function state(Request $request)
     {
-//        if(!$request->ajax()) return redirect('/home');
+        if(!$request->ajax()) return redirect('/home');
         $proyecto = Proyecto::findOrFail($request->idProyecto);
         $proyecto->estado = $request->estado;
         $proyecto->save();

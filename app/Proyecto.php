@@ -12,11 +12,11 @@ class Proyecto extends Model
 
     public function estudiantes()
     {
-        return $this->belongsToMany('App\User', 'proyectoxestudiante', 'idUser', 'idProyecto');
+        return $this->belongsToMany('App\User', 'proyectoxestudiante', 'idProyecto', 'idUser' )->withPivot('estado');
     }
 
     public function carreras()
     {
-        return $this->belongsToMany('App\Carrera', 'proyectoxcarrera', 'idCarrera', 'idProyecto');
+        return $this->belongsToMany('App\Carrera', 'proyectoxcarrera', 'idProyecto', 'idCarrera')->withPivot(['limite_inf', 'limite_sup']);
     }
 }
